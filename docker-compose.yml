@@ -1,0 +1,25 @@
+services:
+  backend:
+    image: plone/plone-backend:6.1.3
+    ports: ["8080:8080"]
+    environment:
+      SITE: Plone # create a site named "Plone"
+      TYPE: classic # or "classic"
+      # ADDONS: "collective.easyform my.company.policy"
+      # PROFILES: "collective.easyform:default my.company.policy:default"
+      # For local dev iteration, you can reset the site on each start:
+      # DELETE_EXISTING: "true"
+
+      # Install local packages in editable mode
+      # DEVELOP: "/app/src/lcc-project /app/src/zen-organization"
+
+      # Register them as Plone add-ons
+      # ADDONS: "lcc.project zen.organization"
+
+    volumes:
+      - backend-data:/data # Data.fs + blobs
+      - ./src/lcc-project:/app/src/lcc-project
+      - ./src/zen-organization:/app/src/zen-organization
+
+volumes:
+  backend-data:
