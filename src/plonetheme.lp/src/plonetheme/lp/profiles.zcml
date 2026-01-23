@@ -1,0 +1,32 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    i18n_domain="plonetheme.lp"
+    >
+
+  <genericsetup:registerProfile
+      name="default"
+      title="plonetheme.lp: Install"
+      description="Package to configure a new plonetheme.lp site"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      directory="profiles/default"
+      />
+
+  <genericsetup:registerProfile
+      name="uninstall"
+      title="plonetheme.lp: Uninstall"
+      description="Uninstall plonetheme.lp setup."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      directory="profiles/uninstall"
+      />
+
+  <!-- Hide Uninstall Profile-->
+  <utility
+      factory=".setuphandlers.HiddenProfiles"
+      name="plonetheme.lp"
+      />
+
+
+  <include package=".upgrades" />
+
+</configure>

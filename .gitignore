@@ -1,0 +1,10 @@
+.env
+.idea/
+venv/
+__pycache__/
+*.pyc
+.DS_Store
+*.vscode-workspace
+*~
+node_modules/
+docker/logs/

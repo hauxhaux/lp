@@ -12,14 +12,16 @@ services:
 
       # Install local packages in editable mode
       # DEVELOP: "/app/src/lcc-project /app/src/zen-organization"
+      DEVELOP: "/app/src/plonetheme.lp"
 
       # Register them as Plone add-ons
-      # ADDONS: "lcc.project zen.organization"
+      # ADDONS: "plonetheme.lp"
 
     volumes:
       - backend-data:/data # Data.fs + blobs
-      - ./src/lcc-project:/app/src/lcc-project
-      - ./src/zen-organization:/app/src/zen-organization
+      # - ./src/lcc-project:/app/src/lcc-project
+      # - ./src/zen-organization:/app/src/zen-organization
+      - ./src/plonetheme.lp:/app/src/plonetheme.lp
 
 volumes:
   backend-data:
