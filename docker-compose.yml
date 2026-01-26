@@ -14,14 +14,18 @@ services:
       # DEVELOP: "/app/src/lcc-project /app/src/zen-organization"
       DEVELOP: "/app/src/plonetheme.lp"
 
+      # install PyPI deps at startup
+      PIP_REQUIREMENTS: /app/requirements.txt
+
       # Register them as Plone add-ons
-      # ADDONS: "plonetheme.lp"
+      ADDONS: "collective.lineage"
 
     volumes:
       - backend-data:/data # Data.fs + blobs
       # - ./src/lcc-project:/app/src/lcc-project
       # - ./src/zen-organization:/app/src/zen-organization
       - ./src/plonetheme.lp:/app/src/plonetheme.lp
+      - ./requirements.txt:/app/requirements.txt:ro
 
 volumes:
   backend-data:

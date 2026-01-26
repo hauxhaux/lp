@@ -1,0 +1,2 @@
+# requirements.txt
+collective.lineage==3.0.0
