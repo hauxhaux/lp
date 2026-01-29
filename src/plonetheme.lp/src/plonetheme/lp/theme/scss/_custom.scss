@@ -1,3 +1,8 @@
 #portal-logo img {
     filter: invert(60%) sepia(75%) saturate(503%) hue-rotate(62deg) brightness(93%) contrast(91%);
 }
+
+h1, h2, h3 {
+  margin-top: 60px !important;
+  color: #f00 !important;
+}
