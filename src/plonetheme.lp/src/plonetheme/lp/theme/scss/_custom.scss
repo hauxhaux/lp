@@ -1,5 +1,11 @@
 #portal-logo img {
-    filter: invert(60%) sepia(75%) saturate(503%) hue-rotate(62deg) brightness(93%) contrast(91%);
+  margin: 1rem;
+  width: 400px;
+}
+
+body {
+  font-family: 'Open sans', sans-serif;
+  line-height: 1.5em;
 }
 
 h1, h2, h3 {
@@ -11,6 +17,5 @@ h1, h2, h3 {
   padding-top: 75px;
 }
 
-div.something {
-  margin: 5px;
-}
+
+
