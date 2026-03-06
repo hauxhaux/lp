@@ -6,5 +6,10 @@
       "sourceType": "github",
       "computedHash": "7075ab30f588019197a2f1518bb4c9d33d69d33352af079b5f9c60303ad3886e"
     },
+    "plone-classic-expert-developer": {
+      "source": "sdaitzman/plone-classic-expert-developer",
+      "sourceType": "github",
+      "computedHash": "9137c148a9b166291e98e55cb9060bcf98b4bd9f1fe955d9a1efac260f765730"
+    }
   }
 }
