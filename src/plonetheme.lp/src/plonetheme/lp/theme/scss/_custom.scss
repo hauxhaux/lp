@@ -15,24 +15,37 @@ html {
   box-sizing: inherit;
 }
 
-#portal-logo img {
-  margin: 1rem;
-  width: 382px;
-  height: auto;
+#content-header {
+  width: 100%;
+  max-width: 100%;
+  height: 150px;
+  background-color: #278e95;
+  box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
+  padding: 0;
+  margin: 0;
 @media only screen and (max-width: 768px) {
- width: 295px;
+  height: 100px;
 }
-}
-#portal-searchbox {
-  top: 5rem;
 }
 
-#content-header {
+#portal-logo img {
+  width: 300px;
+  height: auto;
   position: relative;
-  top: 2rem;
+  top: 15px;
+  left: 35px;
+  margin: 0;
 @media only screen and (max-width: 768px) {
-  top: 0;
+  width: 200px;
+  top: -18px;
+  left: 5px;
 }
+}
+
+#portal-searchbox {
+  margin-right: 20px;
+  margin-top: 0;
+  padding: 7px;
 }
 
 .searchButton {
@@ -41,18 +54,115 @@ html {
   text-transform: uppercase;
 }
 
-#mainnavigation-wrapper { /* moved menu to top of page */
+#mainnavigation-wrapper {
   position: absolute;
-  top: 0;
+  top: 100px;
   width: 100%;
+  z-index: 10;
+@media only screen and (max-width: 768px) {
+  top: 105px;
+  left: 0;
 }
+}
+
 .navbar-barceloneta {
-  --bs-navbar-background: #657F9E;
-  background-color: var(--bs-navbar-background);
+  --bs-navbar-background: transparent;
+  background-color: transparent;
+}
+
+/* Override Bootstrap offcanvas white background so teal header shows through.
+   ID specificity beats .offcanvas class, so !important is not needed. */
+#portal-globalnav-wrapper,
+#portal-globalnav-wrapper .container,
+#offcanvasNavbar {
+  --bs-offcanvas-bg: transparent;
+  background-color: transparent;
+  box-shadow: none;
+}
+
+/* --- Navigation Links ---
+   Use direct-child selectors (> li > a) to scope top-level styles and
+   avoid bleeding into Barceloneta's ul.dropdown submenu items. */
+
+#portal-globalnav > li > a {
+  background-color: transparent;
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  border: 3px solid transparent;
+  margin: 0 0.15em;
+  font-family: 'Public Sans', sans-serif;
+  color: #ffffff;
+}
+
+#portal-globalnav > li > a:visited {
+  color: #fff;
+}
+
+#portal-globalnav > li > a:hover,
+#portal-globalnav > li.selected > a:hover {
+  background: rgba(0, 0, 0, 0.35);
+  color: #dcc464;
+}
+
+#portal-globalnav > li.selected > a {
+  background: rgba(0, 0, 0, 0.35);
+  color: #dcc464;
+}
+
+/* Submenu / dropdown — Barceloneta uses ul.dropdown, not ul.submenu.
+   Structure matched from original aquatics ploneCustom.css + wlfw-aquatics.css.
+   The ul container gets white bg + shadow. Barceloneta sets background-color on
+   every li via --bs-navbar-background (which we set transparent for top-level),
+   so we must explicitly set #efefef on dropdown li and a to override it. */
+#portal-globalnav ul.dropdown {
+  background: #fff;
+  border-color: #fff;
+  border-width: 1px;
+  border-style: none solid solid solid;
+  box-shadow: 0px 0px 5px #666;
+}
+
+#portal-globalnav ul.dropdown li {
+  background-color: #efefef;
+}
+
+#portal-globalnav ul.dropdown a {
+  background: #efefef;
+  color: #176065;
+  text-transform: none;
+  font-size: 15px;
+  font-weight: 400;
+  display: block;
+}
+
+#portal-globalnav ul.dropdown a:hover {
+  background-color: #efefef;
+  color: #E86128;
+}
+
+#portal-globalnav ul.dropdown a:visited {
+  background-color: #efefef;
+  color: #666;
+}
+
+@media only screen and (max-width: 767px) {
+  #portal-globalnav {
+    display: none;
+  }
+  #portal-globalnav.opened {
+    display: block;
+  }
+  #portal-globalnav li {
+    width: 100%;
+    background: #dcc464;
+  }
 }
 
 #portal-breadcrumbs {
-  margin-top: 1rem;
+  margin-top: 0;
+  padding: 15px 35px;
 }
 a {
   color: #205C90;
