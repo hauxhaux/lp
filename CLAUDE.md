@@ -107,3 +107,27 @@ The SCSS build uses `@plone/plonetheme-barceloneta-base` as a Node dependency �
 - **Follow Plone best practices.** Use GenericSetup profiles, ZCML, and standard Plone patterns — avoid workarounds.
 - **Keep solutions simple.** If the right approach is unclear, ask before implementing.
 - **Goal:** Recreating specific sub-sites of `https://landscapepartnership.org` within this theme. Reference crawls and style guides are in `agents/`.
+
+## Workflow: Making and Testing Theme Changes
+
+Follow this procedure for every theme/CSS task:
+
+### 1. Before making changes
+- Invoke the `plone-classic-expert-developer` skill for any Plone/theme work before starting.
+- Run `npm run watch` in the background (from `src/plonetheme.lp/src/plonetheme/lp/theme/`) — keep it running during the session. Do NOT use `npm run build` during active dev.
+
+### 2. Making changes
+- Edit SCSS files. The watch process recompiles automatically.
+- Wait no more than 2 seconds after saving before checking the output — do not use long sleeps.
+
+### 3. After making changes — always test with Playwright
+- Invoke the `playwright-cli` skill to open `http://localhost:8080` (admin/admin).
+- Test all relevant interactions: hover states, dropdowns, active states, mobile widths.
+- **Screenshots must go in `agents/` with a contextual name** (e.g. `agents/nav-hover-gold-test.png`). Never save screenshots to the project root.
+- After testing, ask the user whether to clean up the test screenshots.
+
+### Plone dev notes
+- Site: `http://localhost:8080/Plone` — credentials `admin` / `admin`
+- Barceloneta uses `ul.dropdown` (not `ul.submenu`) for nav dropdowns
+- Use ID selectors (`#portal-globalnav`) for specificity over Bootstrap — avoid `!important`
+- CSS custom properties: always use `--variable-name` (two dashes), not `var(variable-name)`
