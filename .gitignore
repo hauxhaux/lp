@@ -9,3 +9,4 @@ __pycache__/
 *~
 node_modules/
 docker/logs/
+.playwright-cli
