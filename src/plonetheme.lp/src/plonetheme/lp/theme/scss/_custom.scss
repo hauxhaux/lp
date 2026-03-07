@@ -160,26 +160,38 @@ p {
 }
 
 // Document byline — "by <author> — last modified <date>" below the page title.
-// Styled small and subdued; author link matches surrounding text so it doesn't
-// compete visually with the content. Source: base.css + ploneCustom.css.
-.documentByLine {
-  font-size: 0.85rem;
+// Matches the live site: small, subdued text; links keep default blue color.
+// Plone 5 uses .documentByLine; Plone 6 uses #section-byline.
+.documentByLine,
+#section-byline {
+  font-size: 85%;
   color: #666;
+  display: block;
   margin-bottom: 10px;
   font-family: 'Public Sans', sans-serif;
-  font-style: italic;
+}
+
+// Override Plone 6 Bootstrap badge on author link — render as plain text link.
+#section-byline a.badge {
+  background: none !important;
+  padding: 0;
+  font-size: inherit;
+  color: #205C90;
+  font-weight: 400;
 }
 
 .documentByLine a,
-.documentByLine a:visited {
-  color: #666;
-  font-weight: 600;
+.documentByLine a:visited,
+#section-byline a,
+#section-byline a:visited {
+  color: #205C90;
   text-decoration: none;
 }
 
-.documentByLine a:hover {
+.documentByLine a:hover,
+#section-byline a:hover {
   color: var(--darkgreen);
-  text-decoration: none;
+  text-decoration: underline;
 }
 
 
@@ -340,7 +352,9 @@ a:visited {
   padding: 0;
   margin: 0;
 
-  @media only screen and (max-width: 768px) {
+  // Align with Bootstrap's navbar-expand-lg collapse point (992px)
+  // so the header shrinks when the hamburger menu appears.
+  @media only screen and (max-width: 991px) {
     height: 100px;
   }
 }
@@ -353,7 +367,7 @@ a:visited {
   left: 35px;
   margin: 0;
 
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 991px) {
     width: 200px;
     top: -18px;
     left: 5px;
@@ -390,7 +404,7 @@ a:visited {
   width: 100%;
   z-index: 10;
 
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 991px) {
     top: 105px;
     left: 0;
   }
@@ -494,7 +508,7 @@ a:visited {
   background: url(../theme_images/aquatics-hero.jpg) no-repeat center center;
   background-size: cover;
 
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 991px) {
     height: 195px;
   }
 }
@@ -609,7 +623,7 @@ body.section-about #hero {
 
 
 // --- Gap utilities ---
-.gap10 { gap: 10px; padding-right: 10px; }
+.gap10 { gap: 10px; }
 .gap15 { gap: 15px; }
 .gap20 { gap: 20px; }
 .gap30 { gap: 30px; }
