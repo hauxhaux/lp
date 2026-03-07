@@ -89,8 +89,9 @@ body {
 
 // --- Headings ---
 // Merriweather serif, teal brand colour, tight letter-spacing.
-// Only the document's first h1 (`.documentFirstHeading`) gets the gold bar —
-// using the Plone-specific class prevents it from firing on every h1 in body copy.
+// The gold underline bar applies to h1.documentFirstHeading (content items)
+// and #content h1 (folder views where the class is absent) — matching the
+// original wlfw-aquatics.css which had both rules.
 
 h1, h2, h3, h4, h5, h6 {
   color: var(--heading);
@@ -101,7 +102,7 @@ h1, h2, h3, h4, h5, h6 {
   margin: 1em 0 0.5em;
 }
 
-h1, h1.documentFirstHeading {
+h1 {
   font-size: 2.8rem;
   line-height: 3.4rem;
 
@@ -400,7 +401,9 @@ a:visited {
   background-color: transparent;
 }
 
-// Make the offcanvas transparent so the teal header shows through.
+// Desktop: make the offcanvas container transparent so the teal header
+// shows through.  On mobile the offcanvas slides in as a panel, so it
+// needs its own solid background — handled in the mobile block below.
 // ID specificity avoids !important — a deliberate choice.
 #portal-globalnav-wrapper,
 #portal-globalnav-wrapper .container,
@@ -408,6 +411,14 @@ a:visited {
   --bs-offcanvas-bg: transparent;
   background-color: transparent;
   box-shadow: none;
+}
+
+// Mobile offcanvas: solid teal background so links are readable.
+@media only screen and (max-width: 991px) {
+  #offcanvasNavbar {
+    --bs-offcanvas-bg: var(--darkgreen);
+    background-color: var(--darkgreen);
+  }
 }
 
 // Top-level nav links
@@ -456,11 +467,17 @@ a:visited {
 #portal-globalnav ul.dropdown a:visited  { background-color: var(--ltgrey); color: #666; }
 #portal-globalnav ul.dropdown a:hover    { background-color: var(--ltgrey); color: #E86128; text-decoration: none; }
 
-// Mobile: full-width stacked links
-@media only screen and (max-width: 767px) {
-  #portal-globalnav          { display: none; }
-  #portal-globalnav.opened   { display: block; }
-  #portal-globalnav li       { width: 100%; background: var(--gold); }
+// Mobile: full-width stacked links inside the offcanvas.
+// Do NOT hide #portal-globalnav — Bootstrap's offcanvas handles visibility.
+@media only screen and (max-width: 991px) {
+  #portal-globalnav > li {
+    width: 100%;
+    background: transparent;
+  }
+  #portal-globalnav > li > a {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 12px 20px;
+  }
 }
 
 
@@ -468,13 +485,8 @@ a:visited {
 // 7. HERO / BANNER
 // =============================================================================
 // Full-width photo strip below the header.  The element is always present in
-// index.html but collapses via :empty when Diazo places no content inside it.
+// index.html with nested children, so the hero always renders.
 // Per-section image overrides use Plone's body classes (e.g. .section-about).
-
-#hero:empty,
-#hero > .container:empty {
-  display: none;
-}
 
 #hero {
   display: block;
@@ -511,11 +523,11 @@ body.section-about #hero {
 // --- Narrow / centred content container ---
 .narrow,
 .inner-container {
-  width: 1170px;
+  max-width: 1170px;
+  width: 100%;
   margin: 0 auto;
 
   @media only screen and (max-width: 768px) {
-    max-width: 100%;
     padding: 0 1rem;
   }
 }
@@ -608,7 +620,7 @@ body.section-about #hero {
 .flex {
   display: flex;
   align-items: center;
-  justify-items: center;
+  justify-content: center;
   flex: 1;
 }
 
@@ -835,7 +847,7 @@ body.section-about #hero {
 
 // --- Warbler block (decorative bird image in corner) ---
 .warbler-block {
-  background: rgba(0, 0, 0, 0.60);
+  background-color: rgba(0, 0, 0, 0.60);
   padding: 30px;
   background-image: url(../theme_images/literature-images/canada-warbler-masked.png);
   background-repeat: no-repeat;
@@ -848,7 +860,7 @@ body.section-about #hero {
 // --- Background image blocks (site-specific photo backgrounds) ---
 
 #fire-block {
-  background: url(fire-images/driptorch.jpg) no-repeat center center;
+  background: url(../theme_images/fire-images/driptorch.jpg) no-repeat center center;
   background-size: cover;
   min-height: 400px;
 
@@ -915,8 +927,8 @@ body.section-about #hero {
   background-color: #28526E;
   width: 100vw;
   position: relative;
-  margin-left: -50vw;
   left: 50%;
+  transform: translateX(-50%);
 }
 
 
@@ -1305,13 +1317,19 @@ ul.topic a:hover { color: #444; text-decoration: none; }
 }
 
 // Site-actions bar — full-width brown strip at the very bottom.
-// Because #portal-footer has no side padding, this row naturally spans
-// the full width of #portal-footer-wrapper without any negative-margin tricks.
+// #portal-footer is a Bootstrap .container (max-width: 1140px) so we must
+// break out with the viewport-width technique to span edge-to-edge.
 #portal-footer .site-actions {
   --bs-gutter-x: 0;
   background: var(--brown);
   padding: 0.65em 1.5em;
   text-align: center;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-left: 0;
+  margin-right: 0;
 }
 
 #portal-footer .site-actions > div { padding: 0; }
