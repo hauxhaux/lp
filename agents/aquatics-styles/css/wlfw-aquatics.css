@@ -1,0 +1,1259 @@
+/* --- Custom style sheet for WLFW Aquatics Landscape --- */
+
+/* --- Colors --- */
+:root {
+  --darkgrey: #262626;
+  --darkgreen: #278e95;
+  --heading: #278e95;
+  --gold: #dcc464;
+  --ltgold: #ebdc9e;
+  --darkgold: #bca647;
+  --brown: #825640;
+  --grey: #f8f5ef;
+  --ltgrey: #efefef;
+  --orange: #f88630;
+  --yellow: #fbd84d;
+  --white: #ffffff;
+
+}
+
+.bg-dark { background: var(--darkgreen); }
+.bg-blue { background: var(--heading); }
+.bg-grey { background: var(--grey); }
+.bg-gold { background: var(--gold); border-top: none; }
+.bg-drk-gold { background: var(--darkgold);}
+.bg-lt-gold { background: var(--ltgold); }
+.bg-orange { background: var(--orange); }
+ a.gold-text { color: #d8c468!important; }
+.bg-brown { background: var(--brown); }
+.bg-ltgrey { background: var(--ltgrey); }
+
+
+body {
+    background: var(--white);
+    font-family: 'Public Sans', san-serif;
+    -webkit-font-smoothing: antialiased;
+    image-rendering: -webkit-optimize-contrast;
+}
+
+.fullwidth-section {
+    padding: 0;
+}
+
+.landscape-biome-menu { display: block; }
+
+@media only screen and (max-width: 768px) {
+
+.site-aquatics .landscape-biome-menu {
+    position: absolute;
+    top: 304px;
+}
+.wlfw-biome-nav-bar {
+    padding: 10px 15px !important;
+    font-size: 11px !important;
+    letter-spacing: normal;
+}
+}
+
+.nest-navigation-bar {
+    display: none;
+}
+
+.wlfw-biome-nav-bar {
+    background: var(--darkgrey);
+    display: block;
+    padding: 10px 30px;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 1px;
+    z-index: 20;
+}
+.wlfw-biome-nav-bar a {
+    color: #fff !important;
+    text-transform: uppercase;
+}
+
+.wlfw-biome-nav-bar a:hover {
+   color: var(--orange)!important;
+   text-transform: uppercase;
+}
+
+.wlfw-navigation-bar { /* --- turn off WLFW logo and link */
+    display: none;
+}
+
+/*.wlfw-navigation-bar img {
+    display: none;
+}*/
+
+.companion-select a:hover {
+    color: var(--orange)!important;
+}
+
+#portal-top {
+    background-image: none;
+}
+
+/* --- Banners --- */
+
+#portal-banner { 
+    display: block;
+    height: 450px;
+    background: url(aquatic-images/florida-wetlands.jpg) no-repeat center;
+    background-size: cover;
+}
+
+/*
+#portal-banner:after {
+    content: "Tom Dykstra purchased this 110-acre wetland reserve easement located in Fremont, Indiana.";
+    display: block;
+    position: absolute;
+    font-size: 12px;
+    color: white;
+    bottom: 15px;
+    left: 15px;
+    padding: 0.5rem 1.2rem;
+    background: rgba(0 0 0 / 35%);
+    max-width: 430px;
+    line-height: 1.5em;
+}*/
+
+
+@media only screen and (max-width: 768px) {
+#portal-banner { 
+    height: 195px;
+}
+#portal-banner:after { /* turn off banner caption on mobile */
+    display: none;
+}
+}
+
+.site-aquatics.section-news-and-stories #portal-banner { 
+    height: 350px;
+    background: url(working-lands/scuba-scientists.jpg) no-repeat center !important;
+   background-size: cover !important;
+}
+
+.site-aquatics.section-training #portal-banner { 
+    background: url(working-lands/working-near-pond.jpg) no-repeat center !important;
+   background-size: cover !important;
+}
+ .site-aquatics.section-training #portal-banner:after {
+    content: "";
+    display: none;
+}
+
+.site-aquatics.section-about #portal-banner { 
+    background: url(aquatic-images/usda-flickr-group-at-water.jpg) no-repeat center !important;
+   background-size: cover !important;
+}
+
+ .site-aquatics.section-about #portal-banner:after {
+    content: "Scientists inspecting mussels.";
+    display: none;
+}
+
+.site-aquatics.section-resources.subsection-framework #portal-banner{ 
+    background: url(aquatic-images/iStock-1769416417.webp) no-repeat center !important;
+   background-size: cover !important;
+}
+ .site-aquatics.section-resources.subsection-framework #portal-banner:after {
+    content: "Sunset on the Eastern Shore of Maryland. iStock";
+}
+
+.subsection-framework-the-aquatic-connectivity-framework-page #portal-banner{ 
+    background: url(aquatic-images/iStock-1769416417.webp) no-repeat center !important;
+   background-size: cover !important;
+}
+.subsection-framework-the-aquatic-connectivity-framework-page #portal-banner:after {
+    content: "Sunset on the Eastern Shore of Maryland. iStock";
+}
+
+.site-aquatics.section-wildlife #portal-banner{ 
+    background: url(sydney-herron-unsplash.jpg) no-repeat center !important;
+   background-size: cover !important;
+
+}
+.site-aquatics.section-resources #portal-banner{ 
+    background: url(aquatic-images/baby-bog-turtle.webp) no-repeat center !important;
+   background-size: cover !important;
+
+}
+ .site-aquatics.section-resources #portal-banner:after {
+    content: "Florida Wetlands";
+    display: none;
+}
+
+.site-aquatics.section-news-and-stories.subsection-stories #portal-banner{ 
+    background: url(aquatic-images/forest-stream-IMG_0746.webp) no-repeat center !important;
+    background-size: cover !important;
+
+}
+ .site-aquatics.section-stories #portal-banner:after {
+    content: "Forest stream";
+    display: none;
+}
+.site-aquatics.section-about.subsection-workspace #portal-banner{ 
+   height: 350px;
+   background: url(aquatic-images/usfws-prairie-potholes.jpg) no-repeat center !important;
+   background-size: cover !important;
+
+}
+ .site-aquatics.section-workspace #portal-banner:after {
+    content: "Forest stream";
+    display: none;
+}
+
+.section-maps-and-data #portal-banner {
+  height: 350px;
+  background: url(aquatic-images/ACF-watershed-map-banner.jpg ) no-repeat center;
+  background-size: cover !important;
+}
+
+.bg-acf { 
+   background: url(working-lands/acf-watershed.jpg) no-repeat center !important;
+   background-size: cover !important;
+  padding: 3rem;
+
+}
+
+/* adjust banner heights on mobile */
+@media only screen and (max-width: 768px) {
+
+.site-aquatics.section-news-and-stories #portal-banner,section-maps-and-data #portal-banner,.site-aquatics.section-about.subsection-workspace {
+  height: 200px!important;
+}
+}
+
+@media only screen and (max-width: 767px) {
+.bg-acf { 
+  padding: 2rem 1rem;
+
+}
+}
+
+#visual-portal-wrapper {
+    background-color: #fff;
+    border-radius: 0;
+    margin: 0 auto;
+    max-width: 100%;
+}
+.template-atct_edit #visual-portal-wrapper {
+    width: 1170px;
+    margin: 0 auto;
+}
+.template-atct_edit #portal-banner:after { /* turn off banner caption on edit page */
+    display: none;
+}
+.template-atct_edit .LSBox {
+    top: -50px;
+    right: 5%;
+}
+
+#content {
+    margin: 1em auto;
+    width: 80%;
+}
+
+@media only screen and (max-width: 1530px) {
+#content {
+   width: 85%;
+}
+}
+
+#portal-header {
+  width: 100%;
+  height: 150px;
+  background-color: var(--darkgreen);
+  box-shadow: 0px 10px 20px -10px rgba(0,0,0,0.75);
+}
+
+#portal-logo {
+   margin: 0;
+}
+
+#portal-logo img {
+    width: 300px;
+    position: relative;
+    top: 15px;
+    left: 35px;
+}
+
+@media only screen and (max-width: 768px) {
+  #portal-header {
+    height: 100px;
+  box-shadow: 0px 10px 20px -10px rgba(0,0,0,0);
+}
+  #portal-logo {
+    width: 300px;
+    margin: 0;
+  }
+#portal-logo img {
+    width: 200px;
+    position: relative;
+    top: -18px;
+    left: 5px;
+}
+}
+
+#portal-searchbox {
+    margin-right: 20px;
+    margin-top: 0;
+    padding: 7px;
+}
+
+@media only screen and (max-width: 768px) {
+
+#portal-searchbox {
+   position: absolute;
+   top: 5px;
+}
+
+#portal-searchbox [type="submit"] {
+    border: none;
+    color: transparent;
+    background: no-repeat transparent url(magnifier-white.png) center center;
+    height: 25px;
+    width: 25px;
+}
+}
+
+@media only screen and (max-width: 768px) {
+#searchGadget {
+    width: 8em;
+    padding: 3px;
+    border-radius: 6px;
+}
+}
+
+#partnerSiteSelection {
+    position: absolute;
+    right: 15px;
+    top: 145px;
+}
+
+#jumpmenu {
+    clear: right;
+    float: right;
+    margin-top: -60px;
+    position: relative;
+    width: 225px;
+}
+
+
+/* --- main navigation tabs --- */
+
+@media only screen and (max-width: 768px) {
+
+  .menu-toggle{
+   font-weight: 600;
+   font-size: 13px;
+    padding: 12px 0 12px 35px;
+  }
+}
+
+#globalnav-wrapper {
+    background-color: transparent;
+    top: 100px;
+    border-top: none;
+
+}
+@media only screen and (max-width: 768px) {
+ #globalnav-wrapper {
+    width: 100%;
+    top: 105px;
+    left: 0;
+}
+}
+
+#portal-globalnav {
+    display: flex;
+    justify-content: right;
+    margin-right: 2.5%;
+    background-color: transparent;
+}
+   
+
+#portal-globalnav li a {
+    background-color: transparent;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    border: 3px solid transparent;
+    margin: 0 0.15em;
+    font-family: 'Public Sans';
+    color: var(--white) !important;
+}
+
+#portal-globalnav a:visited {
+    /* color: #25344f !important; */
+   color: #fff !important;
+}
+
+#portal-globalnav a:hover, #portal-globalnav .selected a:hover {
+    background: rgba(0 0 0 / 35%);
+    color: var(--gold)!important;
+}
+
+#portal-globalnav .selected a {
+  color: var(--gold)!important;
+}
+
+@media only screen and (max-width: 1024px) {
+
+#portal-globalnav li a {
+    background-color: transparent;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 10px 15px;
+    margin: 0 0.125em;
+    text-align: center;
+}
+}
+
+
+#portaltab-news-and-stories ul.submenu {
+  right: 0;
+}
+#portaltab-news-and-stories .navTreeLevel1,#portaltab-resources .navTreeLevel1 {
+  right: 229px;
+}
+
+
+
+
+/* --- Home Icon --- */
+
+#portaltab-home > a {
+    background: url(none)!important;
+    text-indent: 0;
+}
+
+#portaltab-home > a:hover {
+    background: rgba(0 0 0 / 35%)!important;
+    text-indent: 0;
+   color: var(--gold) !important;
+} 
+
+#portal-globalnav .selected a {
+    background: rgba(0 0 0 / 35%);
+    color: var(--gold);
+}
+
+#portal-globalnav ul.submenu a {
+    text-transform: none;
+    font-size: 15px;
+    color: #176065!important;
+}
+
+#portal-globalnav ul.submenu a:hover {
+    color: var(--darkgreen)!important;
+}
+
+.loginbutton {
+    display: block !important;
+}
+#anon-personalbar {
+    display: none;
+}
+
+#portal-personaltools-wrapper {
+    right: 260px;
+    top: -38px;
+    position: absolute;
+}
+@media only screen and (max-width: 768px) {
+#portal-personaltools-wrapper {
+    right: 20px;
+    top: 330px;
+}
+}
+
+#portal-personaltools a { color: #fff; }
+#portal-personaltools a:visited { color: #a9e1f3 !important; }
+
+#portal-personaltools dd { background: #bebebe; }
+
+li#portaltab-home ul.submenu {
+    display:none;
+}
+#portal-globalnav ul.submenu a:hover {
+    background-color: #efefef !important;
+    color: #E86128 !important;
+}
+@media only screen and (max-width: 767px) { /* --- turn off on mobile --*/
+#portal-globalnav{
+    display: none;
+  }
+
+  #portal-globalnav.opened{
+    display: block;
+  }
+  #portal-globalnav li{
+    width: 100%;
+    background: #d8c468;
+  }
+}
+
+/* Custom footer */
+
+#portal-footer-wlfw { 
+   display: block; 
+    background: var(--darkgold);
+    color: #fff;
+    width: 100%;
+   padding: 1.5em;
+   }
+
+#portal-footer {
+ display: none;
+}
+
+#portal-siteactions {
+    background: var(--brown);
+}
+
+
+/* --- Typography --- */
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--heading);
+    font-family: 'Merriweather', serif;
+    line-height: 1.5em;
+    letter-spacing: -0.025em;
+    font-weight: 600;
+    margin: 1em 0 0.5em;
+}
+
+#content h1.documentFirstHeading {
+    font-size: 2.8rem;
+    margin-bottom: 0.5em;
+    margin-top: 35px;
+    line-height: 3.4rem;
+   color: var(--heading);
+}
+
+h1.documentFirstHeading:after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 5px;
+    background-color: var(--gold);
+    margin-top: 5px;
+}
+@media only screen and (max-width: 767px) {
+#content h1.documentFirstHeading {
+    font-size: 2.3rem;
+    line-height: 2.6rem;
+}
+}
+#content h1 {
+    font-size: 2.8rem;
+    margin-bottom: 0.5em;
+    margin-top: 35px;
+    color: var(--heading);
+    font-weight: 600;
+    line-height: 3.4rem;
+}
+
+#content h1:after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 5px;
+    background-color: var(--gold);
+    margin-top: 5px;
+}
+
+@media only screen and (max-width: 767px) {
+#content h1 {
+    font-size: 2.3rem;
+    line-height: 2.6rem;
+}
+}
+
+#content .flex h1 {
+    margin-top: 0;
+}
+
+h2 {
+    font-size: 2.3rem;
+   line-height: 2.8rem;
+}
+
+h2.large {
+    font-size: 2.8rem;
+    margin: 0 0 0.5em;
+}
+@media only screen and (max-width: 767px) {
+  h2.large {
+    font-size: 2rem;
+}
+}
+
+h3 {
+    font-size: 1.6rem;
+}
+
+h4 {
+    font-size: 1.3rem;
+}
+
+p {
+    color: #3b3b3b;
+    font-size: 1.1rem;
+    line-height: 1.65rem;
+}
+
+.subheading {
+    display: block;
+    font-family: 'Public Sans';
+    font-size: 1.1rem;
+    color: var(--gold);
+}
+
+.text-shadow { text-shadow: 1px 2px 10px #3a3a3a; }
+
+
+.intro {
+    font-size: 18px;
+    line-height: 1.6em;
+    color: #3c4d6a;
+    margin: 1em 0em;
+    font-family: 'Merriweather', serif;
+}
+
+#content li {
+    color: var(--darkgrey);
+    font-size: 1rem;
+    letter-spacing: 0.01em;
+    margin-bottom: 10px;
+    font-family: 'Public Sans', san-serif;
+}
+
+#content ul.large-list {
+    list-style-type: disc;
+    list-style-image: url(none);
+    font-size: 16px;
+}
+
+img.image-left, img.image-right, .captioned img {
+    border: none;
+}
+
+#content .pullquote {
+    letter-spacing: -0.05em;
+    font-family: 'merriweather',serif;
+    padding: 10px 0 10px 30px;
+    font-size: 1.5rem;
+    line-height: 1.5em;
+    border-left: 6px solid #d3bd64;
+    margin-left: 30px;
+    color: #3c4d6a;
+}
+
+#content .callout {
+    background: #f2e6b5;
+    padding: 1em;
+    border-left: 1em solid #d3bd64;
+    clear: both;
+}
+
+#portal-breadcrumbs {
+    margin-left: 0;
+    margin-top: 0;
+    padding: 15px 35px;
+    font-size: .9rem;  
+}
+.section-east-and-central-aquatics-corridors #portal-breadcrumbs {
+    display: none;  
+}
+.site-eastern-deciduous-forests #edit-bar {
+    top: 10px;
+    position: relative;
+}
+
+#breadcrumbs-you-are-here {
+    display: none;
+}
+
+#content .documentDescription, #content #description {
+    font-size: 1.35em;
+    line-height: 1.5em;
+    font-family: 'Public Sans', san-serif;
+    font-weight: 500;
+}
+
+/* --- hide description on this newsitem -- */
+.subsection-news-inbox-end-of-year-update-aquatic-connectivity-framework .documentDescription {
+  display: none!important;
+}
+.subsection-news-inbox-end-of-year-update-aquatic-connectivity-framework .newsImageContainer {
+    display: none;
+  }
+
+.pad80 { padding: 80px 0; }
+.pad60 { padding: 60px 0; }
+.pad40 { padding: 40px; }
+.pad20 { padding: 20px; }
+
+.LSBox {
+    top: -60px;
+    position: relative;
+    background: #ffffff;
+    padding: 10px 13px;
+    border-radius: 6px;
+    border: 1px solid #fff;
+    right: 5%;
+}
+
+.LSBox .searchSection {
+    display: none;
+}
+
+
+@media only screen and (max-width: 768px) {
+
+.LSBox {
+    top: 100px;
+    position: absolute;
+    background: transparent;
+    padding: 11px;
+    border-radius: 6px;
+    border: none;
+    left: 90px;
+    width: 100px;
+}
+}
+
+.basic-block {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 0 2rem 1rem;
+  margin: 2rem 0;
+}
+
+.mapviewer-block {
+    background: url(fire-images/mapviewer-bg.jpg) no-repeat center center;
+    background-size: cover;
+    min-height: 400px;
+    margin: 3em auto 2em;
+
+}
+.blue-block {
+    background: rgba(37 50 75 / 90%);
+    padding: 40px 30px;
+    min-height: 400px;
+    margin: 4em 1em;
+    border-radius: 10px;
+}
+.blue-block h2,.black-overlay-block h2 {
+    font-size: 40px;
+    line-height: 1.3em;
+    margin: 15px 0;
+}
+.blue-block h4 {
+    color: var(--yellow);
+    font-size: 22px;
+    margin: 10px 0;
+}
+.heading-white {
+    color: #fff!important;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.7em;
+    text-transform: uppercase;
+}
+
+.blue-block .subhead {
+    letter-spacing: 3px;
+    font-weight: 600;
+    color: #D0F7FF;
+    margin-bottom: 0!important;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+@media only screen and (max-width: 768px) {
+  .blue-block,.black-overlay-block { margin: 2em; }
+  .blue-block h2,.black-overlay-block h2 { font-size: 30px;}
+}
+
+#fire-block {
+    background: url(fire-images/outdoor-alabama-slide.jpg) no-repeat right center;
+    background-size: cover;
+    min-height: 400px;
+}
+
+.black-overlay-block {
+    background: rgba(8 7 7 / 80%);
+    margin: 0;
+    padding: 40px 30px;
+    min-height: 400px;
+    margin: 4em 1em;
+   border-radius: 10px;
+}
+.black-overlay-block .subhead {
+    color: #f1d215;
+    font-size: 14px;
+    letter-spacing: 4px;
+    font-weight: 600;
+}
+
+@media only screen and (max-width: 767px) {
+#fire-block {
+    background-size: cover;
+}
+}
+
+.turf-block {
+    background: url(working-lands/rich-turf.jpg) no-repeat center center;
+    background-size: cover;
+}
+.aquacorridors-block {
+    background: url(working-lands/usfws-coastal-delta-kodiak-refuge-alaska.jpg) no-repeat center center;
+    background-size: cover;
+}
+
+
+#bobscapes-block {
+    background: url(bobscapes-images/bobscapes-slide-bg.jpg) no-repeat center -50px;
+    background-size: cover;
+    margin: 2em 0;
+}
+#birdlocale-block {
+    background: url(birdlocale-images/birdlocale-block.jpg) no-repeat center center;
+    background-size: cover;
+    margin: 5em 0;
+}
+
+.black-50-block {
+    background: rgb(0 0 0 / 50%);
+    padding: 40px;
+    margin: 3em;
+}
+.black-50-block h3,.black-70-block h3{
+    margin: 0;
+}
+.black-50-block h2 {
+    font-family: 'Public Sans';
+    margin: 0;
+}
+
+.black-70-block {
+    background: rgb(0 0 0 / 70%);
+    padding: 2rem;
+    margin: 1em;
+    display: flex;
+    gap: 20px;
+   border-radius: 10px;
+}
+.black-70-block .subhead {
+    letter-spacing: 2px;
+    font-weight: 600;
+    color: var(--yellow);
+    margin-bottom: .5em;
+    font-size: 14px;
+}
+@media only screen and (max-width: 768px) {
+  .black-70-block {
+    flex-direction: column;
+}
+}
+
+.last-block {
+    padding-bottom: 0;
+    margin-bottom: -1em;
+}
+
+.centered-block-flex {
+    text-align: center;
+    flex: 1;
+}
+@media only screen and (max-width: 768px) {
+ .flex {
+    padding: 30px;
+}
+.grid {
+    justify-content: center;
+    align-items: center;
+    display: grid;
+}
+}
+/* Used on Aquatics home page to switch order for Key Conservation section on mobile  */
+.flex-block-reverse-mobile {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+}
+@media only screen and (max-width: 767px) {
+.flex-block-reverse-mobile {
+    flex-direction: column-reverse;
+}
+}
+
+.eeo-statement a {
+    font-weight: 600;
+    color: #fff!important;
+}
+.eeo-statement a:hover {
+    color: #29457b !important;
+}
+
+.tileItem { border-top: none; }
+
+.tileHeadline {
+    margin-top: 0;
+    line-height: 1.6em;
+    font-size: 1.75em;
+}
+
+#content .tileHeadline a { color: var(--heading); }
+
+.quote {
+    font-size: 20px;
+    font-family: 'Merriweather';
+    font-style: italic;
+    margin: 2em;
+}
+.cite {
+    text-align: center;
+    font-size: .9rem;
+    padding-bottom: 2em;
+}
+
+.portletNavigationTree .portletHeader {
+    background: var(--heading);
+    border-radius: 6px 6px 0 0;
+    text-transform: uppercase;
+    padding: 15px;
+}
+.portletNavigationTree .portletHeader a {
+    color: var(--gold)!important;
+    font-weight: 600;
+}
+#content a.btn.large-white:hover {
+    background: rgb(131 84 64);
+}
+
+.section-aquatics-style-guide #content {
+    margin: 1em auto;
+    width: unset;
+    padding: 0 2em 2em;
+}
+
+/* --- AquaCorridors --- */
+
+.subsection-aquacorridors-tool-suite #portal-banner {
+  background-image: url(aqua-corridors-images/aquacorridors-banner-bg.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  display: block;
+  height: 350px;
+  background-size: cover;
+}
+@media only screen and (max-width: 600px) {
+ .subsection-aquacorridors-tool-suite #portal-banner {
+  background-image: url(working-lands/aquacorridors-banner-w-logo-stacked.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  display: block;
+  height: 175px;
+  background-size: cover;
+}
+}
+
+.subsection-aquacorridors-tool-suite #portal-banner-logo { /* float secondary logo over banner */
+    display: block;
+    position: relative;
+    margin: 0 auto;
+    top: 30%;
+    width: 500px;
+    height: 121px;
+    background: url(aqua-corridors-images/aquacorridors-logo-horiz.png) no-repeat center;
+    background-size: contain;
+}
+@media only screen and (max-width: 600px) {
+.subsection-aquacorridors-tool-suite #portal-banner-logo { 
+    display: none;
+}
+}
+
+.subsection-aquacorridors-tool-suite #content h1.documentFirstHeading {
+  display: none;
+}
+
+.subsection-aquacorridors-tool-suite #portal-banner::after {
+  display: none;
+}
+
+.subsection-aquacorridors-tool-suite .LSBox {
+  top: 85px;
+}
+
+@media only screen and (max-width: 768px) {
+
+  .subsection-aquacorridors-tool-suite .LSBox {
+    display: none;
+  }
+  .subsection-aquacorridors-tool-suite #globalnav-wrapper {
+    top: 125px;
+  }
+
+  .subsection-aquacorridors-tool-suite .landscape-biome-menu {
+    top: 322px;
+  }
+  .subsection-aquatic-framework-products #portal-breadcrumbs {
+    margin-top: 35px;
+}
+}
+
+#anchor-menu-block {
+  background: #efefef;
+  display: grid;
+  border-top: 7px solid #a6c372;
+  border-bottom: 1px solid #e2dcdc;
+ margin-top: -15px;
+}
+@media only screen and (max-width: 767px) {
+ #content ul.anchor-menu {
+  margin-top: 85px!important;
+}
+#content li.anchor-menu-item {
+  padding: 5px 20px!important;
+}
+}
+#content ul.anchor-menu {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  list-style: none;
+margin: 0 auto;
+}
+#content li.anchor-menu-item {
+  padding: 15px 20px 5px;
+  font-size: 17px;
+  text-align: center;
+  font-weight: 600;
+  line-height: 1.2rem;
+  text-transform: uppercase;
+flex: 1 1 auto;
+}
+
+.anchor-menu-item a.selected {
+  color: #ff6c00 !important;
+}
+.anchor-submenu {
+  display: block;
+  font-size: 13px;
+  font-weight: 400;
+  text-transform: none;
+}
+
+/* --- Hide breadcrumb and editbar on AquaCorridors Tool Suite --- */
+
+.subsection-aquacorridors-tool-suite #portal-breadcrumbs,.subsection-aquacorridors-tool-suite .documentByLine,.subsection-aquacorridors-tool-suite #plone-lock-status {
+   display: none!important;
+}
+.subsection-aquacorridors-tool-suite-AquaCorridors-Tool-Suite h1.hide-heading {
+  display: none;
+}
+
+.button-right {
+    margin: 3em 0 0;
+    text-align: right;
+  }
+
+/* Timeline Slider */
+
+#timeline {
+  display: flex;
+  background-color: #345a67;
+  margin-bottom: 3rem;
+}
+#timeline:hover .tl-item {
+  width: 25%;
+}
+
+.tl-item {
+  transform: translate3d(0, 0, 0);
+  position: relative;
+  width: 24.3333%;
+  height: 70vh;
+  min-height: 600px;
+  color: #fff;
+  overflow: hidden;
+  transition: width 0.5s ease;
+  border-right: 1px solid #444;
+}
+
+.tl-bg-1 {
+ background: url(aqua-corridors-images/ACTS_Planner_CoverImage.webp) no-repeat center;
+}
+.tl-bg-2 {
+ background: url(aqua-corridors-images/handbook-bg.webp) no-repeat center;
+}
+.tl-bg-3 {
+ background: url(aqua-corridors-images/ACTS_DataLayerLibrary_CoverImage.webp) no-repeat center;
+}
+.tl-bg-4 {
+ background: url(aqua-corridors-images/ACTS_Mapper_CoverImage_LongRectangle.webp) no-repeat center;
+}
+
+.tl-item:before, .tl-item:after {
+  transform: translate3d(0, 0, 0);
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+.tl-item:after {
+  background: rgba(38, 96, 116, 0.65);
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+.tl-item:before {
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, black 85%);
+  z-index: 1;
+  opacity: 0;
+  transform: translate3d(0, 0, 0) translateY(50%);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.tl-item:hover {
+  width: 100% !important;
+}
+.tl-item:hover:after {
+  opacity: 0;
+}
+.tl-item:hover:before {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) translateY(0);
+  transition: opacity 1s ease, transform 1s ease 0.25s;
+}
+.tl-item:hover .tl-content {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.75s ease 0.5s;
+}
+.tl-item:hover .tl-bg {
+  filter: grayscale(0);
+}
+
+.tl-content {
+  transform: translate3d(0, 0, 0) translateY(25px);
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  margin: 0 2em;
+  top: 45%;
+  opacity: 0;
+}
+.tl-content h1 .tl-content h1 {
+  font-family: "Merriweather", Helvetica Neue, Helvetica, sans-serif;
+  color: #dcc464 !important;
+  font-size: 1.8rem;
+  font-weight: normal;
+}
+.tl-content h3 {
+  color: #eeca37;
+}
+.tl-content p {
+  color: #ffffff;
+}
+
+.tl-year {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  z-index: 1;
+  border-top: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+}
+.tl-year p {
+  font-size: 1.28rem;
+  line-height: 0;
+}
+
+.tl-bg {
+  transform: translate3d(0, 0, 0);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-size: cover;
+  background-position: center center;
+  transition: filter 0.5s ease;
+  filter: grayscale(100%);
+}
+
+.tl-content .button {
+  padding: 5px 15px;
+  background: #fff;
+  border-radius: 6px;
+  display: inline-block;
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+.tl-content a.button {
+  text-decoration: none;
+}
+
+.tl-content a.button:hover {
+  color: #fd8d58;
+}
+
+.tl-item:hover .tl-year {
+  display: none;
+}
+
+/* End Timeline Slider */
+
+/* All About Watershed poster */
+
+#content .tooltipContent a:link {
+  color: #91C45E;
+  text-decoration: none;
+}
+
+.tooltipTop,.tooltipBottom {
+  display: none;
+}
+.tooltipContent {
+  background-image: none;
+  width: 288px;
+  padding: 1em;
+  border: 2px solid #fff;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.75);
+ box-shadow: 0px 0px 5px #666;
+ box-shadow: 1px 3px 9px rgba(0, 0, 0, 0.75);
+}
+
+.col-60 {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 0 2rem 1rem;
+}
+a.btn-orange {
+    color: #fff!important;
+    letter-spacing: 1px;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 13px;
+    background: #ef8f39;
+}
+
+.card-title {
+  font-size: 1.2rem;
+  line-height: 1.6rem;
+}
+
+.subsection-outreach-materials-aquatics-framework-posters-aquatics-framework-posters-collection  #content .documentByLine,.subsection-outreach-materials-aquatics-framework-posters-aquatics-framework-posters-collection .description {
+    display: none;
+}

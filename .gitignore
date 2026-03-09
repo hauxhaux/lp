@@ -5,6 +5,8 @@ __pycache__/
 *.pyc
 .DS_Store
 *.vscode-workspace
+.vscode
 *~
 node_modules/
 docker/logs/
+.playwright-cli
