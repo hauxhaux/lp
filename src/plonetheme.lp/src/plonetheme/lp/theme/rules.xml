@@ -64,11 +64,12 @@
         css:content=".navbar-toggler"
         css:theme=".navbar-toggler"
   />
-  <!-- move searchbox into place -->
+  <!-- move searchbox into the header (top-right, above nav) -->
   <replace css:content="#portal-searchbox"
            css:theme="#portal-searchbox"
            mode="raw"
   />
+  <!-- Drop searchbox from content so it doesn't also get copied via #portal-header -->
   <drop css:content="#portal-header #portal-searchbox" />
 
   <!-- Content header -->

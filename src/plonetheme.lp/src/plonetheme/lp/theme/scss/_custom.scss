@@ -351,12 +351,28 @@ a:visited {
   box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.75);
   padding: 0;
   margin: 0;
+  position: relative;
 
-  // Align with Bootstrap's navbar-expand-lg collapse point (992px)
-  // so the header shrinks when the hamburger menu appears.
   @media only screen and (max-width: 991px) {
     height: 100px;
   }
+}
+
+// "Log in" / personal tools — top-right corner, above the search box.
+#portal-top {
+  position: absolute;
+  top: 8px;
+  right: 20px;
+  width: auto;
+  z-index: 6;
+
+  a { color: rgba(255, 255, 255, 0.8); font-size: 0.7rem; }
+  a:hover { color: #fff; text-decoration: none; }
+  .list-inline { margin: 0; }
+}
+
+#portal-logo-wrapper {
+  display: inline-block;
 }
 
 #portal-logo img {
@@ -374,16 +390,68 @@ a:visited {
   }
 }
 
-#portal-searchbox {
-  margin-right: 20px;
-  margin-top: 0;
-  padding: 7px;
+// Search box: top-right of header, above the nav bar.
+// Live site structure: #portal-searchbox > .LSBox > input + .searchButton
+// .LSBox is the visible white box: bg white, padding 10px 13px, 212×49px,
+//   border: 1px solid white. Positioned ~23px from header top, ~38px from right.
+// Input: 156×20px, browser-default styling.
+// Button: 25×25px, transparent, background-image: magnifier.png.
+#header-searchbox {
+  position: absolute;
+  top: 23px;
+  right: 38px;
+  z-index: 5;
+  // Recreate the .LSBox white box from the live site.
+  background-color: #fff;
+  padding: 10px 13px;
+  border: 1px solid #fff;
+
+  @media only screen and (max-width: 991px) {
+    display: none;
+  }
 }
 
-.searchButton {
-  background-color: var(--darkblue);
-  font-size: 75%;
-  text-transform: uppercase;
+// Override Plone 6's full-width flex search layout.
+#header-searchbox #portal-searchbox {
+  width: auto;
+  padding: 0;
+  flex-direction: row;
+  align-items: center;
+  border: none;
+  background: transparent;
+}
+
+#header-searchbox #searchGadget {
+  width: 156px;
+  height: 20px;
+  font-size: 13px;
+  padding: 1px 2px;
+  border: 2px inset;
+  border-radius: 0;
+  background-color: #fff;
+  color: #000;
+  box-sizing: border-box;
+
+  &:focus {
+    box-shadow: none;
+    outline: none;
+  }
+}
+
+// Magnifier icon — using the original magnifier.png from the live site.
+#header-searchbox .searchButton {
+  padding: 0;
+  width: 25px;
+  height: 25px;
+  background-color: transparent;
+  border: none;
+  font-size: 0;
+  color: transparent;
+  cursor: pointer;
+  background-image: url('../theme_images/magnifier.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: auto;
 }
 
 
@@ -407,6 +475,18 @@ a:visited {
   @media only screen and (max-width: 991px) {
     top: 105px;
     left: 0;
+  }
+}
+
+// Right-align nav links on desktop to match the live site layout.
+// Live site: #portal-globalnav { display: flex; justify-content: right; }
+@media (min-width: 992px) {
+  #offcanvasNavbar .offcanvas-body {
+    justify-content: flex-end;
+  }
+
+  #portal-globalnav {
+    justify-content: flex-end;
   }
 }
 
