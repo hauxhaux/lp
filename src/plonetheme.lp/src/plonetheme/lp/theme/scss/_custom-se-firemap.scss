@@ -265,6 +265,36 @@ p {
 // 7. BANNER IMAGES
 // =============================================================================
 
+// Banner area — used for per-section background images on inner pages.
+// The .has-banner class should be added via Diazo/content when a banner
+// image is available. Without it, the hero area collapses to zero height.
+#hero,
+.principal {
+  display: block;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+
+  // Only show banner height when content or background is present
+  &.has-banner {
+    height: 300px;
+    background-color: #ededed;
+  }
+
+  // Always collapse the container/gigantic when empty
+  .container,
+  .gigantic {
+    &:empty { display: none; }
+  }
+}
+
+@media (max-width: 768px) {
+  #hero.has-banner,
+  .principal.has-banner {
+    height: 150px;
+  }
+}
+
 
 // =============================================================================
 // 8. BREADCRUMBS
@@ -606,3 +636,375 @@ a.readmore {
 // =============================================================================
 // 15. TIMELINE CAROUSEL
 // =============================================================================
+
+.timeline-carousel {
+  margin: 0;
+  background-color: var(--sefm-timeline-bg);
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  padding: 86px 6.9444% 110px;
+  position: relative;
+  overflow: hidden;
+
+  h1 {
+    color: #fff;
+    font-family: "Libre Franklin", sans-serif;
+    font-weight: 700;
+  }
+
+  h3 {
+    font-family: "Libre Franklin", sans-serif;
+    font-size: 16px;
+    width: 80%;
+    color: #fff;
+  }
+
+  p {
+    font-family: "Libre Franklin", sans-serif;
+    color: #fff;
+  }
+}
+
+.timeline-carousel__item-inner {
+  position: relative;
+  padding-top: 45px;
+
+  .year {
+    font-family: "Montserrat", sans-serif;
+    font-size: 32px;
+    line-height: 30px;
+    color: #fff;
+    display: table;
+    letter-spacing: -1px;
+    padding-right: 10px;
+    background-color: var(--sefm-timeline-bg);
+    z-index: 1;
+    position: relative;
+    margin: -15px 0 20px;
+    font-weight: 700;
+  }
+
+  .month {
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: var(--sefm-timeline-gold);
+    display: block;
+    margin: 6px 0;
+    font-weight: 600;
+  }
+
+  .release {
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: var(--sefm-green);
+    display: inline-block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    border: 1px solid #fff;
+    padding: 5px 14px;
+    border-radius: 6px;
+    background: #fff;
+  }
+
+  .meeting {
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #2190c6;
+    display: inline-block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    border: 1px solid #fff;
+    padding: 5px 14px;
+    border-radius: 6px;
+    background: #fff;
+  }
+
+  .publication {
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #f7700d;
+    display: inline-block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    border: 1px solid #fff;
+    padding: 5px 14px;
+    border-radius: 6px;
+    background: #fff;
+  }
+
+  p {
+    font-size: 18px;
+    line-height: 1.4em;
+    color: #fff;
+    width: 80%;
+    font-weight: 400;
+    margin-bottom: 15px;
+  }
+
+  .pointer {
+    height: 29px;
+    position: relative;
+    z-index: 1;
+    margin: -4px 0 16px;
+
+    &:after {
+      position: absolute;
+      content: "";
+      width: 9px;
+      height: 9px;
+      border-radius: 100%;
+      top: 0;
+      left: 0;
+      background-color: var(--sefm-timeline-gold);
+    }
+
+    &:before {
+      position: absolute;
+      content: "";
+      width: 1px;
+      height: 100%;
+      top: 0;
+      left: 4px;
+      background-color: var(--sefm-timeline-gold);
+    }
+  }
+}
+
+
+// =============================================================================
+// 16. ADDITIONAL UTILITY CLASSES
+// =============================================================================
+
+.white, .white a:link, .white a:visited {
+  color: #fff;
+}
+
+.intro {
+  font-family: 'Merriweather', serif;
+  font-size: 18px;
+  line-height: 1.7em;
+  color: var(--sefm-text-light);
+  margin: 1em 0;
+}
+
+.image-right {
+  float: right;
+  margin-left: 2em;
+  margin-bottom: 1em;
+}
+
+.float-right { float: right; }
+
+.caption {
+  padding: 10px 0;
+  color: #777;
+  font-size: 13px;
+}
+
+.space40 {
+  height: 40px;
+  display: block;
+}
+
+.space-around {
+  margin: 4rem auto;
+}
+
+.small-heading {
+  display: block;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  line-height: 1.3em;
+}
+
+.desktop-only { display: none; }
+.mobile-only { padding: 10px; }
+
+@media (min-width: 700px) {
+  .mobile-only { display: none; }
+}
+
+@media (min-width: 701px) {
+  .desktop-only { display: block; }
+}
+
+.border3 {
+  margin: 3rem auto;
+  background: #fff;
+  padding: 3rem;
+  border: 3px solid #e1e1e1;
+}
+
+@media (max-width: 768px) {
+  .border3 {
+    margin: 0 auto;
+    padding: 0;
+    border: none;
+  }
+}
+
+// Mapviewer and learning blocks (background image sections)
+.mapviewer-block {
+  background-size: cover;
+  background-position: center;
+  min-height: 400px;
+}
+
+.learning-block {
+  background-size: cover;
+  background-position: center;
+  min-height: 400px;
+  background-color: var(--sefm-grey);
+}
+
+// Material icons
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 60px;
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  color: #fff;
+}
+
+// Company logos (partner section)
+.company-logo img {
+  filter: grayscale(100%);
+  transform: scale(0.95);
+  opacity: 0.35;
+  transition: all 0.4s ease;
+  margin: 12px;
+  width: 150px;
+
+  &:hover {
+    filter: grayscale(0);
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+// Flex row (footer partner logos)
+.flex-row {
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media (max-width: 1160px) {
+  .flex-row {
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+    img { margin: 1em; }
+  }
+}
+
+// Bottom nav (footer nav links)
+.bottom-nav {
+  text-align: left;
+  margin: 20px 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .bottom-nav {
+    text-align: center;
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 0;
+    gap: 10px;
+  }
+}
+
+// Gold box callout
+.gold-box {
+  background: #F7DF79;
+  border-radius: 5px;
+  padding: 5px 20px;
+}
+
+.yellow-box {
+  background: #F7DF79;
+  border-radius: 5px;
+  padding: 5px 20px;
+}
+
+// Card styles
+.card-white h4 {
+  font-size: 18px;
+  line-height: 1.5rem;
+  margin-top: 0.75rem;
+}
+
+// Grid layout tiles
+.grid_layout .tileItem {
+  background: var(--sefm-grey);
+  flex: 1;
+}
+
+@media (max-width: 1130px) {
+  .grid_layout .tileItem { flex: 0 100%; }
+}
+
+.gridImage img {
+  background: #fff;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  box-shadow: 0px 1px 5px 0 rgb(75 75 75 / 25%);
+  margin: 0 auto 0.5em;
+}
+
+// Featured image (sidebar)
+.featured-img {
+  width: 150px;
+  padding: 4px;
+  box-shadow: 0px 1px 5px 0 rgb(75 75 75 / 25%);
+  margin-right: 1.5em;
+}
+
+// Abstract block
+.abstract {
+  font-family: 'Open Sans', sans-serif;
+  margin: 2rem;
+}
+
+@media (max-width: 768px) {
+  .abstract { margin: 1rem auto; }
+}
+
+// Listing bar
+.listingBar {
+  padding-bottom: 50px;
+}
+
+// Hide items not used in this theme
+#jumpmenu, .rss, .rss-feeds {
+  display: none;
+}
+
+// Table styling
+#content table.listing {
+  width: 100%;
+}
+
+table.invisible {
+  font-size: 1rem;
+  font-family: 'Merriweather', serif;
+  color: var(--sefm-text);
+}
