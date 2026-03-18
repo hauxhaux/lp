@@ -58,10 +58,88 @@
 
 body {
   background: #fff;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  color: #000;
 }
 
 * {
   box-sizing: border-box;
+}
+
+// "Return to Landscape Partnership Site" green banner
+#return-to-lp-banner {
+  background: var(--sefm-green);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 30px 8px 70px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  position: relative;
+
+  a {
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-decoration: none;
+
+    &:hover {
+      color: #ffe061;
+    }
+  }
+}
+
+// Move anonymous login tools into the green banner
+#portal-anontools {
+  position: absolute;
+  top: -36px;   // Pull up into the green return-to-LP banner
+  right: 30px;
+  z-index: 10;
+  height: auto;
+
+  .list-inline {
+    margin: 0;
+    padding: 6px 0;
+
+    .list-inline-item {
+      margin: 0;
+    }
+  }
+
+  a {
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 4px 12px;
+    border-radius: 3px;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.35);
+      color: #fff;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  #return-to-lp-banner {
+    padding: 5px 10px;
+    font-size: 11px;
+
+    a { letter-spacing: 1px; }
+  }
+
+  #portal-anontools {
+    right: 10px;
+
+    a { font-size: 11px; padding: 3px 8px; }
+  }
 }
 
 
@@ -107,6 +185,24 @@ p {
   line-height: 1.6em;
 }
 
+li {
+  font-family: 'Merriweather', serif;
+  color: var(--sefm-text);
+  font-size: 16px;
+  line-height: 1.6em;
+}
+
+// Navigation list items should NOT inherit body list styles
+#portal-globalnav li,
+#portal-footer li,
+#return-to-lp-banner li,
+nav[aria-label="breadcrumb"] li {
+  font-family: 'Montserrat', sans-serif;
+  color: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
 
 // =============================================================================
 // 4. LINKS
@@ -125,14 +221,23 @@ p {
 }
 
 #portal-logo-wrapper {
+  padding: 15px 0 10px;
+
   #portal-logo {
     margin: 0;
+    display: block;
+    width: 400px;
+    height: 110px;
+    position: relative;
+    left: 60px;
+    background: url('../theme_images/SE-firemap-logo.svg') no-repeat left center;
+    background-size: contain;
 
     img {
-      width: 400px;
-      position: relative;
-      left: 20%;
-      top: 10px;
+      // Hide the Plone-configured logo; SE FireMap logo shown via bg
+      opacity: 0;
+      width: 100%;
+      height: 100%;
     }
   }
 }
@@ -140,20 +245,44 @@ p {
 #header-searchbox {
   #portal-searchbox {
     position: absolute;
-    top: 20px;
+    top: 15px;
     right: 30px;
+
+    .searchSection { display: none; } // hide "only in current section"
+
+    input[type="text"],
+    .form-control {
+      font-size: 13px;
+      padding: 4px 8px;
+      height: 28px;
+      width: 180px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+
+    .searchButton,
+    button[type="submit"] {
+      font-size: 12px;
+      padding: 4px 10px;
+      height: 28px;
+      background: #ededed;
+      border: 1px solid #ccc;
+      color: #555;
+      cursor: pointer;
+
+      &:hover {
+        background: #ddd;
+      }
+    }
   }
 }
 
 @media (max-width: 768px) {
   #portal-logo-wrapper #portal-logo {
-    position: relative;
+    width: 280px;
+    height: 80px;
+    left: 5px;
     top: 0;
-
-    img {
-      width: 300px;
-      left: 5px;
-    }
   }
 }
 
@@ -181,6 +310,7 @@ p {
 #portal-globalnav {
   background-color: var(--sefm-nav-bg);
   width: 100%;
+  padding-left: 20px;
 
   .nav-item {
     a.nav-link {
@@ -234,8 +364,31 @@ p {
 }
 
 // Dropdown toggle arrow (checkbox-based in Barceloneta)
-#portal-globalnav .nav-item > label {
-  color: #fff;
+// Barceloneta uses a label with ::after pseudo-element for the caret
+#portal-globalnav .nav-item {
+  > label {
+    color: #fff;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    cursor: pointer;
+
+    &::after {
+      content: "▼";
+      font-size: 9px;
+      color: #fff;
+      line-height: 1;
+    }
+  }
+
+  // When the nav item has a submenu, make room for the caret
+  &.has_subtree > a.nav-link {
+    padding-right: 28px;
+  }
 }
 
 // Mobile nav

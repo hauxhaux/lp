@@ -310,7 +310,13 @@ git commit -m "Add Diazo rules and HTML structure for SITE sub-site"
 
 ---
 
-## File naming conventions
+## File naming conventions and screenshot organization
+
+**Never clutter the `agents/` root folder.** All files must be organized within neatly structured subfolders at the appropriate level.
+
+- **Reference screenshots** go in `agents/SITE-styles/screenshots/` (the per-page captures from Phase 1).
+- **Testing screenshots** (taken during development) go in `agents/SITE-styles/screenshots/testing/`.
+- **Never place screenshots directly in `agents/`.** Always use the sub-site's subfolder hierarchy.
 
 ```
 agents/SITE-styles/
@@ -326,9 +332,13 @@ agents/SITE-styles/
 │   ├── 02-about.html
 │   └── ...
 └── screenshots/
-    ├── 01-home.png
+    ├── 01-home.png           (reference captures)
     ├── 02-about.png
-    └── ...
+    ├── ...
+    └── testing/              (development test screenshots)
+        ├── nav-hover-test.png
+        ├── mobile-header.png
+        └── ...
 
 theme/scss/
 ├── _custom-SITE.scss        (new file for this sub-site)
