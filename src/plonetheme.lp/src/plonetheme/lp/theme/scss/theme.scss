@@ -98,7 +98,7 @@ $enable-roboto-webfont: false !default;
 
 
 // 9. Add additional custom code here
-@import "custom";
+// @import "custom";                 // Aquatics sub-site (commented out during SE FireMap dev)
 
-// 10. Sub-site overrides (loaded after base custom styles)
+// 10. Active sub-site custom styles
 @import "custom-se-firemap";
