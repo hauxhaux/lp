@@ -303,7 +303,7 @@ nav[aria-label="breadcrumb"] li {
 #portal-globalnav {
   background-color: var(--sefm-nav-bg);
   width: 100%;
-  padding-left: 20px;
+  justify-content: center;
 
   .nav-item {
     a.nav-link {
