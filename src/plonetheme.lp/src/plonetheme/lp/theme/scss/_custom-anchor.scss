@@ -1,0 +1,816 @@
+// =============================================================================
+// PLONETHEME.LP — ANCHOR CUSTOM STYLES
+// =============================================================================
+// Custom overrides for the ANCHOR sub-site, scoped under
+// body classes like .section-anchor or .site-anchor.
+//
+// Reference design:  agents/anchor-styles/STYLE-GUIDE.md
+// Source CSS:        agents/anchor-styles/css/anchor.css
+// Compiled via:      npm run watch  (from theme/ directory)
+//
+// CONTENTS
+//   1.  Custom properties  — colour palette
+//   2.  Base & reset
+//   3.  Typography         — headings, paragraphs, subheads
+//   4.  Links
+//   5.  Page header        — logo, search, portal-top
+//   6.  Navigation         — global nav, hover/selected, submenus, mobile
+//   7.  Banner images
+//   8.  Breadcrumbs
+//   9.  Layout utilities   — containers, grids, full-width sections
+//  10.  Content blocks     — tan, white-rounded, feature, partner
+//  11.  Buttons & CTAs
+//  12.  Footer
+//  13.  Portlets
+//  14.  Tile / news items
+//  15.  Utility classes
+// =============================================================================
+
+
+// =============================================================================
+// 1. CUSTOM PROPERTIES
+// =============================================================================
+
+:root {
+  // --- ANCHOR brand colours ---
+  --anchor-navy:          #27426A;   // Primary — header nav, footer, headings
+  --anchor-dark-blue:     #205C90;   // Portlet headers, breadcrumb links
+  --anchor-slate:         #657F9E;   // Base LP nav bg (overridden by navy)
+  --anchor-green:         #84984C;   // Nav hover state
+  --anchor-gold:          #DFDF9E;   // Nav selected tab bg
+  --anchor-orange:        #F59E20;   // Solid orange button bg
+  --anchor-btn-hover:     #E64C00;   // Button hover
+  --anchor-orange-gen:    #F7931F;   // General orange accent
+  --anchor-tan:           #F0DEBB;   // Tan background sections
+  --anchor-footer-gold:   #F4D69E;   // Footer heading colour
+  --anchor-yellow-hover:  #FFE061;   // Nest-nav link hover
+  --anchor-text:          #666;      // Body text
+  --anchor-text-intro:    #676767;   // Intro text
+  --anchor-grey:          #F5F5F5;   // Light grey backgrounds
+  --anchor-edit-bar:      #84B3B3;   // Edit bar bg (admin only)
+}
+
+
+// =============================================================================
+// 2. BASE & RESET
+// =============================================================================
+
+body {
+  background: #fff;
+  font-family: 'Open Sans', sans-serif;
+  line-height: 1.5em;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+// "Return to Landscape Partnership Site" navy banner
+#return-to-lp-banner {
+  background: var(--anchor-navy);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 30px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  position: relative;
+
+  a {
+    color: #fff;
+    text-decoration: none;
+
+    &:hover {
+      color: var(--anchor-yellow-hover);
+    }
+  }
+}
+
+// Move anonymous login tools into the banner
+#portal-anontools {
+  position: absolute;
+  right: 30px;
+  z-index: 10;
+  top: -36px;
+
+  .list-inline {
+    margin: 0;
+    padding: 0;
+
+    .list-inline-item {
+      margin: 0;
+    }
+  }
+
+  a {
+    color: #fff;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    text-decoration: none;
+
+    &:hover {
+      color: var(--anchor-yellow-hover);
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  #return-to-lp-banner {
+    padding: 5px 10px;
+    font-size: 11px;
+  }
+
+  #portal-anontools {
+    right: 10px;
+
+    a { font-size: 11px; padding: 3px 8px; }
+  }
+}
+
+
+// =============================================================================
+// 3. TYPOGRAPHY
+// =============================================================================
+
+#content h1.documentFirstHeading {
+  color: var(--anchor-navy);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.6em;
+  font-weight: 500;
+  margin-bottom: 0.5em;
+  margin-top: 1.5em;
+}
+
+#content h1 {
+  color: var(--anchor-navy);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.6em;
+  font-weight: 500;
+  margin-bottom: 0.5em;
+  margin-top: 1.5em;
+}
+
+@media (max-width: 767px) {
+  #content h1.documentFirstHeading,
+  #content h1 {
+    margin-top: 0;
+  }
+}
+
+h2, h3, h4, h5, h6 {
+  color: var(--anchor-navy);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  line-height: 1.5em;
+  letter-spacing: -0.0115em;
+  margin-bottom: 0;
+}
+
+p {
+  color: var(--anchor-text);
+  line-height: 1.6em;
+  padding-bottom: 15px;
+}
+
+// Navigation list items should NOT inherit body list styles
+#portal-globalnav li,
+#portal-footer li,
+#return-to-lp-banner li,
+nav[aria-label="breadcrumb"] li {
+  font-family: 'Montserrat', sans-serif;
+  color: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.intro {
+  font-size: 17px;
+  line-height: 1.7em;
+  color: var(--anchor-text-intro);
+  margin: 1em 0;
+}
+
+.anchor-text {
+  font-weight: 600;
+  color: var(--anchor-navy);
+}
+
+
+// =============================================================================
+// 4. LINKS
+// =============================================================================
+
+a.readmore {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-family: 'Source Sans Pro', sans-serif;
+
+  &:hover { color: var(--anchor-orange-gen); }
+}
+
+
+// =============================================================================
+// 5. PAGE HEADER
+// =============================================================================
+
+#content-header {
+  background: #fff;
+  border: none;
+  position: relative;
+  width: 100%;
+}
+
+#portal-logo-wrapper {
+  padding: 10px 0;
+
+  #portal-logo {
+    margin: 0;
+    display: block;
+    width: 577px;
+    height: 182px;
+    position: relative;
+    left: 16%;
+    top: 10px;
+    background: url('../theme_images/anchor-logo.png') no-repeat left center;
+    background-size: contain;
+    transition: all 0.3s ease-in-out;
+
+    img {
+      opacity: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+#header-searchbox {
+  #portal-searchbox {
+    position: absolute;
+    top: -30px;
+    right: 30px;
+    border-radius: 6px;
+
+    .searchSection { display: none; }
+
+    input[type="text"],
+    .form-control {
+      font-size: 13px;
+      padding: 4px 8px;
+      height: 28px;
+      width: 180px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+
+    .searchButton,
+    button[type="submit"] {
+      font-size: 12px;
+      padding: 4px 10px;
+      height: 28px;
+      background: #ededed;
+      border: 1px solid #ccc;
+      color: #555;
+      cursor: pointer;
+
+      &:hover {
+        background: #ddd;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  #portal-logo-wrapper #portal-logo {
+    width: 350px;
+    height: auto;
+    left: 10px;
+    top: 10px;
+  }
+
+  #header-searchbox #portal-searchbox {
+    top: 0;
+  }
+}
+
+
+// =============================================================================
+// 6. NAVIGATION
+// =============================================================================
+
+#mainnavigation-wrapper {
+  background-color: var(--anchor-navy);
+  border-top: 1px solid #fff;
+}
+
+#portal-globalnav-wrapper {
+  background-color: var(--anchor-navy);
+  border: none;
+  padding: 0;
+
+  .container {
+    max-width: 100%;
+    padding: 0;
+  }
+}
+
+#portal-globalnav {
+  background-color: var(--anchor-navy);
+  width: 100%;
+  justify-content: center;
+
+  .nav-item {
+    a.nav-link {
+      background-color: var(--anchor-navy);
+      color: #fff;
+      font-size: 16px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      padding: 14px;
+      border: none;
+      transition: background-color 0.2s ease, color 0.2s ease;
+
+      &:hover {
+        background-color: var(--anchor-green);
+        color: #fff;
+      }
+    }
+
+    // Selected / current nav item
+    &.current > a.nav-link,
+    &.inPath > a.nav-link {
+      background-color: var(--anchor-gold);
+      color: #222;
+
+      &:hover {
+        background-color: var(--anchor-green);
+        color: #fff;
+      }
+    }
+  }
+
+  // Dropdown / submenu
+  ul.dropdown {
+    background: #fff;
+    box-shadow: 0px 0px 5px #666;
+
+    .nav-item a.nav-link {
+      background: #efefef;
+      color: #333;
+      text-transform: none;
+      font-size: 15px;
+      font-weight: 400;
+      padding: 8px 20px;
+
+      &:hover {
+        background-color: #7d9cc0;
+        color: #fff;
+      }
+    }
+  }
+}
+
+// Dropdown toggle arrow
+#portal-globalnav .nav-item {
+  > label {
+    color: #fff;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    cursor: pointer;
+
+    &::after {
+      content: "\25BC";
+      font-size: 9px;
+      color: #fff;
+      line-height: 1;
+    }
+  }
+
+  &.has_subtree > a.nav-link {
+    padding-right: 28px;
+  }
+}
+
+// Mobile nav
+@media (max-width: 991.98px) {
+  .navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  #offcanvasNavbar {
+    background-color: var(--anchor-navy);
+
+    .offcanvas-header .btn-close {
+      filter: invert(1);
+    }
+  }
+
+  #portal-globalnav {
+    .nav-item a.nav-link {
+      text-align: center;
+      padding: 12px 20px;
+    }
+  }
+}
+
+
+// =============================================================================
+// 7. BANNER IMAGES
+// =============================================================================
+
+#hero,
+.principal {
+  display: block;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+
+  &.has-banner {
+    height: 440px;
+    background-color: #ededed;
+  }
+
+  .container,
+  .gigantic {
+    &:empty { display: none; }
+  }
+}
+
+@media (max-width: 768px) {
+  #hero.has-banner,
+  .principal.has-banner {
+    height: 230px;
+  }
+}
+
+
+// =============================================================================
+// 8. BREADCRUMBS
+// =============================================================================
+
+// Breadcrumbs are hidden on the ANCHOR sub-site
+#portal-breadcrumbs,
+nav[aria-label="breadcrumb"] {
+  display: none;
+}
+
+
+// =============================================================================
+// 9. LAYOUT UTILITIES
+// =============================================================================
+
+#visual-portal-wrapper,
+.outer-wrapper {
+  max-width: 100%;
+  min-height: calc(100vh - 190px);
+  background-color: #fff;
+}
+
+.fullwidth-section {
+  margin-bottom: 2em;
+  padding: 0;
+}
+
+.grid-container-three-quarter {
+  display: grid;
+  grid-template-columns: 80% 1fr;
+  grid-column-gap: 25px;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .grid-container-three-quarter {
+    grid-template-columns: auto;
+    grid-column-gap: 0;
+    width: 100%;
+  }
+}
+
+.flex-container {
+  display: flex;
+  gap: 15px;
+}
+
+@media (max-width: 768px) {
+  .flex-container { flex-direction: column; }
+}
+
+.flex1 { flex: 1; }
+
+
+// =============================================================================
+// 10. CONTENT BLOCKS
+// =============================================================================
+
+.bg-tan {
+  background: var(--anchor-tan);
+  padding: 2rem;
+}
+
+.bg-white-rounded {
+  background: #fff;
+  border-radius: 15px;
+}
+
+.grey-bg {
+  background: var(--anchor-grey);
+}
+
+.partner-block {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 20px;
+  margin: 2em auto;
+}
+
+@media (max-width: 768px) {
+  .partner-block {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    padding: 0;
+    grid-column-gap: 10px;
+  }
+
+  .partner-logo {
+    width: 85%;
+  }
+}
+
+.card-white {
+  padding: 15px;
+  border-radius: 3px;
+  background-color: #fff;
+}
+
+.image-border {
+  border: 1px solid #dfdfdf;
+}
+
+.image-right {
+  margin: 0 0 0 2em;
+}
+
+@media (max-width: 768px) {
+  .image-right.captioned {
+    max-width: 100%;
+    margin: 0;
+    float: none;
+  }
+
+  .image-right.captioned img {
+    max-width: 100%;
+    height: auto;
+    margin: 0;
+  }
+}
+
+.caption {
+  padding: 0 0 10px;
+  color: #777;
+  font-size: 13px;
+}
+
+dd.image-caption {
+  color: #666;
+  font-size: 100%;
+  max-width: 100%;
+  padding: 20px;
+  text-align: center;
+}
+
+
+// =============================================================================
+// 11. BUTTONS & CTAs
+// =============================================================================
+
+.button {
+  color: #54585b;
+  font-size: 1.125rem;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.1875rem;
+  display: inline-block;
+  text-decoration: none;
+  border: 1px solid #888;
+  border-radius: 0.25rem;
+  text-align: center;
+  font-weight: 700;
+  transition: background 0.2s linear, color 0.2s linear, border-color 0.2s linear;
+  font-family: "Open Sans", Arial, sans-serif;
+  box-shadow: 2px 3px 5px -1px rgba(0, 0, 0, 0.35);
+
+  &:hover {
+    border-color: transparent;
+    background: var(--anchor-btn-hover);
+    color: #fff;
+  }
+}
+
+.btn-solid-orange {
+  color: #fff;
+  background: var(--anchor-orange);
+  border-color: transparent;
+
+  &:hover {
+    background: var(--anchor-btn-hover);
+    color: #fff;
+  }
+}
+
+
+// =============================================================================
+// 12. FOOTER
+// =============================================================================
+
+#portal-footer-wrapper {
+  background: var(--anchor-navy);
+  margin-top: 3em;
+
+  #portal-footer {
+    background: var(--anchor-navy);
+    color: #fff;
+    padding: 1.5em;
+
+    a {
+      color: #fff;
+
+      &:hover {
+        color: var(--anchor-tan);
+      }
+    }
+
+    h3, h4 {
+      color: var(--anchor-footer-gold);
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: 16px;
+    }
+
+    p {
+      color: #fff;
+      font-size: 12px;
+    }
+
+    .sitecredit a {
+      color: #fff;
+
+      &:hover {
+        color: var(--anchor-tan);
+      }
+    }
+
+    ul.ft-menu {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+      li a {
+        color: #fff;
+        font-size: 14px;
+
+        &:hover {
+          color: var(--anchor-tan);
+        }
+      }
+    }
+  }
+}
+
+
+// =============================================================================
+// 13. PORTLETS
+// =============================================================================
+
+.card.portlet {
+  font-size: 90%;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  margin-bottom: 1.5em;
+
+  .card-header {
+    padding: 1em 1em 0.25em;
+    background: transparent;
+    color: var(--anchor-text);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 17px;
+  }
+
+  &.portlet-navigation-tree .card-header {
+    background: var(--anchor-dark-blue);
+    border-radius: 4px 4px 0 0;
+    text-transform: uppercase;
+    padding: 15px;
+    color: #fff;
+  }
+}
+
+
+// =============================================================================
+// 14. TILE / NEWS ITEMS
+// =============================================================================
+
+.tileItem {
+  clear: both;
+}
+
+.tileHeadline {
+  font-size: 1.5em;
+  font-weight: 600;
+}
+
+.tileImage img {
+  width: 280px;
+  height: auto;
+}
+
+
+// =============================================================================
+// 15. UTILITY CLASSES
+// =============================================================================
+
+// Colour swatches
+.orange { background: var(--anchor-orange-gen); }
+.brown { background: #a26623; }
+.dark-blue { background: var(--anchor-dark-blue); }
+.light-grey { background: var(--anchor-grey); }
+.dark-grey { background: var(--anchor-text-intro); }
+.gold { background: #f6d514; }
+.blue { background: #6d97bf; }
+
+.white, .white a:link, .white a:visited {
+  color: #fff;
+}
+
+.rounded { border-radius: 8px; }
+img.rounded { border-radius: 5px; }
+.rounded15 { border-radius: 15px; }
+.shadow-btm { box-shadow: 3px 8px 10px -4px rgb(0 0 0 / 40%); }
+
+// Spacing
+.space { height: 25px; display: block; }
+.space10 { height: 10px; display: block; }
+.space15 { height: 15px; display: block; }
+.space20 { height: 20px; display: block; }
+.space30 { height: 30px; display: block; }
+.pad10 { padding: 10px; }
+.pad20 { padding: 20px; }
+.pad30 { padding: 30px; }
+.gap10 { gap: 10px; }
+.gap15 { gap: 15px; }
+.gap20 { gap: 20px; }
+.gap30 { gap: 30px; }
+.clear { clear: both; }
+
+.desktop-only { display: none; }
+.mobile-only { padding: 10px; }
+
+@media (min-width: 700px) {
+  .mobile-only { display: none; }
+}
+
+@media (min-width: 701px) {
+  .desktop-only { display: block; }
+}
+
+// Hide items not used in this theme
+#jumpmenu, .rss, .rss-feeds {
+  display: none;
+}
+
+// Table styling
+#content table.listing {
+  width: 100%;
+}
+
+.listingBar {
+  padding-bottom: 50px;
+}
+
+// Back-to-top button
+.back-to-top a {
+  background: #222;
+  border-radius: 5px;
+  bottom: 0.75em;
+  color: #ccc;
+  height: 35px;
+  line-height: 35px;
+  position: fixed;
+  right: 0.75em;
+  width: 110px;
+  font-size: 13px;
+  text-transform: uppercase;
+  z-index: 100;
+}
+
+.back-to-top:hover a {
+  background: #000;
+  color: #87A301;
+}

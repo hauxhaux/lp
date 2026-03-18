@@ -1,0 +1,881 @@
+// =============================================================================
+// PLONETHEME.LP — BIRDLOCALE CUSTOM STYLES
+// =============================================================================
+// Custom overrides for the BirdLocale sub-site, scoped under
+// body classes like .section-birdlocale or .site-birdlocale.
+//
+// Reference design:  agents/birdlocale-styles/STYLE-GUIDE.md
+// Source CSS:        agents/birdlocale-styles/css/birdlocale.css
+// Compiled via:      npm run watch  (from theme/ directory)
+//
+// CONTENTS
+//   1.  Custom properties  — colour palette
+//   2.  Base & reset
+//   3.  Typography         — headings, paragraphs, subheads
+//   4.  Links
+//   5.  Page header        — logo, search, portal-top
+//   6.  Navigation         — global nav, hover/selected, submenus, mobile
+//   7.  Banner images
+//   8.  Breadcrumbs
+//   9.  Layout utilities   — containers, grids, full-width sections
+//  10.  Content blocks     — feature, portlet-overlay, grid tiles
+//  11.  Buttons & CTAs
+//  12.  Footer
+//  13.  Portlets
+//  14.  Tile / news items
+//  15.  Material icons
+//  16.  Utility classes
+// =============================================================================
+
+
+// =============================================================================
+// 1. CUSTOM PROPERTIES
+// =============================================================================
+
+:root {
+  // --- BirdLocale brand colours ---
+  --bl-green:           #b0bc1f;   // Primary — nav hover/selected border, icon borders
+  --bl-orange:          #f88630;   // Breadcrumb current, readmore hover, site credit hover
+  --bl-orange-dark:     #E86128;   // Submenu hover text
+  --bl-orange-alt:      #f7931e;   // Readmore hover alt
+  --bl-brown:           #624f44;   // Headings h1-h6
+  --bl-dark-brown:      #2f2a25;   // Body text (paragraphs)
+  --bl-med-brown:       #91806e;   // Breadcrumb "you are here", material icons
+  --bl-cream:           #f8f5ef;   // Footer bg, feature block bg, site credit text
+  --bl-gold-mobile:     #b59553;   // Mobile nav background
+  --bl-olive:           #95a662;   // Footer bar background
+  --bl-edit-green:      #88b66a;   // Edit bar bg
+  --bl-cyan:            #a9e1f3;   // Personal tools visited link
+  --bl-cyan-footer:     #d0f7ff;   // Footer heading h4
+  --bl-grey-intro:      #676767;   // Intro text
+  --bl-grey-dark:       #444;      // WLFW nav bar bg
+  --bl-grey-light:      #efefef;   // Submenu hover bg, grid tile bg
+  --bl-hover-bg:        rgba(0, 0, 0, 0.35);  // Nav hover/selected bg
+  --bl-orange-footer:   #ff9900;   // Footer menu link hover
+}
+
+
+// =============================================================================
+// 2. BASE & RESET
+// =============================================================================
+
+body {
+  background: #fff;
+  font-family: 'Nunito Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+// WLFW top bar ("Return to Working Lands for Wildlife")
+#return-to-lp-banner {
+  background: var(--bl-grey-dark);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 30px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  z-index: 20;
+  position: relative;
+
+  a {
+    color: var(--bl-green);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+
+    &:hover {
+      color: var(--bl-orange);
+    }
+  }
+}
+
+// Move anonymous login tools into the banner
+#portal-anontools {
+  position: absolute;
+  right: 30px;
+  z-index: 10;
+  top: -36px;
+
+  .list-inline {
+    margin: 0;
+    padding: 0;
+
+    .list-inline-item {
+      margin: 0;
+    }
+  }
+
+  a {
+    color: #fff;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 13px;
+    text-decoration: none;
+
+    &:hover {
+      color: var(--bl-orange);
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  #return-to-lp-banner {
+    padding: 5px 10px;
+    font-size: 11px;
+  }
+
+  #portal-anontools {
+    right: 10px;
+
+    a { font-size: 11px; padding: 3px 8px; }
+  }
+}
+
+
+// =============================================================================
+// 3. TYPOGRAPHY
+// =============================================================================
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Nunito Sans', sans-serif;
+  color: var(--bl-brown);
+  font-weight: 700;
+  line-height: 1.3em;
+  letter-spacing: -0.0115em;
+  margin-bottom: 10px;
+}
+
+#content h1.documentFirstHeading {
+  color: var(--bl-brown);
+  font-size: 2.1rem;
+  font-weight: 700;
+  margin-bottom: 0.5em;
+  margin-top: 0;
+}
+
+#content h1 {
+  color: var(--bl-brown);
+  font-size: 2.1rem;
+  font-weight: 700;
+  margin-bottom: 0.5em;
+  margin-top: 0;
+}
+
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.3rem; }
+
+p {
+  color: var(--bl-dark-brown);
+  font-size: 1rem;
+  line-height: 1.6em;
+}
+
+// Navigation list items should NOT inherit body list styles
+#portal-globalnav li,
+#portal-footer li,
+#return-to-lp-banner li,
+nav[aria-label="breadcrumb"] li {
+  font-family: 'Nunito Sans', sans-serif;
+  color: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.intro {
+  font-size: 18px;
+  line-height: 1.7em;
+  color: var(--bl-grey-intro);
+  margin: 1em 0;
+}
+
+
+// =============================================================================
+// 4. LINKS
+// =============================================================================
+
+a.readmore {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-family: 'Open Sans', sans-serif;
+  border-bottom: none;
+
+  &:hover { color: var(--bl-orange-alt); }
+}
+
+
+// =============================================================================
+// 5. PAGE HEADER
+// =============================================================================
+
+#content-header {
+  background: url('../theme_images/birdlocale-header.jpg') no-repeat right bottom / cover;
+  border: none;
+  position: relative;
+  width: 100%;
+  height: 635px;
+}
+
+@media (max-width: 768px) {
+  #content-header {
+    background: url('../theme_images/birdlocale-block.jpg') no-repeat center bottom / cover;
+    height: 240px;
+  }
+}
+
+#portal-logo-wrapper {
+  padding: 0;
+
+  #portal-logo {
+    margin: 0;
+    display: block;
+    width: 320px;
+    position: relative;
+    left: 10%;
+    top: 20px;
+    z-index: 2;
+    background: url('../theme_images/birdlocale-logo.png') no-repeat left center;
+    background-size: contain;
+
+    img {
+      opacity: 0;
+      width: 100%;
+      height: auto;
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  #portal-logo-wrapper #portal-logo {
+    width: 280px;
+  }
+}
+
+@media (max-width: 768px) {
+  #portal-logo-wrapper #portal-logo {
+    width: 290px;
+    top: 15px;
+    left: 5px;
+    position: absolute;
+  }
+}
+
+#header-searchbox {
+  #portal-searchbox {
+    position: absolute;
+    top: -30px;
+    right: 30px;
+
+    .searchSection { display: none; }
+
+    input[type="text"],
+    .form-control {
+      font-size: 13px;
+      padding: 4px 8px;
+      height: 28px;
+      width: 180px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+
+    .searchButton,
+    button[type="submit"] {
+      font-size: 12px;
+      padding: 4px 10px;
+      height: 28px;
+      background: #ededed;
+      border: 1px solid #ccc;
+      color: #555;
+      cursor: pointer;
+
+      &:hover { background: #ddd; }
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  #header-searchbox #portal-searchbox {
+    display: none;
+  }
+}
+
+
+// =============================================================================
+// 6. NAVIGATION
+// =============================================================================
+
+#mainnavigation-wrapper {
+  background-color: transparent;
+  border-top: none;
+}
+
+#portal-globalnav-wrapper {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  position: absolute;
+  top: 25px;
+  left: 30%;
+  width: 70%;
+
+  .container {
+    max-width: 100%;
+    padding: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  #portal-globalnav-wrapper {
+    width: 100%;
+    left: 0;
+    top: 70px;
+  }
+}
+
+#portal-globalnav {
+  background-color: transparent;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 2.5%;
+
+  .nav-item {
+    a.nav-link {
+      background-color: transparent;
+      color: #fff;
+      font-size: 18px;
+      font-weight: 600;
+      text-transform: uppercase;
+      padding: 10px 20px;
+      border: 3px solid transparent;
+      border-radius: 30px;
+      transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+
+      &:hover {
+        background: var(--bl-hover-bg);
+        color: #fff;
+        border: 3px solid var(--bl-green);
+        border-radius: 30px;
+      }
+    }
+
+    // Selected / current nav item
+    &.current > a.nav-link,
+    &.inPath > a.nav-link {
+      background: var(--bl-hover-bg);
+      color: #fff;
+      border: 3px solid var(--bl-green);
+      border-radius: 30px;
+
+      &:hover {
+        background: var(--bl-hover-bg);
+        color: #fff;
+        border: 3px solid var(--bl-green);
+      }
+    }
+  }
+
+  // Dropdown / submenu
+  ul.dropdown {
+    background: #fff;
+    border: 1px solid #ddd;
+
+    .nav-item a.nav-link {
+      background: #fff;
+      color: #333;
+      text-transform: none;
+      font-size: 15px;
+      border: none;
+      border-radius: 0;
+      padding: 8px 20px;
+
+      &:hover {
+        background-color: var(--bl-grey-light);
+        color: var(--bl-orange-dark);
+        border: none;
+      }
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  #portal-globalnav .nav-item a.nav-link {
+    font-size: 16px;
+    padding: 10px 15px;
+  }
+}
+
+// Dropdown toggle arrow
+#portal-globalnav .nav-item {
+  > label {
+    color: #fff;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    cursor: pointer;
+
+    &::after {
+      content: "\25BC";
+      font-size: 9px;
+      color: #fff;
+      line-height: 1;
+    }
+  }
+
+  &.has_subtree > a.nav-link {
+    padding-right: 28px;
+  }
+}
+
+// Mobile nav
+@media (max-width: 991.98px) {
+  .navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.3);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    border-radius: 0;
+  }
+
+  #offcanvasNavbar {
+    background-color: var(--bl-gold-mobile);
+
+    .offcanvas-header .btn-close {
+      filter: invert(1);
+    }
+  }
+
+  #portal-globalnav {
+    .nav-item {
+      a.nav-link {
+        text-align: center;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 0;
+
+        &:hover {
+          border: none;
+          border-radius: 0;
+        }
+      }
+
+      &.current > a.nav-link,
+      &.inPath > a.nav-link {
+        border: none;
+        border-radius: 0;
+      }
+    }
+  }
+}
+
+
+// =============================================================================
+// 7. BANNER IMAGES
+// =============================================================================
+
+// Banner is part of the header on BirdLocale (tall 635px header with bg image)
+// The portal-banner is hidden
+#hero,
+.principal {
+  display: none;
+}
+
+
+// =============================================================================
+// 8. BREADCRUMBS
+// =============================================================================
+
+#portal-breadcrumbs,
+nav[aria-label="breadcrumb"] {
+  font-size: 0.75rem;
+  margin: 0 0 2rem;
+  padding: 0 0 10px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 600;
+
+  .breadcrumb {
+    margin-bottom: 0;
+  }
+
+  // "You are here" label
+  #breadcrumbs-you-are-here {
+    color: var(--bl-med-brown);
+  }
+
+  // Current page
+  #breadcrumbs-current {
+    color: var(--bl-orange);
+  }
+}
+
+
+// =============================================================================
+// 9. LAYOUT UTILITIES
+// =============================================================================
+
+#visual-portal-wrapper,
+.outer-wrapper {
+  max-width: 100%;
+  background-color: #fff;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.space-around {
+  justify-content: space-around;
+}
+
+@media (max-width: 768px) {
+  .flex-container {
+    flex-direction: column;
+  }
+
+  .flex-container.space-between {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 0;
+    grid-gap: 10px;
+    justify-content: space-around;
+    align-items: center;
+    justify-items: center;
+  }
+}
+
+.flex-container-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+  margin: 0 1em;
+}
+
+.bird-footer-layout {
+  display: grid;
+  grid-template-columns: 25% 25% auto;
+  grid-column-gap: 30px;
+  padding-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .bird-footer-layout {
+    grid-template-columns: 100%;
+    padding-top: 30px;
+  }
+}
+
+
+// =============================================================================
+// 10. CONTENT BLOCKS
+// =============================================================================
+
+.feature-block {
+  border: none;
+  padding: 30px;
+  background: var(--bl-cream);
+  margin: 0 0 30px;
+  border-radius: 15px;
+
+  &:hover {
+    box-shadow: 0px 1px 5px 0 rgb(75 75 75 / 25%);
+  }
+
+  p {
+    font-size: 20px;
+    margin-top: 10px;
+  }
+}
+
+.portlet-overlay {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid #fff;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.grid_layout .tileItem {
+  text-align: center;
+  background: var(--bl-grey-light);
+}
+
+.gridImage img {
+  background: #fff;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  box-shadow: 0px 1px 5px 0 rgb(75 75 75 / 25%);
+  margin: 2em 2em 1em;
+  align-content: center;
+}
+
+
+// =============================================================================
+// 11. BUTTONS & CTAs
+// =============================================================================
+
+// (BirdLocale has minimal custom buttons — primarily readmore links)
+
+
+// =============================================================================
+// 12. FOOTER
+// =============================================================================
+
+#portal-footer-wrapper {
+  background: var(--bl-cream);
+}
+
+// Custom BirdLocale footer section
+#birdlocale-footer {
+  display: block;
+  background: var(--bl-cream) url('../theme_images/birdlocale-footer.jpg') no-repeat center / cover;
+  padding: 2em 0;
+
+  h3 {
+    color: var(--bl-cream);
+    margin: 0 0 15px;
+  }
+
+  h4 {
+    color: var(--bl-cyan-footer);
+    margin-top: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  #birdlocale-footer {
+    padding: 1.5em;
+    margin: 1em auto;
+    width: 100%;
+  }
+}
+
+// Footer bar
+#portal-footer-wrapper {
+  #portal-footer {
+    background: var(--bl-olive);
+    display: block;
+    padding: 0;
+  }
+}
+
+.ft-menu li {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  padding: 2px 0;
+}
+
+.ft-menu a {
+  color: #fff;
+
+  &:hover { color: var(--bl-orange-footer); }
+}
+
+.bottom-nav {
+  text-align: left;
+  margin: 20px 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .bottom-nav {
+    text-align: center;
+    margin: 20px 0;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    padding: 0;
+    grid-gap: 10px;
+  }
+}
+
+.sitecredit {
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin: 25px auto 5px;
+  width: 185px;
+
+  a {
+    color: var(--bl-cream);
+
+    &:hover { color: var(--bl-orange); }
+  }
+}
+
+@media (max-width: 768px) {
+  .sitecredit {
+    margin: 1em auto;
+    text-align: left;
+  }
+}
+
+.eeo-statement {
+  font-size: 13px;
+  line-height: 1.3em;
+  margin-top: 10px;
+  color: var(--bl-cream);
+
+  a {
+    color: var(--bl-cream);
+  }
+}
+
+// Hidden elements
+.lp-footer { display: none; }
+.footer-left { display: none; }
+.footer-rt { display: none; }
+
+
+// =============================================================================
+// 13. PORTLETS
+// =============================================================================
+
+.card.portlet {
+  font-size: 90%;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  margin-bottom: 1.5em;
+
+  .card-header {
+    padding: 1em 1em 0.25em;
+    background: transparent;
+    color: var(--bl-brown);
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 17px;
+  }
+}
+
+
+// =============================================================================
+// 14. TILE / NEWS ITEMS
+// =============================================================================
+
+.tileItem {
+  clear: both;
+}
+
+.tileHeadline {
+  font-size: 1.5em;
+  font-weight: 600;
+}
+
+.tileImage img {
+  width: 220px;
+  height: auto;
+}
+
+
+// =============================================================================
+// 15. MATERIAL ICONS
+// =============================================================================
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 60px;
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  color: #fff;
+}
+
+.material-icons-brown {
+  font-family: 'Material Icons';
+  font-size: 68px;
+  display: inline-block;
+  color: var(--bl-med-brown);
+}
+
+.material-icons-green {
+  font-family: 'Material Icons';
+  font-size: 60px;
+  display: inline-block;
+  color: var(--bl-green);
+  border: 3px solid var(--bl-green);
+  border-radius: 50%;
+  padding: 15px;
+  background: #fff;
+}
+
+
+// =============================================================================
+// 16. UTILITY CLASSES
+// =============================================================================
+
+.white, .white a:link, .white a:visited {
+  color: #fff;
+}
+
+// Colour swatches
+.orange { background: var(--bl-orange); }
+.brown { background: var(--bl-med-brown); }
+.dark-brown { background: var(--bl-dark-brown); }
+.green { background: var(--bl-green); }
+.lite-brown { background: var(--bl-cream); }
+
+.image-right {
+  float: right;
+  margin-left: 2em;
+  margin-bottom: 1em;
+}
+
+.float-right { float: right; }
+
+// Company logos (partner section)
+.company-logo img {
+  filter: grayscale(100%);
+  transform: scale(0.95);
+  opacity: 0.35;
+  transition: all 0.4s ease;
+  margin: 12px;
+  width: 150px;
+
+  &:hover {
+    filter: grayscale(0);
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+// Hide items not used
+#jumpmenu, .rss, .rss-feeds {
+  display: none;
+}
+
+.listingBar {
+  padding-bottom: 50px;
+}
+
+@media (max-width: 600px) {
+  .footer-logo {
+    flex: 1 1 150px;
+    display: flex;
+    justify-content: center;
+  }
+}

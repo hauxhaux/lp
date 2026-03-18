@@ -1,0 +1,1089 @@
+// =============================================================================
+// PLONETHEME.LP — GRASSLANDS & SAVANNAS CUSTOM STYLES
+// =============================================================================
+// Custom overrides for the Grasslands & Savannas sub-site, scoped under
+// body classes like .section-grasslands-and-savannas or
+// .site-grasslands-and-savannas.
+//
+// Reference design:  agents/grasslands-styles/STYLE-GUIDE.md
+// Source CSS:        agents/grasslands-styles/css/wlfw-grassland.css
+// Compiled via:      npm run watch  (from theme/ directory)
+//
+// CONTENTS
+//   1.  Custom properties  — colour palette
+//   2.  Base & reset
+//   3.  Typography         — headings, paragraphs, subheads, special text
+//   4.  Links
+//   5.  Page header        — logo, search, portal-top
+//   6.  Navigation         — global nav, hover/selected, submenus, mobile
+//   7.  Banner images
+//   8.  Breadcrumbs
+//   9.  Layout utilities   — containers, grids, full-width sections
+//  10.  Content blocks     — blue, black overlay, callout, background utilities
+//  11.  Buttons & CTAs
+//  12.  Footer
+//  13.  Portlets
+//  14.  Tiles & listings
+//  15.  Utility classes
+// =============================================================================
+
+
+// =============================================================================
+// 1. CUSTOM PROPERTIES
+// =============================================================================
+
+:root {
+  // --- Grasslands & Savannas brand colours ---
+  --grass-darkblue:   #25334f;   // Primary brand — header bg
+  --grass-heading:    #425a84;   // Heading colour (muted blue)
+  --grass-gold:       #dcc464;   // Accent — nav selected/hover, h1 underline bar
+  --grass-darkgold:   #bca647;   // Footer background
+  --grass-ltgold:     #ebdc9e;   // Light gold background blocks
+  --grass-brown:      #846b0a;   // .subheading-2 text
+  --grass-orange:     #f88630;   // Biome nav hover, companion-select hover
+  --grass-yellow:     #fbd84d;   // Blue-block h4, dark-block subheads
+  --grass-darkgrey:   #262626;   // Biome nav bar bg, list item text
+  --grass-grey:       #f8f5ef;   // Light background sections
+  --grass-white:      #ffffff;   // Body bg, nav link text
+  --grass-text:       #3b3b3b;   // Body paragraph text
+  --grass-intro:      #3c4d6a;   // Intro text, pullquote text
+  --grass-callout-bg: #f2e6b5;   // Callout background
+  --grass-callout-border: #d3bd64; // Pullquote/callout border
+  --grass-submenu-text: #4a4a4a;   // Submenu link text
+  --grass-submenu-hover-text: #E86128; // Submenu hover text (orange)
+  --grass-submenu-hover-bg: #efefef;   // Submenu hover background
+}
+
+
+// =============================================================================
+// 2. BASE & RESET
+// =============================================================================
+
+body {
+  background: var(--grass-white);
+  font-family: 'Public Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+// "Return to WLFW" biome navigation bar
+.wlfw-biome-nav-bar {
+  background: var(--grass-darkgrey);
+  display: block;
+  padding: 10px 30px;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 1px;
+  z-index: 20;
+
+  a {
+    color: #fff;
+    text-transform: uppercase;
+    text-decoration: none;
+
+    &:hover {
+      color: var(--grass-orange);
+    }
+  }
+}
+
+// Hide unused bars
+.nest-navigation-bar,
+.wlfw-navigation-bar {
+  display: none;
+}
+
+// Landscape biome menu
+.landscape-biome-menu {
+  display: block;
+}
+
+// Move anonymous login tools into the return banner area
+#portal-anontools {
+  position: absolute;
+  right: 30px;
+  z-index: 10;
+  top: -36px;
+
+  .list-inline {
+    margin: 0;
+    padding: 0;
+
+    .list-inline-item {
+      margin: 0;
+    }
+  }
+
+  a {
+    color: #fff;
+    font-family: 'Public Sans', sans-serif;
+    font-size: 13px;
+    text-decoration: none;
+
+    &:hover {
+      color: var(--grass-gold);
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .wlfw-biome-nav-bar {
+    padding: 10px 15px;
+    font-size: 11px;
+    letter-spacing: normal;
+  }
+
+  .landscape-biome-menu {
+    position: absolute;
+    top: 304px;
+  }
+
+  #portal-anontools {
+    right: 10px;
+
+    a { font-size: 11px; padding: 3px 8px; }
+  }
+}
+
+
+// =============================================================================
+// 3. TYPOGRAPHY
+// =============================================================================
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--grass-heading);
+  font-family: 'Merriweather', serif;
+  line-height: 1.5em;
+  letter-spacing: -0.025em;
+  font-weight: 600;
+  margin: 1em 0 0.5em;
+}
+
+#content h1.documentFirstHeading {
+  font-size: 2.8rem;
+  margin-bottom: 0.5em;
+  margin-top: 35px;
+  line-height: 3.2rem;
+  color: var(--grass-heading);
+}
+
+// Gold underline bar after h1
+h1.documentFirstHeading::after,
+#content h1::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 5px;
+  background-color: var(--grass-gold);
+  margin-top: 5px;
+}
+
+#content h1 {
+  font-size: 2.8rem;
+  margin-bottom: 0.5em;
+  margin-top: 35px;
+  color: var(--grass-heading);
+  font-weight: 600;
+  line-height: 3.2rem;
+}
+
+@media (max-width: 767px) {
+  #content h1.documentFirstHeading,
+  #content h1 {
+    font-size: 2.3rem;
+    line-height: 2.6rem;
+  }
+}
+
+h2 {
+  font-size: 2.3rem;
+  line-height: 2.8rem;
+}
+
+h2.large {
+  font-size: 2.8rem;
+  margin: 0 0 0.5em;
+}
+
+@media (max-width: 767px) {
+  h2.large {
+    font-size: 2rem;
+  }
+}
+
+h3 { font-size: 1.7rem; }
+h4 { font-size: 1.5rem; }
+
+p {
+  color: var(--grass-text);
+  font-size: 1.1rem;
+  line-height: 1.65rem;
+}
+
+// Navigation list items should NOT inherit body list styles
+#portal-globalnav li,
+#portal-footer li,
+.wlfw-biome-nav-bar li,
+nav[aria-label="breadcrumb"] li {
+  font-family: 'Public Sans', sans-serif;
+  color: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+#content li {
+  color: var(--grass-darkgrey);
+  font-size: 1rem;
+  letter-spacing: 0.01em;
+  margin-bottom: 10px;
+  font-family: 'Public Sans', sans-serif;
+}
+
+.intro {
+  font-size: 18px;
+  line-height: 1.6em;
+  color: var(--grass-intro);
+  margin: 1em 0;
+  font-family: 'Merriweather', serif;
+}
+
+.subheading {
+  display: block;
+  font-family: 'Public Sans', sans-serif;
+  font-size: 1.1rem;
+  color: var(--grass-gold);
+}
+
+.subheading-2 {
+  display: block;
+  font-family: 'Public Sans', sans-serif;
+  font-size: 1.3rem;
+  color: var(--grass-brown);
+  text-transform: uppercase;
+}
+
+#content .documentDescription,
+#content #description {
+  font-size: 1.35em;
+  line-height: 1.5em;
+  font-family: 'Public Sans', sans-serif;
+  font-weight: 500;
+}
+
+.heading-white {
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.7em;
+  text-transform: uppercase;
+}
+
+.text-shadow {
+  text-shadow: 1px 2px 10px #3a3a3a;
+}
+
+#content .pullquote {
+  letter-spacing: -0.05em;
+  font-family: 'Merriweather', serif;
+  padding: 10px 0 10px 30px;
+  font-size: 1.5rem;
+  line-height: 1.5em;
+  border-left: 6px solid var(--grass-callout-border);
+  margin-left: 30px;
+  color: var(--grass-intro);
+}
+
+.quote {
+  font-size: 20px;
+  font-family: 'Merriweather', serif;
+  font-style: italic;
+  margin: 2em;
+}
+
+.cite {
+  text-align: center;
+  font-size: 0.9rem;
+  padding-bottom: 2em;
+}
+
+#content .flex h1 {
+  margin-top: 0;
+}
+
+
+// =============================================================================
+// 4. LINKS
+// =============================================================================
+
+a.gold-text {
+  color: #d8c468;
+}
+
+
+// =============================================================================
+// 5. PAGE HEADER
+// =============================================================================
+
+#content-header {
+  background: var(--grass-darkblue);
+  border: none;
+  position: relative;
+  width: 100%;
+  height: 150px;
+}
+
+#portal-logo-wrapper {
+  padding: 0;
+
+  #portal-logo {
+    margin: 0;
+    display: block;
+
+    img {
+      width: 560px;
+      position: relative;
+      top: 15px;
+      left: 35px;
+    }
+  }
+}
+
+#header-searchbox {
+  #portal-searchbox {
+    margin-right: 20px;
+    margin-top: 0;
+    padding: 7px;
+
+    .searchSection { display: none; }
+
+    input[type="text"],
+    .form-control {
+      font-size: 13px;
+      padding: 4px 8px;
+      height: 28px;
+      width: 180px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+
+    .searchButton,
+    button[type="submit"] {
+      font-size: 12px;
+      padding: 4px 10px;
+      height: 28px;
+      background: #ededed;
+      border: 1px solid #ccc;
+      color: #555;
+      cursor: pointer;
+
+      &:hover {
+        background: #ddd;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  #content-header {
+    height: 100px;
+  }
+
+  #portal-logo-wrapper {
+    width: 340px;
+
+    #portal-logo img {
+      width: 335px;
+      top: -15px;
+      left: 5px;
+    }
+  }
+
+  #header-searchbox #portal-searchbox {
+    position: absolute;
+    top: 5px;
+  }
+}
+
+
+// =============================================================================
+// 6. NAVIGATION
+// =============================================================================
+
+#mainnavigation-wrapper {
+  background-color: transparent;
+  border-top: none;
+}
+
+#portal-globalnav-wrapper {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+
+  .container {
+    max-width: 100%;
+    padding: 0;
+  }
+}
+
+#portal-globalnav {
+  background-color: transparent;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 2.5%;
+
+  .nav-item {
+    a.nav-link {
+      background-color: transparent;
+      color: var(--grass-white);
+      font-size: 1rem;
+      font-family: 'Public Sans', sans-serif;
+      font-weight: 600;
+      text-transform: uppercase;
+      padding: 10px 20px;
+      border: 3px solid transparent;
+      transition: background-color 0.2s ease, color 0.2s ease;
+
+      &:hover {
+        background: rgba(0, 0, 0, 0.35);
+        color: var(--grass-gold);
+      }
+    }
+
+    // Selected / current nav item
+    &.current > a.nav-link,
+    &.inPath > a.nav-link {
+      background: rgba(0, 0, 0, 0.35);
+      color: var(--grass-gold);
+
+      &:hover {
+        background: rgba(0, 0, 0, 0.35);
+        color: var(--grass-gold);
+      }
+    }
+  }
+
+  // Dropdown / submenu
+  ul.dropdown {
+    background: #fff;
+    box-shadow: 0 0 5px #666;
+
+    .nav-item a.nav-link {
+      background: #fff;
+      color: var(--grass-submenu-text);
+      text-transform: none;
+      font-size: 15px;
+      padding: 8px 20px;
+      border: none;
+
+      &:hover {
+        background-color: var(--grass-submenu-hover-bg);
+        color: var(--grass-submenu-hover-text);
+      }
+    }
+  }
+}
+
+// Dropdown toggle arrow
+#portal-globalnav .nav-item {
+  > label {
+    color: #fff;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    cursor: pointer;
+
+    &::after {
+      content: "\25BC"; // ▼
+      font-size: 9px;
+      color: #fff;
+      line-height: 1;
+    }
+  }
+
+  &.has_subtree > a.nav-link {
+    padding-right: 28px;
+  }
+}
+
+// Tablet nav adjustments
+@media (max-width: 1024px) {
+  #portal-globalnav .nav-item a.nav-link {
+    font-size: 16px;
+    padding: 10px 15px;
+    margin: 0 0.125em;
+    text-align: center;
+  }
+}
+
+// Mobile nav
+@media (max-width: 991.98px) {
+  .navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  #offcanvasNavbar {
+    background-color: #d8c468; // Gold background for mobile nav
+
+    .offcanvas-header .btn-close {
+      filter: invert(1);
+    }
+  }
+
+  #portal-globalnav {
+    .nav-item {
+      a.nav-link {
+        text-align: center;
+        padding: 12px 20px;
+        background: #d8c468;
+        color: var(--grass-darkblue);
+        width: 100%;
+      }
+    }
+  }
+}
+
+
+// =============================================================================
+// 7. BANNER IMAGES
+// =============================================================================
+
+#hero,
+.principal {
+  display: block;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+
+  &.has-banner {
+    height: 450px;
+    background-color: #ededed;
+  }
+
+  .container,
+  .gigantic {
+    &:empty { display: none; }
+  }
+}
+
+// Banner caption overlay
+.banner-caption {
+  font-size: 12px;
+  color: #fff;
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  padding: 0.5rem 1.2rem;
+  background: rgba(0, 0, 0, 0.35);
+  max-width: 430px;
+  line-height: 1.5em;
+}
+
+@media (max-width: 768px) {
+  #hero.has-banner,
+  .principal.has-banner {
+    height: 195px;
+  }
+
+  .banner-caption {
+    display: none;
+  }
+}
+
+
+// =============================================================================
+// 8. BREADCRUMBS
+// =============================================================================
+
+#portal-breadcrumbs,
+nav[aria-label="breadcrumb"] {
+  margin-left: 0;
+  margin-top: 0;
+  padding: 15px 35px;
+  font-size: 0.9rem;
+
+  .breadcrumb {
+    margin-bottom: 0;
+  }
+}
+
+#breadcrumbs-you-are-here {
+  display: none;
+}
+
+
+// =============================================================================
+// 9. LAYOUT UTILITIES
+// =============================================================================
+
+#visual-portal-wrapper,
+.outer-wrapper {
+  max-width: 100%;
+  background-color: #fff;
+  border-radius: 0;
+  margin: 0 auto;
+}
+
+// Content width — Grasslands uses 80% instead of fixed 1170px
+#content {
+  margin: 1em auto;
+  width: 80%;
+}
+
+@media (max-width: 1530px) {
+  #content {
+    width: 100%;
+    padding: 0 2em;
+  }
+}
+
+#portal-columns {
+  padding: 0 2em;
+}
+
+@media (max-width: 768px) {
+  #portal-columns {
+    padding: 0;
+  }
+}
+
+// Spacing utilities
+.pad80 { padding: 80px 0; }
+.pad60 { padding: 60px 0; }
+.pad40 { padding: 40px; }
+.pad20 { padding: 20px; }
+
+// Flex helpers
+.centered-block-flex {
+  text-align: center;
+  flex: 1;
+}
+
+@media (max-width: 768px) {
+  .flex {
+    padding: 30px;
+  }
+
+  .grid {
+    justify-content: center;
+    align-items: center;
+    display: grid;
+  }
+}
+
+
+// =============================================================================
+// 10. CONTENT BLOCKS
+// =============================================================================
+
+// Background utility classes
+.bg-dark     { background: var(--grass-darkblue); }
+.bg-blue     { background: var(--grass-heading); }
+.bg-grey     { background: var(--grass-grey); }
+.bg-gold     { background: var(--grass-gold); border-top: none; }
+.bg-drk-gold { background: var(--grass-darkgold); }
+.bg-lt-gold  { background: var(--grass-ltgold); }
+.bg-orange   { background: var(--grass-orange); }
+
+// Blue block
+.blue-block {
+  background: rgba(37, 50, 75, 0.90);
+  padding: 40px 30px;
+  min-height: 400px;
+  margin: 4em 1em;
+  border-radius: 10px;
+
+  h2 {
+    font-size: 40px;
+    line-height: 1.3em;
+    margin: 15px 0;
+  }
+
+  h4 {
+    color: var(--grass-yellow);
+    font-size: 22px;
+    margin: 10px 0;
+  }
+
+  p { color: #fff; font-size: 18px; line-height: 1.7em; }
+  li { color: #fff; }
+
+  .subhead {
+    letter-spacing: 3px;
+    font-weight: 600;
+    color: #D0F7FF;
+    margin-bottom: 0;
+    font-size: 14px;
+    text-transform: uppercase;
+  }
+
+  a:link, a:visited { color: #f9d90f; }
+  a:hover { color: #fd7916; }
+}
+
+// Black overlay block
+.black-overlay-block {
+  background: rgba(8, 7, 7, 0.80);
+  padding: 40px 30px;
+  min-height: 400px;
+  margin: 4em 1em;
+  border-radius: 10px;
+
+  h2 {
+    font-size: 40px;
+    line-height: 1.3em;
+    margin: 15px 0;
+  }
+
+  .subhead {
+    color: #f1d215;
+    font-size: 14px;
+    letter-spacing: 4px;
+    font-weight: 600;
+  }
+}
+
+@media (max-width: 768px) {
+  .blue-block, .black-overlay-block {
+    margin: 2em;
+  }
+
+  .blue-block h2, .black-overlay-block h2 {
+    font-size: 30px;
+  }
+}
+
+// Black 50% block
+.black-50-block {
+  background: rgba(0, 0, 0, 0.50);
+  padding: 40px;
+  margin: 3em;
+
+  h3 { margin: 0; }
+}
+
+// Black 70% block
+.black-70-block {
+  background: rgba(0, 0, 0, 0.70);
+  padding: 40px;
+  margin: 1em;
+  display: flex;
+  gap: 20px;
+  border-radius: 10px;
+
+  h3 { margin: 0; }
+
+  .subhead {
+    letter-spacing: 2px;
+    font-weight: 600;
+    color: var(--grass-yellow);
+    margin-bottom: 0.5em;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  .black-70-block {
+    flex-direction: column;
+  }
+}
+
+// Dark block 75%
+.dark-block-75 {
+  background: rgba(0, 0, 0, 0.75);
+  padding: 40px;
+
+  .subhead {
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 4px;
+    font-weight: 600;
+    color: #D0F7FF;
+    margin-bottom: 0;
+    font-size: 14px;
+    text-transform: uppercase;
+  }
+
+  h4 {
+    color: #f8903e;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+  }
+
+  h2 {
+    margin-top: 10px;
+  }
+}
+
+.block-400 {
+  min-height: 400px;
+}
+
+// Callout block
+#content .callout {
+  background: var(--grass-callout-bg);
+  padding: 1em;
+  border-left: 1em solid var(--grass-callout-border);
+  clear: both;
+}
+
+// Last block (removes bottom spacing)
+.last-block {
+  padding-bottom: 0;
+  margin-bottom: -1em;
+}
+
+// Image backgrounds
+.turf-block {
+  background: url('../theme_images/working-lands/rich-turf.jpg') no-repeat center center;
+  background-size: cover;
+}
+
+.mapviewer-block {
+  background-size: cover;
+  background-position: center;
+  min-height: 400px;
+  margin: 3em auto 2em;
+}
+
+// Image borders removed
+img.image-left,
+img.image-right,
+.captioned img {
+  border: none;
+}
+
+
+// =============================================================================
+// 11. BUTTONS & CTAs
+// =============================================================================
+
+#content a.btn.large-white {
+  border: 1px solid #fff;
+  padding: 15px;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.25);
+  color: #fff;
+  letter-spacing: 0.075em;
+  border-radius: 4px;
+  transition: all 0.3s ease-in-out;
+  font-size: 14px;
+  font-weight: 600;
+
+  &:hover {
+    background: rgba(255, 0, 0, 0.25);
+    color: #fff;
+  }
+}
+
+.btn-grey {
+  padding: 10px 15px;
+  text-transform: uppercase;
+  background: #e6e6e6;
+  color: #515151;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+
+  &:hover {
+    background: #F8903E;
+    color: #fff;
+  }
+}
+
+.cta-button {
+  padding: 15px 25px;
+  background: #f7bd4f;
+  font-size: 20px;
+  border-radius: 5px;
+  border: 1px solid #fff;
+
+  a {
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  &:hover {
+    background: #f38b1a;
+  }
+}
+
+.large-orange {
+  background: #f8903e;
+  color: #fff;
+  border: 1px solid #fff;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.075em;
+  border-radius: 4px;
+  padding: 10px 15px;
+
+  &:hover {
+    background: #F7700D;
+    color: #fff;
+  }
+}
+
+
+// =============================================================================
+// 12. FOOTER
+// =============================================================================
+
+#portal-footer-wrapper {
+  background: var(--grass-darkgold);
+  margin-top: 0;
+
+  #portal-footer {
+    background: var(--grass-darkgold);
+    color: #fff;
+    padding: 1.5em;
+
+    a {
+      color: #fff;
+
+      &:hover {
+        color: #fff;
+        border-bottom: 1px solid #fff;
+      }
+    }
+
+    h3 {
+      margin-top: 0;
+      color: #fff;
+      border-bottom: 1px solid #ebebeb;
+      letter-spacing: 2px;
+      font-size: 1.5rem;
+    }
+
+    .ft-menu li a {
+      color: #fff;
+      font-size: 15px;
+      line-height: 1.8em;
+
+      &:hover {
+        border-bottom: 1px solid #fff;
+      }
+    }
+
+    .eeo-statement {
+      font-size: 0.75rem;
+      line-height: 1.4em;
+      margin-top: 15px;
+
+      a {
+        font-weight: 600;
+        color: #fff;
+
+        &:hover {
+          color: #29457b;
+        }
+      }
+    }
+
+    .bottom-nav {
+      text-align: left;
+      margin: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+}
+
+// Site actions bar
+#portal-siteactions {
+  background: #25324b; // Dark blue, matches header
+}
+
+@media (max-width: 768px) {
+  #portal-footer-wrapper #portal-footer .bottom-nav {
+    text-align: center;
+    flex-direction: column;
+  }
+}
+
+
+// =============================================================================
+// 13. PORTLETS
+// =============================================================================
+
+.card.portlet {
+  font-size: 90%;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  margin-bottom: 1.5em;
+
+  .card-header {
+    padding: 1em 1em 0.25em;
+    background: transparent;
+    font-family: 'Public Sans', sans-serif;
+    font-size: 17px;
+  }
+
+  &.portlet-navigation-tree .card-header {
+    background: var(--grass-heading);
+    border-radius: 4px 4px 0 0;
+    text-transform: uppercase;
+    padding: 15px;
+    color: #fff;
+
+    a {
+      color: var(--grass-gold);
+      font-weight: 600;
+    }
+  }
+}
+
+
+// =============================================================================
+// 14. TILES & LISTINGS
+// =============================================================================
+
+.tileItem {
+  border-top: none;
+}
+
+.tileHeadline {
+  margin-top: 0;
+  line-height: 1.6em;
+  font-size: 1.75em;
+}
+
+#content .tileHeadline a {
+  color: var(--grass-heading);
+}
+
+
+// =============================================================================
+// 15. UTILITY CLASSES
+// =============================================================================
+
+.white, .white a:link, .white a:visited {
+  color: #fff;
+}
+
+#content ul.large-list {
+  list-style-type: disc;
+  list-style-image: none;
+  font-size: 16px;
+}
+
+// Hide items not used in this theme
+#jumpmenu {
+  display: none;
+}
+
+// Partners subsection full width
+.subsection-partners #content {
+  width: 100%;
+}

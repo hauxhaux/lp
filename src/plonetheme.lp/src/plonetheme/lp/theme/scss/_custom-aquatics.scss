@@ -1,0 +1,1259 @@
+// =============================================================================
+// PLONETHEME.LP — AQUATICS CUSTOM STYLES
+// =============================================================================
+// Custom overrides for the Aquatics sub-site, scoped under
+// body classes like .section-aquatics or .site-aquatics.
+//
+// Reference design:  agents/aquatics-dev-styles/STYLE-GUIDE.md
+// Source CSS:        agents/aquatics-dev-styles/css/wlfw-aquatics.css
+// Compiled via:      npm run watch  (from theme/ directory)
+//
+// CONTENTS
+//   1.  Custom properties  — colour palette
+//   2.  Base & reset
+//   3.  Typography         — headings, paragraphs, subheads
+//   4.  Links
+//   5.  Page header        — logo, search, portal-top
+//   6.  Navigation         — global nav, hover/selected, submenus, mobile
+//   7.  Banner images
+//   8.  Breadcrumbs
+//   9.  Layout utilities   — containers, grids, full-width sections
+//  10.  Content blocks     — blue, black overlays, callout, basic
+//  11.  Buttons & CTAs
+//  12.  Footer
+//  13.  Portlets
+//  14.  Tile / news items
+//  15.  Timeline slider
+//  16.  Utility classes
+// =============================================================================
+
+
+// =============================================================================
+// 1. CUSTOM PROPERTIES
+// =============================================================================
+
+:root {
+  // --- Aquatics brand colours ---
+  --aq-teal:            #278e95;   // Primary brand — header bg, headings
+  --aq-gold:            #dcc464;   // Accents, selected nav, h1 underline bar
+  --aq-dark-gold:       #bca647;   // Footer bg, .bg-drk-gold
+  --aq-lt-gold:         #ebdc9e;   // Light gold bg blocks
+  --aq-brown:           #825640;   // Site actions bar bg
+  --aq-orange:          #f88630;   // Biome nav hover, button bg
+  --aq-yellow:          #fbd84d;   // Blue block h4, subhead labels
+  --aq-dark-grey:       #262626;   // Biome nav bar bg, list item text
+  --aq-grey:            #f8f5ef;   // Light background sections
+  --aq-lt-grey:         #efefef;   // Subtle bg blocks, submenu hover
+  --aq-white:           #ffffff;   // Body bg, nav link colour
+  --aq-text:            #3b3b3b;   // Body paragraph text
+  --aq-intro-text:      #3c4d6a;   // Intro text, pullquote text
+  --aq-submenu-text:    #176065;   // Submenu link colour
+  --aq-submenu-hover:   #E86128;   // Submenu hover text
+  --aq-gold-text:       #d8c468;   // Gold text class
+  --aq-callout-bg:      #f2e6b5;   // Callout background
+  --aq-callout-border:  #d3bd64;   // Callout/pullquote border
+  --aq-timeline-bg:     #345a67;   // Timeline background
+  --aq-timeline-gold:   #eeca37;   // Timeline h3 colour
+  --aq-anchor-green:    #a6c372;   // Anchor menu border-top
+  --aq-anchor-selected: #ff6c00;   // Anchor menu selected link
+  --aq-tooltip-link:    #91C45E;   // Tooltip link colour
+}
+
+
+// =============================================================================
+// 2. BASE & RESET
+// =============================================================================
+
+body {
+  background: var(--aq-white);
+  font-family: 'Public Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+// Biome navigation bar (top bar above header)
+#return-to-lp-banner {
+  background: var(--aq-dark-grey);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 30px;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 1px;
+  z-index: 20;
+  position: relative;
+
+  a {
+    color: #fff;
+    text-transform: uppercase;
+    text-decoration: none;
+
+    &:hover {
+      color: var(--aq-orange);
+    }
+  }
+}
+
+// Move anonymous login tools into the banner
+#portal-anontools {
+  position: absolute;
+  right: 30px;
+  z-index: 10;
+  top: -36px;
+
+  .list-inline {
+    margin: 0;
+    padding: 0;
+
+    .list-inline-item {
+      margin: 0;
+    }
+  }
+
+  a {
+    color: #fff;
+    font-family: 'Public Sans', sans-serif;
+    font-size: 13px;
+    text-decoration: none;
+
+    &:hover {
+      color: var(--aq-orange);
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  #return-to-lp-banner {
+    padding: 10px 15px;
+    font-size: 11px;
+    letter-spacing: normal;
+  }
+
+  #portal-anontools {
+    right: 10px;
+
+    a { font-size: 11px; padding: 3px 8px; }
+  }
+}
+
+
+// =============================================================================
+// 3. TYPOGRAPHY
+// =============================================================================
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--aq-teal);
+  font-family: 'Merriweather', serif;
+  line-height: 1.5em;
+  letter-spacing: -0.025em;
+  font-weight: 600;
+  margin: 1em 0 0.5em;
+}
+
+#content h1.documentFirstHeading {
+  font-size: 2.8rem;
+  margin-bottom: 0.5em;
+  margin-top: 35px;
+  line-height: 3.4rem;
+  color: var(--aq-teal);
+
+  // Gold underline bar
+  &::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 5px;
+    background-color: var(--aq-gold);
+    margin-top: 5px;
+  }
+}
+
+#content h1 {
+  font-size: 2.8rem;
+  margin-bottom: 0.5em;
+  margin-top: 35px;
+  color: var(--aq-teal);
+  font-weight: 600;
+  line-height: 3.4rem;
+
+  // Gold underline bar
+  &::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 5px;
+    background-color: var(--aq-gold);
+    margin-top: 5px;
+  }
+}
+
+@media (max-width: 767px) {
+  #content h1.documentFirstHeading,
+  #content h1 {
+    font-size: 2.3rem;
+    line-height: 2.6rem;
+  }
+}
+
+h2 {
+  font-size: 2.3rem;
+  line-height: 2.8rem;
+}
+
+h2.large {
+  font-size: 2.8rem;
+  margin: 0 0 0.5em;
+}
+
+@media (max-width: 767px) {
+  h2.large { font-size: 2rem; }
+}
+
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.3rem; }
+
+p {
+  color: var(--aq-text);
+  font-size: 1.1rem;
+  line-height: 1.65rem;
+}
+
+#content li {
+  color: var(--aq-dark-grey);
+  font-size: 1rem;
+  letter-spacing: 0.01em;
+  margin-bottom: 10px;
+  font-family: 'Public Sans', sans-serif;
+}
+
+// Navigation list items should NOT inherit body list styles
+#portal-globalnav li,
+#portal-footer li,
+#return-to-lp-banner li,
+nav[aria-label="breadcrumb"] li {
+  font-family: 'Public Sans', sans-serif;
+  color: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.intro {
+  font-size: 18px;
+  line-height: 1.6em;
+  color: var(--aq-intro-text);
+  margin: 1em 0;
+  font-family: 'Merriweather', serif;
+}
+
+.subheading {
+  display: block;
+  font-family: 'Public Sans', sans-serif;
+  font-size: 1.1rem;
+  color: var(--aq-gold);
+}
+
+.heading-white {
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.7em;
+  text-transform: uppercase;
+}
+
+.documentDescription {
+  font-size: 1.35em;
+  line-height: 1.5em;
+  font-family: 'Public Sans', sans-serif;
+  font-weight: 500;
+}
+
+#content .pullquote {
+  letter-spacing: -0.05em;
+  font-family: 'Merriweather', serif;
+  padding: 10px 0 10px 30px;
+  font-size: 1.5rem;
+  line-height: 1.5em;
+  border-left: 6px solid var(--aq-callout-border);
+  margin-left: 30px;
+  color: var(--aq-intro-text);
+}
+
+.quote {
+  font-size: 20px;
+  font-family: 'Merriweather', serif;
+  font-style: italic;
+  margin: 2em;
+}
+
+.cite {
+  text-align: center;
+  font-size: 0.9rem;
+  padding-bottom: 2em;
+}
+
+.text-shadow {
+  text-shadow: 1px 2px 10px #3a3a3a;
+}
+
+
+// =============================================================================
+// 4. LINKS
+// =============================================================================
+
+a.gold-text {
+  color: var(--aq-gold-text);
+}
+
+
+// =============================================================================
+// 5. PAGE HEADER
+// =============================================================================
+
+#content-header {
+  background-color: var(--aq-teal);
+  border: none;
+  position: relative;
+  width: 100%;
+  height: 150px;
+  box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
+}
+
+@media (max-width: 768px) {
+  #content-header {
+    height: 100px;
+    box-shadow: none;
+  }
+}
+
+#portal-logo-wrapper {
+  padding: 0;
+
+  #portal-logo {
+    margin: 0;
+    display: block;
+    width: 300px;
+    position: relative;
+    top: 15px;
+    left: 35px;
+    background: url('../theme_images/aquatics-logo.png') no-repeat left center;
+    background-size: contain;
+
+    img {
+      opacity: 0;
+      width: 100%;
+      height: auto;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  #portal-logo-wrapper #portal-logo {
+    width: 200px;
+    top: -18px;
+    left: 5px;
+  }
+}
+
+#header-searchbox {
+  #portal-searchbox {
+    margin-right: 20px;
+    margin-top: 0;
+    padding: 7px;
+
+    .searchSection { display: none; }
+
+    input[type="text"],
+    .form-control {
+      font-size: 13px;
+      padding: 4px 8px;
+      height: 28px;
+      width: 180px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .searchButton,
+    button[type="submit"] {
+      font-size: 12px;
+      padding: 4px 10px;
+      height: 28px;
+      background: #ededed;
+      border: 1px solid #ccc;
+      color: #555;
+      cursor: pointer;
+
+      &:hover { background: #ddd; }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  #header-searchbox #portal-searchbox {
+    position: absolute;
+    top: 5px;
+
+    [type="submit"] {
+      border: none;
+      color: transparent;
+      background: no-repeat transparent url('../theme_images/magnifier-white.png') center center;
+      height: 25px;
+      width: 25px;
+    }
+  }
+
+  #searchGadget {
+    width: 8em;
+    padding: 3px;
+    border-radius: 6px;
+  }
+}
+
+
+// =============================================================================
+// 6. NAVIGATION
+// =============================================================================
+
+#mainnavigation-wrapper {
+  background-color: transparent;
+  border-top: none;
+}
+
+#portal-globalnav-wrapper {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  position: absolute;
+  top: 100px;
+
+  .container {
+    max-width: 100%;
+    padding: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  #portal-globalnav-wrapper {
+    width: 100%;
+    top: 105px;
+    left: 0;
+  }
+}
+
+#portal-globalnav {
+  background-color: transparent;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 2.5%;
+
+  .nav-item {
+    a.nav-link {
+      background-color: transparent;
+      color: var(--aq-white);
+      font-size: 1rem;
+      font-family: 'Public Sans', sans-serif;
+      font-weight: 600;
+      text-transform: uppercase;
+      padding: 10px 20px;
+      border: 3px solid transparent;
+      margin: 0 0.15em;
+      transition: background-color 0.2s ease, color 0.2s ease;
+
+      &:hover {
+        background: rgba(0, 0, 0, 0.35);
+        color: var(--aq-gold);
+      }
+    }
+
+    // Selected / current nav item
+    &.current > a.nav-link,
+    &.inPath > a.nav-link {
+      background: rgba(0, 0, 0, 0.35);
+      color: var(--aq-gold);
+
+      &:hover {
+        background: rgba(0, 0, 0, 0.35);
+        color: var(--aq-gold);
+      }
+    }
+  }
+
+  // Dropdown / submenu
+  ul.dropdown {
+    background: #fff;
+    border: 1px solid #ddd;
+
+    .nav-item a.nav-link {
+      background: #fff;
+      color: var(--aq-submenu-text);
+      text-transform: none;
+      font-size: 15px;
+      padding: 8px 20px;
+      border: none;
+      margin: 0;
+
+      &:hover {
+        background-color: var(--aq-lt-grey);
+        color: var(--aq-submenu-hover);
+      }
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  #portal-globalnav .nav-item a.nav-link {
+    font-size: 16px;
+    padding: 10px 15px;
+    margin: 0 0.125em;
+  }
+}
+
+// Dropdown toggle arrow
+#portal-globalnav .nav-item {
+  > label {
+    color: #fff;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    cursor: pointer;
+
+    &::after {
+      content: "\25BC";
+      font-size: 9px;
+      color: #fff;
+      line-height: 1;
+    }
+  }
+
+  &.has_subtree > a.nav-link {
+    padding-right: 28px;
+  }
+}
+
+// Mobile nav
+@media (max-width: 991.98px) {
+  .navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.3);
+    font-weight: 600;
+    font-size: 13px;
+  }
+
+  #offcanvasNavbar {
+    background-color: #d8c468; // Gold mobile nav
+
+    .offcanvas-header .btn-close {
+      filter: invert(1);
+    }
+  }
+
+  #portal-globalnav {
+    .nav-item {
+      a.nav-link {
+        text-align: center;
+        padding: 12px 20px;
+      }
+    }
+  }
+}
+
+
+// =============================================================================
+// 7. BANNER IMAGES
+// =============================================================================
+
+#hero,
+.principal {
+  display: block;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+
+  &.has-banner {
+    height: 450px;
+    background-color: #ededed;
+  }
+
+  .container,
+  .gigantic {
+    &:empty { display: none; }
+  }
+}
+
+@media (max-width: 768px) {
+  #hero.has-banner,
+  .principal.has-banner {
+    height: 195px;
+  }
+}
+
+
+// =============================================================================
+// 8. BREADCRUMBS
+// =============================================================================
+
+#portal-breadcrumbs,
+nav[aria-label="breadcrumb"] {
+  margin-left: 0;
+  margin-top: 0;
+  padding: 15px 35px;
+  font-size: 0.9rem;
+
+  .breadcrumb {
+    margin-bottom: 0;
+  }
+
+  // "You are here" label
+  #breadcrumbs-you-are-here {
+    display: none;
+  }
+}
+
+
+// =============================================================================
+// 9. LAYOUT UTILITIES
+// =============================================================================
+
+#visual-portal-wrapper,
+.outer-wrapper {
+  max-width: 100%;
+  background-color: #fff;
+}
+
+#content {
+  margin: 1em auto;
+  width: 80%;
+}
+
+@media (max-width: 1530px) {
+  #content {
+    width: 85%;
+  }
+}
+
+.fullwidth-section {
+  padding: 0;
+}
+
+.flex-block {
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 767px) {
+  .flex-block { flex-direction: column; }
+}
+
+.flex-block-reverse-mobile {
+  display: flex;
+  align-items: center;
+  justify-items: center;
+}
+
+@media (max-width: 767px) {
+  .flex-block-reverse-mobile { flex-direction: column-reverse; }
+}
+
+.flex-container {
+  display: flex;
+  gap: 15px;
+}
+
+@media (max-width: 768px) {
+  .flex-container { flex-direction: column; }
+}
+
+.centered-block-flex {
+  text-align: center;
+  flex: 1;
+}
+
+
+// =============================================================================
+// 10. CONTENT BLOCKS
+// =============================================================================
+
+.blue-block {
+  background: rgba(37, 50, 75, 0.90);
+  padding: 40px 30px;
+  min-height: 400px;
+  margin: 4em 1em;
+  border-radius: 10px;
+
+  h2 {
+    font-size: 40px;
+    line-height: 1.3em;
+    margin: 15px 0;
+  }
+
+  h4 {
+    color: var(--aq-yellow);
+    font-size: 22px;
+    margin: 10px 0;
+  }
+
+  p { color: #fff; font-size: 16px; line-height: 1.7em; margin-top: 10px; }
+  li { color: #fff; }
+
+  .subhead {
+    letter-spacing: 3px;
+    font-weight: 600;
+    color: #D0F7FF;
+    margin-bottom: 0;
+    font-size: 14px;
+    text-transform: uppercase;
+  }
+
+  a:link, a:visited { color: #f9d90f; }
+  a:hover { color: #fd7916; }
+}
+
+@media (max-width: 768px) {
+  .blue-block { margin: 2em; }
+  .blue-block h2 { font-size: 30px; }
+}
+
+.black-overlay-block {
+  background: rgba(8, 7, 7, 0.80);
+  padding: 40px 30px;
+  min-height: 400px;
+  margin: 4em 1em;
+  border-radius: 10px;
+
+  h2 {
+    font-size: 40px;
+    line-height: 1.3em;
+    margin: 15px 0;
+  }
+
+  .subhead {
+    color: #f1d215;
+    font-size: 14px;
+    letter-spacing: 4px;
+    font-weight: 600;
+  }
+}
+
+@media (max-width: 768px) {
+  .black-overlay-block { margin: 2em; }
+  .black-overlay-block h2 { font-size: 30px; }
+}
+
+.black-50-block {
+  background: rgb(0 0 0 / 50%);
+  padding: 40px;
+  margin: 3em;
+
+  h2 {
+    font-family: 'Public Sans', sans-serif;
+    margin: 0;
+  }
+  h3 { margin: 0; }
+}
+
+.black-70-block {
+  background: rgb(0 0 0 / 70%);
+  padding: 2rem;
+  margin: 1em;
+  display: flex;
+  gap: 20px;
+  border-radius: 10px;
+
+  h3 { margin: 0; }
+
+  .subhead {
+    letter-spacing: 2px;
+    font-weight: 600;
+    color: var(--aq-yellow);
+    margin-bottom: 0.5em;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  .black-70-block { flex-direction: column; }
+}
+
+.basic-block {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 0 2rem 1rem;
+  margin: 2rem 0;
+}
+
+#content .callout {
+  background: var(--aq-callout-bg);
+  padding: 1em;
+  border-left: 1em solid var(--aq-callout-border);
+  clear: both;
+}
+
+// Background utility classes
+.bg-dark { background: var(--aq-teal); }
+.bg-blue { background: var(--aq-teal); }
+.bg-grey { background: var(--aq-grey); }
+.bg-gold { background: var(--aq-gold); border-top: none; }
+.bg-drk-gold { background: var(--aq-dark-gold); }
+.bg-lt-gold { background: var(--aq-lt-gold); }
+.bg-orange { background: var(--aq-orange); }
+.bg-brown { background: var(--aq-brown); }
+.bg-ltgrey { background: var(--aq-lt-grey); }
+
+
+// =============================================================================
+// 11. BUTTONS & CTAs
+// =============================================================================
+
+a.btn-orange {
+  color: #fff;
+  letter-spacing: 1px;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 13px;
+  background: #ef8f39;
+  text-decoration: none;
+  display: inline-block;
+  padding: 10px 15px;
+  border-radius: 5px;
+
+  &:hover {
+    background: #F7700D;
+    color: #fff;
+  }
+}
+
+#content a.btn.large-white {
+  border: 1px solid #fff;
+  padding: 15px;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.25);
+  color: #fff;
+  letter-spacing: 0.075em;
+  border-radius: 4px;
+  transition: all 0.3s ease-in-out;
+  font-size: 14px;
+  font-weight: 600;
+
+  &:hover {
+    background: rgb(131, 84, 64);
+  }
+}
+
+.btn-grey {
+  background: #e6e6e6;
+  color: #515151;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 15px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: inline-block;
+
+  &:hover {
+    background: #F8903E;
+    color: #fff;
+  }
+}
+
+.cta-button {
+  padding: 15px 25px;
+  background: #f7bd4f;
+  font-size: 20px;
+  border-radius: 5px;
+  border: 1px solid #fff;
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+
+  &:hover {
+    background: #f38b1a;
+    color: #fff;
+  }
+}
+
+
+// =============================================================================
+// 12. FOOTER
+// =============================================================================
+
+// WLFW custom footer (displayed for Aquatics)
+#portal-footer-wlfw {
+  display: block;
+  background: var(--aq-dark-gold);
+  color: #fff;
+  width: 100%;
+  padding: 1.5em;
+
+  h3 {
+    margin-top: 0;
+    color: #fff;
+    border-bottom: 1px solid #ebebeb;
+    letter-spacing: 2px;
+    font-size: 1.5rem;
+  }
+
+  .bottom-nav {
+    text-align: left;
+    margin: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .ft-menu {
+    color: #fff;
+    text-align: center;
+
+    li a {
+      color: #fff;
+      font-size: 15px;
+      line-height: 1.8em;
+
+      &:hover {
+        border-bottom: 1px solid #fff;
+      }
+    }
+  }
+
+  .eeo-statement {
+    font-size: 0.75rem;
+    line-height: 1.4em;
+    margin-top: 15px;
+
+    a {
+      font-weight: 600;
+      color: #fff;
+
+      &:hover { color: #29457b; }
+    }
+  }
+
+  .sitecredit {
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin: 25px auto 5px;
+    width: 185px;
+
+    a { color: #fff; }
+  }
+}
+
+@media (max-width: 767px) {
+  #portal-footer-wlfw .bottom-nav {
+    text-align: center;
+    flex-direction: column;
+  }
+}
+
+// Default Plone footer — hidden for Aquatics
+#portal-footer-wrapper {
+  #portal-footer {
+    display: none;
+  }
+}
+
+#portal-siteactions {
+  background: var(--aq-brown);
+}
+
+
+// =============================================================================
+// 13. PORTLETS
+// =============================================================================
+
+.card.portlet {
+  font-size: 90%;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  margin-bottom: 1.5em;
+
+  .card-header {
+    padding: 1em 1em 0.25em;
+    background: transparent;
+    color: var(--aq-text);
+    font-family: 'Public Sans', sans-serif;
+    font-size: 17px;
+  }
+
+  &.portlet-navigation-tree .card-header {
+    background: var(--aq-teal);
+    border-radius: 6px 6px 0 0;
+    text-transform: uppercase;
+    padding: 15px;
+    color: #fff;
+
+    a {
+      color: var(--aq-gold);
+      font-weight: 600;
+    }
+  }
+}
+
+
+// =============================================================================
+// 14. TILE / NEWS ITEMS
+// =============================================================================
+
+.tileItem {
+  border-top: none;
+}
+
+.tileHeadline {
+  margin-top: 0;
+  line-height: 1.6em;
+  font-size: 1.75em;
+
+  a { color: var(--aq-teal); }
+}
+
+.card-title {
+  font-size: 1.2rem;
+  line-height: 1.6rem;
+}
+
+
+// =============================================================================
+// 15. TIMELINE SLIDER
+// =============================================================================
+
+#timeline {
+  display: flex;
+  background-color: var(--aq-timeline-bg);
+  margin-bottom: 3rem;
+
+  &:hover .tl-item {
+    width: 25%;
+  }
+}
+
+.tl-item {
+  transform: translate3d(0, 0, 0);
+  position: relative;
+  width: 24.3333%;
+  height: 70vh;
+  min-height: 600px;
+  color: #fff;
+  overflow: hidden;
+  transition: width 0.5s ease;
+  border-right: 1px solid #444;
+
+  &::before,
+  &::after {
+    transform: translate3d(0, 0, 0);
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  &::after {
+    background: rgba(38, 96, 116, 0.65);
+    opacity: 1;
+    transition: opacity 0.5s ease;
+  }
+
+  &::before {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, black 85%);
+    z-index: 1;
+    opacity: 0;
+    transform: translate3d(0, 0, 0) translateY(50%);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  &:hover {
+    width: 100% !important;
+
+    &::after { opacity: 0; }
+
+    &::before {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) translateY(0);
+      transition: opacity 1s ease, transform 1s ease 0.25s;
+    }
+
+    .tl-content {
+      opacity: 1;
+      transform: translateY(0);
+      transition: all 0.75s ease 0.5s;
+    }
+
+    .tl-bg {
+      filter: grayscale(0);
+    }
+
+    .tl-year {
+      display: none;
+    }
+  }
+}
+
+.tl-content {
+  transform: translate3d(0, 0, 0) translateY(25px);
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  margin: 0 2em;
+  top: 45%;
+  opacity: 0;
+
+  h1 {
+    font-family: "Merriweather", serif;
+    color: var(--aq-gold);
+    font-size: 1.8rem;
+    font-weight: normal;
+  }
+
+  h3 {
+    color: var(--aq-timeline-gold);
+  }
+
+  p {
+    color: #fff;
+  }
+
+  .button {
+    padding: 5px 15px;
+    background: #fff;
+    border-radius: 6px;
+    display: inline-block;
+    margin-top: 1rem;
+    font-weight: bold;
+  }
+
+  a.button {
+    text-decoration: none;
+
+    &:hover { color: #fd8d58; }
+  }
+}
+
+.tl-year {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  z-index: 1;
+  border-top: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+
+  p {
+    font-size: 1.28rem;
+    line-height: 0;
+  }
+}
+
+.tl-bg {
+  transform: translate3d(0, 0, 0);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-size: cover;
+  background-position: center;
+  transition: filter 0.5s ease;
+  filter: grayscale(100%);
+}
+
+
+// =============================================================================
+// 16. UTILITY CLASSES
+// =============================================================================
+
+.white, .white a:link, .white a:visited {
+  color: #fff;
+}
+
+img.image-left, img.image-right, .captioned img {
+  border: none;
+}
+
+.image-right {
+  float: right;
+  margin-left: 2em;
+  margin-bottom: 1em;
+}
+
+// Spacing
+.pad80 { padding: 80px 0; }
+.pad60 { padding: 60px 0; }
+.pad40 { padding: 40px; }
+.pad20 { padding: 20px; }
+
+// Hide items not used
+#jumpmenu, .rss, .rss-feeds {
+  display: none;
+}
+
+// Anchor menu block (AquaCorridors)
+#anchor-menu-block {
+  background: var(--aq-lt-grey);
+  display: grid;
+  border-top: 7px solid var(--aq-anchor-green);
+  border-bottom: 1px solid #e2dcdc;
+  margin-top: -15px;
+}
+
+#content ul.anchor-menu {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  list-style: none;
+  margin: 0 auto;
+}
+
+#content li.anchor-menu-item {
+  padding: 15px 20px 5px;
+  font-size: 17px;
+  text-align: center;
+  font-weight: 600;
+  line-height: 1.2rem;
+  text-transform: uppercase;
+  flex: 1 1 auto;
+}
+
+.anchor-menu-item a.selected {
+  color: var(--aq-anchor-selected);
+}
+
+@media (max-width: 767px) {
+  #content ul.anchor-menu {
+    margin-top: 85px;
+  }
+
+  #content li.anchor-menu-item {
+    padding: 5px 20px;
+  }
+}
+
+// Tooltip
+.tooltipContent {
+  width: 288px;
+  padding: 1em;
+  border: 2px solid #fff;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.75);
+  box-shadow: 1px 3px 9px rgba(0, 0, 0, 0.75);
+}
+
+#content .tooltipContent a:link {
+  color: var(--aq-tooltip-link);
+  text-decoration: none;
+}
+
+.tooltipTop, .tooltipBottom {
+  display: none;
+}

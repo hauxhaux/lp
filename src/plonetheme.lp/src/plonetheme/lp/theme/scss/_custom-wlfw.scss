@@ -1,0 +1,1316 @@
+// =============================================================================
+// PLONETHEME.LP — WLFW (WORKING LANDS FOR WILDLIFE) CUSTOM STYLES
+// =============================================================================
+// Custom overrides for the WLFW sub-site. WLFW is the main LP site
+// and shares the base ploneCustom.css styles. It does NOT have its own
+// dedicated sub-site CSS file; styling is driven by body classes like
+// .site-working-lands-for-wildlife and .template-wlfw_home.
+//
+// Reference design:  agents/wlfw-styles/STYLE-GUIDE.md
+// Source CSS:        agents/wlfw-styles/css/ploneCustom.css
+// Compiled via:      npm run watch  (from theme/ directory)
+//
+// CONTENTS
+//   1.  Custom properties  — colour palette
+//   2.  Base & reset
+//   3.  Typography         — headings, paragraphs, subheads
+//   4.  Links
+//   5.  Page header        — logo, search, portal-top
+//   6.  Navigation         — global nav, hover/selected, submenus, mobile
+//   7.  Banner images / slideshow
+//   8.  Breadcrumbs
+//   9.  Layout utilities   — containers, grids, full-width sections
+//  10.  Content blocks     — orange, blue, grey, black overlays, feature
+//  11.  Buttons & CTAs
+//  12.  Footer
+//  13.  Portlets
+//  14.  Tile / news items
+//  15.  Material icons
+//  16.  Utility classes
+// =============================================================================
+
+
+// =============================================================================
+// 1. CUSTOM PROPERTIES
+// =============================================================================
+
+:root {
+  // --- WLFW brand colours ---
+  --wlfw-nav-bg:          #657F9E;   // Main nav background (blue-grey)
+  --wlfw-nav-hover:       #4C6C8C;   // Nav hover bg
+  --wlfw-nav-selected:    #95A664;   // Selected nav tab bg (green)
+  --wlfw-brown:           #8E6747;   // Headings h1-h6
+  --wlfw-dark-blue:       #28526E;   // CTA block bg, dark blue sections
+  --wlfw-link-blue:       #205C90;   // Links, portlet headers, breadcrumbs
+  --wlfw-footer-blue:     #2e76a0;   // Main LP footer bg
+  --wlfw-footer-heading:  #aae2fd;   // Footer h3 colour
+  --wlfw-footer-credit:   #7dd4d6;   // Site credit link colour
+  --wlfw-orange:          #f8903e;   // .btn-orange bg
+  --wlfw-orange-hover:    #F7700D;   // Orange button hover
+  --wlfw-gold-cta:        #f7bd4f;   // CTA button bg
+  --wlfw-gold-cta-hover:  #f38b1a;   // CTA button hover
+  --wlfw-gold-text:       #f6d514;   // .gold-text
+  --wlfw-gold-heading:    #f7d25b;   // .heading-gold
+  --wlfw-red-orange:      #dd733e;   // Feature block headings, .bg-orange
+  --wlfw-teal:            #408E9B;   // .text-big-blue
+  --wlfw-text:            #444;      // Body text
+  --wlfw-grey:            #efefef;   // Grey blocks, submenu bg
+  --wlfw-grey-light:      #f6f3ed;   // Portal banner default bg
+  --wlfw-tan:             #e7e5da;   // Tan block bg
+  --wlfw-nest-nav:        #405D68;   // Nest navigation bar bg (base, usually hidden)
+}
+
+
+// =============================================================================
+// 2. BASE & RESET
+// =============================================================================
+
+body {
+  background: #fff;
+  font-family: 'Open Sans', sans-serif;
+  line-height: 1.5em;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+// Nest navigation bar — hidden by default for WLFW, shown for sub-sites
+#return-to-lp-banner {
+  background: var(--wlfw-nest-nav);
+  display: none; // Hidden on main WLFW site
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 25px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  position: relative;
+
+  a {
+    color: #fff;
+    text-decoration: none;
+
+    &:hover {
+      color: #f7d25b;
+    }
+  }
+}
+
+// Move anonymous login tools into the banner area
+#portal-anontools {
+  position: absolute;
+  right: 30px;
+  z-index: 10;
+  top: -36px;
+
+  .list-inline {
+    margin: 0;
+    padding: 0;
+
+    .list-inline-item {
+      margin: 0;
+    }
+  }
+
+  a {
+    color: #fff;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    text-decoration: none;
+
+    &:hover {
+      color: #f7d25b;
+    }
+  }
+}
+
+
+// =============================================================================
+// 3. TYPOGRAPHY
+// =============================================================================
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--wlfw-brown);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  line-height: 1.5em;
+  letter-spacing: -0.0125em;
+}
+
+#content h1.documentFirstHeading {
+  color: var(--wlfw-brown);
+  font-size: 36px;
+  margin: 1em 0 0.5em;
+}
+
+#content h1 {
+  color: var(--wlfw-brown);
+  font-size: 36px;
+  font-weight: 500;
+  margin: 1.5em 0 0.5em;
+}
+
+@media (max-width: 600px) {
+  #content h1.documentFirstHeading,
+  #content h1 {
+    font-size: 30px;
+    line-height: 1.2em;
+  }
+}
+
+h2 { font-size: 30px; }
+h3 { font-size: 24px; margin-bottom: 0.5em; margin-top: 1em; }
+
+p {
+  color: var(--wlfw-text);
+  font-size: 16px;
+  line-height: 1.6em;
+}
+
+#content li {
+  font-size: 1.2em;
+  color: var(--wlfw-text);
+  line-height: 1.5em;
+}
+
+// Navigation list items should NOT inherit body list styles
+#portal-globalnav li,
+#portal-footer li,
+#return-to-lp-banner li,
+nav[aria-label="breadcrumb"] li {
+  font-family: 'Source Sans Pro', sans-serif;
+  color: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.intro {
+  font-size: 20px;
+  line-height: 1.5em;
+  color: #676767;
+  margin: 1em 0;
+}
+
+.introtext {
+  font-size: 16px;
+  color: var(--wlfw-text);
+  line-height: 1.5em;
+  font-weight: 600;
+}
+
+.documentDescription {
+  font-size: 1.35em;
+  line-height: 1.5em;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+}
+
+.heading-gold {
+  color: var(--wlfw-gold-heading);
+  font-size: 2.6em;
+  letter-spacing: -0.025em;
+  line-height: 2.3rem;
+}
+
+.heading-white {
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.7em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+  .heading-white { font-size: 2.4em; }
+}
+
+.heading-large {
+  font-size: 2.3em;
+  margin: 1em 0 0.5em;
+}
+
+.subhead {
+  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: 4px;
+  display: block;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  line-height: 1em;
+}
+
+.popquote {
+  font-size: 1.5em;
+  color: var(--wlfw-link-blue);
+  font-family: 'Merriweather', serif;
+  font-style: italic;
+  line-height: 1.4em;
+}
+
+.quote {
+  font-size: 20px;
+  font-family: 'Merriweather', serif;
+  font-style: italic;
+}
+
+.slogan {
+  font-size: 22px;
+  font-style: italic;
+  line-height: 1.5em;
+}
+
+.lead {
+  font-size: 115%;
+  line-height: 1.4em;
+}
+
+.smaller {
+  font-size: 14px;
+}
+
+
+// =============================================================================
+// 4. LINKS
+// =============================================================================
+
+a.readmore {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-family: 'Source Sans Pro', sans-serif;
+
+  &:hover { color: #f7931e; }
+}
+
+.more-link {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 3px 18px 3px 3px;
+  text-align: right;
+}
+
+
+// =============================================================================
+// 5. PAGE HEADER
+// =============================================================================
+
+#content-header {
+  background: transparent;
+  border: none;
+  position: relative;
+  width: 100%;
+  height: 215px;
+}
+
+#portal-logo-wrapper {
+  padding: 0;
+
+  #portal-logo {
+    margin: 70px 20px 20px;
+    display: block;
+    position: relative;
+
+    img {
+      width: auto;
+      height: auto;
+    }
+  }
+}
+
+#header-searchbox {
+  #portal-searchbox {
+    position: absolute;
+    top: 15px;
+    right: 30px;
+
+    .searchSection { display: none; }
+
+    input[type="text"],
+    .form-control {
+      font-size: 13px;
+      padding: 4px 8px;
+      height: 28px;
+      width: 180px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+
+    .searchButton,
+    button[type="submit"] {
+      font-size: 12px;
+      padding: 4px 10px;
+      height: 28px;
+      background: #ededed;
+      border: 1px solid #ccc;
+      color: #555;
+      cursor: pointer;
+
+      &:hover { background: #ddd; }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  #content-header {
+    height: 185px;
+  }
+
+  #portal-logo-wrapper #portal-logo {
+    position: absolute;
+    top: 30px;
+    left: 10px;
+    width: 295px;
+    margin: 0;
+  }
+}
+
+
+// =============================================================================
+// 6. NAVIGATION
+// =============================================================================
+
+#mainnavigation-wrapper {
+  background-color: var(--wlfw-nav-bg);
+  border-top: 1px solid #fff;
+}
+
+#portal-globalnav-wrapper {
+  background-color: var(--wlfw-nav-bg);
+  border: none;
+  padding: 0;
+
+  .container {
+    max-width: 100%;
+    padding: 0;
+  }
+}
+
+#portal-globalnav {
+  background-color: var(--wlfw-nav-bg);
+  width: 100%;
+  justify-content: center;
+
+  .nav-item {
+    a.nav-link {
+      background-color: var(--wlfw-nav-bg);
+      color: #fff;
+      font-size: 18px;
+      font-family: 'Source Sans Pro', sans-serif;
+      font-weight: 400;
+      padding: 14px;
+      border: none;
+      transition: background-color 0.2s ease, color 0.2s ease;
+
+      &:hover {
+        background-color: var(--wlfw-nav-hover);
+        color: #fff;
+      }
+    }
+
+    // Selected / current nav item
+    &.current > a.nav-link,
+    &.inPath > a.nav-link {
+      background-color: var(--wlfw-nav-selected);
+      color: #fff;
+
+      &:hover {
+        background-color: var(--wlfw-nav-hover);
+        color: #fff;
+      }
+    }
+  }
+
+  // Dropdown / submenu
+  ul.dropdown {
+    background: var(--wlfw-grey);
+    box-shadow: 0px 0px 5px #666;
+
+    .nav-item a.nav-link {
+      background: var(--wlfw-grey);
+      color: #333;
+      text-transform: none;
+      font-size: 15px;
+      padding: 8px 20px;
+
+      &:hover {
+        background-color: #7d9cc0;
+        color: #fff;
+      }
+    }
+  }
+}
+
+// Dropdown toggle arrow
+#portal-globalnav .nav-item {
+  > label {
+    color: #fff;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    cursor: pointer;
+
+    &::after {
+      content: "\25BC";
+      font-size: 9px;
+      color: #fff;
+      line-height: 1;
+    }
+  }
+
+  &.has_subtree > a.nav-link {
+    padding-right: 28px;
+  }
+}
+
+// Mobile nav
+@media (max-width: 991.98px) {
+  .navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  #offcanvasNavbar {
+    background-color: var(--wlfw-nav-bg);
+
+    .offcanvas-header .btn-close {
+      filter: invert(1);
+    }
+  }
+
+  #portal-globalnav {
+    .nav-item a.nav-link {
+      text-align: center;
+      padding: 12px 20px;
+    }
+  }
+}
+
+
+// =============================================================================
+// 7. BANNER IMAGES / SLIDESHOW
+// =============================================================================
+
+#hero,
+.principal {
+  display: block;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+
+  &.has-banner {
+    height: 350px;
+    background-color: var(--wlfw-grey-light);
+  }
+
+  .container,
+  .gigantic {
+    &:empty { display: none; }
+  }
+}
+
+@media (max-width: 768px) {
+  #hero.has-banner,
+  .principal.has-banner {
+    height: 130px;
+  }
+}
+
+// Slideshow / feature slides
+.feature-slide {
+  height: 600px;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+
+  img {
+    object-fit: cover;
+    height: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .feature-slide {
+    height: 460px;
+  }
+}
+
+.slide-overlay {
+  position: absolute;
+  z-index: 5;
+  top: 24%;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 30px 30px 40px;
+  width: 60%;
+  left: 20%;
+  color: #fff;
+  border-radius: 6px;
+  text-align: center;
+
+  .subhead {
+    display: block;
+    font-size: 80%;
+  }
+}
+
+.slide-overlay-wlfw {
+  position: absolute;
+  z-index: 5;
+  top: 13%;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 30px 30px 40px;
+  width: 50%;
+  left: 25%;
+  color: #fff;
+  border-radius: 6px;
+  text-align: center;
+}
+
+@media (max-width: 979px) {
+  .slide-overlay,
+  .slide-overlay-wlfw {
+    top: 20%;
+    width: 70%;
+    left: 15%;
+  }
+}
+
+@media (max-width: 768px) {
+  .slide-overlay,
+  .slide-overlay-wlfw {
+    top: 8%;
+    width: 90%;
+    left: 5%;
+    padding: 15px 30px 40px;
+  }
+
+  .slide-overlay-wlfw img.responsive {
+    max-width: 80px;
+  }
+}
+
+
+// =============================================================================
+// 8. BREADCRUMBS
+// =============================================================================
+
+#portal-breadcrumbs,
+nav[aria-label="breadcrumb"] {
+  font-size: 12px;
+  margin: 0;
+  padding: 10px 20px;
+
+  .breadcrumb {
+    margin-bottom: 0;
+  }
+}
+
+
+// =============================================================================
+// 9. LAYOUT UTILITIES
+// =============================================================================
+
+#visual-portal-wrapper,
+.outer-wrapper {
+  max-width: 100%;
+  min-height: calc(100vh - 190px);
+}
+
+.fullwidth-section {
+  width: 100vw;
+  position: relative;
+  margin-left: -50vw;
+  left: 50%;
+  padding: 2em 0;
+  margin-bottom: 2em;
+}
+
+.grid-container-three-quarter {
+  display: grid;
+  grid-template-columns: 75% 1fr;
+  grid-column-gap: 30px;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .grid-container-three-quarter { grid-template-columns: 100%; }
+}
+
+.flex-container {
+  display: flex;
+  gap: 15px;
+}
+
+@media (max-width: 768px) {
+  .flex-container { flex-direction: column; }
+}
+
+.flex1 { flex: 1; }
+
+.flex-block {
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 767px) {
+  .flex-block { flex-direction: column; }
+}
+
+
+// =============================================================================
+// 10. CONTENT BLOCKS
+// =============================================================================
+
+.white-block {
+  background: #fff;
+  padding: 30px;
+}
+
+.grey-block {
+  background: var(--wlfw-grey);
+  padding: 30px;
+
+  a { border-bottom: none; }
+}
+
+.orange-block {
+  background: #ef9b26;
+  padding: 50px;
+  min-height: 400px;
+  color: #fff;
+
+  .subhead {
+    color: #b5700f;
+    letter-spacing: 4px;
+  }
+}
+
+.blue-block {
+  background: rgba(20, 83, 120, 0.80);
+  padding: 50px 30px;
+  min-height: 400px;
+
+  h2 { color: #fedb08; }
+  h4 { color: #fbd84d; font-size: 22px; }
+  p { color: #fff; font-size: 16px; line-height: 1.7em; margin-top: 10px; }
+  li { color: #fff; }
+
+  .subhead {
+    color: #D0F7FF;
+    letter-spacing: 4px;
+  }
+
+  a:link, a:visited { color: #f9d90f; }
+  a:hover { color: #fd7916; }
+}
+
+.black-65-block {
+  background: rgb(0 0 0 / 65%);
+  padding: 40px;
+}
+
+.black-50-block {
+  background: rgb(0 0 0 / 50%);
+  padding: 40px;
+
+  .subhead {
+    color: #fbd84d;
+    letter-spacing: 4px;
+  }
+}
+
+.overlay-block {
+  background: rgba(0 0 0 / 50%);
+  padding: 30px;
+}
+
+.tan-block {
+  background: var(--wlfw-tan);
+  padding: 2rem;
+  border-radius: 6px;
+}
+
+.feature-block {
+  border: 6px solid var(--wlfw-grey);
+  padding: 30px;
+  background: #fff;
+  margin-bottom: 0;
+
+  h3 { color: var(--wlfw-red-orange); }
+}
+
+.block-w-border {
+  margin: 2rem auto;
+  padding: 1rem 2rem;
+  border: 4px solid #d5d5d5;
+}
+
+.centered-block {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+}
+
+#cta-block {
+  background-color: var(--wlfw-dark-blue);
+  height: 120px;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+}
+
+.bg-grey { background: var(--wlfw-grey); }
+.bg-blue { background: var(--wlfw-nav-bg); }
+.bg-darkblue { background: var(--wlfw-dark-blue); }
+.bg-orange { background: var(--wlfw-red-orange); }
+
+@media (max-width: 767px) {
+  .orange-block,
+  .blue-block {
+    padding: 30px 20px;
+  }
+}
+
+
+// =============================================================================
+// 11. BUTTONS & CTAs
+// =============================================================================
+
+.cta-button {
+  padding: 15px 25px;
+  background: var(--wlfw-gold-cta);
+  font-size: 20px;
+  border-radius: 5px;
+  border: 1px solid #fff;
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+
+  &:hover {
+    background: var(--wlfw-gold-cta-hover);
+    color: #fff;
+  }
+}
+
+a.btn-orange {
+  background: var(--wlfw-orange);
+  color: #fff;
+  padding: 10px 15px;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: inline-block;
+
+  &:hover {
+    background: var(--wlfw-orange-hover);
+    color: #fff;
+  }
+}
+
+a.btn-orange-large {
+  background: var(--wlfw-orange);
+  color: #fff;
+  padding: 10px 15px;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: 600;
+  text-transform: uppercase;
+  display: inline-block;
+  text-decoration: none;
+
+  &:hover {
+    background: var(--wlfw-orange-hover);
+    color: #fff;
+  }
+}
+
+a.large-orange {
+  background: var(--wlfw-orange);
+  color: #fff;
+  padding: 15px;
+  border: 1px solid #fff;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.075em;
+  text-decoration: none;
+  display: inline-block;
+
+  &:hover {
+    background: var(--wlfw-orange-hover);
+    color: #fff;
+  }
+}
+
+.btn-grey {
+  background: #e6e6e6;
+  color: #515151;
+  font-size: 14px;
+  text-transform: uppercase;
+  border-radius: 4px;
+  padding: 10px 15px;
+  text-decoration: none;
+  display: inline-block;
+
+  &:hover {
+    background: var(--wlfw-orange);
+    color: #fff;
+  }
+}
+
+.btn-red {
+  background: #FF6633;
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-size: 18px;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-blue {
+  background: #0e71eb;
+  color: #fff;
+  padding: 8px 15px;
+  border-radius: 8px;
+  text-decoration: none;
+  display: inline-block;
+
+  &:hover {
+    background: #1a5cbb;
+    color: #fff;
+  }
+}
+
+a.overlay-btn {
+  background: rgba(0, 0, 0, 0.5);
+  color: #fafafa;
+  font-size: 20px;
+  font-weight: 600;
+  border-radius: 0 0 5px 5px;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+  padding: 15px;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.6);
+  }
+}
+
+a.overlay-btn-2 {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid #fff;
+  font-size: 1.3em;
+  padding: 15px;
+  border-radius: 6px;
+  color: #fff;
+  text-decoration: none;
+  display: inline-block;
+
+  &:hover {
+    background: rgba(255, 255, 255, 1);
+    color: #222;
+  }
+}
+
+.button-dark {
+  background: #274352;
+  color: #eaea8b;
+  padding: 15px 25px;
+  border-radius: 5px;
+  font-size: 18px;
+  text-decoration: none;
+  display: inline-block;
+
+  &:hover {
+    background: #132631;
+    color: #fb9a1e;
+  }
+}
+
+
+// =============================================================================
+// 12. FOOTER
+// =============================================================================
+
+#portal-footer-wrapper {
+  background: var(--wlfw-footer-blue);
+  margin-top: 3em;
+
+  #portal-footer {
+    background: var(--wlfw-footer-blue);
+    color: #fff;
+    padding: 1.5em;
+
+    a {
+      color: #fff;
+
+      &:hover {
+        border-bottom: 1px solid #fff;
+      }
+    }
+
+    h3 {
+      color: var(--wlfw-footer-heading);
+      font-size: 20px;
+      text-transform: uppercase;
+      margin: 17px 0 10px;
+    }
+
+    p {
+      color: #fff;
+      font-size: 12px;
+    }
+
+    .sitecredit {
+      font-size: 12px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--wlfw-footer-heading);
+
+      a {
+        color: var(--wlfw-footer-credit);
+
+        &:hover { color: #fff; }
+      }
+    }
+
+    ul.ft-menu {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+      li a {
+        color: #fff;
+        font-size: 15px;
+        line-height: 1.8em;
+
+        &:hover {
+          border-bottom: 1px solid #fff;
+        }
+      }
+    }
+  }
+}
+
+// WLFW-specific footer (custom element in index.html)
+#portal-footer-wlfw {
+  display: none; // Toggled on by template-level logic
+  background: var(--wlfw-footer-blue);
+  color: #fff;
+  padding: 1.5em;
+
+  h3 {
+    margin-top: 0;
+    color: #fff;
+    border-bottom: 1px solid #ebebeb;
+    letter-spacing: 2px;
+    font-size: 1.5rem;
+  }
+
+  .bottom-nav {
+    text-align: left;
+    margin: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .ft-menu {
+    color: #fff;
+    text-align: center;
+
+    li a {
+      color: #fff;
+      font-size: 15px;
+      line-height: 1.8em;
+
+      &:hover {
+        border-bottom: 1px solid #fff;
+      }
+    }
+  }
+
+  .eeo-statement {
+    font-size: 0.75rem;
+    line-height: 1.4em;
+    margin-top: 15px;
+
+    a {
+      font-weight: 600;
+      color: #fff;
+    }
+  }
+
+  .sitecredit {
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin: 25px auto 5px;
+    width: 185px;
+
+    a { color: #fff; }
+  }
+}
+
+@media (max-width: 767px) {
+  #portal-footer-wlfw .bottom-nav {
+    text-align: center;
+    flex-direction: column;
+  }
+}
+
+
+// =============================================================================
+// 13. PORTLETS
+// =============================================================================
+
+.card.portlet {
+  font-size: 90%;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  margin-bottom: 1.5em;
+
+  .card-header {
+    padding: 1em 1em 0.25em;
+    background: transparent;
+    color: #666;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 17px;
+  }
+
+  &.portlet-navigation-tree .card-header {
+    background: var(--wlfw-link-blue);
+    border-radius: 4px 4px 0 0;
+    text-transform: uppercase;
+    padding: 15px;
+    color: #fff;
+  }
+}
+
+
+// =============================================================================
+// 14. TILE / NEWS ITEMS
+// =============================================================================
+
+.tileItem {
+  clear: both;
+}
+
+.tileHeadline {
+  font-size: 1.5em;
+  font-weight: 600;
+}
+
+.tileImage img {
+  width: 250px;
+  height: auto;
+}
+
+
+// =============================================================================
+// 15. MATERIAL ICONS
+// =============================================================================
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 90px;
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  color: #fff;
+}
+
+.material-icons-40 {
+  font-family: 'Material Icons';
+  font-size: 40px;
+  display: inline-block;
+  color: #fff;
+}
+
+.material-icons-black,
+.material-icons-grey {
+  font-family: 'Material Icons';
+  font-size: 68px;
+  display: inline-block;
+  color: #9d9d9d;
+}
+
+.material-icons-small {
+  font-family: 'Material Icons';
+  font-size: 40px;
+  display: inline-block;
+  color: #9d9d9d;
+}
+
+.material-icons-gold {
+  font-family: 'Material Icons';
+  font-size: 48px;
+  color: #f8cf95;
+  float: left;
+  margin-right: 10px;
+}
+
+.material-icons-gold-circle {
+  font-family: 'Material Icons';
+  font-size: 60px;
+  display: inline-block;
+  color: #fff;
+  background: #efe48d;
+  height: 70px;
+  border-radius: 50%;
+  padding: 5px;
+  width: 70px;
+}
+
+.circle-icon {
+  border: 3px solid #fff;
+  border-radius: 50%;
+  padding: 10px;
+  margin: 10px;
+  transition: all 0.2s ease;
+
+  &:hover { background: #f19023; }
+}
+
+.circle-icon-left {
+  border: 3px solid #fff;
+  border-radius: 50%;
+  padding: 4px;
+  margin: 0 10px 0 0;
+  transition: all 0.2s ease;
+
+  &:hover { background: #f19023; }
+}
+
+
+// =============================================================================
+// 16. UTILITY CLASSES
+// =============================================================================
+
+.white, .white a:link, .white a:visited {
+  color: #fff;
+}
+
+.gold-text { color: var(--wlfw-gold-text); }
+.text-big-blue { color: var(--wlfw-teal); }
+
+// Image styles
+.styled-img {
+  border-radius: 4px;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
+  max-width: 100%;
+}
+
+.responsive-img {
+  border: 1px solid #ccc;
+  max-width: 100%;
+  padding: 4px;
+  border-radius: 4px;
+}
+
+.img-responsive {
+  border-radius: 4px;
+  max-width: 100%;
+}
+
+.circle-img { border-radius: 100%; }
+.image-circle { border-radius: 50%; }
+.image-fit { object-fit: cover; }
+
+.image-right {
+  float: right;
+  margin-left: 2em;
+  margin-bottom: 1em;
+}
+
+.float-right { float: right; }
+
+.caption {
+  padding: 10px 0;
+  color: #777;
+  font-size: 13px;
+}
+
+// Spacing
+.space { height: 25px; display: block; }
+.space10 { height: 10px; display: block; }
+.space15 { height: 15px; display: block; }
+.space20 { height: 20px; display: block; }
+.space30 { height: 30px; display: block; }
+.space-left { margin-left: 2em; }
+.space-right { margin-right: 2em; }
+.space-btm { padding-bottom: 10px; }
+.space-top-bottom { margin: 2em auto; }
+.pad10 { padding: 10px; }
+.pad20 { padding: 20px; }
+.pad30 { padding: 30px; }
+.pad40 { padding: 40px; }
+.gap { gap: 30px; }
+.gap10 { gap: 10px; }
+.gap15 { gap: 15px; }
+.gap20 { gap: 20px; }
+.gap30 { gap: 30px; }
+.clear { clear: both; }
+
+.desktop-only { display: none; }
+.mobile-only { padding: 10px; }
+
+@media (min-width: 700px) {
+  .mobile-only { display: none; }
+}
+
+@media (min-width: 701px) {
+  .desktop-only { display: block; }
+}
+
+// Hide items not used in this theme
+#jumpmenu, .rss, .rss-feeds {
+  display: none;
+}
+
+// Table styling
+#content table.listing {
+  width: 100%;
+}
+
+.listingBar {
+  padding-bottom: 50px;
+}
+
+// Company logos (partner section)
+.company-logo img {
+  filter: grayscale(100%);
+  transform: scale(0.95);
+  opacity: 0.35;
+  transition: all 0.4s ease;
+  margin: 12px;
+  width: 150px;
+
+  &:hover {
+    filter: grayscale(0);
+    opacity: 1;
+    transform: scale(1);
+  }
+}

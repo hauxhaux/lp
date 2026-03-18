@@ -1,0 +1,1281 @@
+// =============================================================================
+// PLONETHEME.LP — LITERATURE GATEWAY CUSTOM STYLES
+// =============================================================================
+// Custom overrides for the Literature Gateway sub-site, scoped under
+// body classes like .section-the-literature-gateway or .site-the-literature-gateway.
+//
+// Reference design:  agents/literature-gateway-styles/STYLE-GUIDE.md
+// Source CSS:        agents/literature-gateway-styles/css/literature.css
+// Compiled via:      npm run watch  (from theme/ directory)
+//
+// CONTENTS
+//   1.  Custom properties  — colour palette
+//   2.  Base & reset
+//   3.  Typography         — headings, paragraphs
+//   4.  Links
+//   5.  Page header        — logo, search, portal-top
+//   6.  Navigation         — global nav, hover/selected, submenus, mobile
+//   7.  Banner images
+//   8.  Breadcrumbs
+//   9.  Layout utilities   — containers, grids, full-width sections
+//  10.  Content blocks     — blue-block, feature-block, gateway, overlays
+//  11.  Buttons & CTAs
+//  12.  Footer
+//  13.  Portlets
+//  14.  Gateway tool page
+//  15.  Utility classes
+// =============================================================================
+
+
+// =============================================================================
+// 1. CUSTOM PROPERTIES
+// =============================================================================
+
+:root {
+  // --- Literature Gateway brand colours ---
+  --litgw-darkblue:       #266074;   // Header bg, nav bg, footer bg, heading colour
+  --litgw-lightblue:      #3484a3;   // Secondary blue
+  --litgw-green:          #b1c260;   // Accent green
+  --litgw-topgreen:       #88b66a;   // Return-to-WLFW bar, edit bar
+  --litgw-heading:        #266074;   // All heading colours (h1-h6)
+  --litgw-yellow:         #F9D909;   // Yellow accent
+  --litgw-nav-hover:      #3890ae;   // Nav hover background
+  --litgw-nav-selected:   #bac966;   // Nav selected background (yellow-green)
+  --litgw-orange:         #e86129;   // Link hover, feature block headings
+  --litgw-btn-orange:     #ef8f39;   // Orange button
+  --litgw-btn-solid:      #F59E20;   // Solid orange button
+  --litgw-btn-hover:      #e64c00;   // Button hover
+  --litgw-gold:           #f1d215;   // Blue block h4 colour
+  --litgw-gold-link:      #f9d90f;   // Blue block link colour
+  --litgw-cyan:           #D0F7FF;   // Footer heading, blue block subhead
+  --litgw-footer-credit:  #b3dde7;   // Sitecredit link colour
+  --litgw-text:           #666;      // Body text
+  --litgw-text-light:     #676767;   // Intro text
+  --litgw-grey:           #efefef;   // Light backgrounds, borders
+  --litgw-portlet-header: #205C90;   // Portlet header bg
+  --litgw-wlfw-link-hov:  #fced20;   // WLFW nav bar link hover (bright yellow)
+  --litgw-ft-menu-hover:  #ff9900;   // Footer menu link hover
+  --litgw-first-heading:  #276f88;   // documentFirstHeading colour
+}
+
+
+// =============================================================================
+// 2. BASE & RESET
+// =============================================================================
+
+body {
+  background: #fff;
+  font-family: 'Merriweather', serif;
+  font-size: 16px;
+  color: #000;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+// "Return to WLFW Site" green banner
+#return-to-lp-banner {
+  background: var(--litgw-topgreen);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 30px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  position: relative;
+  z-index: 20;
+
+  a {
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+
+    &:hover {
+      color: var(--litgw-wlfw-link-hov);
+    }
+  }
+}
+
+// Move anonymous login tools into the green banner
+#portal-anontools {
+  position: absolute;
+  right: 30px;
+  z-index: 10;
+  top: -36px;
+
+  .list-inline {
+    margin: 0;
+    padding: 0;
+
+    .list-inline-item {
+      margin: 0;
+    }
+  }
+
+  a {
+    color: #fff;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    text-decoration: none;
+
+    &:hover {
+      color: var(--litgw-wlfw-link-hov);
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  #return-to-lp-banner {
+    padding: 5px 10px;
+    font-size: 11px;
+
+    a { letter-spacing: 1px; }
+  }
+
+  #portal-anontools {
+    right: 10px;
+
+    a { font-size: 11px; padding: 3px 8px; }
+  }
+}
+
+
+// =============================================================================
+// 3. TYPOGRAPHY
+// =============================================================================
+
+#content h1.documentFirstHeading {
+  color: var(--litgw-first-heading);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 34px;
+  font-weight: 600;
+  margin-bottom: 0.5em;
+  margin-top: 0;
+  text-transform: capitalize;
+}
+
+#content h1 {
+  color: var(--litgw-heading);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 0.5em;
+  margin-top: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Montserrat', Verdana, sans-serif;
+  color: var(--litgw-heading);
+  font-weight: 600;
+  line-height: 1.3em;
+  letter-spacing: -0.0115em;
+  margin-bottom: 10px;
+}
+
+h2 { font-size: 26px; }
+h3 { font-size: 24px; }
+h4 { font-size: 20px; font-weight: 600; }
+
+p {
+  font-family: 'Merriweather', serif;
+  color: var(--litgw-text);
+  font-size: 16px;
+  letter-spacing: 0.01em;
+  line-height: 1.6em;
+}
+
+li {
+  font-family: 'Merriweather', serif;
+  color: var(--litgw-text);
+  font-size: 16px;
+  line-height: 1.6em;
+}
+
+// Navigation list items should NOT inherit body list styles
+#portal-globalnav li,
+#portal-footer li,
+#return-to-lp-banner li,
+nav[aria-label="breadcrumb"] li {
+  font-family: 'Montserrat', sans-serif;
+  color: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+#content .documentDescription, #content #description {
+  font-family: 'Merriweather', serif;
+}
+
+
+// =============================================================================
+// 4. LINKS
+// =============================================================================
+
+#content a:link, .card.portlet a:link {
+  border-bottom: none;
+}
+
+#content a:hover {
+  color: var(--litgw-orange);
+}
+
+
+// =============================================================================
+// 5. PAGE HEADER
+// =============================================================================
+
+// The Literature Gateway uses a bird-banner image above the header
+#content-header {
+  background: transparent;
+  border: none;
+  position: relative;
+  width: 100%;
+  height: 130px;
+}
+
+// Portal-top area with bird banner background
+// NOTE: In Plone 6 Classic, the equivalent of #portal-top is handled
+// via the hero/principal area or custom Diazo injection
+.portal-top-banner {
+  height: 215px;
+  background-image: url('../theme_images/literature-images/bird-banner.jpg');
+  background-position: left top;
+  background-repeat: repeat-x;
+  background-size: 52%;
+}
+
+@media (max-width: 768px) {
+  .portal-top-banner {
+    height: 130px;
+    background-repeat: no-repeat;
+    background-size: 100%;
+  }
+}
+
+#portal-logo-wrapper {
+  padding: 0;
+
+  #portal-logo {
+    margin: 0;
+    display: block;
+    width: 780px;
+    height: 110px;
+    position: relative;
+    left: 10%;
+    top: 75px;
+    z-index: 2;
+    background: url('../theme_images/literature-images/literature-logo-wlfw.svg') no-repeat left center;
+    background-size: contain;
+
+    img {
+      // Hide the Plone-configured logo; Literature Gateway logo shown via bg
+      opacity: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  #portal-logo-wrapper #portal-logo {
+    width: 95%;
+    height: 80px;
+    left: 5px;
+    top: 10px;
+  }
+}
+
+#header-searchbox {
+  #portal-searchbox {
+    position: relative;
+    top: 70px;
+    right: 0;
+    background: #fff;
+    padding: 11px;
+    border-radius: 6px;
+    border: 1px solid #fff;
+    box-shadow: 0px 1px 5px 0 rgba(75, 75, 75, 0.25);
+
+    .searchSection { display: none; }
+
+    input[type="text"],
+    .form-control {
+      font-size: 13px;
+      padding: 4px 8px;
+      height: 28px;
+      width: 180px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+
+    .searchButton,
+    button[type="submit"] {
+      font-size: 12px;
+      padding: 4px 10px;
+      height: 28px;
+      background: #ededed;
+      border: 1px solid #ccc;
+      color: #555;
+      cursor: pointer;
+
+      &:hover {
+        background: #ddd;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  #header-searchbox #portal-searchbox {
+    top: 113px;
+    position: absolute;
+    background: transparent;
+    padding: 11px;
+    border: none;
+    left: 57px;
+    width: 150px;
+    box-shadow: none;
+  }
+}
+
+
+// =============================================================================
+// 6. NAVIGATION
+// =============================================================================
+
+#mainnavigation-wrapper {
+  background-color: var(--litgw-darkblue);
+  border-bottom: 2px solid var(--litgw-darkblue);
+}
+
+#portal-globalnav-wrapper {
+  background-color: var(--litgw-darkblue);
+  border: none;
+  padding: 0;
+
+  .container {
+    max-width: 100%;
+    padding: 0;
+  }
+}
+
+#portal-globalnav {
+  background-color: var(--litgw-darkblue);
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 4em;
+
+  .nav-item {
+    a.nav-link {
+      background-color: var(--litgw-darkblue);
+      color: #fff;
+      font-size: 16px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 500;
+      text-transform: uppercase;
+      padding: 10px 30px;
+      border: none;
+      transition: background-color 0.2s ease, color 0.2s ease;
+
+      &:hover {
+        background-color: var(--litgw-nav-hover);
+        color: #fff;
+      }
+    }
+
+    // Selected / current nav item
+    &.current > a.nav-link,
+    &.inPath > a.nav-link {
+      background-color: var(--litgw-nav-selected);
+      color: #222;
+
+      &:hover {
+        background-color: var(--litgw-nav-hover);
+        color: #fff;
+      }
+    }
+  }
+
+  // Dropdown / submenu
+  ul.dropdown {
+    background: #fff;
+    border: 1px solid #ddd;
+
+    .nav-item a.nav-link {
+      background: #fff;
+      color: #333;
+      text-transform: none;
+      font-size: 15px;
+      padding: 8px 20px;
+
+      &:hover {
+        background-color: var(--litgw-grey);
+        color: #E86128;
+      }
+    }
+  }
+}
+
+// Dropdown toggle arrow
+#portal-globalnav .nav-item {
+  > label {
+    color: #fff;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    cursor: pointer;
+
+    &::after {
+      content: "▼";
+      font-size: 9px;
+      color: #fff;
+      line-height: 1;
+    }
+  }
+
+  &.has_subtree > a.nav-link {
+    padding-right: 28px;
+  }
+}
+
+// Mobile nav
+@media (max-width: 991.98px) {
+  .navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  #offcanvasNavbar {
+    background-color: var(--litgw-darkblue);
+
+    .offcanvas-header .btn-close {
+      filter: invert(1);
+    }
+  }
+
+  #portal-globalnav {
+    margin-right: 0;
+
+    .nav-item a.nav-link {
+      text-align: center;
+      padding: 12px 20px;
+    }
+  }
+}
+
+
+// =============================================================================
+// 7. BANNER IMAGES
+// =============================================================================
+
+#hero,
+.principal {
+  display: block;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+
+  &.has-banner {
+    height: 300px;
+    background-color: #ededed;
+  }
+
+  .container,
+  .gigantic {
+    &:empty { display: none; }
+  }
+}
+
+// Bird banner display area
+#bird-banner {
+  display: block;
+  background: #efefef;
+  height: 80px;
+}
+
+@media (max-width: 768px) {
+  #hero.has-banner,
+  .principal.has-banner {
+    height: 150px;
+  }
+}
+
+
+// =============================================================================
+// 8. BREADCRUMBS
+// =============================================================================
+
+#portal-breadcrumbs,
+nav[aria-label="breadcrumb"] {
+  font-size: 85%;
+  margin: 0.5em auto 2em;
+  padding: 10px 0;
+
+  .breadcrumb {
+    margin-bottom: 0;
+  }
+}
+
+
+// =============================================================================
+// 9. LAYOUT UTILITIES
+// =============================================================================
+
+#visual-portal-wrapper,
+.outer-wrapper {
+  background-color: #fff;
+  max-width: 100%;
+  min-height: calc(100vh - 220px);
+}
+
+.fullwidth-section {
+  margin-bottom: 3em;
+}
+
+@media (max-width: 1169px) {
+  .fullwidth-section {
+    width: 100vw;
+    margin-left: -1.5em;
+    left: 0;
+  }
+}
+
+// Grid layouts
+.grid-container-three-quarter {
+  display: grid;
+  grid-template-columns: 68% 1fr;
+  grid-column-gap: 30px;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .grid-container-three-quarter { grid-template-columns: 100%; }
+}
+
+.twocol-container {
+  display: flex;
+  gap: 30px;
+}
+
+@media (max-width: 1200px) {
+  .twocol-container { flex-direction: column; }
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+@media (max-width: 768px) {
+  .flex-container {
+    flex-direction: column;
+  }
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.space-around {
+  justify-content: space-around;
+}
+
+@media (max-width: 768px) {
+  .flex-container.space-between {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 0;
+    gap: 10px;
+    justify-content: space-around;
+    align-items: center;
+    justify-items: center;
+  }
+}
+
+.flex1 { flex: 1; }
+
+.center-block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.narrow {
+  width: 1170px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .narrow {
+    max-width: 100%;
+    padding: 0 1rem;
+  }
+}
+
+
+// =============================================================================
+// 10. CONTENT BLOCKS
+// =============================================================================
+
+.blue-block {
+  background: rgba(20, 83, 120, 0.80);
+  padding: 40px 30px;
+  position: relative;
+
+  .subhead {
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 4px;
+    font-weight: 600;
+    color: var(--litgw-cyan);
+    margin-bottom: 0;
+    font-size: 14px;
+    text-transform: uppercase;
+  }
+
+  h4 { color: var(--litgw-gold); font-size: 22px; }
+  p { color: #fff; font-size: 16px; line-height: 1.7em; margin-top: 10px; }
+  li { color: #fff; }
+
+  a:link, a:visited { color: var(--litgw-gold-link); }
+  a:hover { color: #fd7916; }
+}
+
+.orange-block p, .blue-block p {
+  color: #fff;
+  font-size: 16px;
+  line-height: 1.7em;
+  margin-top: 10px;
+}
+
+#content .blue-block a.btn.large-white:hover {
+  background: rgb(8, 48, 70);
+  color: #fff;
+}
+
+.feature-block {
+  border: 6px solid var(--litgw-grey);
+  padding: 30px;
+  background: #fff;
+
+  h3 { margin-top: 10px; font-size: 28px; color: var(--litgw-orange); }
+}
+
+@media (max-width: 767px) {
+  .feature-block {
+    padding: 15px;
+    text-align: center;
+  }
+}
+
+.gateway-block {
+  position: relative;
+  top: -35px;
+  background: url('../theme_images/literature-images/smoky-mtn-fall.jpg') no-repeat center center;
+  background-size: cover;
+  min-height: 400px;
+}
+
+.mapviewer-block {
+  position: relative;
+  top: -35px;
+  background: url('../theme_images/literature-images/Indigo-bunting.jpg') no-repeat center top;
+  background-size: cover;
+  min-height: 200px;
+}
+
+.block-400 { min-height: 400px; }
+.block-200 { min-height: 200px; }
+
+.slide-overlay {
+  position: absolute;
+  z-index: 5;
+  top: 55%;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 30px 30px 40px;
+  width: 70%;
+  left: 15%;
+  color: #fff;
+  border-radius: 6px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .slide-overlay {
+    top: 35%;
+    background: rgba(0, 0, 0, 0.45);
+    width: 100%;
+    left: 0;
+    border-radius: 0;
+  }
+}
+
+.center-block-overlay {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid #fff;
+  padding: 20px;
+  border-radius: 12px;
+
+  h4 {
+    margin-top: 1em;
+    margin-left: 10px;
+  }
+}
+
+.portlet-overlay {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid #fff;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.gateway-tool-overlay {
+  background: url('../theme_images/literature-images/chestnut-sided-warbler.jpg');
+  padding: 90px 15px 20px;
+  border-radius: 10px;
+  background-position: left center;
+  background-size: cover;
+  margin-bottom: 1em;
+}
+
+.bg {
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  padding: 10px 10px 5px;
+}
+
+.bg-grey { background: var(--litgw-grey); }
+.bg-darkblue { background: var(--litgw-darkblue); }
+.bg-lightblue { background: var(--litgw-lightblue); }
+.bg-green { background: var(--litgw-green); }
+.bg-top-green { background: var(--litgw-topgreen); }
+.heading-color { background: var(--litgw-heading); }
+.bg-yellow { background: var(--litgw-yellow); }
+
+.subhead {
+  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: 2px;
+  display: block;
+  color: #7f7f87;
+  line-height: 1em;
+}
+
+.heading-white {
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.7em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+  .heading-white { font-size: 2.4em; }
+}
+
+// Bird overlay image
+.bird-overlay {
+  position: relative;
+  top: 111px;
+  left: 40px;
+
+  img { width: 280px; }
+}
+
+@media (max-width: 767px) {
+  .bird-overlay { display: none; }
+  .bird-overlay img { display: none; }
+}
+
+// Material icons
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 60px;
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  color: #fff;
+}
+
+.material-icons-black {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 68px;
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  color: #9d9d9d;
+}
+
+
+// =============================================================================
+// 11. BUTTONS & CTAs
+// =============================================================================
+
+.button {
+  color: #54585b;
+  font-size: 1.125rem;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.1875rem;
+  display: inline-block;
+  text-decoration: none;
+  border: 1px solid #888;
+  border-radius: 0.25rem;
+  text-align: center;
+  font-weight: 700;
+  transition: background 0.2s linear, color 0.2s linear, border-color 0.2s linear;
+  font-family: "Open Sans", Arial, sans-serif;
+  box-shadow: 2px 3px 5px -1px rgba(0, 0, 0, 0.35);
+
+  &:hover {
+    border-color: transparent;
+    background: var(--litgw-btn-hover);
+    color: #fff;
+  }
+}
+
+.btn-solid-orange {
+  color: #fff;
+  background: var(--litgw-btn-solid);
+  border-color: transparent;
+
+  &:hover {
+    background: var(--litgw-btn-hover);
+    color: #fff;
+  }
+}
+
+a.btn-orange {
+  color: #fff;
+  letter-spacing: 1px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 13px;
+  background: var(--litgw-btn-orange);
+  display: inline-block;
+  margin-top: 10px;
+}
+
+#content a.btn.large-white {
+  border: 1px solid #fff;
+  padding: 15px;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.25);
+  color: #fff;
+  letter-spacing: 0.075em;
+  border-radius: 4px;
+  transition: all 0.3s ease-in-out;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+a.readmore {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-family: 'Open Sans', sans-serif;
+
+  &:hover { color: #f7931e; }
+}
+
+
+// =============================================================================
+// 12. FOOTER
+// =============================================================================
+
+#portal-footer-wrapper {
+  background: var(--litgw-darkblue);
+  margin-top: 3em;
+
+  #portal-footer {
+    background: var(--litgw-darkblue);
+    color: #fff;
+    display: block;
+    margin-top: 0;
+    padding: 2em 0;
+
+    a {
+      color: #fff;
+
+      &:hover {
+        color: var(--litgw-ft-menu-hover);
+      }
+    }
+
+    h4 {
+      color: var(--litgw-cyan);
+      margin-top: 15px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: 16px;
+    }
+  }
+}
+
+// Dedicated Literature Gateway footer
+#portal-footer-lit-gateway {
+  display: block;
+  position: relative;
+  padding: 2em;
+  margin: 2em auto;
+  width: 80%;
+}
+
+@media (max-width: 768px) {
+  #portal-footer-lit-gateway {
+    padding: 1.5em;
+    margin: 1em auto;
+    width: 100%;
+  }
+}
+
+.footer-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  h4 {
+    color: var(--litgw-cyan);
+    margin-top: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+
+  .flex-item img {
+    width: 100%;
+  }
+}
+
+.block-1 { margin-top: 1.5em; }
+.block-2 { width: 15%; }
+.block-25 { width: 25%; }
+.block-50 { width: 53%; }
+
+@media (max-width: 768px) {
+  .block-50 { width: 90%; }
+}
+
+.ft-menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+
+  li {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    padding: 2px 0;
+  }
+
+  a {
+    color: #fff;
+
+    &:hover {
+      color: var(--litgw-ft-menu-hover);
+    }
+  }
+}
+
+// Bottom navigation
+.bottom-nav {
+  text-align: left;
+  margin: 20px 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .bottom-nav {
+    text-align: center;
+    margin: 20px 0;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    padding: 0;
+    gap: 10px;
+  }
+}
+
+// Site credit
+.sitecredit {
+  background: url('../theme_images/fergusonlynch-icon.png') no-repeat scroll 0 0 transparent;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  line-height: 1.1rem;
+  margin: 30px auto 0 12px;
+  padding-left: 50px;
+  text-transform: uppercase;
+  width: 185px;
+
+  a { color: var(--litgw-footer-credit); }
+  a:hover { color: var(--litgw-ft-menu-hover); }
+}
+
+@media (max-width: 768px) {
+  .sitecredit {
+    margin: 25px auto 0 10px;
+  }
+}
+
+// Hide main LP footer
+.lp-footer { display: none; }
+.footer-left { display: none; }
+
+
+// =============================================================================
+// 13. PORTLETS
+// =============================================================================
+
+.card.portlet {
+  font-size: 90%;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  margin-bottom: 1.5em;
+
+  .card-header {
+    padding: 1em 1em 0.25em;
+    background: transparent;
+    color: var(--litgw-text);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 17px;
+  }
+
+  &.portlet-navigation-tree .card-header {
+    background: var(--litgw-portlet-header);
+    border-radius: 4px 4px 0 0;
+    text-transform: uppercase;
+    padding: 15px;
+    color: #fff;
+  }
+}
+
+
+// =============================================================================
+// 14. GATEWAY TOOL PAGE
+// =============================================================================
+
+// The Gateway Tool page hides standard nav, header, breadcrumbs
+// and shows its own minimal nav bar
+.section-gateway-tool {
+  #mainnavigation-wrapper,
+  #portal-breadcrumbs,
+  nav[aria-label="breadcrumb"],
+  #content-header {
+    display: none;
+  }
+
+  .portal-top-banner {
+    height: 0;
+    background-image: none;
+  }
+
+  .gateway-nav-bar {
+    background: #444;
+    display: block;
+    padding: 10px 30px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    z-index: 20;
+
+    a {
+      color: #fff;
+      text-transform: uppercase;
+      font-size: 13px;
+      letter-spacing: 1px;
+      text-decoration: none;
+
+      &:hover {
+        color: var(--litgw-orange);
+      }
+    }
+  }
+}
+
+
+// =============================================================================
+// 15. UTILITY CLASSES
+// =============================================================================
+
+.white, .white a:link, .white a:visited {
+  color: #fff;
+}
+
+.intro {
+  font-family: 'Merriweather', serif;
+  font-size: 18px;
+  line-height: 1.7em;
+  color: var(--litgw-text-light);
+  margin: 1em 0;
+}
+
+.image-right {
+  float: right;
+  margin-left: 2em;
+  margin-bottom: 1em;
+}
+
+.float-right { float: right; }
+
+.caption {
+  padding: 10px 0;
+  color: #777;
+  font-size: 13px;
+}
+
+.space40 {
+  height: 40px;
+  display: block;
+}
+
+.small-heading {
+  display: block;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  line-height: 1.3em;
+}
+
+.shiftup {
+  position: relative;
+  top: -40px;
+}
+
+// News tiles
+.tileItem {
+  clear: both;
+}
+
+.tileHeadline {
+  font-size: 1.5em;
+  font-weight: 600;
+}
+
+.tileImage img {
+  width: 220px;
+  height: auto;
+}
+
+// Grid layout tiles
+.grid_layout .tileItem {
+  text-align: center;
+  background: var(--litgw-grey);
+}
+
+.gridImage img {
+  background: #fff;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  box-shadow: 0px 1px 5px 0 rgba(75, 75, 75, 0.25);
+  margin: 2em 2em 1em;
+  align-content: center;
+}
+
+// Featured image (sidebar)
+.featured-img {
+  width: 150px;
+  padding: 4px;
+  box-shadow: 0px 1px 5px 0 rgba(75, 75, 75, 0.25);
+  margin-right: 1.5em;
+}
+
+// Company logos (partner section)
+.company-logo img {
+  filter: grayscale(100%);
+  transform: scale(0.95);
+  opacity: 0.35;
+  transition: all 0.4s ease;
+  margin: 12px;
+  width: 150px;
+
+  &:hover {
+    filter: grayscale(0);
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+// Hide items not used in this theme
+#jumpmenu, .rss, .rss-feeds {
+  display: none;
+}
+
+// Table styling
+#content table.listing {
+  width: 100%;
+}
+
+// Listing bar
+.listingBar {
+  padding-bottom: 50px;
+}
+
+// Gap utilities
+.gap10 { gap: 10px; }
+.gap15 { gap: 15px; }
+.gap20 { gap: 20px; }
+.gap30 { gap: 30px; }
+
+// Gold box callout
+.gold-box {
+  background: #F7DF79;
+  border-radius: 5px;
+  padding: 5px 20px;
+}
+
+.yellow-box {
+  background: #F7DF79;
+  border-radius: 5px;
+  padding: 5px 20px;
+}
+
+// Desktop / mobile visibility
+.desktop-only { display: none; }
+.mobile-only { padding: 10px; }
+
+@media (min-width: 700px) {
+  .mobile-only { display: none; }
+}
+
+@media (min-width: 701px) {
+  .desktop-only { display: block; }
+}
+
+// STYLEGUIDE colour swatches
+.orange { background: #f7931f; }
+.brown { background: #a26623; }
+.dark-blue { background: #205c90; }
+.light-grey { background: #f5f5f5; }
+.dark-grey { background: #676767; }
