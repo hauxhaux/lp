@@ -70,14 +70,19 @@ body {
 }
 
 // "Return to WLFW" biome navigation bar
+#return-to-lp-banner,
 .wlfw-biome-nav-bar {
   background: var(--grass-darkgrey);
-  display: block;
-  padding: 10px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 30px;
+  font-family: 'Montserrat', sans-serif;
   font-weight: 600;
   font-size: 12px;
   letter-spacing: 1px;
   z-index: 20;
+  position: relative;
 
   a {
     color: #fff;
@@ -226,6 +231,7 @@ p {
 // Navigation list items should NOT inherit body list styles
 #portal-globalnav li,
 #portal-footer li,
+#return-to-lp-banner li,
 .wlfw-biome-nav-bar li,
 nav[aria-label="breadcrumb"] li {
   font-family: 'Public Sans', sans-serif;
