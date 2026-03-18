@@ -94,14 +94,14 @@ body {
 // Move anonymous login tools into the green banner
 #portal-anontools {
   position: absolute;
-  top: -36px;   // Pull up into the green return-to-LP banner
   right: 30px;
   z-index: 10;
-  height: auto;
+  // Pull up into the green banner; vertically center with the banner text
+  top: -36px;
 
   .list-inline {
     margin: 0;
-    padding: 6px 0;
+    padding: 0;
 
     .list-inline-item {
       margin: 0;
@@ -110,19 +110,12 @@ body {
 
   a {
     color: #fff;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 600;
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
     text-decoration: none;
-    background: rgba(255, 255, 255, 0.2);
-    padding: 4px 12px;
-    border-radius: 3px;
 
     &:hover {
-      background: rgba(255, 255, 255, 0.35);
-      color: #fff;
+      color: #ffe061;
     }
   }
 }
