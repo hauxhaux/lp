@@ -56,10 +56,56 @@
 // 2. BASE & RESET
 // =============================================================================
 
+body {
+  background: #fff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 
 // =============================================================================
 // 3. TYPOGRAPHY
 // =============================================================================
+
+#content h1.documentFirstHeading {
+  color: var(--sefm-orange);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 38px;
+  font-weight: 500;
+  margin-bottom: 0.5em;
+  margin-top: 0;
+}
+
+#content h1 {
+  color: var(--sefm-orange);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 38px;
+  font-weight: 700;
+  margin-bottom: 0.5em;
+  margin-top: 0;
+}
+
+h2, h3, h4, h5, h6 {
+  color: var(--sefm-orange);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  line-height: 1.5em;
+  letter-spacing: -0.0115em;
+  margin-bottom: 10px;
+}
+
+h3 { font-size: 24px; }
+h4 { font-size: 20px; }
+
+p {
+  font-family: 'Merriweather', serif;
+  color: var(--sefm-text);
+  font-size: 16px;
+  letter-spacing: 0.01em;
+  line-height: 1.6em;
+}
 
 
 // =============================================================================
@@ -71,10 +117,148 @@
 // 5. PAGE HEADER
 // =============================================================================
 
+#content-header {
+  background: #fff;
+  border: none;
+  position: relative;
+  width: 100%;
+}
+
+#portal-logo-wrapper {
+  #portal-logo {
+    margin: 0;
+
+    img {
+      width: 400px;
+      position: relative;
+      left: 20%;
+      top: 10px;
+    }
+  }
+}
+
+#header-searchbox {
+  #portal-searchbox {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  #portal-logo-wrapper #portal-logo {
+    position: relative;
+    top: 0;
+
+    img {
+      width: 300px;
+      left: 5px;
+    }
+  }
+}
+
 
 // =============================================================================
 // 6. NAVIGATION
 // =============================================================================
+
+#mainnavigation-wrapper {
+  background-color: var(--sefm-nav-bg);
+  border-top: 1px solid #fff;
+}
+
+#portal-globalnav-wrapper {
+  background-color: var(--sefm-nav-bg);
+  border: none;
+  padding: 0;
+
+  .container {
+    max-width: 100%;
+    padding: 0;
+  }
+}
+
+#portal-globalnav {
+  background-color: var(--sefm-nav-bg);
+  width: 100%;
+
+  .nav-item {
+    a.nav-link {
+      background-color: var(--sefm-nav-bg);
+      color: #fff;
+      font-size: 16px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 500;
+      text-transform: uppercase;
+      padding: 10px 20px;
+      border: none;
+      transition: background-color 0.2s ease, color 0.2s ease;
+
+      &:hover {
+        background-color: var(--sefm-orange);
+        color: #fff;
+      }
+    }
+
+    // Selected / current nav item
+    &.current > a.nav-link,
+    &.inPath > a.nav-link {
+      background-color: var(--sefm-gold);
+      color: #222;
+
+      &:hover {
+        background-color: var(--sefm-orange);
+        color: #fff;
+      }
+    }
+  }
+
+  // Dropdown / submenu
+  ul.dropdown {
+    background: #fff;
+    border: 1px solid #ddd;
+
+    .nav-item a.nav-link {
+      background: #fff;
+      color: #333;
+      text-transform: none;
+      font-size: 15px;
+      padding: 8px 20px;
+
+      &:hover {
+        background-color: var(--sefm-grey);
+        color: var(--sefm-orange);
+      }
+    }
+  }
+}
+
+// Dropdown toggle arrow (checkbox-based in Barceloneta)
+#portal-globalnav .nav-item > label {
+  color: #fff;
+}
+
+// Mobile nav
+@media (max-width: 991.98px) {
+  .navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  #offcanvasNavbar {
+    background-color: var(--sefm-nav-bg);
+
+    .offcanvas-header .btn-close {
+      filter: invert(1);
+    }
+  }
+
+  #portal-globalnav {
+    .nav-item a.nav-link {
+      text-align: center;
+      padding: 12px 20px;
+    }
+  }
+}
 
 
 // =============================================================================
@@ -86,10 +270,27 @@
 // 8. BREADCRUMBS
 // =============================================================================
 
+#portal-breadcrumbs,
+nav[aria-label="breadcrumb"] {
+  font-size: 85%;
+  margin: 0;
+  padding: 10px 15px;
+
+  .breadcrumb {
+    margin-bottom: 0;
+  }
+}
+
 
 // =============================================================================
 // 9. LAYOUT UTILITIES
 // =============================================================================
+
+#visual-portal-wrapper,
+.outer-wrapper {
+  max-width: 100%;
+  min-height: calc(100vh - 190px);
+}
 
 
 // =============================================================================
@@ -105,6 +306,32 @@
 // =============================================================================
 // 12. FOOTER
 // =============================================================================
+
+#portal-footer-wrapper {
+  background: var(--sefm-brown);
+  margin-top: 3em;
+
+  #portal-footer {
+    background: var(--sefm-brown);
+    color: var(--sefm-footer-link);
+    padding: 2em 0;
+
+    a {
+      color: var(--sefm-footer-link);
+
+      &:hover {
+        color: #fff;
+      }
+    }
+
+    h4 {
+      color: var(--sefm-footer-heading);
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: 16px;
+    }
+  }
+}
 
 
 // =============================================================================
