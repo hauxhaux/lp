@@ -1,0 +1,864 @@
+/* --- Custom style sheet for WLFW Grassland Landscape --- */
+
+/* --- Colors --- */
+:root {
+  --darkgrey: #262626;
+  --darkblue: #25334f;
+  --heading: #425a84;
+  --gold: #dcc464;
+  --ltgold: #ebdc9e;
+  --darkgold: #bca647;
+  --grey: #f8f5ef;
+  --orange: #f88630;
+  --yellow: #fbd84d;
+  --white: #ffffff;
+  --brown: #846b0a;
+
+}
+
+.bg-dark { background: var(--darkblue); }
+.bg-blue { background: var(--heading); }
+.bg-grey { background: var(--grey); }
+.bg-gold { background: var(--gold); border-top: none; }
+.bg-drk-gold { background: var(--darkgold);}
+.bg-lt-gold { background: var(--ltgold); }
+.bg-orange { background: var(--orange); }
+ a.gold-text { color: #d8c468!important; }
+
+
+body {
+    background: var(--white);
+    font-family: 'Public Sans', san-serif;
+    -webkit-font-smoothing: antialiased;
+    image-rendering: -webkit-optimize-contrast;
+}
+
+.landscape-biome-menu { display: block; }
+
+@media only screen and (max-width: 768px) {
+
+.site-grasslands-and-savannas .landscape-biome-menu {
+    position: absolute;
+    top: 304px;
+}
+.wlfw-biome-nav-bar {
+    padding: 10px 15px !important;
+    font-size: 11px !important;
+    letter-spacing: normal;
+}
+}
+
+.nest-navigation-bar {
+    display: none;
+}
+
+.wlfw-biome-nav-bar {
+    background: var(--darkgrey);
+    display: block;
+    padding: 10px 30px;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 1px;
+    z-index: 20;
+}
+.wlfw-biome-nav-bar a {
+    color: #fff !important;
+    text-transform: uppercase;
+}
+
+.wlfw-biome-nav-bar a:hover {
+   color: var(--orange)!important;
+   text-transform: uppercase;
+}
+
+.wlfw-navigation-bar { /* --- turn off WLFW logo and link */
+    display: none;
+}
+
+/*.wlfw-navigation-bar img {
+    display: none;
+}*/
+
+.companion-select a:hover {
+    color: var(--orange)!important;
+}
+
+#portal-top {
+    background-image: none;
+}
+
+/* --- Banners --- */
+
+#portal-banner { 
+    display: block;
+    height: 450px;
+    background: url(working-lands/restored-prairie-in-ohio.jpg) no-repeat center;
+    background-size: cover;
+}
+/*#portal-banner:after {
+    content: "Restored prairie in Ohio";
+    display: block;
+    position: absolute;
+      font-size: 12px;
+    color: white;
+    bottom: 15px;
+    left: 15px;
+    padding: 0.5rem 1.2rem;
+    background: rgba(0 0 0 / 35%);
+    max-width: 430px;
+    line-height: 1.5em;
+}*/
+
+@media only screen and (max-width: 768px) {
+#portal-banner { 
+    height: 195px;
+}
+#portal-banner:after { /* turn off banner caption on mobile */
+    display: none;
+}
+}
+
+.site-grasslands-and-savannas.section-about #portal-banner { 
+    background: url(working-lands/ocala-iStock-597928044.jpg) no-repeat center !important;
+   background-size: cover !important;
+}
+
+/*.site-grasslands-and-savannas.section-about #portal-banner:after {
+    content: "A prairie and pine trees in Juniper Prairie Wilderness in Ocala National Forest, the southernmost wilderness area in the United States. iStock";
+}*/
+
+.site-grasslands-and-savannas.section-resources #portal-banner { 
+    background: url(working-lands/longleaf-pine.jpg) no-repeat center !important;
+   background-size: cover !important;
+}
+ .site-grasslands-and-savannas.section-resources #portal-banner:after {
+    content: "Longleaf pine forest, Florida";
+}
+
+.site-grasslands-and-savannas.section-training #portal-banner { 
+    background: url(working-lands/fire-images/longleaf-FB-group.jpg) no-repeat center !important;
+   background-size: cover !important;
+}
+ .site-grasslands-and-savannas.section-training #portal-banner:after {
+    content: "";
+}
+.site-grasslands-and-savannas.section-workspace #portal-banner { 
+    background: url(working-lands/wlfw-grassland-header.jpg) no-repeat center !important;
+   background-size: cover !important;
+}
+ .site-grasslands-and-savannas.section-workspace #portal-banner:after {
+    content: "Buffalo Gap National Grassland";
+}
+
+#visual-portal-wrapper {
+    background-color: #fff;
+    border-radius: 0;
+    margin: 0 auto;
+    max-width: 100%;
+}
+.template-atct_edit #visual-portal-wrapper {
+    width: 1170px;
+    margin: 0 auto;
+}
+.template-atct_edit #portal-banner:after { /* turn off banner caption on edit page */
+    display: none;
+}
+.template-atct_edit .LSBox {
+    top: -50px;
+    right: 5%;
+}
+#content {
+    margin: 1em auto;
+    width: 80%;
+}
+
+@media only screen and (max-width: 1530px) {
+#content {
+   width: 100%;
+   padding: 0 2em;
+}
+}
+
+#portal-header {
+  width: 100%;
+  height: 150px;
+  background-color: var(--darkblue);
+
+}
+
+#portal-logo {
+   margin: 0;
+}
+
+#portal-logo img {
+    width: 560px;
+    position: relative;
+    top: 15px;
+    left: 35px;
+}
+
+@media only screen and (max-width: 768px) {
+  #portal-header {
+    height: 100px;
+}
+  #portal-logo {
+    width: 340px;
+    margin: 0;
+  }
+#portal-logo img {
+    width: 335px;
+    position: relative;
+    top: -15px;
+    left: 5px;
+}
+}
+
+#portal-searchbox {
+    margin-right: 20px;
+    margin-top: 0;
+    padding: 7px;
+}
+
+@media only screen and (max-width: 768px) {
+
+#portal-searchbox {
+   position: absolute;
+   top: 5px;
+}
+#portal-searchbox [type="submit"] {
+    border: none;
+    color: transparent;
+    background: no-repeat transparent url(magnifier-white.png) center center;
+    height: 25px;
+    width: 25px;
+}
+
+#searchGadget {
+    width: 8em;
+    padding: 3px;
+    border-radius: 6px;
+}
+}
+.LSBox {
+    top: 430px;
+    position: relative;
+    background: #ffffff;
+    padding: 10px 13px;
+    border-radius: 6px;
+    border: 1px solid #fff;
+    right: 5%;
+}
+
+.LSBox .searchSection {
+    display: none;
+}
+
+
+@media only screen and (max-width: 768px) {
+
+.LSBox {
+    top: 100px;
+    position: absolute;
+    background: transparent;
+    padding: 11px;
+    border-radius: 6px;
+    border: none;
+    left: 90px;
+    width: 100px;
+}
+}
+
+#partnerSiteSelection {
+    position: absolute;
+    right: 15px;
+    top: 145px;
+}
+
+#jumpmenu {
+    clear: right;
+    float: right;
+    margin-top: -60px;
+    position: relative;
+    width: 225px;
+}
+
+
+/* --- main navigation tabs --- */
+
+@media only screen and (max-width: 768px) {
+
+  .menu-toggle{
+   font-weight: 600;
+   font-size: 13px;
+    padding: 12px 0 12px 35px;
+  }
+}
+
+#globalnav-wrapper {
+    background-color: transparent;
+    top: 100px;
+    border-top: none;
+
+}
+@media only screen and (max-width: 768px) {
+ #globalnav-wrapper {
+    width: 100%;
+    top: 105px;
+    left: 0;
+}
+}
+
+#portal-globalnav {
+    display: flex;
+    justify-content: right;
+    margin-right: 2.5%;
+    background-color: transparent;
+}
+   
+
+#portal-globalnav li a {
+    background-color: transparent;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    border: 3px solid transparent;
+    font-family: 'Public Sans';
+    color: var(--white) !important;
+}
+
+#portal-globalnav a:visited {
+    /* color: #25344f !important; */
+   color: #fff !important;
+}
+
+#portal-globalnav a:hover, #portal-globalnav .selected a:hover {
+    background: rgba(0 0 0 / 35%);
+    color: var(--gold)!important;
+}
+
+#portal-globalnav .selected a {
+  color: var(--gold)!important;
+}
+
+@media only screen and (max-width: 1024px) {
+
+#portal-globalnav li a {
+    background-color: transparent;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 10px 15px;
+    margin: 0 0.125em;
+    text-align: center;
+}
+}
+
+/* --- Home Icon --- */
+
+#portaltab-home > a {
+    background: url(none)!important;
+    text-indent: 0;
+}
+
+#portaltab-home > a:hover {
+    background: rgba(0 0 0 / 35%)!important;
+    text-indent: 0;
+   color: var(--gold) !important;
+} 
+
+#portal-globalnav .selected a {
+    background: rgba(0 0 0 / 35%);
+    color: var(--gold);
+}
+
+#portal-globalnav ul.submenu a {
+    text-transform: none;
+    font-size: 15px;
+    color: #4a4a4a !important;
+}
+
+#portal-globalnav ul.submenu a:hover {
+    color: var(--darkblue)!important;
+}
+
+.loginbutton {
+    display: block !important;
+}
+#anon-personalbar {
+    display: none;
+}
+
+#portal-personaltools-wrapper {
+    right: 260px;
+    top: -38px;
+    position: absolute;
+}
+@media only screen and (max-width: 768px) {
+#portal-personaltools-wrapper {
+    right: 20px;
+    top: 330px;
+}
+}
+
+#portal-personaltools a { color: #fff; }
+#portal-personaltools a:visited { color: #a9e1f3 !important; }
+
+#portal-personaltools dd { background: #bebebe; }
+
+li#portaltab-home ul.submenu {
+    display:none;
+}
+#portal-globalnav ul.submenu a:hover {
+    background-color: #efefef !important;
+    color: #E86128 !important;
+}
+@media only screen and (max-width: 767px) { /* --- turn off on mobile --*/
+#portal-globalnav{
+    display: none;
+  }
+
+  #portal-globalnav.opened{
+    display: block;
+  }
+  #portal-globalnav li{
+    width: 100%;
+    background: #d8c468;
+  }
+}
+
+/* Custom footer */
+
+#portal-footer-wlfw { 
+   display: block; 
+    background: var(--darkgold);
+    color: #fff;
+    width: 100%;
+   padding: 1.5em;
+   }
+
+#portal-footer {
+ display: none;
+}
+
+#portal-siteactions {
+    background: none repeat scroll 0 0 #25324b;
+}
+
+
+/* --- Typography --- */
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--heading);
+    font-family: 'Merriweather', serif;
+    line-height: 1.5em;
+    letter-spacing: -0.025em;
+    font-weight: 600;
+    margin: 1em 0 0.5em;
+}
+
+#content h1.documentFirstHeading {
+    font-size: 2.8rem;
+    margin-bottom: 0.5em;
+    margin-top: 35px;
+    line-height: 3.2rem;
+   color: var(--heading);
+}
+
+h1.documentFirstHeading:after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 5px;
+    background-color: var(--gold);
+    margin-top: 5px;
+}
+@media only screen and (max-width: 767px) {
+#content h1.documentFirstHeading {
+    font-size: 2.3rem;
+    line-height: 2.6rem;
+}
+}
+#content h1 {
+    font-size: 2.8rem;
+    margin-bottom: 0.5em;
+    margin-top: 35px;
+    color: var(--heading);
+    font-weight: 600;
+    line-height: 3.2rem;
+}
+
+#content h1:after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 5px;
+    background-color: var(--gold);
+    margin-top: 5px;
+}
+
+@media only screen and (max-width: 767px) {
+#content h1 {
+    font-size: 2.3rem;
+    line-height: 2.6rem;
+}
+}
+
+#content .flex h1 {
+    margin-top: 0;
+}
+
+h2 {
+    font-size: 2.3rem;
+   line-height: 2.8rem;
+}
+
+h2.large {
+    font-size: 2.8rem;
+    margin: 0 0 0.5em;
+}
+@media only screen and (max-width: 767px) {
+  h2.large {
+    font-size: 2rem;
+}
+}
+
+h3 {
+    font-size: 1.7rem;
+}
+
+h4 {
+    font-size: 1.5rem;
+}
+
+p {
+    color: #3b3b3b;
+    font-size: 1.1rem;
+    line-height: 1.65rem;
+}
+
+.subheading {
+    display: block;
+    font-family: 'Public Sans';
+    font-size: 1.1rem;
+    color: var(--gold);
+}
+.subheading-2 {
+  display: block;
+  font-family: 'Public Sans';
+  font-size: 1.3rem;
+  color: var(--brown);
+  text-transform: uppercase;
+}
+
+.text-shadow { text-shadow: 1px 2px 10px #3a3a3a; }
+
+
+.intro {
+    font-size: 18px;
+    line-height: 1.6em;
+    color: #3c4d6a;
+    margin: 1em 0em;
+    font-family: 'Merriweather', serif;
+}
+
+#content li {
+    color: var(--darkgrey);
+    font-size: 1rem;
+    letter-spacing: 0.01em;
+    margin-bottom: 10px;
+    font-family: 'Public Sans', san-serif;
+}
+
+#content ul.large-list {
+    list-style-type: disc;
+    list-style-image: url(none);
+    font-size: 16px;
+}
+
+img.image-left, img.image-right, .captioned img {
+    border: none;
+}
+
+#content .pullquote {
+    letter-spacing: -0.05em;
+    font-family: 'merriweather',serif;
+    padding: 10px 0 10px 30px;
+    font-size: 1.5rem;
+    line-height: 1.5em;
+    border-left: 6px solid #d3bd64;
+    margin-left: 30px;
+    color: #3c4d6a;
+}
+
+#content .callout {
+    background: #f2e6b5;
+    padding: 1em;
+    border-left: 1em solid #d3bd64;
+    clear: both;
+}
+
+#portal-breadcrumbs {
+    margin-left: 0;
+    margin-top: 0;
+    padding: 15px 35px;
+    font-size: .9rem;  
+}
+.section-east-and-central-grasslands-and-savannas #portal-breadcrumbs {
+    display: none;  
+}
+.site-grasslands-and-savannas #edit-bar {
+    top: 10px;
+    position: relative;
+}
+
+#breadcrumbs-you-are-here {
+    display: none;
+}
+
+
+#content .documentDescription, #content #description {
+    font-size: 1.35em;
+    line-height: 1.5em;
+    font-family: 'Public Sans', san-serif;
+    font-weight: 500;
+}
+
+/* --- end --- */
+
+.pad80 { padding: 80px 0; }
+.pad60 { padding: 60px 0; }
+.pad40 { padding: 40px; }
+.pad20 { padding: 20px; }
+
+
+.mapviewer-block {
+    background: url(fire-images/mapviewer-bg.jpg) no-repeat center center;
+    background-size: cover;
+    min-height: 400px;
+    margin: 3em auto 2em;
+
+}
+.blue-block {
+    background: rgba(37 50 75 / 90%);
+    padding: 40px 30px;
+    min-height: 400px;
+    margin: 4em 1em;
+    border-radius: 10px;
+}
+.blue-block h2,.black-overlay-block h2 {
+    font-size: 40px;
+    line-height: 1.3em;
+    margin: 15px 0;
+}
+.blue-block h4 {
+    color: var(--yellow);
+    font-size: 22px;
+    margin: 10px 0;
+}
+.heading-white {
+    color: #fff!important;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.7em;
+    text-transform: uppercase;
+}
+
+.blue-block .subhead {
+    letter-spacing: 3px;
+    font-weight: 600;
+    color: #D0F7FF;
+    margin-bottom: 0!important;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+@media only screen and (max-width: 768px) {
+  .blue-block,.black-overlay-block { margin: 2em; }
+  .blue-block h2,.black-overlay-block h2 { font-size: 30px;}
+}
+
+#fire-block {
+    background: url(fire-images/outdoor-alabama-slide.jpg) no-repeat right center;
+    background-size: cover;
+    min-height: 400px;
+}
+
+.black-overlay-block {
+    background: rgba(8 7 7 / 80%);
+    margin: 0;
+    padding: 40px 30px;
+    min-height: 400px;
+    margin: 4em 1em;
+   border-radius: 10px;
+}
+.black-overlay-block .subhead {
+    color: #f1d215;
+    font-size: 14px;
+    letter-spacing: 4px;
+    font-weight: 600;
+}
+
+@media only screen and (max-width: 767px) {
+#fire-block {
+    background-size: cover;
+}
+}
+
+.turf-block {
+    background: url(working-lands/rich-turf.jpg) no-repeat center center;
+    background-size: cover;
+}
+
+#bobscapes-block {
+    background: url(bobscapes-images/bobscapes-slide-bg.jpg) no-repeat center -50px;
+    background-size: cover;
+    margin: 2em 0;
+}
+#birdlocale-block {
+    background: url(birdlocale-images/birdlocale-block.jpg) no-repeat center center;
+    background-size: cover;
+    margin: 5em 0;
+}
+
+.black-50-block {
+    background: rgb(0 0 0 / 50%);
+    padding: 40px;
+    margin: 3em;
+}
+.black-50-block h3,.black-70-block h3{
+    margin: 0;
+}
+
+.black-70-block {
+    background: rgb(0 0 0 / 70%);
+    padding: 40px;
+    margin: 1em;
+    display: flex;
+    gap: 20px;
+   border-radius: 10px;
+}
+.black-70-block .subhead {
+    letter-spacing: 2px;
+    font-weight: 600;
+    color: var(--yellow);
+    margin-bottom: .5em;
+    font-size: 14px;
+}
+@media only screen and (max-width: 768px) {
+  .black-70-block {
+    flex-direction: column;
+}
+}
+
+.last-block {
+    padding-bottom: 0;
+    margin-bottom: -1em;
+}
+
+
+.centered-block-flex {
+    text-align: center;
+    flex: 1;
+}
+@media only screen and (max-width: 768px) {
+ .flex {
+    padding: 30px;
+}
+.grid {
+    justify-content: center;
+    align-items: center;
+    display: grid;
+}
+}
+
+.eeo-statement a {
+    font-weight: 600;
+    color: #fff!important;
+}
+.eeo-statement a:hover {
+    color: #29457b !important;
+}
+
+.tileItem { border-top: none; }
+
+.tileHeadline {
+    margin-top: 0;
+    line-height: 1.6em;
+    font-size: 1.75em;
+}
+
+#content .tileHeadline a { color: var(--heading); }
+
+
+.quote {
+    font-size: 20px;
+    font-family: 'Merriweather';
+    font-style: italic;
+    margin: 2em;
+}
+.cite {
+    text-align: center;
+    font-size: .9rem;
+    padding-bottom: 2em;
+}
+
+.portletNavigationTree .portletHeader {
+    background: var(--heading);
+    border-radius: 6px 6px 0 0;
+    text-transform: uppercase;
+    padding: 15px;
+}
+.portletNavigationTree .portletHeader a {
+    color: var(--gold)!important;
+    font-weight: 600;
+}
+
+#portal-columns {
+    padding: 0 2em;
+}
+@media only screen and (max-width: 768px) {
+#portal-columns {
+    padding: 0;
+}
+}
+.subsection-partners #content {
+width: 100%;
+}
+
+/*.gridImage img {
+    width: 100%;
+    height: auto;
+}*/
+
+.section-style-guide-for-site .LSBox {
+    top: 80px;
+
+}
+.mapviewer-block-2 {
+  background: url(fire-images/sefiremap-2-bg.jpg) no-repeat center center;
+  background-size: auto;
+  background-size: cover;
+}
+.dark-block-75 {
+  background: rgba(0 0 0 / 75%);
+  padding: 40px;
+}
+.block-400 { min-height: 400px; }
+.dark-block-75 .subhead {
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 4px;
+  font-weight: 600;
+  color: #D0F7FF;
+  margin-bottom: 0 !important;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+.dark-block-75 h4 {
+  color: #f8903e;
+font-family: 'Montserrat', sans-serif;
+font-size: 20px;
+}
+.dark-block-75 h2 {
+  margin-top: 10px;
+}

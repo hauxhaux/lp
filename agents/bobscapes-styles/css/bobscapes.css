@@ -1,0 +1,559 @@
+/* -------  CUSTOM STYLES FOR BOBWHITE CHILDSITE (copied from quail.css) ---------  */
+
+body {
+background: #E9E6D4;
+}
+#portal-banner { display: none; }
+
+.loginbutton a {
+    display: none;
+}
+.registerbutton a {
+    display: none;
+}
+
+.fullwidth-section {
+    padding: 0;
+}
+.gap30 { gap: 30px; }
+
+.image-inline, a .image-inline, a:visited .image-inline {
+    border: none;
+    padding: 4px;
+    max-width: 100%;
+    background: #fff;
+}
+
+#content {
+    margin: 0  auto 2em;
+    background: url(bobscapes-images/quail-masked-25.jpg) no-repeat right bottom;
+    min-height: 60vh;
+    width: 1170px;
+}
+/* hide quail on these pages */
+#content .section-access-mobile-app {
+    background: url(blank.png) no-repeat center !important;
+}
+.subsection-bobscapes-data-use-agreement-form #content,.subsection-data-request-page #content, .section-reports #content {
+    background: url(blank.png) no-repeat center !important;
+}
+
+/* end */
+
+.template-atct_edit #content {
+    margin: 0 auto;
+}
+
+@media only screen and (max-width: 1024px) {
+#content {
+   margin: 0  auto -5em;
+    width: 100%;
+    padding: 0 1em;
+    background-size: 150px;
+}
+}
+
+.template-bobscapes_home #content {
+    background: none;
+  margin: 0;
+  width: 100%;
+}
+
+
+.addthis_toolbox.addthis_default_style {
+    margin-right: 15px;
+    margin-top: 20px;
+}
+#portal-breadcrumbs {
+    padding: 20px;
+}
+
+#portaltab-home > a {
+    background: url(blank.png) no-repeat scroll 7px 6px transparent !important;
+    text-indent: 0;
+}
+
+#portaltab-home > a:hover {
+    background: url(blank.png) no-repeat scroll 7px 6px transparent !important;
+    text-indent: 0;
+   color: #a84e47;
+}
+
+li#portaltab-home ul.submenu {
+    display:none;
+}
+
+/* Hide these items */
+#jumpmenu,.rss,.rss-feeds,.footer-mid,.footer-rt {
+    display: none;
+}
+.template-bobscapes_home #edit-bar,.template-bobscapes_home #portal-breadcrumbs,.template-bobscapes_home .addthis_toolbox {
+display: none;
+}
+
+.nest-navigation-bar {
+    display: none;
+}
+
+.bobscapes-nav-bar {
+    background: #5d442a;
+    display: block;
+    padding: 10px 40px;
+    font-family: 'montserrat';
+    font-weight: 600;
+    font-size: 13px;
+    padding-left: 70px;
+}
+@media only screen and (max-width: 768px) {
+.bobscapes-nav-bar {
+    padding: 10px;
+    padding-left: 15px;
+}
+}
+
+.bobscapes-nav-bar a {
+    color: #fff!important;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 2px;
+}
+.bobscapes-nav-bar a:hover {
+    color: #ffe061!important;
+}
+
+.wlfw-navigation-bar img {
+    display: none;
+}
+
+#visual-portal-wrapper {
+    background-color: #fff;
+    border-radius: 0;
+    margin: 0 auto;
+    max-width: 100%;
+    min-height: calc(100vh - 190px);
+}
+
+
+#portal-header {
+    /*background: url(working-lands/header-quail-01.jpg) no-repeat top left transparent;*/
+    border-color: transparent;
+    border-style: none;
+    width: 100%;
+    background-size: cover;
+    height: 170px;
+   background-color: #ffda3e;
+}
+
+
+#portal-logo {
+   margin: 0;
+    top: 1em;
+    left: 3em;
+    position: relative;
+}
+
+#portal-logo img {
+    width: 400px;
+}
+
+@media only screen and (max-width: 768px) {
+  #portal-header {
+    height: 145px;
+}
+
+  #portal-logo {
+   width: 335px;
+   top: -1em;
+   left: 0.5em;
+  }
+#portal-logo img {
+    width: 330px;
+}
+}
+
+@media only screen and (max-device-width: 480px) and (min-device-width: 320px)
+#portal-header {
+    height: 170px;
+}
+
+#portal-searchbox {
+    background: transparent;
+    margin-right: 15px;
+    margin-top: 15px;
+    padding: 7px;
+}
+
+#partnerSiteSelection {
+    position: absolute;
+    right: 15px;
+    top: 145px;
+}
+
+#jumpmenu {
+    clear: right;
+    float: right;
+    margin-top: -60px;
+    position: relative;
+    width: 225px;
+}
+
+/* --- main navigation tabs --- */
+
+#globalnav-wrapper {
+    background-color: transparent;
+    border-bottom: medium none;
+    border-top: none;
+    top: 121px;
+    position: absolute;
+    right: 3em;
+}
+
+#portal-globalnav {
+    background-color: transparent;
+    justify-content: right;
+}
+@media only screen and (max-width: 768px){
+#portal-globalnav li {
+    width: 100%;
+    background: #efefef;
+   font-size: 16px;
+}
+}
+
+
+#portal-globalnav a:visited {
+    color: #2c2c2c !important;
+}
+#portal-globalnav li a {
+    background-color: transparent;
+    border-right: none;
+    padding: 0.75em 1.5em;
+    font-size: 130%;
+    font-family: 'montserrat';
+    font-weight: 600;
+    color: #2c2c2c !important;
+}
+
+#portal-globalnav a:hover, #portal-globalnav .selected a:hover {
+    background: url(none) repeat scroll 0 0;
+    color: #a84e47!important;
+}
+
+#portal-globalnav .selected a {
+    background: #dd7031;
+    color: #fff!important;
+}
+
+#portal-personaltools-wrapper {
+    right: 3.5em;
+    top: 0px;
+}
+
+/* Custom footer */
+
+#bobscapes-footer .sitecredit {
+    background: url("fergusonlynch-icon.png") no-repeat scroll 0 2px transparent;
+    background-size: 36px;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    line-height: 1.2rem;
+    margin-left: 3px;
+    margin-top: 35px!important;
+    padding-left: 50px;
+    text-transform: uppercase;
+    width: 185px;
+}
+    
+
+@media only screen and (max-width: 768px) {
+#bobscapes-footer .sitecredit {
+  margin: 15px 0;
+}
+}
+
+#bobscapes-footer a {
+    color: #ede6d7!important;
+}
+
+#bobscapes-footer a:hover {
+    color: #f4a221!important;
+}
+
+.flex-container-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;   
+    gap: 30px;
+}
+@media only screen and (max-width: 768px) {
+.flex-container-center {
+    gap: 20px;
+    flex-direction: column;
+}
+}
+
+.flex-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+@media only screen and (max-width: 768px) {
+.flex-container {
+    align-items: center;
+    flex-direction: column;
+}
+}
+
+.framework-block {
+    background: #fbecbf;
+    padding: 20px 30px;
+}
+
+.bottom-nav {
+    text-align: left;
+    margin: 20px 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-top: 20px;
+}
+
+@media only screen and (max-width: 1023px) {
+.bottom-nav {
+    text-align: center;
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding-top: 20px;
+    flex-direction: column;
+}
+}
+
+.eeo-statement {
+    font-size: 13px;
+    line-height: 1.3em;
+    margin-top: 10px;
+    margin-right: 3em;
+    color: #ede6d7;
+}
+@media only screen and (max-width: 768px) {
+.eeo-statement { margin-right: 0; }
+}
+
+#bobscapes-footer {
+    display: block;
+    background: #7d6042 none repeat scroll 0 0;
+    color: #fff;
+    width: 100%;
+    padding: 1.5em 0;
+    margin: 0 auto;
+}
+
+.ft-menu li {
+    padding: 3px 0;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+.border-left {
+    border-left: 1px solid #54402d;
+    padding-left: 20px;
+}
+@media only screen and (max-width: 768px) {
+.border-left {
+    border-left: none;
+    padding-left: 0;
+}
+}
+
+.ft-menu a {
+    color: #ede6d7;
+}
+.ft-menu a:hover {
+    color: #f1c058;
+}
+
+
+#bobscapes-footer h3 {
+    color: #d4a447;
+    letter-spacing: 2px;
+    margin: 15px 0;
+}
+#bobscapes-footer h3.underline {
+    border-bottom: 1px solid #54402d;
+}
+
+#portal-siteactions {
+    background: none repeat scroll 0 0 #34281c;
+}
+
+#portal-footer {
+ display: none;
+}
+
+#content h1.documentFirstHeading {
+   color: #2c2c2c;
+    font-size: 2.3em;
+    font-weight: 500;
+    margin-bottom: 0.5em;
+    margin-top: 1.5em;
+}
+
+#content h1 {
+   color: #2c2c2c;
+    font-size: 2.3em;
+    font-weight: 500;
+    margin-bottom: 0.5em;
+    margin-top: 1.5em;
+}
+
+
+.LSBox {
+    top: -60px;
+    right: 3.5em;
+    position: relative;
+    background: #ffffff;
+    padding: 10px 13px;
+    border-radius: 6px;
+    border: 1px solid #fff;
+}
+
+.LSBox .searchSection {
+    display: none;
+}
+/* Mobile settings */
+
+
+@media only screen and (max-width: 600px) {
+
+}
+
+@media only screen and (max-width: 768px) {
+
+.LSBox {
+  display: none;
+    top: 30px;
+    position: absolute;
+    background: transparent;
+    padding: 11px;
+    border-radius: 6px;
+    border: none;
+    width: 150px;
+    right: 100px;
+}
+
+#globalnav-wrapper {
+    top: -15px;
+   left: 0px;
+}
+}
+
+/* Animated Underline */
+
+.underline-animation {
+  display: inline-block;
+  position: relative;
+}
+
+.underline-animation::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 3px;
+  bottom: -5px;
+  left: 0;
+  background-color: #ED9700;
+  transform-origin: bottom center;
+  transition: transform 0.35s ease-out;
+}
+
+.underline-animation:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom center;
+}
+
+.grid-container-2col {
+    grid-gap: 0;
+}
+
+.quail-block {
+    background: url(bobscapes-images/quail-forever-landscape-w-quail.jpg) no-repeat center top;
+    background-size: cover;
+    min-height: 540px;
+    border-top: 6px solid #4b4744;
+}
+
+.cellphone-block {
+    background: url(bobscapes-images/hand-w-phone.jpg) no-repeat center center;
+    background-size: cover;
+    min-height: 540px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+.cellphone-block h2 { 
+margin-right: 30%;
+color: #fff; }
+
+@media only screen and (max-width: 768px) {
+
+.quail-block {
+    background: none;
+    min-height: 10px;
+}
+
+.cellphone-block {
+    min-height: 480px;
+    padding: 20px 20px 30px;
+}
+.cellphone-block h2 { 
+ font-size: 2em;
+ line-height: 1.5em;
+ margin-right: 0;
+}
+}
+
+.button-left {
+    margin: 2.5em 0 1em;
+}
+
+@media only screen and (max-width: 768px) {
+.menu-toggle {
+    font-family: 'Montserrat';
+    display: block;
+    color: white;
+    text-align: left;
+    padding: 10px 15px 10px 50px;
+    font-size: 85%;
+    background: url(menu-toggle.png) 20px center no-repeat black;
+    z-index: 5;
+}
+}
+
+.green-box {
+    background: #8fa85d;
+    text-align: center;
+    padding: 30px;
+    color: #fff;
+    margin: 1em 0;
+    border-radius: 10px;
+}
+.blue-section {
+    background: #2fb9d2;
+    text-align: center;
+    padding: 20px;
+    color: #fff;
+    border-radius: 8px;
+}
+
+.blue-section h3 {
+    margin: 0;
+    font-size: 1.8rem;
+}
+
+.bg-white {
+    background: #ffffff;
+}
