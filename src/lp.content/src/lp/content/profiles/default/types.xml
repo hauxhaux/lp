@@ -1,4 +1,17 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <object meta_type="Plone Types Tool" name="portal_types">
-   <object name="audio" meta_type="Dexterity FTI" />
+  <object name="audio" meta_type="Dexterity FTI" />
+  <object name="biblio_reference" meta_type="Dexterity FTI" />
+  <object name="case_study" meta_type="Dexterity FTI" />
+  <object name="cbnrm_annotation" meta_type="Dexterity FTI" />
+  <object name="custom_link" meta_type="Dexterity FTI" />
+  <object name="google_doc" meta_type="Dexterity FTI" />
+  <object name="megamenu_detail" meta_type="Dexterity FTI" />
+  <object name="staff_spotlight" meta_type="Dexterity FTI" />
+  <object name="story" meta_type="Dexterity FTI" />
+  <object name="video" meta_type="Dexterity FTI" />
+
+  <object name="Document" meta_type="Dexterity FTI" />
+  <object name="News Item" meta_type="Dexterity FTI" />
+  <object name="Event" meta_type="Dexterity FTI" />
 </object>

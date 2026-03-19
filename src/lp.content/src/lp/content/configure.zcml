@@ -4,6 +4,14 @@
     i18n_domain="lp.content"
     >
 
+  <genericsetup:registerProfile
+      name="default"
+      title="lp.content"
+      directory="profiles/default"
+      description="lp.content customizations"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
   <i18n:registerTranslations directory="locales" />
 
   <include

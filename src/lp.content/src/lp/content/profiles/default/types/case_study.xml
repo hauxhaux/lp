@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<object name="case_study" meta_type="Dexterity FTI" i18n:domain="plone"
+   xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+ <property name="title" i18n:translate="">Case Study</property>
+ <property name="description" i18n:translate="">None</property>
+ <property name="icon_expr">string:${portal_url}/document_icon.png</property>
+ <property name="factory">case_study</property>
+ <property
+    name="add_view_expr">string:${folder_url}/++add++case_study</property>
+ <property name="link_target"></property>
+ <property name="immediate_view">view</property>
+ <property name="global_allow">True</property>
+ <property name="filter_content_types">True</property>
+ <property name="allowed_content_types"/>
+ <property name="allow_discussion">False</property>
+ <property name="default_view">view</property>
+ <property name="view_methods">
+  <element value="view"/>
+ </property>
+ <property name="default_view_fallback">False</property>
+ <property name="add_permission">cmf.AddPortalContent</property>
+ <property name="klass">plone.dexterity.content.Container</property>
+ <property name="behaviors">
+  <element value="plone.dublincore"/>
+  <element value="plone.namefromtitle"/>
+  <element value="plone.eventlocation"/>
+  <element value="plone.leadimage"/>
+  <element value="solr.fields"/>
+  <element value="geolocatable"/>
+ </property>
+ <property name="schema"></property>
+ <property
+    name="model_source">&lt;model xmlns:easyform=&quot;http://namespaces.plone.org/supermodel/easyform&quot; xmlns:form=&quot;http://namespaces.plone.org/supermodel/form&quot; xmlns:i18n=&quot;http://xml.zope.org/namespaces/i18n&quot; xmlns:indexer=&quot;http://namespaces.plone.org/supermodel/indexer&quot; xmlns:lingua=&quot;http://namespaces.plone.org/supermodel/lingua&quot; xmlns:marshal=&quot;http://namespaces.plone.org/supermodel/marshal&quot; xmlns:security=&quot;http://namespaces.plone.org/supermodel/security&quot; xmlns:users=&quot;http://namespaces.plone.org/supermodel/users&quot; xmlns=&quot;http://namespaces.plone.org/supermodel/schema&quot;&gt;
+    &lt;schema&gt;
+      &lt;field name=&quot;text&quot; type=&quot;plone.app.textfield.RichText&quot;&gt;
+        &lt;description/&gt;
+        &lt;required&gt;False&lt;/required&gt;
+        &lt;title&gt;Story Text&lt;/title&gt;
+      &lt;/field&gt;
+      &lt;field name=&quot;imageHome&quot; type=&quot;plone.namedfile.field.NamedBlobImage&quot;&gt;
+        &lt;description&gt;Dimensions: 268px x 150px&lt;/description&gt;
+        &lt;required&gt;False&lt;/required&gt;
+        &lt;title&gt;Homepage image (16:9)&lt;/title&gt;
+      &lt;/field&gt;
+      &lt;field name=&quot;themes&quot; type=&quot;zope.schema.Set&quot;&gt;
+        &lt;default/&gt;
+        &lt;description/&gt;
+        &lt;required&gt;False&lt;/required&gt;
+        &lt;title&gt;Themes&lt;/title&gt;
+        &lt;value_type type=&quot;zope.schema.Choice&quot;&gt;
+          &lt;values&gt;
+            &lt;element&gt;Land&lt;/element&gt;
+            &lt;element&gt;Gender&lt;/element&gt;
+            &lt;element&gt;Energy&lt;/element&gt;
+            &lt;element&gt;Marine and Fisheries&lt;/element&gt;
+            &lt;element&gt;Natural Resources Economics&lt;/element&gt;
+            &lt;element&gt;Agriculture and Food Security&lt;/element&gt;
+            &lt;element&gt;Forestry&lt;/element&gt;
+            &lt;element&gt;Monitoring and Evaluation&lt;/element&gt;
+            &lt;element&gt;Biodiversity&lt;/element&gt;
+            &lt;element&gt;Social and Community-Based Development&lt;/element&gt;
+            &lt;element&gt;Democracy and Governance&lt;/element&gt;
+            &lt;element&gt;Global Climate Change&lt;/element&gt;
+            &lt;element&gt;Water and Sanitation&lt;/element&gt;
+            &lt;element&gt;Wildlife Trafficking&lt;/element&gt;
+          &lt;/values&gt;
+        &lt;/value_type&gt;
+      &lt;/field&gt;
+      &lt;field name=&quot;regions&quot; type=&quot;zope.schema.Set&quot;&gt;
+        &lt;default/&gt;
+        &lt;description/&gt;
+        &lt;required&gt;False&lt;/required&gt;
+        &lt;title&gt;Regions&lt;/title&gt;
+        &lt;value_type type=&quot;zope.schema.Choice&quot;&gt;
+          &lt;values&gt;
+            &lt;element&gt;Africa&lt;/element&gt;
+            &lt;element&gt;Asia and Near East&lt;/element&gt;
+            &lt;element&gt;Europe and Eurasia&lt;/element&gt;
+            &lt;element&gt;Global&lt;/element&gt;
+            &lt;element&gt;Latin America and Caribbean&lt;/element&gt;
+          &lt;/values&gt;
+        &lt;/value_type&gt;
+      &lt;/field&gt;
+      &lt;field name=&quot;publisher&quot; type=&quot;zope.schema.TextLine&quot;&gt;
+        &lt;description/&gt;
+        &lt;required&gt;False&lt;/required&gt;
+        &lt;title&gt;Publisher&lt;/title&gt;
+      &lt;/field&gt;
+      &lt;field name=&quot;publisherurl&quot; type=&quot;zope.schema.TextLine&quot;&gt;
+        &lt;description/&gt;
+        &lt;required&gt;False&lt;/required&gt;
+        &lt;title&gt;PublisherURL&lt;/title&gt;
+      &lt;/field&gt;
+      &lt;field name=&quot;byline&quot; type=&quot;zope.schema.TextLine&quot;&gt;
+        &lt;description/&gt;
+        &lt;required&gt;False&lt;/required&gt;
+        &lt;title&gt;Byline&lt;/title&gt;
+      &lt;/field&gt;
+      &lt;field name=&quot;sourceUID&quot; type=&quot;zope.schema.TextLine&quot;&gt;
+        &lt;description/&gt;
+        &lt;required&gt;False&lt;/required&gt;
+        &lt;title&gt;SourceUID&lt;/title&gt;
+      &lt;/field&gt;
+      &lt;field name=&quot;authorUID&quot; type=&quot;zope.schema.TextLine&quot;&gt;
+        &lt;description/&gt;
+        &lt;required&gt;False&lt;/required&gt;
+        &lt;title&gt;AuthorUID&lt;/title&gt;
+      &lt;/field&gt;
+      &lt;field name=&quot;badge&quot; type=&quot;plone.namedfile.field.NamedBlobImage&quot;&gt;
+        &lt;description/&gt;
+        &lt;required&gt;False&lt;/required&gt;
+        &lt;title&gt;Badge&lt;/title&gt;
+      &lt;/field&gt;
+      &lt;field name=&quot;implementing_partners&quot; type=&quot;plone.app.textfield.RichText&quot;&gt;
+        &lt;description/&gt;
+        &lt;required&gt;False&lt;/required&gt;
+        &lt;title&gt;Implementing Partners&lt;/title&gt;
+      &lt;/field&gt;
+    &lt;/schema&gt;
+  &lt;/model&gt;</property>
+ <property name="model_file"></property>
+ <property name="schema_policy">dexterity</property>
+ <alias from="(Default)" to="(dynamic view)"/>
+ <alias from="edit" to="@@edit"/>
+ <alias from="sharing" to="@@sharing"/>
+ <alias from="view" to="(selected layout)"/>
+ <action title="View" action_id="view" category="object" condition_expr=""
+    icon_expr="" link_target="" url_expr="string:${object_url}"
+    visible="True">
+  <permission value="View"/>
+ </action>
+ <action title="Edit" action_id="edit" category="object" condition_expr=""
+    icon_expr="" link_target="" url_expr="string:${object_url}/edit"
+    visible="True">
+  <permission value="Modify portal content"/>
+ </action>
+</object>

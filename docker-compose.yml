@@ -18,7 +18,7 @@ services:
       PIP_REQUIREMENTS: /app/requirements.txt
 
       # Register them as Plone add-ons
-      ADDONS: "collective.lineage"
+      ADDONS: "collective.lineage collective.easyform"
 
     volumes:
       - backend-data:/data # Data.fs + blobs
