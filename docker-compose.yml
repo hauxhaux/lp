@@ -12,7 +12,7 @@ services:
 
       # Install local packages in editable mode
       # DEVELOP: "/app/src/lcc-project /app/src/zen-organization"
-      DEVELOP: "/app/src/plonetheme.lp"
+      DEVELOP: "/app/src/plonetheme.lp /app/src/lp.content"
 
       # install PyPI deps at startup
       PIP_REQUIREMENTS: /app/requirements.txt
@@ -25,6 +25,7 @@ services:
       # - ./src/lcc-project:/app/src/lcc-project
       # - ./src/zen-organization:/app/src/zen-organization
       - ./src/plonetheme.lp:/app/src/plonetheme.lp
+      - ./src/lp.content:/app/src/lp.content
       - ./requirements.txt:/app/requirements.txt:ro
 
 volumes:

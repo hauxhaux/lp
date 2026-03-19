@@ -1,0 +1,32 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    i18n_domain="lp.content"
+    >
+
+  <genericsetup:registerProfile
+      name="default"
+      title="lp.content: Install"
+      description="Package to configure a new lp.content site"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      directory="profiles/default"
+      />
+
+  <genericsetup:registerProfile
+      name="uninstall"
+      title="lp.content: Uninstall"
+      description="Uninstall lp.content setup."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      directory="profiles/uninstall"
+      />
+
+  <!-- Hide Uninstall Profile-->
+  <utility
+      factory=".setuphandlers.HiddenProfiles"
+      name="lp.content"
+      />
+
+
+  <include package=".upgrades" />
+
+</configure>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<object name="audio" meta_type="Dexterity FTI" i18n:domain="plone"
+   xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+ <property name="title" i18n:translate="">Audio</property>
+ <property name="description" i18n:translate="">None</property>
+ <property name="icon_expr">string:${portal_url}/document_icon.png</property>
+ <property name="factory">audio</property>
+ <property name="add_view_expr">string:${folder_url}/++add++audio</property>
+ <property name="link_target"></property>
+ <property name="immediate_view">audio_view</property>
+ <property name="global_allow">True</property>
+ <property name="filter_content_types">True</property>
+ <property name="allowed_content_types"/>
+ <property name="allow_discussion">False</property>
+ <property name="default_view">audio_view</property>
+ <property name="view_methods">
+  <element value="audio_view"/>
+ </property>
+ <property name="default_view_fallback">False</property>
+ <property name="add_permission">cmf.AddPortalContent</property>
+ <property name="klass">plone.dexterity.content.Item</property>
+ <property name="behaviors">
+  <element value="plone.namefromtitle"/>
+  <element value="plone.leadimage"/>
+  <element value="plone.excludefromnavigation"/>
+  <element value="plone.dublincore"/>
+  <element value="plone.relateditems"/>
+  <element value="plone.eventlocation"/>
+  <element value="solr.fields"/>
+  <element value="geolocatable"/>
+ </property>
+ <property name="schema"></property>
+ <property
+    name="model_source">&lt;model xmlns:easyform=&quot;http://namespaces.plone.org/supermodel/easyform&quot; xmlns:form=&quot;http://namespaces.plone.org/supermodel/form&quot; xmlns:i18n=&quot;http://xml.zope.org/namespaces/i18n&quot; xmlns:indexer=&quot;http://namespaces.plone.org/supermodel/indexer&quot; xmlns:lingua=&quot;http://namespaces.plone.org/supermodel/lingua&quot; xmlns:marshal=&quot;http://namespaces.plone.org/supermodel/marshal&quot; xmlns:security=&quot;http://namespaces.plone.org/supermodel/security&quot; xmlns:users=&quot;http://namespaces.plone.org/supermodel/users&quot; xmlns=&quot;http://namespaces.plone.org/supermodel/schema&quot;&gt;
+    &lt;schema&gt;
+      &lt;field name=&quot;embed_code&quot; type=&quot;zope.schema.Text&quot;&gt;
+        &lt;description/&gt;
+        &lt;required&gt;False&lt;/required&gt;
+        &lt;title&gt;Embed Code&lt;/title&gt;
+      &lt;/field&gt;
+      &lt;field name=&quot;url_of_hosted_audio&quot; type=&quot;zope.schema.TextLine&quot;&gt;
+        &lt;description/&gt;
+        &lt;required&gt;False&lt;/required&gt;
+        &lt;title&gt;URL of hosted audio&lt;/title&gt;
+      &lt;/field&gt;
+      &lt;field name=&quot;pub_date_year&quot; type=&quot;zope.schema.TextLine&quot;&gt;
+        &lt;description/&gt;
+        &lt;required&gt;False&lt;/required&gt;
+        &lt;title&gt;Year of Publication&lt;/title&gt;
+      &lt;/field&gt;
+    &lt;/schema&gt;
+  &lt;/model&gt;</property>
+ <property name="model_file"></property>
+ <property name="schema_policy">dexterity</property>
+ <alias from="(Default)" to="(dynamic view)"/>
+ <alias from="edit" to="@@edit"/>
+ <alias from="sharing" to="@@sharing"/>
+ <alias from="view" to="(selected layout)"/>
+ <action title="View" action_id="view" category="object" condition_expr=""
+    icon_expr="" link_target="" url_expr="string:${object_url}"
+    visible="True">
+  <permission value="View"/>
+ </action>
+ <action title="Edit" action_id="edit" category="object" condition_expr=""
+    icon_expr="" link_target="" url_expr="string:${object_url}/edit"
+    visible="True">
+  <permission value="Modify portal content"/>
+ </action>
+</object>
