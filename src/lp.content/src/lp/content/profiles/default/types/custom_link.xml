@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<object name="custom_link" meta_type="Dexterity FTI" i18n:domain="plone"
+   xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+ <property name="title" i18n:translate="">Custom Link</property>
+ <property name="description"
+    i18n:translate="">Use Custom Link to create a link that does not automatically direct to the target (keeps the user in the link container).</property>
+ <property name="icon_expr">string:${portal_url}/document_icon.png</property>
+ <property name="factory">custom_link</property>
+ <property
+    name="add_view_expr">string:${folder_url}/++add++custom_link</property>
+ <property name="link_target"></property>
+ <property name="immediate_view">custom_link_view</property>
+ <property name="global_allow">True</property>
+ <property name="filter_content_types">True</property>
+ <property name="allowed_content_types"/>
+ <property name="allow_discussion">False</property>
+ <property name="default_view">custom_link_view</property>
+ <property name="view_methods">
+  <element value="custom_link_view"/>
+ </property>
+ <property name="default_view_fallback">False</property>
+ <property name="add_permission">cmf.AddPortalContent</property>
+ <property name="klass">plone.dexterity.content.Container</property>
+ <property name="behaviors">
+  <element value="plone.namefromtitle"/>
+  <element value="plone.excludefromnavigation"/>
+  <element value="plone.relateditems"/>
+  <element value="plone.shortname"/>
+  <element value="plone.ownership"/>
+  <element value="plone.leadimage"/>
+  <element value="plone.categorization"/>
+  <element value="plone.publication"/>
+  <element value="geolocatable"/>
+ </property>
+ <property name="schema"></property>
+ <property
+    name="model_source">&lt;model xmlns:easyform=&quot;http://namespaces.plone.org/supermodel/easyform&quot; xmlns:form=&quot;http://namespaces.plone.org/supermodel/form&quot; xmlns:i18n=&quot;http://xml.zope.org/namespaces/i18n&quot; xmlns:indexer=&quot;http://namespaces.plone.org/supermodel/indexer&quot; xmlns:lingua=&quot;http://namespaces.plone.org/supermodel/lingua&quot; xmlns:marshal=&quot;http://namespaces.plone.org/supermodel/marshal&quot; xmlns:security=&quot;http://namespaces.plone.org/supermodel/security&quot; xmlns:users=&quot;http://namespaces.plone.org/supermodel/users&quot; xmlns=&quot;http://namespaces.plone.org/supermodel/schema&quot;&gt;
+    &lt;schema&gt;
+      &lt;field name=&quot;title&quot; type=&quot;zope.schema.TextLine&quot;&gt;
+        &lt;description/&gt;
+        &lt;title&gt;Title&lt;/title&gt;
+      &lt;/field&gt;
+      &lt;field name=&quot;description&quot; type=&quot;zope.schema.Text&quot;&gt;
+        &lt;description/&gt;
+        &lt;title&gt;Description&lt;/title&gt;
+      &lt;/field&gt;
+      &lt;field name=&quot;url&quot; type=&quot;zope.schema.URI&quot;&gt;
+        &lt;description/&gt;
+        &lt;title&gt;URL&lt;/title&gt;
+      &lt;/field&gt;
+      &lt;field name=&quot;pub_date_year&quot; type=&quot;zope.schema.Int&quot;&gt;
+        &lt;description&gt;Enter the four digit year in which the resource was published. For example: 2006&lt;/description&gt;
+        &lt;required&gt;False&lt;/required&gt;
+        &lt;title&gt;Publication Date (Year only)&lt;/title&gt;
+      &lt;/field&gt;
+      &lt;field name=&quot;additional_information&quot; type=&quot;plone.app.textfield.RichText&quot;&gt;
+        &lt;description/&gt;
+        &lt;required&gt;False&lt;/required&gt;
+        &lt;title&gt;Additional information&lt;/title&gt;
+      &lt;/field&gt;
+      &lt;field name=&quot;author&quot; type=&quot;zope.schema.Text&quot;&gt;
+        &lt;description&gt;Each author should be on a separate line.&lt;/description&gt;
+        &lt;required&gt;False&lt;/required&gt;
+        &lt;title&gt;Author(s)&lt;/title&gt;
+      &lt;/field&gt;
+      &lt;field name=&quot;location&quot; type=&quot;zope.schema.TextLine&quot;&gt;
+        &lt;description/&gt;
+        &lt;required&gt;False&lt;/required&gt;
+        &lt;title&gt;Country or Global&lt;/title&gt;
+      &lt;/field&gt;
+    &lt;/schema&gt;
+  &lt;/model&gt;</property>
+ <property name="model_file"></property>
+ <property name="schema_policy">dexterity</property>
+ <alias from="(Default)" to="(dynamic view)"/>
+ <alias from="edit" to="@@edit"/>
+ <alias from="sharing" to="@@sharing"/>
+ <alias from="view" to="(selected layout)"/>
+ <action title="View" action_id="view" category="object" condition_expr=""
+    icon_expr="" link_target="" url_expr="string:${object_url}"
+    visible="True">
+  <permission value="View"/>
+ </action>
+ <action title="Edit" action_id="edit" category="object" condition_expr=""
+    icon_expr="" link_target="" url_expr="string:${object_url}/edit"
+    visible="True">
+  <permission value="Modify portal content"/>
+ </action>
+ <action title="Controlled Vocabs" action_id="controlled-vocabs"
+    category="object" condition_expr="" icon_expr="" link_target=""
+    url_expr="string:${object_url}/edit_multivocab" visible="True">
+  <permission value="Modify portal content"/>
+ </action>
+</object>

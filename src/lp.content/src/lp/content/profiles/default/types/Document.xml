@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<object
+  xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+  name="Document"
+  meta_type="Dexterity FTI"
+  i18n:domain="plone"
+>
+
+  <property name="behaviors">
+    <element value="plone.dublincore" />
+    <element value="plone.namefromtitle" />
+    <element value="plone.richtext" />
+    <element value="plone.excludefromnavigation" />
+    <element value="plone.locking" />
+    <element value="plone.relateditems" />
+    <element value="plone.shortname" />
+    <element value="plone.tableofcontents" />
+    <element value="plone.versioning" />
+  </property>
+</object>
