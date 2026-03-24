@@ -93,6 +93,7 @@ $enable-roboto-webfont: false !default;
 @import "@plone/plonetheme-barceloneta-base/scss/footer";
 
 @import "@plone/plonetheme-barceloneta-base/scss/print";
+@import "print";                  // LP base print styles (extends Barceloneta print)
 
 // @import "@plone/plonetheme-barceloneta-base/scss/roboto-webfont";
 
