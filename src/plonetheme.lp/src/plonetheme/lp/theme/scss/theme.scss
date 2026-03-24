@@ -93,12 +93,13 @@ $enable-roboto-webfont: false !default;
 @import "@plone/plonetheme-barceloneta-base/scss/footer";
 
 @import "@plone/plonetheme-barceloneta-base/scss/print";
+@import "print";                  // LP base print styles (extends Barceloneta print)
 
 // @import "@plone/plonetheme-barceloneta-base/scss/roboto-webfont";
 
 
 // 9. Add additional custom code here
-// @import "custom";                 // Aquatics sub-site (commented out during SE FireMap dev)
+@import "custom";                 // Aquatics sub-site (commented out during SE FireMap dev)
 
 // 10. Active sub-site custom styles
 // @import "custom-se-firemap";
@@ -106,4 +107,4 @@ $enable-roboto-webfont: false !default;
 // @import "custom-western";
 // @import "custom-eastern-deciduous";
 // @import "custom-grasslands";
-@import "custom-western";
+// @import "custom-western";

@@ -67,14 +67,23 @@ If the server is not running, start it with `./devbuild.sh` before proceeding. D
   - Site-wide custom overrides (`ploneCustom.css`)
   - **Sub-site-specific CSS** (e.g. `wlfw-SITE.css`) — this is the most important file.
   - Mobile/responsive overrides (`mobile.css`)
+  - **Print stylesheets** (`print.css`, or `@media print` blocks embedded in other files)
   - Any reset CSS.
 
-### 1.4 Capture screenshots
-- Use Playwright at desktop width (1280px) to take full-page screenshots of each URL.
-- Save to `agents/SITE-styles/screenshots/NN-slug.png`.
-- Also capture one at mobile width (375px) for the home page.
+### 1.4 Capture images from the original site
+- Examine the header, footer, hero/banner, and top content area of the home page for images that are part of the site design (logos, banner photos, background images, partner logos, icons).
+- Download these images using Playwright or direct fetch and save to `agents/SITE-styles/images/`.
+- Use descriptive filenames: `header-logo.png`, `hero-banner.jpg`, `footer-partner-logo.png`, etc.
+- Note which images are referenced via CSS (`background-image`) vs HTML (`<img>` tags) — this distinction matters for how they'll be integrated into the theme.
+- These images serve as reference material and may be needed as assets in the theme's `theme_images/` directory during Phase 3.
 
-### 1.5 Write STYLE-GUIDE.md
+### 1.5 Capture screenshots
+- Use Playwright to take full-page screenshots of **every** captured URL at both widths:
+  - **Desktop (1280px):** save to `agents/SITE-styles/screenshots/NN-slug.png`
+  - **Mobile (375px):** save to `agents/SITE-styles/screenshots/NN-slug-mobile.png`
+- Mobile screenshots are not optional — they are required for every page, not just the home page. Mobile layout differences (collapsed navs, stacked columns, hidden elements, different font sizes) must be visible in the reference material for accurate replication.
+
+### 1.6 Write STYLE-GUIDE.md
 - Create `agents/SITE-styles/STYLE-GUIDE.md` organized by feature:
   1. **Page inventory** — table of all captured pages with URLs
   2. **Color palette** — extract all CSS custom properties from the sub-site CSS; list hex values and usage
@@ -86,11 +95,12 @@ If the server is not running, start it with `./devbuild.sh` before proceeding. D
   8. **Footer** — layout, colors, link styles
   9. **Responsive breakpoints** — document all `@media` rules with their px values
   10. **Google Fonts** — all loaded families and weights
+  11. **Print styles** — document all `@media print` rules found in the captured CSS files: what elements are hidden, color overrides, layout simplifications, font changes, and any `@page` rules (margins, page size). If no print styles exist, note that explicitly so Phase 3 can create them from scratch.
 
-### 1.6 Commit capture
+### 1.7 Commit capture
 ```
 git add agents/SITE-styles/
-git commit -m "Capture SITE sub-site styles (HTML, CSS, screenshots, style guide)"
+git commit -m "Capture SITE sub-site styles (HTML, CSS, images, screenshots, style guide)"
 ```
 
 ---
@@ -105,6 +115,8 @@ git commit -m "Capture SITE sub-site styles (HTML, CSS, screenshots, style guide
 2. **Add** `@import "custom-SITE";` in its place.
 
 This ensures the new sub-site's styles are built on top of the clean Barceloneta/Bootstrap base, without interference from another sub-site's overrides. Only one sub-site custom file should be active at a time during development.
+
+**Note:** The base `@import "print";` line (which imports `_print.scss`) must remain active — it sits between Barceloneta's print import and the custom sub-site import, and provides shared print defaults for all sub-sites.
 
 ```scss
 // @import "custom";                // <-- comment out previous sub-site
@@ -131,6 +143,86 @@ This ensures the new sub-site's styles are built on top of the clean Barceloneta
 ```
 git commit -m "Add SITE SCSS scaffold with color palette and font imports"
 ```
+
+---
+
+## Phase 2.5: Structural Audit — Header, Footer & Top Section
+
+Before writing any styles, compare the markup structure of the captured reference site against the local Plone site. The original sub-sites were built on older Plone versions with different markup conventions — **the HTML structure will not match 1:1**, and these differences must be understood up front so that styling decisions account for them.
+
+### 2.5.1 Capture the local Plone markup
+
+Use Playwright to load `http://localhost:8080/Plone` and extract the rendered HTML for three key regions:
+
+1. **Header** — everything from the top of the page through the navigation bar (typically `#portal-header` and `#mainnavigation-wrapper`)
+2. **Top section / hero** — the first content area below the nav (banners, hero images, lead text)
+3. **Footer** — everything in `#portal-footer-wrapper`
+
+Save these HTML snippets to `agents/SITE-styles/html/local-header.html`, `local-top-section.html`, and `local-footer.html` for reference.
+
+### 2.5.2 Compare markup against the captured reference
+
+For each of the three regions, open the corresponding captured HTML from Phase 1 and compare it side-by-side with the local Plone markup. Look for:
+
+**Structural differences**
+- Different element nesting (e.g. the original site wraps the logo in a `<div class="logo-wrapper">` but Plone uses `<a id="portal-logo">` directly)
+- Missing or extra wrapper elements (the original may have containers or grid wrappers that Plone doesn't generate)
+- Different tag types (e.g. `<nav>` vs `<div>`, `<ul>` vs `<ol>`, `<section>` vs `<div>`)
+
+**Image differences**
+- Images present in the original that are missing from Plone (logos, banner photos, decorative graphics)
+- Images referenced as CSS `background-image` in the original that will need to be added to `theme_images/` and referenced in SCSS
+- Images referenced as `<img>` tags that will need Diazo rules or `index.html` changes to appear
+- Different image paths, sizes, or formats
+
+**Layout and semantic differences**
+- Different CSS class names (the original site's classes won't exist in Plone — identify what Plone uses instead)
+- Different ID attributes
+- Content that's dynamically generated in Plone but static in the original (e.g. nav links come from the site structure, not hardcoded HTML)
+- Elements that exist in one version but not the other (e.g. search box placement, breadcrumb position, login links)
+
+### 2.5.3 Flag inconsistencies to the user
+
+**This step requires human input.** After completing the comparison, present the user with a clear summary of all markup and layout inconsistencies found. Organize the report by region:
+
+```
+## Structural Audit: SITE
+
+### Header
+- [list each difference: what the original has vs what Plone generates]
+- [flag any images that need to be added]
+- [note any Diazo rule or index.html changes required]
+
+### Top Section / Hero
+- [list differences]
+- [flag missing images or background images]
+
+### Footer
+- [list differences]
+- [flag missing images or content]
+
+### Images to Transfer
+- [list all images from agents/SITE-styles/images/ that need to be
+  copied to theme/theme_images/ with recommended filenames]
+
+### Recommended Approach
+- [for each major inconsistency, suggest whether to solve with
+  CSS alone, Diazo rules, index.html changes, or content editing]
+```
+
+**After presenting the audit, wait at least 10 seconds before proceeding to Phase 3.** Use `sleep 10` to pause — this gives the user time to read and react to the findings. Some inconsistencies may require content to be created in Plone, images to be uploaded to the CMS, or architectural decisions about how to bridge the markup gap. These decisions affect every subsequent styling commit. If the user intervenes during or after the pause with questions or instructions, address those before continuing.
+
+### 2.5.4 Transfer required images
+
+After the user has reviewed the audit, or the sleep has elapsed:
+
+1. Copy any images needed for the theme from `agents/SITE-styles/images/` to `theme/theme_images/`.
+2. If images need to be added to `index.html` (e.g. a logo or decorative element), make those changes now.
+3. If images will be referenced from SCSS as `background-image`, note the paths for use in Phase 3.
+4. Commit image assets and any structural HTML changes separately from style changes:
+   ```
+   git commit -m "Add SITE theme images and structural HTML for header/footer"
+   ```
 
 ---
 
@@ -196,6 +288,11 @@ When working on any section, systematically consider these categories:
 - Which breakpoints affect this section?
 - What changes at each breakpoint? (layout, visibility, sizing, font adjustments)
 
+**Print behavior**
+- Should this section be visible in print? (e.g. nav, search, and footer are typically hidden)
+- Does the section need color or background adjustments for print? (e.g. remove dark backgrounds, use black text)
+- Are there any layout simplifications needed? (e.g. single-column, full-width)
+
 Not every section will need all categories. Use the reference CSS and screenshots to determine which are relevant.
 
 ### 3.4 Per-section workflow
@@ -215,7 +312,38 @@ For each section, repeat this cycle:
 9. **Iterate** — fix every discrepancy found, re-screenshot, until the section is a visual match
 10. **Only after visual confirmation**, commit with a message describing what was styled
 
-### 3.5 Scoping commits
+### 3.5 Print styles
+
+After all visual sections are styled, review and extend print styles for this sub-site. This should be treated as its own section with its own commit.
+
+**Architecture:** Print styles are layered in three tiers, loaded in order:
+
+1. **Barceloneta print** (`@plone/plonetheme-barceloneta-base/scss/print`) — hides core Plone chrome, forces black text on transparent background.
+2. **LP base print** (`_print.scss`) — shared across all sub-sites. Provides `@page` margins, hides LP-specific chrome (return-to-LP banner, social links, back-to-top), simplifies layout to single-column, protects content blocks from page breaks, and adds readable link treatment. **Do not duplicate these rules in sub-site files.**
+3. **Sub-site overrides** (`_custom-SITE.scss`) — only needed for elements unique to this sub-site that aren't covered by the base.
+
+**How to build sub-site print overrides:**
+
+1. **Check STYLE-GUIDE.md** for the print styles inventory from Phase 1. If the CSS captured from the live site has `@media print` rules beyond what the base already covers, port them where they (1) differ significantly, and (2) apply to elements present in the the new theme.
+2. **Review what `_print.scss` already handles** — read the file and confirm which elements are already addressed. Do not re-declare rules that are already in the base.
+3. **Add a `@media print` block at the end of `_custom-SITE.scss`** only for sub-site-specific overrides, such as:
+   - Hiding sub-site-unique decorative elements (e.g. a biome switcher, a timeline slider)
+   - Adjusting sub-site-specific content blocks that use custom class names not covered by the base
+   - Overriding base rules where the sub-site needs different behavior (e.g. keeping a specific background image visible)
+4. **If no sub-site-specific overrides are needed**, add a comment at the end of `_custom-SITE.scss`:
+   ```scss
+   // Print styles: base _print.scss covers all needs for this sub-site.
+   ```
+5. **Test with Playwright** — use `page.emulateMedia({ media: 'print' })` to preview print rendering, then screenshot and verify that:
+   - Navigation, footer, and chrome are hidden
+   - Content is single-column and readable
+   - No sub-site-specific elements break the print layout
+6. **Commit** print styles separately:
+   ```
+   git commit -m "Add print styles for SITE sub-site"
+   ```
+
+### 3.6 Scoping commits
 
 Each commit should represent a coherent visual section or sub-section. Guidelines:
 
@@ -237,9 +365,9 @@ Each commit should represent a coherent visual section or sub-section. Guideline
 ## Phase 4: Validation & Polish
 
 ### 4.1 Full-page comparison
-- Use Playwright to capture full-page screenshots of the local site at each page equivalent.
-- Compare side-by-side with the reference screenshots in `agents/SITE-styles/screenshots/`.
-- Note all remaining discrepancies.
+- Use Playwright to capture full-page screenshots of the local site at each page equivalent at **both desktop (1280px) and mobile (375px)** widths.
+- Compare side-by-side with the corresponding reference screenshots in `agents/SITE-styles/screenshots/` (`NN-slug.png` for desktop, `NN-slug-mobile.png` for mobile).
+- Note all remaining discrepancies at both widths.
 
 ### 4.2 Interaction testing
 - Test with Playwright:
@@ -255,6 +383,18 @@ Each commit should represent a coherent visual section or sub-section. Guideline
 - Test at: 375px, 768px, 992px, 1280px, 1530px+
 - Screenshot at each width.
 - Fix any breakpoint issues found.
+
+### 4.3.1 Print layout testing
+- Use Playwright with `page.emulateMedia({ media: 'print' })` to render the print view.
+- Screenshot the home page and one content-heavy detail page in print mode.
+- Verify:
+  - Navigation, footer, search, and all chrome elements are hidden.
+  - Content renders as a single readable column with black text.
+  - Images are sized appropriately and don't overflow.
+  - No content blocks break awkwardly across pages (`break-inside: avoid`).
+  - External link URLs are printed after the link text.
+  - Tables retain visible borders.
+- Fix any print-specific issues found, commit separately.
 
 ### 4.4 Fix remaining issues
 - Address each discrepancy found in 4.1–4.3.
@@ -293,6 +433,37 @@ Some sub-sites may require changes to the HTML shell or Diazo rules:
 git commit -m "Add Diazo rules and HTML structure for SITE sub-site"
 ```
 
+### 5.4 Final structural audit recap
+
+At the end of all work, **re-present the structural inconsistencies found during Phase 2.5 to the user**. This is critical because some issues identified in the audit may have been deferred, worked around, or only partially addressed during Phases 3–5.
+
+Output a summary that revisits each inconsistency from the Phase 2.5 audit and reports its current status:
+
+```
+## Final Structural Audit Recap: SITE
+
+### Header
+- [original inconsistency] → [resolved / partially resolved / still outstanding]
+  - How it was addressed (CSS workaround, Diazo rule, content edit, etc.)
+  - OR: why it remains unresolved and what would be needed to fix it
+
+### Top Section / Hero
+- [same format]
+
+### Footer
+- [same format]
+
+### Images
+- [list each image from Phase 2.5 and whether it was transferred,
+  referenced in SCSS/HTML, or still missing]
+
+### Outstanding Items
+- [any inconsistencies that could not be resolved with CSS/Diazo alone
+  and require manual content editing, CMS uploads, or other user action]
+```
+
+This recap ensures the user has a complete picture of what was achieved and what still needs attention, rather than having to re-derive this from the Phase 2.5 audit and subsequent commits.
+
 ---
 
 ## Checklist per section (copy for each section in Phase 3)
@@ -306,6 +477,7 @@ git commit -m "Add Diazo rules and HTML structure for SITE sub-site"
 - [ ] **Compare against reference screenshot — exact visual match**
 - [ ] **Test hover/interactive states with Playwright**
 - [ ] **Iterate and fix until match is confirmed**
+- [ ] **Test print layout** (at least once per sub-site, required in Phase 3.5 and Phase 4.3.1)
 - [ ] Commit with descriptive message
 
 ---
@@ -328,12 +500,21 @@ agents/SITE-styles/
 │   ├── mobile.css
 │   └── reset.css
 ├── html/
-│   ├── 01-home.html
+│   ├── 01-home.html          (captured reference pages)
 │   ├── 02-about.html
+│   ├── ...
+│   ├── local-header.html     (Plone markup snapshots from Phase 2.5)
+│   ├── local-top-section.html
+│   └── local-footer.html
+├── images/
+│   ├── header-logo.png       (images captured from original site)
+│   ├── hero-banner.jpg
 │   └── ...
 └── screenshots/
-    ├── 01-home.png           (reference captures)
+    ├── 01-home.png           (desktop reference captures)
+    ├── 01-home-mobile.png    (mobile reference captures)
     ├── 02-about.png
+    ├── 02-about-mobile.png
     ├── ...
     └── testing/              (development test screenshots)
         ├── nav-hover-test.png
@@ -341,6 +522,7 @@ agents/SITE-styles/
         └── ...
 
 theme/scss/
+├── _print.scss              (shared base print styles — do not modify per sub-site)
 ├── _custom-SITE.scss        (new file for this sub-site)
 └── theme.scss               (updated to import _custom-SITE.scss)
 ```
