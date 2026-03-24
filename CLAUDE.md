@@ -131,8 +131,8 @@ Follow this procedure for every theme/CSS task:
 ### 3. After making changes — always test with Playwright
 - Invoke the `playwright-cli` skill to open `http://localhost:8080` (admin/admin).
 - Test all relevant interactions: hover states, dropdowns, active states, mobile widths.
-- **Screenshots must go in `lp-lineage-theme-capture/captured-themes/SITE-styles/screenshots/testing/`** with a contextual name (e.g. `nav-hover-gold-test.png`). Never save screenshots to the project root.
-- After testing, ask the user whether to clean up the test screenshots.
+- **Dev test screenshots** go in `tmp/screenshots/` (gitignored) with contextual names (e.g. `nav-hover-gold-test.png`). Never save screenshots to the project root or into the submodule.
+- **Captured reference screenshots** (from live site crawls) go in `lp-lineage-theme-capture/captured-themes/SITE-styles/screenshots/` and are always committed to the submodule.
 
 ### Plone dev notes
 - Site: `http://localhost:8080/Plone` — credentials `admin` / `admin`
