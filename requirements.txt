@@ -1,3 +1,5 @@
 # requirements.txt
 collective.lineage==3.0.0
 collective.easyform==4.5.1
+collective.fullcalendar==1.6
+lineage.themeselection==2.2
