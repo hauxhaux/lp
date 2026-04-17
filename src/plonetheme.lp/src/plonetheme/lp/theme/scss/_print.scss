@@ -1,0 +1,129 @@
+// =============================================================================
+// PLONETHEME.LP — BASE PRINT STYLES
+// =============================================================================
+// Shared print defaults imported by all sub-site custom SCSS files.
+// Extends Barceloneta's minimal print rules with LP-specific layout cleanup,
+// readable typography, and sensible page-margin defaults.
+//
+// Sub-sites can override or extend these rules by adding their own
+// `@media print { }` block *after* importing this file.
+// =============================================================================
+
+@media print {
+
+  // -------------------------------------------------------------------------
+  // 1. Page margins
+  // -------------------------------------------------------------------------
+  @page {
+    margin: 1.5cm;
+  }
+
+  // -------------------------------------------------------------------------
+  // 2. Hide non-content chrome
+  //    (Barceloneta already hides #mainnavigation-wrapper, #portal-searchbox,
+  //     #portal-breadcrumbs, #portal-footer-wrapper, #portal-personaltools,
+  //     #content-header, and #edit-zone — we add LP-specific elements here.)
+  // -------------------------------------------------------------------------
+  .navbar,
+  .navbar-toggler,
+  .offcanvas,
+  .offcanvas-backdrop,
+  #return-to-lp-banner,
+  #portal-logo,
+  .back-to-top,
+  .social-links,
+  .search-toggle,
+  .mobile-toggler {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  // -------------------------------------------------------------------------
+  // 3. Typography — readable black-on-white
+  //    (Barceloneta forces color: black and background: transparent on *,
+  //     but we refine link treatment and heading hierarchy.)
+  // -------------------------------------------------------------------------
+  a,
+  a:visited {
+    text-decoration: underline !important;
+  }
+
+  // Show link URLs after external links (but not internal navigation anchors)
+  #content a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
+    word-break: break-all;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    break-after: avoid;
+  }
+
+  // -------------------------------------------------------------------------
+  // 4. Layout simplification
+  // -------------------------------------------------------------------------
+  body,
+  #visual-portal-wrapper,
+  #content,
+  .container,
+  .container-fluid {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    float: none !important;
+    position: static !important;
+  }
+
+  // Collapse multi-column grids into a single column
+  .row {
+    display: block !important;
+  }
+
+  .row > [class*="col-"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: none !important;
+    float: none !important;
+  }
+
+  // -------------------------------------------------------------------------
+  // 5. Images
+  // -------------------------------------------------------------------------
+  img {
+    max-width: 100% !important;
+    height: auto !important;
+    break-inside: avoid;
+  }
+
+  // Allow hero/banner background images to print when present
+  .hero,
+  .banner,
+  .lead-image {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  // -------------------------------------------------------------------------
+  // 6. Content blocks — prevent awkward page breaks
+  // -------------------------------------------------------------------------
+  .card,
+  figure,
+  blockquote,
+  .feature-block,
+  .blue-block,
+  .orange-block,
+  .dark-block,
+  table {
+    break-inside: avoid;
+  }
+
+  // -------------------------------------------------------------------------
+  // 7. Tables — keep borders visible
+  // -------------------------------------------------------------------------
+  table,
+  th,
+  td {
+    border: 1px solid #999 !important;
+  }
+}

@@ -1,0 +1,3 @@
+[submodule "lp-lineage-theme-capture"]
+	path = lp-lineage-theme-capture
+	url = https://github.com/sdaitzman/lp-lineage-theme-capture

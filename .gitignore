@@ -8,3 +8,9 @@ __pycache__/
 *~
 node_modules/
 docker/logs/
+
+# Ephemeral dev test screenshots (visual testing against captured references)
+tmp/screenshots/
+
+# Playwright test artifacts (videos, traces, screenshots)
+.playwright-cli/*
