@@ -23,4 +23,10 @@
       name="anchor"
       />
 
+  <plone:static
+      directory="themes/aquatics"
+      type="theme"
+      name="aquatics"
+      />
+
 </configure>
