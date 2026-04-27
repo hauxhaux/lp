@@ -24,9 +24,21 @@
       />
 
   <plone:static
-      directory="themes/aquatics"
+      directory="themes/se-firemap"
       type="theme"
-      name="aquatics"
+      name="se-firemap"
+      />
+
+  <plone:static
+      directory="themes/western-landscapes"
+      type="theme"
+      name="western-landscapes"
+      />
+
+  <plone:static
+      directory="themes/wildland-fire"
+      type="theme"
+      name="wildland-fire"
       />
 
 </configure>

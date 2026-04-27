@@ -1,0 +1,6 @@
+// Entry point for the se-firemap theme.
+// Imports the shared LP base (Bootstrap + Barceloneta + LP variables/maps/print),
+// then the se-firemap sub-site's customizations.
+
+@import "../../_shared/scss/base";
+@import "custom";
