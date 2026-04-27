@@ -16,4 +16,11 @@
       name="l-p-theme"
       />
 
+  <!-- LP Diazo themes (one per sub-site). -->
+  <plone:static
+      directory="themes/anchor"
+      type="theme"
+      name="anchor"
+      />
+
 </configure>

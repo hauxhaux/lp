@@ -1,0 +1,26 @@
+{
+  "//": "Single hoisted package.json for all LP Diazo themes. Theme entry points live at themes/<site>/scss/theme.scss; node_modules and build output are shared. See scripts/build-themes.mjs.",
+  "name": "l-p-themes",
+  "version": "1.0.0",
+  "license": "MIT",
+  "devDependencies": {
+    "autoprefixer": "^10.4.8",
+    "clean-css-cli": "^5.6.1",
+    "glob": "^10.3.10",
+    "postcss": "^8.4.16",
+    "postcss-cli": "^9.0.1",
+    "sass": "^1.54.7",
+    "stylelint-config-twbs-bootstrap": "^5.0.0",
+    "tinymce": "^5.10.2"
+  },
+  "scripts": {
+    "watch": "node scripts/build-themes.mjs --watch",
+    "watch:anchor": "node scripts/build-themes.mjs --watch --theme=anchor",
+    "build": "node scripts/build-themes.mjs",
+    "build:anchor": "node scripts/build-themes.mjs --theme=anchor",
+    "css-lint": "stylelint \"*/scss/**/*.scss\" \"_shared/scss/**/*.scss\" --cache --cache-location .cache/.stylelintcache"
+  },
+  "dependencies": {
+    "@plone/plonetheme-barceloneta-base": "^3.3.1"
+  }
+}
