@@ -71,10 +71,13 @@
   />
   <drop css:content="#portal-header #portal-searchbox" />
 
-  <!-- Content header -->
-  <replace css:content="#portal-logo"
-           css:theme="#portal-logo"
-           mode="raw"
+  <!-- Content header — the theme owns the portal-logo image (baked into
+       index.html with the ++theme++anchor/ prefix). We only copy the
+       dynamic href from Plone's portal-logo link so it points at the
+       correct navigation root (portal or child site). -->
+  <copy attributes="href"
+        css:content="#portal-logo"
+        css:theme="#portal-logo-link"
   />
   <drop css:content="#portal-logo" />
 
