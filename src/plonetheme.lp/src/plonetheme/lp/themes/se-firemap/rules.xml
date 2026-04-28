@@ -81,6 +81,20 @@
   />
   <drop css:content="#portal-logo" />
 
+  <!-- Lineage return-to-parent banner: emitted by
+       plonetheme.lp's ReturnToParentViewlet inside Plone's
+       portal-header. Move it to the very top of the body so it
+       sits above the theme chrome. -->
+  <replace css:theme="#return-to-lp-banner-placeholder"
+           css:content="#return-to-lp-banner"
+           mode="raw"
+           css:if-content="#return-to-lp-banner"
+  />
+  <drop css:theme="#return-to-lp-banner-placeholder"
+        css:if-not-content="#return-to-lp-banner"
+  />
+  <drop css:content="#portal-header #return-to-lp-banner" />
+
   <replace css:content-children="#portal-header"
            css:theme-children="#portal-top"
   />
@@ -218,3 +232,4 @@
   <!-- <replace css:theme="#anonymous-actions" css:content-children="#portal-personaltools-wrapper" css:if-not-content=".ajax_load" css:if-content=".userrole-anonymous" /> -->
 
 </rules>
+

@@ -1,0 +1,6 @@
+<div id="return-to-lp-banner"
+     tal:condition="view/available">
+  <a tal:attributes="href view/parent_url"
+     tal:content="string:Return to ${view/parent_title} site"
+  >Return to parent site</a>
+</div>

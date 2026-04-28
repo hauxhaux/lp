@@ -455,9 +455,13 @@ a.readmore {
       }
     }
 
-    // Selected / current nav item — only for inner sections, NOT the home/root
-    // The Home li has both .index_html and .inPath; exclude it.
-    &.inPath:not(.index_html) > a.nav-link {
+    // Selected / current nav item — gold tab background like the live LP
+    // anchor site (#DFDF9E). Plone 6 Classic uses .selected on the current
+    // item; on the navigation-root home page Plone marks it with
+    // .index_html instead. Cover both so the home tab highlights too.
+    &.selected > a.nav-link,
+    &.inPath > a.nav-link,
+    &.index_html > a.nav-link {
       background-color: var(--anchor-gold);
       color: #222;
 
