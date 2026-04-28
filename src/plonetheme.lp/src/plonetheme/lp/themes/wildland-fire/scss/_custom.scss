@@ -222,38 +222,30 @@ a.readmore {
 // =============================================================================
 
 #content-header {
-  background: var(--wf-nav-bg);
+  background: #fff;
   border: none;
   position: relative;
   width: 100%;
-  min-height: 130px;
-  padding: 0 30px;
-  color: #fff;
+  min-height: 110px;
   max-width: none;
 }
 
 #portal-logo-wrapper {
-  padding: 15px 0 10px;
-  flex-grow: 1;
+  padding: 25px 0 15px 30px;
 
   #portal-logo {
     margin: 0;
-    display: flex;
-    align-items: center;
+    display: block;
 
     a#portal-logo-link {
       text-decoration: none;
       display: inline-block;
     }
 
-    .portal-logo-text {
-      color: #fff;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 56px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      line-height: 1;
-      text-transform: uppercase;
+    img {
+      display: block;
+      max-width: 465px;
+      height: auto;
     }
   }
 }
@@ -856,22 +848,6 @@ a.btn-orange {
       padding: 30px 0 0;
       letter-spacing: 3px;
       font-size: 16px;
-    }
-
-    // Bottom thin copyright/colophon strip — darker than the main
-    // footer to match the live Wildland Fire site.
-    .copyright,
-    .colophon,
-    .site-actions {
-      background: var(--wf-footer-strip, #54402d);
-      color: var(--wf-footer-link);
-      margin-left: -15px;
-      margin-right: -15px;
-      padding: 8px 30px;
-      font-size: 13px;
-      letter-spacing: 0.5px;
-
-      &:empty { display: none; }
     }
   }
 }

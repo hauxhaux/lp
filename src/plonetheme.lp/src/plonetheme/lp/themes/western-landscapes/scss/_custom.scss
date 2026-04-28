@@ -330,19 +330,30 @@ a.gold-text {
 // =============================================================================
 
 #content-header {
-  background: var(--west-purple);
+  background: var(--west-purple) url('../theme_images/header-banner-mountains.jpg') center/cover no-repeat;
   border: none;
   position: relative;
   width: 100%;
-  min-height: 150px;
+  min-height: 200px;
   max-width: none;
   padding: 0 35px;
   color: #fff;
+
+  // Dark overlay so the white logo + nav remain legible against the
+  // bright mountains photo. Matches the live site treatment.
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(20, 30, 50, 0.35);
+    pointer-events: none;
+  }
+
+  > * { position: relative; }
 }
 
 #portal-logo-wrapper {
   padding: 0;
-  flex-grow: 1;
 
   #portal-logo {
     margin: 0;
@@ -354,19 +365,13 @@ a.gold-text {
       display: flex;
       align-items: center;
       gap: 18px;
-      padding: 18px 0;
-    }
-
-    .portal-logo-text {
-      color: #fff;
-      font-family: 'Merriweather', 'Georgia', serif;
-      font-size: 38px;
-      font-weight: 700;
-      line-height: 1.1;
+      padding: 28px 0 22px;
     }
 
     img {
-      width: 60px;
+      display: block;
+      max-width: 465px;
+      width: 100%;
       height: auto;
     }
   }
