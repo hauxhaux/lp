@@ -1,0 +1,1200 @@
+// =============================================================================
+// PLONETHEME.LP — WILDLAND FIRE CUSTOM STYLES
+// =============================================================================
+// Custom overrides for the Wildland Fire sub-site, scoped under
+// body classes like .section-wildland-fire or .site-wildland-fire.
+//
+// Reference design:  lp-lineage-theme-capture/captured-themes/wildland-fire-styles/STYLE-GUIDE.md
+// Source CSS:        lp-lineage-theme-capture/captured-themes/wildland-fire-styles/css/fire.css
+// Compiled via:      npm run watch  (from theme/ directory)
+//
+// CONTENTS
+//   1.  Custom properties  — colour palette
+//   2.  Base & reset
+//   3.  Typography         — headings, paragraphs
+//   4.  Links
+//   5.  Page header        — logo, search, portal-top
+//   6.  Navigation         — global nav, hover/selected, submenus, mobile
+//   7.  Banner images
+//   8.  Breadcrumbs
+//   9.  Layout utilities   — containers, grids, full-width sections
+//  10.  Content blocks     — slide overlay, CTA blocks, colour utilities
+//  11.  Buttons & CTAs
+//  12.  Footer
+//  13.  Portlets
+//  14.  News tiles & calendar
+//  15.  Utility classes
+// =============================================================================
+
+
+// =============================================================================
+// 1. CUSTOM PROPERTIES
+// =============================================================================
+
+:root {
+  // --- Wildland Fire brand colours ---
+  --wf-heading:       #205c90;   // First heading colour, portlet headers, .bg-blue
+  --wf-brown:         #A26623;   // H1-H6 headings, .bg-brown
+  --wf-green:         #788a3b;   // Nest navigation bar bg, .bg-green
+  --wf-orange:        #ef8f39;   // .bg-orange
+  --wf-redorange:     #e86129;   // .bg-red-orange
+  --wf-tan:           #dfdf9e;   // Selected nav tab bg, .bg-tan
+  --wf-footer:        #7d6042;   // Footer background, .bg-footer
+  --wf-lightbrown:    #dacfbb;   // Footer heading colour, .bg-ltbrown
+  --wf-grey:          #f5f5f5;   // .bg-grey
+  --wf-nav-bg:        #0E1D1C;   // Main nav background (very dark green-black)
+  --wf-nav-hover:     #84984c;   // Nav hover background (olive green)
+  --wf-nav-selected:  #DFDF9E;   // Selected nav tab (tan/gold)
+  --wf-footer-link:   #dbcfbc;   // Footer link colour
+  --wf-footer-hover:  #f4a221;   // Footer link hover
+  --wf-btn-solid:     #F59E20;   // Solid orange button
+  --wf-btn-hover:     #e64c00;   // Button hover
+  --wf-text:          #666;      // Body text
+  --wf-text-light:    #676767;   // Intro text
+  --wf-edit-bar:      #84B3B3;   // Edit bar background
+  --wf-cta-bg:        #EBEBC2;   // Add resource / planning support bg
+  --wf-cta-hover:     #F2F2B0;   // CTA hover bg
+  --wf-cta-heading:   #EA8206;   // CTA block heading colour
+  --wf-portlet-blue:  #205C90;   // Portlet header bg
+  --wf-firemap-bg:    #eae493;   // Firemap portlet bg
+  --wf-carousel-gold: #f6d514;   // Cyclist carousel h2 colour
+}
+
+
+// =============================================================================
+// 2. BASE & RESET
+// =============================================================================
+
+body {
+  background: #fff;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  color: #000;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+// "Return to Landscape Partnership Site" green nest bar
+#return-to-lp-banner {
+  background: var(--wf-green);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 30px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  position: relative;
+
+  a {
+    color: #fff;
+    text-decoration: none;
+
+    &:hover {
+      color: #ffe061;
+    }
+  }
+
+  .return-to-lp-chevron {
+    margin-right: 6px;
+    font-size: 1.1em;
+    line-height: 1;
+    display: inline-block;
+  }
+
+}
+
+// Move anonymous login tools into the green banner
+#portal-anontools {
+  position: absolute;
+  right: 30px;
+  z-index: 10;
+  top: -36px;
+
+  .list-inline {
+    margin: 0;
+    padding: 0;
+
+    .list-inline-item {
+      margin: 0;
+    }
+  }
+
+  a {
+    color: #fff;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    text-decoration: none;
+
+    &:hover {
+      color: #ffe061;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  #return-to-lp-banner {
+    padding: 5px 0;
+    font-size: 11px;
+  }
+
+  #portal-anontools {
+    right: 10px;
+
+    a { font-size: 11px; padding: 3px 8px; }
+  }
+}
+
+
+// =============================================================================
+// 3. TYPOGRAPHY
+// =============================================================================
+
+#content h1.documentFirstHeading {
+  color: var(--wf-brown);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.6em;
+  font-weight: 500;
+  margin-bottom: 0.5em;
+  margin-top: 1.5em;
+}
+
+#content h1 {
+  color: var(--wf-brown);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.6em;
+  font-weight: 500;
+  margin-bottom: 0.5em;
+  margin-top: 1.5em;
+}
+
+h2, h3, h4, h5, h6 {
+  color: var(--wf-brown);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  line-height: 1.5em;
+  letter-spacing: -0.0115em;
+  margin-bottom: 10px;
+}
+
+h3 { font-size: 24px; }
+h4 { font-size: 20px; }
+
+p {
+  font-family: 'Merriweather', serif;
+  color: var(--wf-text);
+  letter-spacing: 0.01em;
+  line-height: 1.6em;
+  padding-bottom: 15px;
+}
+
+li {
+  font-family: 'Merriweather', serif;
+  color: var(--wf-text);
+  font-size: 16px;
+  line-height: 1.6em;
+}
+
+// Navigation list items should NOT inherit body list styles
+#portal-globalnav li,
+#portal-footer li,
+#return-to-lp-banner li,
+nav[aria-label="breadcrumb"] li {
+  font-family: 'Montserrat', sans-serif;
+  color: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+
+// =============================================================================
+// 4. LINKS
+// =============================================================================
+
+a.readmore {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-family: 'Source Sans Pro', sans-serif;
+
+  &:hover { color: #f7931e; }
+}
+
+
+// =============================================================================
+// 5. PAGE HEADER
+// =============================================================================
+
+#content-header {
+  background: #fff;
+  border: none;
+  position: relative;
+  width: 100%;
+  min-height: 110px;
+  max-width: none;
+}
+
+#portal-logo-wrapper {
+  padding: 25px 0 15px 30px;
+
+  #portal-logo {
+    margin: 0;
+    display: block;
+
+    a#portal-logo-link {
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    img {
+      display: block;
+      max-width: 465px;
+      height: auto;
+    }
+  }
+}
+
+#header-searchbox {
+  #portal-searchbox {
+    position: relative;
+    top: 40px;
+    right: 0;
+    background: #fff;
+    padding: 11px;
+    border-radius: 6px;
+    border: 1px solid #fff;
+
+    .searchSection { display: none; }
+
+    input[type="text"],
+    .form-control {
+      font-size: 13px;
+      padding: 4px 8px;
+      height: 28px;
+      width: 180px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+
+    .searchButton,
+    button[type="submit"] {
+      font-size: 12px;
+      padding: 4px 10px;
+      height: 28px;
+      background: #ededed;
+      border: 1px solid #ccc;
+      color: #555;
+      cursor: pointer;
+
+      &:hover {
+        background: #ddd;
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  #portal-logo-wrapper #portal-logo {
+    top: -30px;
+    left: 0;
+
+    img {
+      width: 90%;
+      height: auto;
+      left: 5%;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  #header-searchbox #portal-searchbox {
+    top: 95px;
+    position: absolute;
+    background: transparent;
+    padding: 11px;
+    border: none;
+    left: 57px;
+    width: 150px;
+  }
+}
+
+
+// =============================================================================
+// 6. NAVIGATION
+// =============================================================================
+
+#mainnavigation-wrapper {
+  background-color: var(--wf-nav-bg);
+  border-top: 1px solid #fff;
+}
+
+#portal-globalnav-wrapper {
+  background-color: var(--wf-nav-bg);
+  border: none;
+  padding: 0;
+
+  .container {
+    max-width: 100%;
+    padding: 0;
+  }
+}
+
+#portal-globalnav {
+  // Barceloneta paints each .navbar-nav li with --bs-navbar-background
+  // (the LP-wide green). Override so the theme bg shows through.
+  li {
+    background: transparent;
+  }
+
+  background-color: var(--wf-nav-bg);
+  width: 100%;
+  justify-content: center;
+
+  .nav-item {
+    a.nav-link {
+      background-color: var(--wf-nav-bg);
+      color: #fff;
+      font-size: 16px;
+      font-family: 'Source Sans Pro', sans-serif;
+      font-weight: 400;
+      text-transform: uppercase;
+      padding: 14px 20px;
+      border: none;
+      transition: background-color 0.2s ease, color 0.2s ease;
+
+      &:hover {
+        background-color: var(--wf-nav-hover);
+        color: #fff;
+      }
+    }
+
+    // Selected / current nav item
+    &.current > a.nav-link,
+    &.inPath > a.nav-link {
+      background-color: var(--wf-nav-selected);
+      color: #222;
+
+      &:hover {
+        background-color: var(--wf-nav-hover);
+        color: #fff;
+      }
+    }
+  }
+
+  // Dropdown / submenu
+  ul.dropdown {
+    background: #efefef;
+    border: 1px solid #ddd;
+    box-shadow: 0px 0px 5px #666;
+
+    .nav-item a.nav-link {
+      background: #efefef;
+      color: #333;
+      text-transform: none;
+      font-size: 14px;
+      padding: 8px 20px;
+
+      &:hover {
+        background-color: #7d9cc0;
+        color: #fff;
+      }
+    }
+  }
+}
+
+// Dropdown toggle arrow
+#portal-globalnav .nav-item {
+  > label {
+    color: #fff;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    cursor: pointer;
+
+    &::after {
+      content: "▼";
+      font-size: 9px;
+      color: #fff;
+      line-height: 1;
+    }
+  }
+
+  &.has_subtree > a.nav-link {
+    padding-right: 28px;
+  }
+}
+
+// Mobile nav
+@media (max-width: 991.98px) {
+  .navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  #offcanvasNavbar {
+    background-color: var(--wf-nav-bg);
+
+    .offcanvas-header .btn-close {
+      filter: invert(1);
+    }
+  }
+
+  #portal-globalnav {
+    .nav-item a.nav-link {
+      text-align: center;
+      padding: 12px 20px;
+    }
+  }
+}
+
+
+// =============================================================================
+// 7. BANNER IMAGES
+// =============================================================================
+
+#hero,
+.principal {
+  display: block;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  background-color: #ededed;
+
+  &.has-banner {
+    height: 300px;
+  }
+
+  .container,
+  .gigantic {
+    &:empty { display: none; }
+  }
+}
+
+@media (max-width: 768px) {
+  #hero.has-banner,
+  .principal.has-banner {
+    height: 100px;
+  }
+}
+
+// Section-specific banner images (applied via Diazo body classes)
+// These reference images stored in theme_images/fire-images/
+// Specific banner assignments will be done via Diazo rules or content
+
+
+// =============================================================================
+// 8. BREADCRUMBS
+// =============================================================================
+
+// Subtle breadcrumb strip — small, transparent, muted green links.
+// Match the live Wildland Fire unobtrusive "you are here" trail.
+#above-content-wrapper {
+  background: transparent;
+}
+
+#portal-breadcrumbs,
+nav[aria-label="breadcrumb"] {
+  background: transparent;
+  margin: 0;
+  padding: 10px 15px;
+  font-size: 12px;
+  font-family: 'Public Sans', sans-serif;
+
+  .breadcrumb {
+    background: transparent;
+    margin: 0;
+    padding: 0;
+  }
+
+  .breadcrumb-item {
+    color: #666;
+
+    a {
+      color: var(--wf-green);
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    + .breadcrumb-item::before {
+      color: #999;
+    }
+
+    &.active {
+      color: #444;
+    }
+  }
+}
+
+
+// =============================================================================
+// 9. LAYOUT UTILITIES
+// =============================================================================
+
+#visual-portal-wrapper,
+.outer-wrapper {
+  background-color: #fff;
+  max-width: 100%;
+  min-height: calc(100vh - 190px);
+}
+
+.fullwidth-section {
+  margin-bottom: 3em;
+}
+
+@media (max-width: 1169px) {
+  .fullwidth-section {
+    width: 100vw;
+    margin-left: -1.5em;
+    left: 0;
+  }
+}
+
+// Grid layouts
+.grid-container-three-quarter {
+  display: grid;
+  grid-template-columns: 68% 1fr;
+  grid-column-gap: 30px;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .grid-container-three-quarter { grid-template-columns: 100%; }
+}
+
+.twocol-container {
+  display: flex;
+  gap: 30px;
+}
+
+@media (max-width: 1200px) {
+  .twocol-container { flex-direction: column; }
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+@media (max-width: 768px) {
+  .flex-container {
+    flex-direction: column;
+  }
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.space-around {
+  justify-content: space-around;
+}
+
+@media (max-width: 768px) {
+  .flex-container.space-between {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 0;
+    gap: 10px;
+    justify-content: space-around;
+    align-items: center;
+    justify-items: center;
+  }
+}
+
+.flex1 { flex: 1; }
+
+.center-block {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+}
+
+.narrow {
+  width: 1170px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .narrow {
+    max-width: 100%;
+    padding: 0 1rem;
+  }
+
+  .narrow h2 {
+    text-align: center;
+    margin: 0;
+  }
+
+  .grid-item {
+    margin: 0;
+    padding: 0 3rem;
+  }
+}
+
+
+// =============================================================================
+// 10. CONTENT BLOCKS
+// =============================================================================
+
+// Slide overlay (hero carousel)
+.slide-overlay {
+  position: absolute;
+  z-index: 5;
+  top: 35%;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 30px 30px 40px;
+  width: 70%;
+  left: 15%;
+  color: #fff;
+  border-radius: 6px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .slide-overlay {
+    top: 25%;
+    background: rgba(0, 0, 0, 0.45);
+    width: 100%;
+    left: 0;
+    border-radius: 0;
+  }
+}
+
+// Background colour utility classes
+.bg-brown { background: var(--wf-brown); }
+.bg-green { background: var(--wf-green); }
+.bg-ltbrown { background: var(--wf-lightbrown); }
+.bg-tan { background: var(--wf-tan); }
+.bg-orange { background: var(--wf-orange); }
+.bg-blue { background: var(--wf-heading); }
+.bg-footer { background: var(--wf-footer); }
+.bg-grey { background: var(--wf-grey); }
+.bg-red-orange { background: var(--wf-redorange); }
+
+// Add Resource / Planning Support CTA blocks
+.add-fire-resources {
+  padding: 20px 10px 15px 80px;
+  margin: 2em 0;
+  background: var(--wf-cta-bg) url('../theme_images/fire-images/add-resource-fire.png') no-repeat;
+  background-size: 60px;
+  background-position: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    background: var(--wf-cta-hover) url('../theme_images/fire-images/add-resource-fire.png') no-repeat;
+    background-size: 63px;
+    background-position: 15px;
+  }
+
+  h3 {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 20px;
+    margin-top: 6px;
+    color: var(--wf-cta-heading);
+  }
+
+  p {
+    font-size: 13px;
+    margin: 0;
+    padding: 0;
+    font-style: italic;
+    line-height: 1.2em;
+  }
+}
+
+.planning-support-btn {
+  padding: 20px 10px 15px 80px;
+  margin: 2em 0;
+  background: var(--wf-cta-bg) url('../theme_images/fire-images/checklist.png') no-repeat;
+  background-size: 50px;
+  background-position: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    background: var(--wf-cta-hover) url('../theme_images/fire-images/checklist.png') no-repeat;
+    background-size: 52px;
+    background-position: 15px;
+  }
+
+  h3 {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 20px;
+    margin-top: 6px;
+    color: var(--wf-cta-heading);
+  }
+
+  p {
+    font-size: 13px;
+    margin: 0;
+    padding: 0;
+    font-style: italic;
+    line-height: 1.2em;
+  }
+}
+
+.feature-block {
+  border: 6px solid #efefef;
+  padding: 20px;
+  background: #fff;
+  margin-bottom: 0;
+
+  h3 { margin-top: 10px; font-size: 28px; color: var(--wf-redorange); }
+}
+
+.dark-block {
+  background: rgba(0, 0, 0, 0.80);
+  padding: 40px 30px;
+  min-height: 460px;
+}
+
+.blue-block {
+  background: rgba(20, 83, 120, 0.80);
+  padding: 40px 30px;
+  min-height: 400px;
+
+  h4 { color: #f1d215; font-size: 22px; }
+  p { color: #fff; font-size: 16px; line-height: 1.7em; margin-top: 10px; }
+  li { color: #fff; }
+
+  a:link, a:visited { color: #f9d90f; }
+  a:hover { color: #fd7916; }
+}
+
+.subhead {
+  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: 2px;
+  display: block;
+  color: #7f7f87;
+  line-height: 1em;
+}
+
+.heading-white {
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.7em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+  .heading-white { font-size: 2.4em; }
+}
+
+
+// =============================================================================
+// 11. BUTTONS & CTAs
+// =============================================================================
+
+.button {
+  color: #54585b;
+  font-size: 1.125rem;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.1875rem;
+  display: inline-block;
+  text-decoration: none;
+  border: 1px solid #888;
+  border-radius: 0.25rem;
+  text-align: center;
+  font-weight: 700;
+  transition: background 0.2s linear, color 0.2s linear, border-color 0.2s linear;
+  font-family: "Open Sans", Arial, sans-serif;
+  box-shadow: 2px 3px 5px -1px rgba(0, 0, 0, 0.35);
+
+  &:hover {
+    border-color: transparent;
+    background: var(--wf-btn-hover);
+    color: #fff;
+  }
+}
+
+.btn-solid-orange {
+  color: #fff;
+  background: var(--wf-btn-solid);
+  border-color: transparent;
+
+  &:hover {
+    background: var(--wf-btn-hover);
+    color: #fff;
+  }
+}
+
+a.btn-orange {
+  color: #fff;
+  letter-spacing: 1px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 13px;
+  background: var(--wf-orange);
+}
+
+#content a.btn.large-white {
+  border: 1px solid #fff;
+  padding: 15px;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.25);
+  color: #fff;
+  letter-spacing: 0.075em;
+  border-radius: 4px;
+  transition: all 0.3s ease-in-out;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+
+// =============================================================================
+// 12. FOOTER
+// =============================================================================
+
+#portal-footer-wrapper {
+  background: var(--wf-footer);
+  margin-top: 5em;
+
+  #portal-footer {
+    background: var(--wf-footer);
+    color: var(--wf-footer-link);
+    display: block;
+    margin-top: 0;
+    height: 350px;
+    padding: 2em 0;
+
+    a {
+      color: var(--wf-footer-link);
+
+      &:hover {
+        color: var(--wf-footer-hover);
+      }
+    }
+
+    h4 {
+      margin-top: 20px;
+      color: var(--wf-lightbrown);
+      text-transform: uppercase;
+      padding: 30px 0 0;
+      letter-spacing: 3px;
+      font-size: 16px;
+    }
+  }
+}
+
+// Wildland Fire footer block
+#fire-footer {
+  display: block;
+  position: relative;
+  text-align: center;
+
+  a:link, a:visited { color: var(--wf-footer-link); }
+  a:hover { color: var(--wf-footer-hover); }
+
+  img { margin: 0 15px 10px; }
+
+  h4 {
+    margin-top: 20px;
+    color: var(--wf-lightbrown);
+    text-transform: uppercase;
+    padding: 30px 0 0;
+  }
+
+  .sitecredit {
+    background: url('../theme_images/fergusonlynch-icon.png') no-repeat scroll 0 2px transparent;
+    background-size: 36px;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    line-height: 1.1rem;
+    padding-left: 52px;
+    text-transform: uppercase;
+    width: 185px;
+    margin: 6px auto;
+  }
+}
+
+// Footer menu
+.ft-menu {
+  li a {
+    color: #fff;
+    font-size: 14px;
+  }
+
+  li a:hover {
+    color: var(--wf-footer-hover);
+  }
+}
+
+// Bottom navigation
+.bottom-nav {
+  text-align: left;
+  margin: 20px 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding-top: 20px;
+  gap: 15px;
+}
+
+@media (max-width: 767px) {
+  .bottom-nav {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    text-align: center;
+  }
+}
+
+// Hide main LP footer
+.lp-footer { display: none; }
+.footer-left { display: none; }
+
+
+// =============================================================================
+// 13. PORTLETS
+// =============================================================================
+
+.card.portlet {
+  font-size: 90%;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  margin-bottom: 1.5em;
+
+  .card-header {
+    padding: 1em 1em 0.25em;
+    background: transparent;
+    color: var(--wf-text);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 17px;
+  }
+
+  &.portlet-navigation-tree .card-header {
+    background: var(--wf-portlet-blue);
+    border-radius: 4px 4px 0 0;
+    text-transform: uppercase;
+    padding: 15px;
+    color: #fff;
+    margin-top: 0;
+  }
+}
+
+// Firemap portlet
+.card.portlet#portlet-firemap {
+  border: none;
+  background: var(--wf-firemap-bg);
+}
+
+
+// =============================================================================
+// 14. NEWS TILES & CALENDAR
+// =============================================================================
+
+.tileItem {
+  clear: both;
+}
+
+.tileHeadline {
+  font-size: 1.5em;
+  font-weight: 600;
+}
+
+.tileImage img {
+  width: 220px;
+  height: auto;
+}
+
+@media (max-width: 768px) {
+  .news-image img {
+    width: 120px;
+    height: 150px;
+    background: #fff;
+    padding: 4px;
+    float: left;
+    margin-right: 1em;
+    margin-bottom: 1em;
+    object-fit: cover;
+    margin-top: 10px;
+  }
+}
+
+
+// =============================================================================
+// 15. UTILITY CLASSES
+// =============================================================================
+
+.white, .white a:link, .white a:visited {
+  color: #fff;
+}
+
+.intro {
+  font-family: 'Merriweather', serif;
+  font-size: 17px;
+  line-height: 1.7em;
+  color: var(--wf-text-light);
+  margin: 1em 0;
+}
+
+.image-right {
+  float: right;
+  margin-left: 2em;
+  margin-bottom: 1em;
+}
+
+.float-right { float: right; }
+
+.caption {
+  padding: 0 0 10px;
+  color: #777;
+  font-size: 13px;
+}
+
+.captioned img {
+  max-width: 100%;
+}
+
+.space40 {
+  height: 40px;
+  display: block;
+}
+
+.space-around {
+  margin: 4rem auto;
+}
+
+.small-heading {
+  display: block;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  line-height: 1.3em;
+}
+
+// Company logos (partner section)
+.company-logo img {
+  filter: grayscale(100%);
+  transform: scale(0.95);
+  opacity: 0.35;
+  transition: all 0.4s ease;
+  margin: 12px;
+  width: 150px;
+
+  &:hover {
+    filter: grayscale(0);
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+// Grid layout tiles
+.grid_layout .tileItem {
+  background: #efefef;
+  flex: 1;
+}
+
+@media (max-width: 1130px) {
+  .grid_layout .tileItem { flex: 0 100%; }
+}
+
+.gridImage img {
+  background: #fff;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  box-shadow: 0px 1px 5px 0 rgba(75, 75, 75, 0.25);
+  margin: 0 auto 0.5em;
+}
+
+// Featured image (sidebar)
+.featured-img {
+  width: 150px;
+  padding: 4px;
+  box-shadow: 0px 1px 5px 0 rgba(75, 75, 75, 0.25);
+  margin-right: 1.5em;
+}
+
+// Gold box callout
+.gold-box {
+  background: #F7DF79 url('../theme_images/fire-images/flame.png') no-repeat;
+  border-radius: 5px;
+  background-position: 95% bottom;
+  padding: 5px 20px;
+}
+
+.yellow-box {
+  background: #F7DF79;
+  border-radius: 5px;
+  padding: 5px 20px;
+}
+
+// Flex row (footer partner logos)
+.flex-row {
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media (max-width: 1160px) {
+  .flex-row {
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+    img { margin: 1em; }
+  }
+}
+
+// Gap utilities
+.gap10 { gap: 10px; }
+.gap15 { gap: 15px; }
+.gap20 { gap: 20px; }
+.gap30 { gap: 30px; }
+
+// Hide items not used in this theme
+#jumpmenu, .rss, .rss-feeds {
+  display: none;
+}
+
+// Table styling
+#content table.listing {
+  width: 100%;
+}
+
+// Listing bar
+.listingBar {
+  padding-bottom: 50px;
+}
+
+// Desktop / mobile visibility
+.desktop-only { display: none; }
+.mobile-only { padding: 10px; }
+
+@media (min-width: 700px) {
+  .mobile-only { display: none; }
+}
+
+@media (min-width: 701px) {
+  .desktop-only { display: block; }
+}
+
+// STYLEGUIDE colour swatches
+.orange { background: #f7931f; }
+.brown { background: #a26623; }
+.dark-blue { background: #205c90; }
+.light-grey { background: #f5f5f5; }
+.dark-grey { background: #676767; }

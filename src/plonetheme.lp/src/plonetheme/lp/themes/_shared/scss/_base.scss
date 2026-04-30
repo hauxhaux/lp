@@ -1,6 +1,9 @@
+// Shared base for every LP Diazo theme.
+// Each theme's scss/theme.scss imports this, then its own _custom.scss.
+//
 // Theme import structure is based on Bootstrap documentation
 // https://getbootstrap.com/docs/5.3/customize/sass/#importing
-
+//
 // Barceloneta and Bootstrap import are using --load-path=node_modules
 
 // Roboto is not included in this template and therefore we disable the setup here.
@@ -96,16 +99,3 @@ $enable-roboto-webfont: false !default;
 @import "print";                  // LP base print styles (extends Barceloneta print)
 
 // @import "@plone/plonetheme-barceloneta-base/scss/roboto-webfont";
-
-
-// 9. Add additional custom code here
-// @import "custom";              // Aquatics sub-site
-@import "custom-anchor";          // ANCHOR sub-site (active)
-
-// 10. Available sub-site custom styles
-// @import "custom-se-firemap";
-// @import "custom-birdlocale";
-// @import "custom-western";
-// @import "custom-eastern-deciduous";
-// @import "custom-grasslands";
-// @import "custom-wlfw";

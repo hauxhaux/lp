@@ -1,0 +1,6 @@
+// Entry point for the western-landscapes theme.
+// Imports the shared LP base (Bootstrap + Barceloneta + LP variables/maps/print),
+// then the western-landscapes sub-site's customizations.
+
+@import "../../_shared/scss/base";
+@import "custom";

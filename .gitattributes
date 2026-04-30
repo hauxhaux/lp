@@ -1,0 +1,8 @@
+src/plonetheme.lp/src/plonetheme/lp/theme/styles/theme.css        -diff linguist-generated=true
+src/plonetheme.lp/src/plonetheme/lp/theme/styles/theme.min.css    -diff linguist-generated=true
+src/plonetheme.lp/src/plonetheme/lp/theme/styles/theme.css.map    -diff linguist-generated=true
+src/plonetheme.lp/src/plonetheme/lp/theme/styles/theme.min.css.map -diff linguist-generated=true
+src/plonetheme.lp/src/plonetheme/lp/themes/*/styles/theme.css        -diff linguist-generated=true
+src/plonetheme.lp/src/plonetheme/lp/themes/*/styles/theme.min.css    -diff linguist-generated=true
+src/plonetheme.lp/src/plonetheme/lp/themes/*/styles/theme.css.map    -diff linguist-generated=true
+src/plonetheme.lp/src/plonetheme/lp/themes/*/styles/theme.min.css.map -diff linguist-generated=true
