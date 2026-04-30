@@ -175,6 +175,32 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--west-heading);
 }
 
+// Byline (".documentByLine") matches the live western-landscapes
+// rule: small grey, non-italic, Public Sans, sitting flush-left
+// directly under the page title.
+.documentByLine,
+#plone-document-byline {
+  color: #666 !important;
+  font-size: 11px !important;
+  font-style: normal !important;
+  font-family: 'Public Sans', sans-serif !important;
+  margin: 0 20px 10px 0;
+
+  .documentAuthor,
+  .documentModified,
+  span {
+    color: inherit;
+    font-size: inherit;
+    font-style: normal;
+    font-weight: normal;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: underline;
+  }
+}
+
 // Gold underline bar after h1
 h1.documentFirstHeading::after,
 #content h1::after {
@@ -329,27 +355,20 @@ a.gold-text {
 // 5. PAGE HEADER
 // =============================================================================
 
+// Header is a slate-blue full-width strip; the mountain photo lives in
+// a separate #portal-banner-image element below the nav, matching the
+// live site's #portal-header / #portal-banner split.
 #content-header {
-  background: var(--west-purple) url('../theme_images/header-banner-mountains.jpg') center/cover no-repeat;
+  background: var(--west-purple);
   border: none;
   position: relative;
-  width: 100%;
-  min-height: 200px;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
   max-width: none;
+  min-height: 150px;
   padding: 0 35px;
   color: #fff;
-
-  // Dark overlay so the white logo + nav remain legible against the
-  // bright mountains photo. Matches the live site treatment.
-  &::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: rgba(20, 30, 50, 0.35);
-    pointer-events: none;
-  }
-
-  > * { position: relative; }
 }
 
 #portal-logo-wrapper {
@@ -362,10 +381,8 @@ a.gold-text {
 
     a#portal-logo-link {
       text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      padding: 28px 0 22px;
+      display: inline-block;
+      padding: 25px 0;
     }
 
     img {
@@ -374,6 +391,37 @@ a.gold-text {
       width: 100%;
       height: auto;
     }
+  }
+}
+
+// Full-width photo banner between the slate-blue header and the main
+// content. Caption credits the photographer (Centennial Valley, MT —
+// Jeremy Roberts / Conservation Media) per the live western-landscapes
+// site's #portal-banner:after rule.
+#portal-banner-image {
+  position: relative;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  height: 450px;
+  background: url('../theme_images/header-banner-mountains.jpg') center top / cover no-repeat;
+
+  &::after {
+    content: "Centennial Valley, MT. Credit: Jeremy Roberts, Conservation Media";
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    padding: 0.5rem 1.2rem;
+    color: #fff;
+    font-size: 12px;
+    background: rgba(0, 0, 0, 0.35);
+  }
+}
+
+@media (max-width: 768px) {
+  #portal-banner-image {
+    height: 195px;
+    &::after { display: none; }
   }
 }
 
