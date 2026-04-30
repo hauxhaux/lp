@@ -98,6 +98,14 @@ body {
       color: #ffe061;
     }
   }
+
+  .return-to-lp-chevron {
+    margin-right: 6px;
+    font-size: 1.1em;
+    line-height: 1;
+    display: inline-block;
+  }
+
 }
 
 // Move anonymous login tools into the green banner
@@ -336,6 +344,12 @@ a.readmore {
 }
 
 #portal-globalnav {
+  // Barceloneta paints each .navbar-nav li with --bs-navbar-background
+  // (the LP-wide green). Override so the theme bg shows through.
+  li {
+    background: transparent;
+  }
+
   background-color: var(--wf-nav-bg);
   width: 100%;
   justify-content: center;
@@ -479,14 +493,45 @@ a.readmore {
 // 8. BREADCRUMBS
 // =============================================================================
 
+// Subtle breadcrumb strip — small, transparent, muted green links.
+// Match the live Wildland Fire unobtrusive "you are here" trail.
+#above-content-wrapper {
+  background: transparent;
+}
+
 #portal-breadcrumbs,
 nav[aria-label="breadcrumb"] {
-  font-size: 85%;
-  margin: 1.5em auto 2em;
+  background: transparent;
+  margin: 0;
   padding: 10px 15px;
+  font-size: 12px;
+  font-family: 'Public Sans', sans-serif;
 
   .breadcrumb {
-    margin-bottom: 0;
+    background: transparent;
+    margin: 0;
+    padding: 0;
+  }
+
+  .breadcrumb-item {
+    color: #666;
+
+    a {
+      color: var(--wf-green);
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    + .breadcrumb-item::before {
+      color: #999;
+    }
+
+    &.active {
+      color: #444;
+    }
   }
 }
 

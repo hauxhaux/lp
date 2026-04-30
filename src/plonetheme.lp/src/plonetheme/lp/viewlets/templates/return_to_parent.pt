@@ -1,6 +1,11 @@
 <div id="return-to-lp-banner"
      tal:condition="view/available">
-  <a tal:attributes="href view/parent_url"
-     tal:content="string:Return to ${view/parent_title} site"
-  >Return to parent site</a>
+  <a tal:attributes="href view/parent_url">
+    <span class="return-to-lp-chevron"
+          aria-hidden="true"
+    >&#x2039;</span>
+    <span class="return-to-lp-text"
+          tal:content="string:Return to ${view/parent_title} site"
+    >Return to parent site</span>
+  </a>
 </div>

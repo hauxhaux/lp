@@ -93,6 +93,13 @@ body {
       color: var(--west-orange);
     }
   }
+
+  .return-to-lp-chevron {
+    margin-right: 6px;
+    font-size: 1.1em;
+    line-height: 1;
+    display: inline-block;
+  }
 }
 
 // Hide unused bars
@@ -355,9 +362,21 @@ a.gold-text {
 // 5. PAGE HEADER
 // =============================================================================
 
-// Header is a slate-blue full-width strip; the mountain photo lives in
-// a separate #portal-banner-image element below the nav, matching the
-// live site's #portal-header / #portal-banner split.
+// =============================================================================
+// HEADER LAYOUT — match live workinglandsforwildlife.org/.../western-landscapes
+//
+// Three stacked full-width strips:
+//   1. #content-header   — slate-blue 150px tall, holds the
+//                          "Western Landscapes" wordmark and search box
+//   2. #mainnavigation   — slate-blue, holds the global nav links
+//   3. #portal-banner-image — 450px mountains photo with photo credit
+//
+// Plus #wlfw-banner-badge — a 190px circular WLFW Landscapes badge
+// positioned absolutely at top-left of the slate header. It hangs
+// downward past the slate to overlap into the photo banner below,
+// matching the live site's anchor placement (top:24px, left:32px).
+// =============================================================================
+
 #content-header {
   background: var(--west-purple);
   border: none;
@@ -367,8 +386,30 @@ a.gold-text {
   margin-right: calc(50% - 50vw);
   max-width: none;
   min-height: 150px;
-  padding: 0 35px;
+  padding: 0 35px 0 240px;     // leave room at left for the WLFW badge
   color: #fff;
+  overflow: visible;            // allow #wlfw-banner-badge to hang below
+}
+
+// The big WLFW Landscapes circular badge.
+// 190x190 PNG, absolutely positioned at the top-left of #content-header,
+// extending downward past the slate's bottom edge into the mountain
+// photo below. z-index keeps it above the photo and the nav strip.
+#wlfw-banner-badge {
+  position: absolute;
+  top: 24px;
+  left: 32px;
+  width: 190px;
+  height: 190px;
+  z-index: 10;
+  text-decoration: none;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
 }
 
 #portal-logo-wrapper {
@@ -394,10 +435,63 @@ a.gold-text {
   }
 }
 
-// Full-width photo banner between the slate-blue header and the main
-// content. Caption credits the photographer (Centennial Valley, MT —
-// Jeremy Roberts / Conservation Media) per the live western-landscapes
-// site's #portal-banner:after rule.
+// Slate-coloured nav strip immediately below the header. Items render
+// transparent-on-slate by default; the active / hover state lights up
+// in white-on-darker-slate. No green floating bar.
+#mainnavigation-wrapper {
+  background: var(--west-purple);
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  max-width: none;
+
+  #portal-globalnav-wrapper,
+  .navbar-barceloneta {
+    background: var(--west-purple);
+    padding-left: 240px;       // align nav items past the WLFW badge
+  }
+}
+
+#portal-globalnav {
+  background: var(--west-purple);
+
+  // Barceloneta paints each .navbar-nav li with --bs-navbar-background
+  // (the LP-wide green). Override so the slate header bg shows through.
+  li {
+    background: transparent;
+  }
+
+  .nav-item {
+    a.nav-link {
+      background: transparent;
+      color: #fff;
+      font-family: 'Public Sans', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      text-transform: uppercase;
+      padding: 12px 22px;
+      border: 3px solid transparent;
+      transition: background-color 0.15s ease, color 0.15s ease;
+
+      &:hover,
+      &:focus {
+        background: rgba(0, 0, 0, 0.25);
+        color: var(--west-gold);
+      }
+    }
+
+    &.selected > a.nav-link,
+    &.inPath > a.nav-link,
+    &.index_html > a.nav-link {
+      color: var(--west-gold);
+      background: rgba(0, 0, 0, 0.18);
+    }
+  }
+}
+
+// Full-width photo banner immediately below the nav. Caption credits
+// the photographer (Centennial Valley, MT — Jeremy Roberts /
+// Conservation Media) per the live #portal-banner:after rule.
 #portal-banner-image {
   position: relative;
   width: 100vw;
@@ -405,6 +499,7 @@ a.gold-text {
   margin-right: calc(50% - 50vw);
   height: 450px;
   background: url('../theme_images/header-banner-mountains.jpg') center top / cover no-repeat;
+  overflow: visible;
 
   &::after {
     content: "Centennial Valley, MT. Credit: Jeremy Roberts, Conservation Media";
@@ -419,6 +514,21 @@ a.gold-text {
 }
 
 @media (max-width: 768px) {
+  #content-header {
+    padding-left: 35px;
+  }
+  #wlfw-banner-badge {
+    width: 110px;
+    height: 110px;
+    top: 12px;
+    left: 12px;
+  }
+  #mainnavigation-wrapper {
+    #portal-globalnav-wrapper,
+    .navbar-barceloneta {
+      padding-left: 35px;
+    }
+  }
   #portal-banner-image {
     height: 195px;
     &::after { display: none; }
@@ -486,13 +596,11 @@ a.gold-text {
 // 6. NAVIGATION
 // =============================================================================
 
-#mainnavigation-wrapper {
-  background-color: transparent;
-  border-top: none;
-}
-
+// Inner navbar container fills its parent. Wrapper background is set
+// in the header section above (slate var(--west-purple), full viewport
+// width). Nav items inherit that bg and overlay their own hover/active
+// states — see #portal-globalnav rules in the header section.
 #portal-globalnav-wrapper {
-  background-color: transparent;
   border: none;
   padding: 0;
 
@@ -502,61 +610,22 @@ a.gold-text {
   }
 }
 
-#portal-globalnav {
-  background-color: transparent;
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-  margin-right: 2.5%;
+// Submenu / dropdown styling (independent of the slate nav strip).
+#portal-globalnav ul.dropdown {
+  background: #fff;
+  box-shadow: 0 0 5px #666;
 
-  .nav-item {
-    a.nav-link {
-      background-color: transparent;
-      color: var(--west-white);
-      font-size: 1rem;
-      font-family: 'Public Sans', sans-serif;
-      font-weight: 600;
-      text-transform: uppercase;
-      padding: 10px 20px;
-      border: 3px solid transparent;
-      transition: background-color 0.2s ease, color 0.2s ease;
-
-      &:hover {
-        background: rgba(0, 0, 0, 0.35);
-        color: var(--west-gold);
-      }
-    }
-
-    // Selected / current nav item
-    &.current > a.nav-link,
-    &.inPath > a.nav-link {
-      background: rgba(0, 0, 0, 0.35);
-      color: var(--west-gold);
-
-      &:hover {
-        background: rgba(0, 0, 0, 0.35);
-        color: var(--west-gold);
-      }
-    }
-  }
-
-  // Dropdown / submenu
-  ul.dropdown {
+  .nav-item a.nav-link {
     background: #fff;
-    box-shadow: 0 0 5px #666;
+    color: var(--west-submenu-text);
+    text-transform: none;
+    font-size: 15px;
+    padding: 8px 20px;
+    border: none;
 
-    .nav-item a.nav-link {
-      background: #fff;
-      color: var(--west-submenu-text);
-      text-transform: none;
-      font-size: 15px;
-      padding: 8px 20px;
-      border: none;
-
-      &:hover {
-        background-color: var(--west-submenu-hover-bg);
-        color: var(--west-submenu-hover-text);
-      }
+    &:hover {
+      background-color: var(--west-submenu-hover-bg);
+      color: var(--west-submenu-hover-text);
     }
   }
 }
@@ -676,15 +745,45 @@ a.gold-text {
 // 8. BREADCRUMBS
 // =============================================================================
 
+// Subtle breadcrumb strip — matches live western-landscapes
+// (#portal-breadcrumbs is transparent, ~14px text, muted slate links).
+#above-content-wrapper {
+  background: transparent;
+}
+
 #portal-breadcrumbs,
 nav[aria-label="breadcrumb"] {
-  margin-left: 0;
-  margin-top: 0;
-  padding: 15px 35px;
-  font-size: 0.9rem;
+  background: transparent;
+  margin: 0;
+  padding: 12px 35px;
+  font-size: 12px;
+  font-family: 'Public Sans', sans-serif;
 
   .breadcrumb {
-    margin-bottom: 0;
+    background: transparent;
+    margin: 0;
+    padding: 0;
+  }
+
+  .breadcrumb-item {
+    color: #666;
+
+    a {
+      color: var(--west-heading);
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    + .breadcrumb-item::before {
+      color: #999;
+    }
+
+    &.active {
+      color: #444;
+    }
   }
 }
 

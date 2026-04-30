@@ -152,6 +152,14 @@ label,
       color: var(--anchor-yellow-hover);
     }
   }
+
+  .return-to-lp-chevron {
+    margin-right: 6px;
+    font-size: 1.1em;
+    line-height: 1;
+    display: inline-block;
+  }
+
 }
 
 // Move anonymous login tools into the banner
@@ -434,6 +442,12 @@ a.readmore {
 }
 
 #portal-globalnav {
+  // Barceloneta paints each .navbar-nav li with --bs-navbar-background
+  // (the LP-wide green). Override so the theme bg shows through.
+  li {
+    background: transparent;
+  }
+
   background-color: var(--anchor-navy);
   width: 100%;
   justify-content: center;
@@ -759,10 +773,47 @@ a.readmore {
 // 8. BREADCRUMBS
 // =============================================================================
 
-// Breadcrumbs are hidden on the ANCHOR sub-site
+// Subtle breadcrumb strip — small, transparent, muted-navy links.
+// Matches the live LP convention of an unobtrusive "you are here"
+// trail rather than a second nav row.
+#above-content-wrapper {
+  background: transparent;
+}
+
 #portal-breadcrumbs,
 nav[aria-label="breadcrumb"] {
-  display: none;
+  background: transparent;
+  margin: 0;
+  padding: 10px 15px;
+  font-size: 12px;
+  font-family: 'Public Sans', sans-serif;
+
+  .breadcrumb {
+    background: transparent;
+    margin: 0;
+    padding: 0;
+  }
+
+  .breadcrumb-item {
+    color: #666;
+
+    a {
+      color: var(--anchor-dark-blue);
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    + .breadcrumb-item::before {
+      color: #999;
+    }
+
+    &.active {
+      color: #444;
+    }
+  }
 }
 
 
