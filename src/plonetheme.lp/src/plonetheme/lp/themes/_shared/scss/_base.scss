@@ -99,3 +99,28 @@ $enable-roboto-webfont: false !default;
 @import "print";                  // LP base print styles (extends Barceloneta print)
 
 // @import "@plone/plonetheme-barceloneta-base/scss/roboto-webfont";
+
+// ---------------------------------------------------------------------------
+// LP shared overrides — applied to every per-site theme via this base import.
+// ---------------------------------------------------------------------------
+
+// Barceloneta paints each #portal-globalnav .nav-item <li> with
+// --bs-primary (LP's #4AC728 lime green) as a default. That bleeds the
+// green into every per-site theme's nav row (especially visible on themes
+// whose nav background is otherwise transparent — aquatics' teal banner,
+// the bobscapes yellow band, etc.). Force the LI background back to
+// transparent so each theme's #portal-globalnav rules win on their own.
+#portal-globalnav .nav-item,
+#portal-globalnav li {
+  background: transparent;
+}
+
+// Plone applies a `.state-published` / `.state-private` class to nav links
+// based on the target Document's workflow state, and Barceloneta has
+// upstream rules that color those (green for published) — distracting for
+// rendered nav. Reset color so per-site `nav-link` rules win.
+#portal-globalnav .nav-link.state-published,
+#portal-globalnav .nav-link.state-private,
+#portal-globalnav .nav-link.state-None {
+  color: inherit;
+}
