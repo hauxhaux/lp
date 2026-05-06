@@ -228,13 +228,18 @@ nav[aria-label="breadcrumb"] li {
 // 5. PAGE HEADER
 // =============================================================================
 
-// The Literature Gateway uses a bird-banner image above the header
+// The Literature Gateway uses a bird-banner image above the header.
+// Captured site puts logo at top:75px inside a 130px-tall #content-header
+// because its nav is integrated; our Diazo template emits the nav as a
+// separate row below, so we need a taller band that contains the logo
+// fully and leaves the nav row clear.
 #content-header {
   background: transparent;
   border: none;
   position: relative;
   width: 100%;
-  height: 130px;
+  min-height: 220px;
+  overflow: hidden;
 }
 
 // Portal-top area with bird banner background
@@ -262,11 +267,12 @@ nav[aria-label="breadcrumb"] li {
   #portal-logo {
     margin: 0;
     display: block;
-    width: 780px;
-    height: 110px;
+    width: 600px;
+    max-width: 80%;
+    height: 90px;
     position: relative;
-    left: 10%;
-    top: 75px;
+    left: 5%;
+    top: 25px;
     z-index: 2;
     background: url('../theme_images/literature-images/literature-logo-wlfw.svg') no-repeat left center;
     background-size: contain;
