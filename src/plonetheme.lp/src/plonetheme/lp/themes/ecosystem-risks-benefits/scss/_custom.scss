@@ -54,18 +54,23 @@ body {
   margin: 2em;
 }
 
-// White content card floating over the bg image, with the signature shadow
-#visual-portal-wrapper {
-  background-color: transparent;
+// White content card floating over the bg image, with the signature shadow.
+// Diazo template uses outer-wrapper / container / main-container; the captured
+// site used #visual-portal-wrapper / #portal-columns. Apply the white-card
+// styling to whichever is present so content always reads against a solid bg.
+#visual-portal-wrapper,
+.outer-wrapper {
+  background-color: #fff;
   box-shadow: 0 10px 20px rgba(50, 50, 50, 0.41);
   margin: 0 auto;
   max-width: 1000px;
   min-height: calc(100vh - 190px);
 }
 
-#portal-columns {
+#portal-columns,
+#main-container,
+.container > .row {
   background-color: #fff;
-  padding-top: 10px;
 }
 
 #portal-top { height: 240px; }
