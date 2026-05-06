@@ -218,8 +218,9 @@ nav[aria-label="breadcrumb"] li {
   width: 100%;
   // Was 170px which collided with the Diazo-injected nav row below; the
   // captured site keeps the nav inside this band, but our template places
-  // it below. Use enough height for logo + breathing room without crowding.
-  min-height: 200px;
+  // it below. 240px gives the 90px logo + the SVG's tagline below ample
+  // room before the nav row starts.
+  min-height: 240px;
   background-size: cover;
   overflow: hidden;
 }
