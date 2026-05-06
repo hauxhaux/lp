@@ -481,8 +481,8 @@ a.gold-text {
     }
 
     &.selected > a.nav-link,
-    &.inPath > a.nav-link,
-    &.index_html > a.nav-link {
+    &.current > a.nav-link,
+    &.inPath:not(.index_html) > a.nav-link {
       color: var(--west-gold);
       background: rgba(0, 0, 0, 0.18);
     }

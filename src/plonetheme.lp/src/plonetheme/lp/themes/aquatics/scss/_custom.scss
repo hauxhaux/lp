@@ -429,12 +429,16 @@ a.gold-text {
   border-top: none;
 }
 
+// Captured site absolute-positions the nav inside the teal banner at
+// top:100px right-aligned. Our Diazo template emits the nav as a
+// sibling row below #content-header, so absolute positioning makes
+// the nav overlap the WLFW LANDSCAPE Aquatics title text. Let the
+// nav flow normally below the banner instead — the colored band
+// underneath the teal banner reads as a clean second row.
 #portal-globalnav-wrapper {
-  background-color: transparent;
+  background-color: var(--aq-teal);
   border: none;
   padding: 0;
-  position: absolute;
-  top: 100px;
 
   .container {
     max-width: 100%;
@@ -442,19 +446,11 @@ a.gold-text {
   }
 }
 
-@media (max-width: 768px) {
-  #portal-globalnav-wrapper {
-    width: 100%;
-    top: 105px;
-    left: 0;
-  }
-}
-
 #portal-globalnav {
   background-color: transparent;
   display: flex;
-  justify-content: flex-end;
-  margin-right: 2.5%;
+  justify-content: center;
+  margin: 0;
 
   .nav-item {
     a.nav-link {
@@ -477,7 +473,7 @@ a.gold-text {
 
     // Selected / current nav item
     &.current > a.nav-link,
-    &.inPath > a.nav-link {
+    &.inPath:not(.index_html) > a.nav-link {
       background: rgba(0, 0, 0, 0.35);
       color: var(--aq-gold);
 

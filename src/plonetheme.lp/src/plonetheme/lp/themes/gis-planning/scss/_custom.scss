@@ -158,7 +158,7 @@ dl.portlet li {
 
   // Selected tab keeps the LP-wide olive-green
   .nav-item.current > a.nav-link,
-  .nav-item.inPath > a.nav-link {
+  .nav-item.inPath:not(.index_html) > a.nav-link {
     background-color: #95A664;
     color: #fff;
 

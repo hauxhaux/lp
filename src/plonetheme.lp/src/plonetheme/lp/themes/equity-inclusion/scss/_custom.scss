@@ -209,7 +209,7 @@ nav[aria-label="breadcrumb"] li {
   }
 
   .nav-item.current > a.nav-link,
-  .nav-item.inPath > a.nav-link {
+  .nav-item.inPath:not(.index_html) > a.nav-link {
     background-color: var(--eq-nav-selected);
     color: #222;
 

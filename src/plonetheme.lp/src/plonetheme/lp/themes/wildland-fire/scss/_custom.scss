@@ -374,7 +374,7 @@ a.readmore {
 
     // Selected / current nav item
     &.current > a.nav-link,
-    &.inPath > a.nav-link {
+    &.inPath:not(.index_html) > a.nav-link {
       background-color: var(--wf-nav-selected);
       color: #222;
 

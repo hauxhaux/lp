@@ -314,14 +314,15 @@ a.readmore {
   border-top: none;
 }
 
+// Captured site absolute-positions the nav inside the cream banner at
+// top:25px left:30%. Our Diazo template emits the nav as a sibling row
+// below #content-header, so absolute positioning makes the nav buttons
+// land on top of the BirdLocale wordmark. Let the nav flow naturally
+// below the banner.
 #portal-globalnav-wrapper {
-  background-color: transparent;
+  background-color: var(--bl-cream);
   border: none;
   padding: 0;
-  position: absolute;
-  top: 25px;
-  left: 30%;
-  width: 70%;
 
   .container {
     max-width: 100%;
@@ -329,24 +330,16 @@ a.readmore {
   }
 }
 
-@media (max-width: 768px) {
-  #portal-globalnav-wrapper {
-    width: 100%;
-    left: 0;
-    top: 70px;
-  }
-}
-
 #portal-globalnav {
   background-color: transparent;
   display: flex;
-  justify-content: flex-end;
-  margin-right: 2.5%;
+  justify-content: center;
+  margin: 0;
 
   .nav-item {
     a.nav-link {
       background-color: transparent;
-      color: #fff;
+      color: var(--bl-text, #444);
       font-size: 18px;
       font-weight: 600;
       text-transform: uppercase;
@@ -365,7 +358,7 @@ a.readmore {
 
     // Selected / current nav item
     &.current > a.nav-link,
-    &.inPath > a.nav-link {
+    &.inPath:not(.index_html) > a.nav-link {
       background: var(--bl-hover-bg);
       color: #fff;
       border: 3px solid var(--bl-green);
@@ -468,7 +461,7 @@ a.readmore {
       }
 
       &.current > a.nav-link,
-      &.inPath > a.nav-link {
+      &.inPath:not(.index_html) > a.nav-link {
         border: none;
         border-radius: 0;
       }

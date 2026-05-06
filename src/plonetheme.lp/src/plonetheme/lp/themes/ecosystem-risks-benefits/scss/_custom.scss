@@ -166,7 +166,7 @@ h1, h2, h3, h4 {
   }
 
   .nav-item.current > a.nav-link,
-  .nav-item.inPath > a.nav-link,
+  .nav-item.inPath:not(.index_html) > a.nav-link,
   .selected a {
     background: var(--eco-selected);
     color: #fff;

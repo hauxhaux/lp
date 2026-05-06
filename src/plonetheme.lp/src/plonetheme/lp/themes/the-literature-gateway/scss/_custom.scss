@@ -396,7 +396,7 @@ nav[aria-label="breadcrumb"] li {
 
     // Selected / current nav item
     &.current > a.nav-link,
-    &.inPath > a.nav-link {
+    &.inPath:not(.index_html) > a.nav-link {
       background-color: var(--litgw-nav-selected);
       color: #222;
 

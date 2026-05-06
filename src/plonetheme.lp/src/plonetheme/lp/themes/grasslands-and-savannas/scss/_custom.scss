@@ -462,7 +462,7 @@ a.gold-text {
 
     // Selected / current nav item
     &.current > a.nav-link,
-    &.inPath > a.nav-link {
+    &.inPath:not(.index_html) > a.nav-link {
       background: rgba(0, 0, 0, 0.35);
       color: var(--grass-gold);
 
