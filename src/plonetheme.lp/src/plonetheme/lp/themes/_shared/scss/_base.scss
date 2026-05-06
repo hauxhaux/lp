@@ -124,3 +124,18 @@ $enable-roboto-webfont: false !default;
 #portal-globalnav .nav-link.state-None {
   color: inherit;
 }
+
+// Plone marks every ancestor folder of the current page with `.inPath`.
+// Each per-site theme styles `.current > a.nav-link, .inPath > a.nav-link`
+// with the selected-tab background — which makes the "Home" (index_html)
+// tab light up as active whenever any descendant page is being viewed,
+// because every sub-page is "in the path" of Home.
+//
+// Suppress that for the index_html nav item specifically: only highlight
+// Home when it really is the current page. The selector is intentionally
+// more specific than per-site `.inPath > a.nav-link` rules so it wins
+// without needing !important.
+#portal-globalnav .nav-item.index_html.inPath:not(.current) > a.nav-link {
+  background: transparent !important;
+  color: inherit !important;
+}
