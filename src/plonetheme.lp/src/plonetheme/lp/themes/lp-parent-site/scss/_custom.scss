@@ -1,22 +1,11 @@
 // =============================================================================
 // PLONETHEME.LP — LP PARENT SITE CUSTOM STYLES
 // =============================================================================
-// Custom overrides for the LP parent (root) site.
-// Body classes: .site-portal .template-landscape_home (home),
-// .userrole-anonymous, etc.
+// Custom overrides for the LP parent (root) site (landscapepartnership.org).
 //
 // Reference design:  lp-lineage-theme-capture/captured-themes/lp-parent-site-styles/STYLE-GUIDE.md
 // Source CSS:        lp-lineage-theme-capture/captured-themes/lp-parent-site-styles/css/ploneCustom.css
 // Compiled via:      themes/scripts/build-themes.mjs (auto-discovered by per-site theme glob)
-//
-// CONTENTS
-//   1.  Custom properties  — colour palette
-//   2.  Base & typography
-//   3.  Page header        — logo, search
-//   4.  Navigation         — slate blue-gray nav
-//   5.  Footer             — medium blue
-//   6.  Buttons & CTAs
-//   7.  Content blocks     — colour utilities
 // =============================================================================
 
 
@@ -26,35 +15,44 @@
 
 :root {
   // --- LP brand colours (parent site palette) ---
-  --lp-nav-bg:         #657F9E;   // Main nav background (slate blue-gray)
-  --lp-nav-hover:      #4C6C8C;   // Nav hover background
-  --lp-nav-selected:   #95A664;   // Selected nav tab (olive)
+  --lp-nav-bg:         #657F9E;   // Slate blue-gray nav
+  --lp-nav-hover:      #4C6C8C;   // Nav hover bg
+  --lp-nav-selected:   #95A664;   // Selected (olive)
+  --lp-nav-submenu-bg: #efefef;   // Submenu bg
+  --lp-nav-submenu-hv: #7d9cc0;   // Submenu hover
   --lp-cta-block-bg:   #28526E;   // Dark navy CTA block
-  --lp-footer-bg:      #2E76A0;   // Medium blue footer
-  --lp-breadcrumb-link:#205C90;   // Medium-dark blue breadcrumb link
-  --lp-expert-bg:      #28526b;   // Teal-dark expert section
-  --lp-button-blue:    #1F657F;   // Group/project buttons
-  --lp-button-blue-2:  #247695;   // Group/project buttons hover
+  --lp-footer-bg:      #2e76a0;   // Medium blue footer
+  --lp-breadcrumb-link:#205C90;
+  --lp-link-visited:   #205C90;
 
-  --lp-heading:        #8E6747;   // Warm brown headings (h1-h6)
-  --lp-gold:           #C1B259;   // Gold accent / .bg-gold
+  --lp-heading:        #8E6747;   // Warm brown headings
+  --lp-gold:           #C1B259;
+  --lp-text-big-blue:  #408E9B;
 
-  --lp-cta-bg:         #f7bd4f;   // CTA gold/yellow
-  --lp-cta-hover:      #f38b1a;   // CTA hover orange
+  --lp-cta-bg:         #f7bd4f;
+  --lp-cta-hover:      #f38b1a;
   --lp-orange:         #f8903e;   // .btn-orange
-  --lp-orange-hover:   #F7700D;   // .btn-orange:hover
-  --lp-orange-block:   #ef9b26;   // .orange-block bg
+  --lp-orange-hover:   #F7700D;
+  --lp-orange-block:   #ef9b26;
   --lp-orange-bg:      #dd733e;   // .bg-orange
-  --lp-red:            #FF6633;   // .btn-red
-  --lp-heading-gold:   #f7d25b;   // Overlay h2 / cyclist
-  --lp-amber:          #f7c60e;   // .overlay-btn-3 hover
+  --lp-red:            #FF6633;
+  --lp-amber:          #f7c60e;
+  --lp-circle-icon:    #f19023;
+  --lp-mat-icon-grey:  #9d9d9d;
+  --lp-mat-icon-gold:  #f8cf95;
 
-  --lp-text:           #444;      // Body text
-  --lp-text-light:     #676767;   // Intro
-  --lp-caption:        #7e7e7e;   // Detail / caption
-  --lp-grey-bg:        #f5f5f5;   // Light grey bg
-  --lp-banner-bg:      #f6f3ed;   // Off-white banner bg
-  --lp-beige:          #e5e5dc;   // Slick-slider / cyclist
+  --lp-text:           #444;
+  --lp-text-light:     #676767;
+  --lp-meta:           #7e7e7e;
+  --lp-grey-bg:        #f5f5f5;
+  --lp-banner-bg:      #f6f3ed;
+  --lp-beige:          #e5e5dc;
+
+  --lp-footer-rss:     #17455e;
+  --lp-footer-link:    #7dd4d6;
+  --lp-footer-credit:  #aae2fd;
+  --lp-footer-help:    #9adff1;
+  --lp-footer-hover:   #FFA64D;
 }
 
 
@@ -63,65 +61,110 @@
 // =============================================================================
 
 body {
-  background: #fff;
+  background: #fff url('../theme_images/blue-top-bar.png') repeat-x top;
   font-family: 'Open Sans', sans-serif;
   font-size: 16px;
   color: var(--lp-text);
+  line-height: 1.5em;
 }
 
-#content h1.documentFirstHeading,
-#content h1, h2, h3, h4, h5, h6 {
+* { box-sizing: border-box; }
+
+html {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+h1, h2, h3, h4, h5, h6 {
   color: var(--lp-heading);
   font-family: 'Montserrat', sans-serif;
-  font-weight: 600;
-  line-height: 1.4;
-  margin-bottom: 0.5em;
+  font-weight: 500;
+  line-height: 1.5em;
+  letter-spacing: -0.0125em;
 }
 
 #content h1.documentFirstHeading,
-#content h1 { font-size: 2.6em; font-weight: 500; margin-top: 1.2em; }
-h3 { font-size: 24px; }
-h4 { font-size: 20px; }
+#content h1 {
+  color: var(--lp-heading);
+  font-size: 36px;
+  margin-bottom: 0.5em;
+  margin-top: 1.5em;
+}
+
+@media (max-width: 600px) {
+  #content h1.documentFirstHeading,
+  #content h1 {
+    font-size: 30px;
+    line-height: 1.2em;
+    margin-top: 0;
+  }
+}
+
+h2 { font-size: 30px; }
+h3 {
+  font-size: 24px;
+  margin-bottom: 0.5em;
+  margin-top: 1em;
+}
+h3.heading {
+  font-size: 1.4em;
+  margin-bottom: 15px;
+}
 
 p {
-  font-family: 'Open Sans', sans-serif;
   color: var(--lp-text);
+  font-size: 16px;
   line-height: 1.6em;
-  padding-bottom: 15px;
+}
+
+a:visited {
+  color: var(--lp-link-visited) !important;
 }
 
 .intro {
-  font-size: 17px;
-  line-height: 1.7em;
+  font-size: 20px;
+  line-height: 1.5em;
   color: var(--lp-text-light);
   margin: 1em 0;
 }
 
-.detail-txt {
-  color: var(--lp-caption);
-  font-size: 13px;
+.introtext {
+  font-size: 16px;
+  line-height: 1.5em;
+  color: var(--lp-text);
+  margin: 1em 0;
+  font-weight: 600;
 }
+
+.text-big-blue {
+  font-size: 18px;
+  line-height: 1.2em;
+  font-weight: 600;
+  margin: 1em;
+  color: var(--lp-text-big-blue);
+}
+
+.dark    { color: var(--lp-text) !important; }
+.smaller { font-size: 14px; }
 
 
 // =============================================================================
-// 3. PAGE HEADER
+// 3. PAGE HEADER & LOGO
 // =============================================================================
 
-#content-header {
-  background: #fff;
-  border: none;
-  width: 100%;
-  min-height: 110px;
-  max-width: none;
+#portal-top {
+  position: relative;
+  background: transparent;
 }
 
-#portal-logo-wrapper {
-  padding: 25px 0 15px 30px;
+#portal-logo {
+  display: block;
+  margin: 30px 0 20px 30px;
 
-  #portal-logo img {
-    display: block;
+  img {
     max-width: 382px;
     height: auto;
+    display: block;
   }
 }
 
@@ -130,60 +173,70 @@ p {
 // 4. NAVIGATION  — slate blue-gray bar with olive selected state
 // =============================================================================
 
+#globalnav-wrapper,
 #mainnavigation-wrapper,
 #portal-globalnav-wrapper {
   background-color: var(--lp-nav-bg);
-  border: none;
+  border-bottom: none;
+  border-top: 1px solid #fff;
+  margin-bottom: 0;
 }
 
 #portal-globalnav {
   background-color: var(--lp-nav-bg);
-  width: 100%;
+  font-weight: 400;
+  display: flex;
   justify-content: center;
+  margin: 0;
 
   li { background: transparent; }
 
-  .nav-item a.nav-link {
+  .nav-item a.nav-link,
+  li a {
     background-color: var(--lp-nav-bg);
+    border-right: none;
     color: #fff;
     font-family: 'Source Sans Pro', sans-serif;
-    font-size: 15px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    padding: 14px 18px;
-    border: none;
+    font-size: 18px;
+    min-width: 2.5em;
+    padding: 14px;
     transition: background-color 0.2s ease, color 0.2s ease;
-
-    &:hover {
-      background-color: var(--lp-nav-hover);
-      color: #fff;
-    }
   }
 
-  .nav-item.current > a.nav-link,
-  .nav-item.inPath > a.nav-link {
-    background-color: var(--lp-nav-selected);
+  a:link, a:visited { color: #fff !important; }
+
+  a:hover,
+  .selected a:hover,
+  .nav-item.current > a.nav-link:hover {
+    background: var(--lp-nav-hover);
     color: #fff;
   }
 
+  .selected a,
+  .nav-item.current > a.nav-link,
+  .nav-item.inPath > a.nav-link {
+    background: var(--lp-nav-selected);
+    color: #fff;
+  }
+
+  // Dropdown / submenu
+  ul.submenu,
   ul.dropdown {
-    background: #fff;
+    background: var(--lp-nav-submenu-bg);
     border: 1px solid #ddd;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 5px #666;
 
-    .nav-item a.nav-link {
-      background: #fff;
-      color: #333;
-      text-transform: none;
-      font-size: 14px;
-      padding: 8px 18px;
-
-      &:hover {
-        background-color: var(--lp-nav-hover);
-        color: #fff;
-      }
+    a, a:visited {
+      background: var(--lp-nav-submenu-bg) !important;
+      color: #333 !important;
     }
+
+    a:hover {
+      background-color: var(--lp-nav-submenu-hv) !important;
+      color: #fff !important;
+    }
+
+    li { font-size: 11px; }
   }
 }
 
@@ -192,105 +245,102 @@ p {
 // 5. BREADCRUMBS
 // =============================================================================
 
-#portal-breadcrumbs,
-nav[aria-label="breadcrumb"] {
-  background: transparent;
-  padding: 10px 15px;
+#portal-breadcrumbs {
+  margin-top: 0;
+  padding: 10px 20px;
   font-size: 12px;
-  font-family: 'Public Sans', sans-serif;
 
-  .breadcrumb-item {
-    color: #666;
-
-    a {
-      color: var(--lp-breadcrumb-link);
-      text-decoration: none;
-
-      &:hover { text-decoration: underline; }
-    }
-
-    &.active { color: #444; }
-  }
+  a { color: var(--lp-breadcrumb-link); }
 }
 
 
 // =============================================================================
-// 6. FOOTER
-// =============================================================================
-
-#portal-footer-wrapper {
-  background: var(--lp-footer-bg);
-  margin-top: 5em;
-
-  #portal-footer {
-    background: var(--lp-footer-bg);
-    color: #fff;
-    padding: 2em 0;
-
-    a {
-      color: #fff;
-      text-decoration: none;
-      &:hover { color: var(--lp-cta-bg); }
-    }
-
-    h4 {
-      margin-top: 20px;
-      color: #fff;
-      text-transform: uppercase;
-      padding: 30px 0 0;
-      letter-spacing: 3px;
-      font-size: 16px;
-    }
-  }
-}
-
-
-// =============================================================================
-// 7. BUTTONS & CTAs
+// 6. BUTTONS & CTAs
 // =============================================================================
 
 .cta-button {
+  padding: 15px 25px;
   background: var(--lp-cta-bg);
-  color: #fff;
-  padding: 0.75rem 1.25rem;
-  border-radius: 0.25rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  display: inline-block;
-  text-decoration: none;
-  transition: background 0.2s linear, color 0.2s linear;
+  font-size: 20px;
+  border-radius: 5px;
+  text-align: center;
+  margin: 0 1.5em;
+  border: 1px solid #fff;
 
-  &:hover {
-    background: var(--lp-cta-hover);
+  &:hover { background: var(--lp-cta-hover); }
+
+  a {
+    border-bottom: none;
     color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+
+    &:hover { color: #fff !important; border-bottom: none; }
   }
 }
 
 .btn-orange {
   background: var(--lp-orange);
-  color: #fff;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 600;
-  text-transform: uppercase;
+  padding: 10px 15px;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  border-bottom: 1px solid #fff !important;
   font-size: 13px;
-  letter-spacing: 1px;
+  font-weight: 600;
+}
 
-  &:hover {
-    background: var(--lp-orange-hover);
-    color: #fff;
-  }
+.btn-orange-large {
+  background: var(--lp-orange);
+  padding: 10px 15px;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  border-bottom: 1px solid #fff !important;
+  font-size: 18px;
+  display: inline-block;
+}
+
+a.btn-orange,
+a.btn-orange-large,
+a.btn-red {
+  color: #fff !important;
+  letter-spacing: 0.025em;
+}
+
+#content a.btn-orange:hover,
+#content a.btn-orange-large:hover {
+  color: #fff !important;
+  background: var(--lp-orange-hover);
 }
 
 .btn-red {
   background: var(--lp-red);
-  color: #fff;
+  padding: 10px 15px;
+  border-radius: 5px;
+  border-bottom: 1px solid #fff !important;
+  font-size: 18px;
+}
 
-  &:hover { background: darken(#FF6633, 8%); }
+a.overlay-btn {
+  background: rgba(0, 0, 0, 0.5);
+  display: block;
+  padding: 10px;
+  color: #fafafa !important;
+  font-size: 20px;
+  font-weight: 600;
+  border-bottom: none !important;
+  border-radius: 0 0 5px 5px;
+  text-align: center;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.6);
+    color: #616161;
+    text-decoration: none;
+  }
 }
 
 
 // =============================================================================
-// 8. CONTENT BLOCKS
+// 7. CONTENT BLOCKS & UTILITIES
 // =============================================================================
 
 #cta-block {
@@ -302,19 +352,105 @@ nav[aria-label="breadcrumb"] {
   h2, h3 { color: #fff; }
 }
 
-.bg-gold { background: var(--lp-gold); }
-.bg-orange { background: var(--lp-orange-bg); }
+.bg-orange    { background: var(--lp-orange-bg); }
 .orange-block { background: var(--lp-orange-block); }
-.gold-block { background: var(--lp-gold); }
-.grey-bg { background: var(--lp-grey-bg); }
+.bg-blue,
+.gold-block,
+.grey-bg      { background: var(--lp-grey-bg); }
+
+
+// Home-template overrides — landscape_home is the LP parent home view
+.template-landscape_home {
+  #visual-portal-wrapper { max-width: 100%; }
+  #content { width: 100%; padding-bottom: 0 !important; }
+  #portal-columns { margin-bottom: -24px !important; }
+  #edit-bar,
+  .addthis_toolbox,
+  a.managePortletsFallback,
+  #portal-breadcrumbs { display: none; }
+}
 
 
 // =============================================================================
-// 9. UTILITY
+// 8. FOOTER  — medium blue
 // =============================================================================
 
-.outer-wrapper,
-#visual-portal-wrapper {
-  background-color: #fff;
-  max-width: 100%;
+// Sub-site-specific footers should not appear when the parent site renders
+#fire-footer,
+#sefiremap-footer,
+#bobscapes-footer,
+#birdlocale-footer,
+#portal-footer-lit-gateway { display: none; }
+
+#portal-footer-wrapper { background: var(--lp-footer-bg); }
+
+#portal-footer {
+  background: var(--lp-footer-bg);
+  color: #fff;
+  width: 100%;
+  padding: 1.5em;
+  position: relative;
+
+  p { padding-left: 15px; color: #fff; font-size: 12px; }
+
+  h3 {
+    color: var(--lp-footer-credit);
+    font-size: 20px;
+    margin: 17px 0 10px;
+    text-transform: uppercase;
+  }
+
+  .sitecredit {
+    color: var(--lp-footer-credit);
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    line-height: 1.1rem;
+    text-transform: uppercase;
+    width: 185px;
+
+    a, a:visited { color: var(--lp-footer-link) !important; }
+    a:hover { color: #fff !important; }
+  }
+
+  .rss {
+    color: var(--lp-footer-rss);
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.0125em;
+    padding-left: 18px;
+    text-indent: 10px;
+    text-transform: uppercase;
+  }
+
+  .help {
+    color: var(--lp-footer-rss);
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.0125em;
+    padding-bottom: 10px;
+    padding-left: 32px;
+    text-transform: uppercase;
+    line-height: 24px;
+
+    > a:link  { color: var(--lp-footer-help); }
+    > a:hover { color: var(--lp-footer-hover) !important; }
+  }
+
+  ul.ft-menu {
+    color: #fff;
+    margin-top: 0;
+
+    li { display: block; }
+    li a {
+      color: #fff !important;
+      font-size: 15px;
+      line-height: 1.8em;
+
+      &:hover { border-bottom: 1px solid #fff; }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  #portal-footer .sitecredit { margin: 15px auto; }
 }
