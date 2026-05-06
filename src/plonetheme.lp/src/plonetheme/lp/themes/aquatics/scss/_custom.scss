@@ -323,7 +323,8 @@ a.gold-text {
   // tagline in 150px because its nav lives inside this band; our Diazo
   // template renders the nav as a sibling row below, so the band needs
   // enough height for the full logo plus a small gap before the nav.
-  min-height: 200px;
+  // 240px clears the WLFW LANDSCAPE small tag-text above the title.
+  min-height: 240px;
   box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
   overflow: hidden;
 }
