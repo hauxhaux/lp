@@ -42,4 +42,70 @@
       name="wildland-fire"
       />
 
+  <plone:static
+      directory="themes/working-lands-for-wildlife"
+      type="theme"
+      name="working-lands-for-wildlife"
+      />
+
+  <plone:static
+      directory="themes/aquatics"
+      type="theme"
+      name="aquatics"
+      />
+
+  <plone:static
+      directory="themes/eastern-deciduous-forests"
+      type="theme"
+      name="eastern-deciduous-forests"
+      />
+
+  <plone:static
+      directory="themes/grasslands-and-savannas"
+      type="theme"
+      name="grasslands-and-savannas"
+      />
+
+  <plone:static
+      directory="themes/the-literature-gateway"
+      type="theme"
+      name="the-literature-gateway"
+      />
+
+  <plone:static
+      directory="themes/birdlocale"
+      type="theme"
+      name="birdlocale"
+      />
+
+  <plone:static
+      directory="themes/bobscapes"
+      type="theme"
+      name="bobscapes"
+      />
+
+  <plone:static
+      directory="themes/lp-parent-site"
+      type="theme"
+      name="lp-parent-site"
+      />
+
+  <plone:static
+      directory="themes/ecosystem-risks-benefits"
+      type="theme"
+      name="ecosystem-risks-benefits"
+      />
+
+  <plone:static
+      directory="themes/equity-inclusion"
+      type="theme"
+      name="equity-inclusion"
+      />
+
+  <plone:static
+      directory="themes/gis-planning"
+      type="theme"
+      name="gis-planning"
+      />
+
 </configure>

@@ -1,0 +1,92 @@
+// =============================================================================
+// PLONETHEME.LP — ECOSYSTEM BENEFITS & RISKS CUSTOM STYLES
+// =============================================================================
+// Custom overrides for the ecosystem-risks-benefits sub-site.
+//
+// Reference design:  lp-lineage-theme-capture/captured-themes/ecosystem-risks-benefits-styles/STYLE-GUIDE.md
+// Source CSS:        lp-lineage-theme-capture/captured-themes/ecosystem-risks-benefits-styles/css/ecoss.css
+// Compiled via:      themes/scripts/build-themes.mjs (auto-discovered by per-site theme glob)
+// =============================================================================
+
+:root {
+  --eco-nav-bg:        #173145;   // Deep navy nav
+  --eco-heading:       #205c90;   // Heading blue
+  --eco-selected:      #5b9a9a;   // Selected teal
+  --eco-hover:         #69ABBB;   // Hover teal
+  --eco-orange:        #EB801C;   // Search/accent orange
+  --eco-text:          #444;
+  --eco-text-light:    #676767;
+  --eco-footer-bg:     #2e76a0;
+  --eco-footer-link:   #7dd4d6;
+  --eco-footer-text:   #aae2fd;
+  --eco-heading-dark:  #17455e;
+}
+
+body {
+  background: var(--eco-nav-bg) url('../theme_images/ecoss-images/ecoss-bg.jpg') no-repeat center center fixed;
+  background-size: cover;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  color: var(--eco-text);
+}
+
+#content h1, #content h2, h3, h4 {
+  color: var(--eco-heading);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+}
+
+#content h1.documentFirstHeading,
+#content h1 { font-size: 2.4em; }
+
+p { color: var(--eco-text); line-height: 1.6em; }
+.intro { color: var(--eco-text-light); font-size: 17px; line-height: 1.7em; }
+
+#mainnavigation-wrapper,
+#portal-globalnav-wrapper { background-color: var(--eco-nav-bg); }
+
+#portal-globalnav {
+  background-color: var(--eco-nav-bg);
+
+  .nav-item a.nav-link {
+    background-color: var(--eco-nav-bg);
+    color: #fff;
+    text-transform: uppercase;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 600;
+    padding: 14px 18px;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: var(--eco-hover);
+      color: var(--eco-nav-bg);
+    }
+  }
+
+  .nav-item.current > a.nav-link,
+  .nav-item.inPath > a.nav-link {
+    background-color: var(--eco-selected);
+    color: #fff;
+  }
+}
+
+#header-searchbox button[type="submit"],
+.searchButton {
+  background: var(--eco-orange);
+  color: #fff;
+
+  &:hover { background: tomato; }
+}
+
+#portal-breadcrumbs a { color: var(--eco-heading); }
+
+#portal-footer-wrapper { background: var(--eco-footer-bg); }
+#portal-footer {
+  background: var(--eco-footer-bg);
+  color: var(--eco-footer-text);
+
+  a { color: var(--eco-footer-link); }
+  a:hover { color: #FFA64D; }
+
+  h4 { color: var(--eco-heading-dark); }
+}

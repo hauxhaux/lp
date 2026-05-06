@@ -1,0 +1,85 @@
+// =============================================================================
+// PLONETHEME.LP — GIS & CONSERVATION PLANNING TOOLKIT CUSTOM STYLES
+// =============================================================================
+// Custom overrides for the gis-planning sub-site. Distinguished by tiled
+// topographic map background and sky-blue (#5DA7E5) accent palette.
+//
+// Reference design:  lp-lineage-theme-capture/captured-themes/gis-planning-styles/STYLE-GUIDE.md
+// Source CSS:        lp-lineage-theme-capture/captured-themes/gis-planning-styles/css/gis.css
+// Compiled via:      themes/scripts/build-themes.mjs (auto-discovered by per-site theme glob)
+// =============================================================================
+
+:root {
+  --gis-primary:       #5DA7E5;   // Sky blue brand
+  --gis-nav-bg:        #0E1D1C;   // Near-black green-tint nav
+  --gis-wrapper-bg:    #000000;   // Globalnav wrapper bg
+  --gis-text-bg:       #FFFFFF;   // Content panels
+  --gis-footer-bg:     #44687E;   // Slate-blue footer
+  --gis-footer-text:   #B7CCDA;   // Cool grey-blue
+  --gis-footer-link:   #A9D8FD;
+  --gis-orange:        #eb801f;   // Search button
+}
+
+body {
+  background: url('../theme_images/gis-back.png') repeat fixed center top #FFFFFF;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  color: #333;
+}
+
+#portal-top,
+#portal-columns,
+.outer-wrapper,
+#visual-portal-wrapper {
+  background-color: var(--gis-text-bg);
+  box-shadow: 0px 9px 18px rgba(50, 50, 50, 0.7);
+}
+
+#content h1, #content h2, h3 {
+  color: var(--gis-primary);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+}
+
+#mainnavigation-wrapper,
+#portal-globalnav-wrapper {
+  background-color: var(--gis-wrapper-bg);
+}
+
+#portal-globalnav {
+  background-color: var(--gis-nav-bg);
+
+  .nav-item a.nav-link {
+    background-color: var(--gis-nav-bg);
+    color: #fff;
+    text-transform: uppercase;
+    font-family: 'Source Sans Pro', sans-serif;
+    padding: 14px 18px;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: var(--gis-primary);
+      color: #fff;
+    }
+  }
+
+  .nav-item.current > a.nav-link {
+    background-color: #95A664;
+    color: #fff;
+  }
+}
+
+#header-searchbox button[type="submit"],
+.searchButton {
+  background: var(--gis-orange);
+  color: #fff;
+  &:hover { background: tomato; }
+}
+
+#portal-footer-wrapper { background: var(--gis-footer-bg); }
+#portal-footer {
+  background: var(--gis-footer-bg);
+  color: var(--gis-footer-text);
+
+  a, .rss, .help > a { color: var(--gis-footer-link); }
+}

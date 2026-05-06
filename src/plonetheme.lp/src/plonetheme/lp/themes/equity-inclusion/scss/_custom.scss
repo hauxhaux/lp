@@ -1,0 +1,65 @@
+// =============================================================================
+// PLONETHEME.LP — EQUITY & INCLUSION CUSTOM STYLES
+// =============================================================================
+// Custom overrides for the equity-inclusion sub-site.
+// NOTE: capture is in-progress — palette below is a starting point inheriting
+// the LP parent-site chrome until the captured STYLE-GUIDE is finalized.
+//
+// Reference design:  lp-lineage-theme-capture/captured-themes/equity-inclusion-styles/STYLE-GUIDE.md
+// Compiled via:      themes/scripts/build-themes.mjs (auto-discovered by per-site theme glob)
+// =============================================================================
+
+:root {
+  --eq-nav-bg:        #657F9E;   // LP slate blue-gray (placeholder)
+  --eq-nav-hover:     #4C6C8C;
+  --eq-heading:       #8E6747;   // LP warm brown
+  --eq-cta:           #f7bd4f;
+  --eq-cta-hover:     #f38b1a;
+  --eq-footer-bg:     #2E76A0;
+  --eq-text:          #444;
+}
+
+body {
+  background: #fff;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  color: var(--eq-text);
+}
+
+#content h1, #content h2, h3, h4 {
+  color: var(--eq-heading);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+}
+
+#mainnavigation-wrapper,
+#portal-globalnav-wrapper { background-color: var(--eq-nav-bg); }
+
+#portal-globalnav .nav-item a.nav-link {
+  background-color: var(--eq-nav-bg);
+  color: #fff;
+  text-transform: uppercase;
+  padding: 14px 18px;
+
+  &:hover { background-color: var(--eq-nav-hover); color: #fff; }
+}
+
+.cta-button {
+  background: var(--eq-cta);
+  color: #fff;
+  padding: 0.75rem 1.25rem;
+  border-radius: 4px;
+  font-weight: 700;
+  text-transform: uppercase;
+  display: inline-block;
+  text-decoration: none;
+  transition: background 0.2s ease;
+  &:hover { background: var(--eq-cta-hover); color: #fff; }
+}
+
+#portal-footer-wrapper { background: var(--eq-footer-bg); }
+#portal-footer {
+  background: var(--eq-footer-bg);
+  color: #fff;
+  a { color: #fff; &:hover { color: var(--eq-cta); } }
+}
