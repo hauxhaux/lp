@@ -111,7 +111,46 @@ nav[aria-label="breadcrumb"] li {
 
 
 // =============================================================================
-// 3. NEST NAVIGATION BAR (return-to-parent strip)
+// 3. PAGE HEADER & LOGO
+// =============================================================================
+
+#content-header {
+  background: #fff;
+  border: none;
+  position: relative;
+  width: 100%;
+  min-height: 150px;
+}
+
+#portal-logo-wrapper {
+  padding: 0;
+
+  #portal-logo {
+    margin: 0;
+    display: block;
+
+    img {
+      // Captured equity site uses width:480px top:20px left:15%
+      width: 480px;
+      max-width: 90%;
+      height: auto;
+      position: relative;
+      top: 20px;
+      left: 5%;
+      transition: all 0.3s ease-in-out;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  #portal-logo-wrapper #portal-logo img {
+    width: 330px;
+  }
+}
+
+
+// =============================================================================
+// 4. NEST NAVIGATION BAR (return-to-parent strip)
 // =============================================================================
 
 #return-to-lp-banner {
