@@ -8,85 +8,271 @@
 // Compiled via:      themes/scripts/build-themes.mjs (auto-discovered by per-site theme glob)
 // =============================================================================
 
+
+// =============================================================================
+// 1. CUSTOM PROPERTIES
+// =============================================================================
+
 :root {
-  --eco-nav-bg:        #173145;   // Deep navy nav
-  --eco-heading:       #205c90;   // Heading blue
-  --eco-selected:      #5b9a9a;   // Selected teal
-  --eco-hover:         #69ABBB;   // Hover teal
-  --eco-orange:        #EB801C;   // Search/accent orange
+  --eco-nav-bg:        #173145;   // Deep navy main nav background
+  --eco-bg-fallback:   #173245;   // Body bg fallback under bg image
+  --eco-heading:       #205c90;   // Heading blue (h1-h4)
+  --eco-selected:      #5b9a9a;   // Selected nav teal
+  --eco-hover:         #69ABBB;   // Nav-link hover teal
+  --eco-orange:        #EB801C;   // Search button accent
   --eco-text:          #444;
-  --eco-text-light:    #676767;
+  --eco-text-light:    #676767;   // .intro
+  --eco-image-border:  #cccccc;
+  --eco-caption:       #777;
+
+  // Shared LP footer chrome
   --eco-footer-bg:     #2e76a0;
   --eco-footer-link:   #7dd4d6;
-  --eco-footer-text:   #aae2fd;
+  --eco-footer-credit: #aae2fd;
+  --eco-footer-help:   #9adff1;
+  --eco-footer-hover:  #FFA64D;
   --eco-heading-dark:  #17455e;
 }
 
+
+// =============================================================================
+// 2. BASE
+// =============================================================================
+
 body {
-  background: var(--eco-nav-bg) url('../theme_images/ecoss-images/ecoss-bg.jpg') no-repeat center center fixed;
+  background: url('../theme_images/ecoss-images/ecoss-bg.jpg') no-repeat center center fixed var(--eco-bg-fallback);
   background-size: cover;
   font-family: 'Open Sans', sans-serif;
-  font-size: 16px;
+  font-size: 100%;
   color: var(--eco-text);
+  margin: 0;
+  padding: 0;
 }
 
-#content h1, #content h2, h3, h4 {
+#content {
+  font-size: 100%;
+  margin: 2em;
+}
+
+// White content card floating over the bg image, with the signature shadow
+#visual-portal-wrapper {
+  background-color: transparent;
+  box-shadow: 0 10px 20px rgba(50, 50, 50, 0.41);
+  margin: 0 auto;
+  max-width: 1000px;
+  min-height: calc(100vh - 190px);
+}
+
+#portal-columns {
+  background-color: #fff;
+  padding-top: 10px;
+}
+
+#portal-top { height: 240px; }
+
+
+// =============================================================================
+// 3. TYPOGRAPHY
+// =============================================================================
+
+h1, h2, h3, h4 {
   color: var(--eco-heading);
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-weight: 600;
+  letter-spacing: -0.0115em;
+  line-height: 1.2em;
+  margin-bottom: 10px;
 }
 
-#content h1.documentFirstHeading,
-#content h1 { font-size: 2.4em; }
+.intro {
+  color: var(--eco-text-light);
+  font-size: 1.3em;
+  font-weight: 300;
+  line-height: 1.4em;
+  margin: 1em 0;
+  -webkit-font-smoothing: antialiased;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
+}
 
-p { color: var(--eco-text); line-height: 1.6em; }
-.intro { color: var(--eco-text-light); font-size: 17px; line-height: 1.7em; }
 
+// =============================================================================
+// 4. HEADER
+// =============================================================================
+
+#portal-header {
+  background: none;
+  border: none;
+  width: 1000px;
+}
+
+#portal-logo {
+  display: block;
+  margin: 50px 0 30px;
+}
+
+#portal-personaltools-wrapper {
+  right: 0;
+  top: 197px;
+}
+
+
+// =============================================================================
+// 5. NAVIGATION  — deep-navy bar with teal hover/selected
+// =============================================================================
+
+.nest-navigation-bar {
+  background: transparent;
+  display: block;
+  height: 40px;
+  margin: 0 auto;
+  width: 1050px;
+}
+
+#globalnav-wrapper,
 #mainnavigation-wrapper,
-#portal-globalnav-wrapper { background-color: var(--eco-nav-bg); }
+#portal-globalnav-wrapper {
+  background-color: var(--eco-nav-bg);
+  border: none;
+  margin: 15px 0 10px;
+  width: 1000px;
+}
 
 #portal-globalnav {
   background-color: var(--eco-nav-bg);
+  font-size: 100%;
+  justify-content: flex-start;
+
+  li { background: transparent; }
 
   .nav-item a.nav-link {
-    background-color: var(--eco-nav-bg);
+    background: var(--eco-nav-bg);
     color: #fff;
-    text-transform: uppercase;
-    font-family: 'Source Sans Pro', sans-serif;
-    font-weight: 600;
-    padding: 14px 18px;
-    transition: background-color 0.2s ease;
+    border: none;
+    font-size: 1.1em;
+    font-weight: normal;
+    min-width: 2.5em;
+    padding: 0.85em 1.1em;
+    transition: background-color 0.2s ease, color 0.2s ease;
 
     &:hover {
-      background-color: var(--eco-hover);
-      color: var(--eco-nav-bg);
+      background: var(--eco-hover);
+      color: var(--eco-nav-bg) !important;
     }
   }
 
   .nav-item.current > a.nav-link,
-  .nav-item.inPath > a.nav-link {
-    background-color: var(--eco-selected);
+  .nav-item.inPath > a.nav-link,
+  .selected a {
+    background: var(--eco-selected);
     color: #fff;
   }
 }
 
-#header-searchbox button[type="submit"],
-.searchButton {
-  background: var(--eco-orange);
-  color: #fff;
 
-  &:hover { background: tomato; }
+// =============================================================================
+// 6. SEARCH
+// =============================================================================
+
+#portal-searchbox {
+  background: rgba(0, 0, 0, 0.55);
+  border-radius: 6px;
+  padding: 10px;
+  position: absolute;
+  margin-top: -73px;
+  border-right: none;
 }
+
+#searchGadget { width: 15em; }
+
+input.searchField {
+  -moz-appearance: none;
+  border: 1px solid #999;
+  border-radius: 4px;
+  padding: 8px 10px;
+}
+
+.searchSection { color: #fff; display: none; }
+
+.searchButton,
+#header-searchbox button[type="submit"] {
+  background: var(--eco-orange) !important;
+  border: none;
+  border-radius: 3px;
+  color: #fff;
+  margin-left: 5px;
+  padding: 7px 3px;
+
+  &:hover { background: tomato; color: #fff; }
+}
+
+
+// =============================================================================
+// 7. CONTENT
+// =============================================================================
+
+.image-inline,
+a .image-inline,
+a:visited .image-inline {
+  border: 1px solid var(--eco-image-border);
+  float: right;
+  margin-left: 1.5em;
+  margin-top: 0.75em;
+  padding: 0;
+}
+
+.captioned img { border: none; }
+
+dd.image-caption {
+  color: var(--eco-caption);
+  font-size: 11pt;
+  line-height: 1.3em;
+  margin: 6px 15px 10px;
+  max-width: 92%;
+}
+
+.span6last {
+  float: right;
+  margin-right: 0;
+  width: 47.75%;
+}
+
+@media (max-width: 680px) {
+  .span6last { float: none; width: 100%; }
+}
+
+
+// =============================================================================
+// 8. BREADCRUMBS / FOOTER
+// =============================================================================
 
 #portal-breadcrumbs a { color: var(--eco-heading); }
 
 #portal-footer-wrapper { background: var(--eco-footer-bg); }
+
 #portal-footer {
   background: var(--eco-footer-bg);
-  color: var(--eco-footer-text);
+  color: var(--eco-footer-credit);
 
   a { color: var(--eco-footer-link); }
-  a:hover { color: #FFA64D; }
+  a:hover { color: var(--eco-footer-hover); }
+
+  .help a { color: var(--eco-footer-help); }
+  .help a:hover { color: var(--eco-footer-hover); }
 
   h4 { color: var(--eco-heading-dark); }
 }
+
+#portal-footer-inner { max-width: 1000px !important; }
+
+
+// =============================================================================
+// 9. UTILITY HIDES (legacy)
+// =============================================================================
+
+#portaltab-the-cooperative,
+#portaltab-research,
+#portaltab-projects,
+li#portaltab-home ul.submenu,
+li#portaltab-child-home ul.submenu,
+#portal-banner,
+.lp-footer { display: none !important; }

@@ -9,77 +9,253 @@
 // Compiled via:      themes/scripts/build-themes.mjs (auto-discovered by per-site theme glob)
 // =============================================================================
 
+
+// =============================================================================
+// 1. CUSTOM PROPERTIES
+// =============================================================================
+
 :root {
-  --gis-primary:       #5DA7E5;   // Sky blue brand
-  --gis-nav-bg:        #0E1D1C;   // Near-black green-tint nav
-  --gis-wrapper-bg:    #000000;   // Globalnav wrapper bg
-  --gis-text-bg:       #FFFFFF;   // Content panels
+  --gis-primary:       #5DA7E5;   // Sky blue — H1-H3, nav-link hover bg
+  --gis-nav-bg:        #0E1D1C;   // Near-black green-tint nav background
+  --gis-wrapper-bg:    #000000;   // Globalnav wrapper bg + nav border
+  --gis-content-bg:    #FFFFFF;   // Content panels (over the bg image)
   --gis-footer-bg:     #44687E;   // Slate-blue footer
-  --gis-footer-text:   #B7CCDA;   // Cool grey-blue
-  --gis-footer-link:   #A9D8FD;
+  --gis-footer-text:   #B7CCDA;   // Cool grey-blue footer body
+  --gis-footer-link:   #A9D8FD;   // Pale blue rss/help links
   --gis-orange:        #eb801f;   // Search button
+  --gis-text:          #333;
+  --gis-meta:          #666;      // Search label etc.
 }
+
+
+// =============================================================================
+// 2. BASE
+// =============================================================================
 
 body {
   background: url('../theme_images/gis-back.png') repeat fixed center top #FFFFFF;
   font-family: 'Open Sans', sans-serif;
-  font-size: 16px;
-  color: #333;
+  font-size: 95%;
+  color: var(--gis-text);
+  margin: 0;
+  padding: 0;
 }
 
+// White content cards floating over the topographic map background, with
+// the signature drop-shadow framing
 #portal-top,
 #portal-columns,
 .outer-wrapper,
 #visual-portal-wrapper {
-  background-color: var(--gis-text-bg);
+  background-color: var(--gis-content-bg);
   box-shadow: 0px 9px 18px rgba(50, 50, 50, 0.7);
 }
 
-#content h1, #content h2, h3 {
-  color: var(--gis-primary);
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 600;
+#portal-top {
+  height: 260px;
+  background-image: none;
 }
 
+#content {
+  margin: 1em 2em !important;
+}
+
+
+// =============================================================================
+// 3. TYPOGRAPHY
+// =============================================================================
+
+h1, h2, h3 {
+  color: var(--gis-primary) !important;
+  // myriad-pro is the original font; fall back to Montserrat (loaded site-wide)
+  font-family: "myriad-pro", "Montserrat", helvetica, arial, sans-serif;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  line-height: 1.2em;
+}
+
+#content li,
+dl.portlet li {
+  display: list-item;
+  line-height: 1.5em;
+  margin-bottom: 1em;
+}
+
+.intro {
+  font-size: 125%;
+}
+
+
+// =============================================================================
+// 4. HEADER & PORTAL CHROME
+// =============================================================================
+
+#portal-header {
+  background: none !important;
+  border: none;
+}
+
+#portal-logo {
+  display: inline-block;
+  margin: 20px 20px 5px;
+}
+
+#portal-personaltools-wrapper {
+  right: 0;
+  top: 210px;
+}
+
+#portal-searchbox {
+  background: transparent;
+  padding: 10px 0;
+  position: absolute;
+  right: 20px;
+  top: 40px;
+
+  label {
+    color: var(--gis-meta);
+    font-weight: normal;
+  }
+}
+
+
+// =============================================================================
+// 5. NAVIGATION  — black wrapper, near-black bar, sky-blue hover
+// =============================================================================
+
+#globalnav-wrapper,
 #mainnavigation-wrapper,
 #portal-globalnav-wrapper {
   background-color: var(--gis-wrapper-bg);
+  border-bottom: none;
+  border-top: 1px solid #fff;
+  height: 40px;
+  margin: 10px 0;
 }
 
 #portal-globalnav {
   background-color: var(--gis-nav-bg);
+  justify-content: flex-start;
+
+  li { background: transparent; }
 
   .nav-item a.nav-link {
     background-color: var(--gis-nav-bg);
     color: #fff;
-    text-transform: uppercase;
-    font-family: 'Source Sans Pro', sans-serif;
-    padding: 14px 18px;
+    border-right: 0.1em solid #fff;
+    font-family: "myriad-pro", "Source Sans Pro", arial, sans-serif;
+    font-size: 1.2em;
+    font-weight: 600;
+    min-width: 2.5em;
+    padding: 0.7em 0.9em;
     transition: background-color 0.2s ease;
 
     &:hover {
-      background-color: var(--gis-primary);
+      background: var(--gis-primary);
       color: #fff;
     }
   }
 
-  .nav-item.current > a.nav-link {
+  // Selected tab keeps the LP-wide olive-green
+  .nav-item.current > a.nav-link,
+  .nav-item.inPath > a.nav-link {
     background-color: #95A664;
+    color: #fff;
+
+    &:hover { background: var(--gis-primary); }
+  }
+}
+
+
+// =============================================================================
+// 6. SEARCH
+// =============================================================================
+
+input.searchPage {
+  font-size: 130% !important;
+  margin-bottom: 15px;
+  padding: 10px;
+}
+
+#searchGadget {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  color: #888;
+  padding: 8px 10px;
+  width: 17em;
+}
+
+.searchButton,
+#header-searchbox button[type="submit"] {
+  background: var(--gis-orange);
+  border: none;
+  border-radius: 3px;
+  color: #fff;
+  margin-left: 5px;
+  padding: 7px 3px;
+
+  &:hover {
+    background: tomato;
     color: #fff;
   }
 }
 
-#header-searchbox button[type="submit"],
-.searchButton {
-  background: var(--gis-orange);
-  color: #fff;
-  &:hover { background: tomato; }
+
+// =============================================================================
+// 7. BREADCRUMBS
+// =============================================================================
+
+#portal-breadcrumbs { padding-top: 10px; }
+
+
+// =============================================================================
+// 8. FOOTER
+// =============================================================================
+
+#portal-footer-wrapper {
+  background: var(--gis-footer-bg);
 }
 
-#portal-footer-wrapper { background: var(--gis-footer-bg); }
 #portal-footer {
   background: var(--gis-footer-bg);
   color: var(--gis-footer-text);
+  font-size: 75%;
+  line-height: 2em;
+  margin: 0;
+  padding: 2em 1em;
+  text-align: center;
 
-  a, .rss, .help > a { color: var(--gis-footer-link); }
+  .rss {
+    color: var(--gis-footer-link);
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: -0.05em;
+    padding-left: 15px;
+    text-indent: 10px;
+  }
+
+  .help > a {
+    color: var(--gis-footer-link) !important;
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: -0.05em;
+
+    &:visited { color: var(--gis-footer-link) !important; }
+    &:hover   { color: var(--gis-primary) !important; }
+  }
 }
+
+.footer-left { margin-left: 63px; }
+
+@media (max-width: 768px) {
+  .footer-left { margin: 10px auto; }
+}
+
+
+// =============================================================================
+// 9. UTILITY
+// =============================================================================
+
+.nest-navigation-bar { display: block; }
+#portal-banner       { display: none; }
+.nest-nav-inner      { width: 1140px; }
