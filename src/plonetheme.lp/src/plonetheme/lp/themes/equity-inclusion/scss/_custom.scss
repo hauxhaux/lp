@@ -2,22 +2,51 @@
 // PLONETHEME.LP — EQUITY & INCLUSION CUSTOM STYLES
 // =============================================================================
 // Custom overrides for the equity-inclusion sub-site.
-// NOTE: capture is in-progress — palette below is a starting point inheriting
-// the LP parent-site chrome until the captured STYLE-GUIDE is finalized.
 //
 // Reference design:  lp-lineage-theme-capture/captured-themes/equity-inclusion-styles/STYLE-GUIDE.md
+// Source CSS:        lp-lineage-theme-capture/captured-themes/equity-inclusion-styles/css/equity.css
+// Note: production site is access-restricted (HTTP 401); palette below is from
+//       Wayback Machine 2023 captures.
 // Compiled via:      themes/scripts/build-themes.mjs (auto-discovered by per-site theme glob)
 // =============================================================================
 
+
+// =============================================================================
+// 1. CUSTOM PROPERTIES
+// =============================================================================
+
 :root {
-  --eq-nav-bg:        #657F9E;   // LP slate blue-gray (placeholder)
-  --eq-nav-hover:     #4C6C8C;
-  --eq-heading:       #8E6747;   // LP warm brown
-  --eq-cta:           #f7bd4f;
-  --eq-cta-hover:     #f38b1a;
-  --eq-footer-bg:     #2E76A0;
-  --eq-text:          #444;
+  // --- Equity & Inclusion brand colours ---
+  --eq-heading:       #A26623;   // Brown/rust H1–H6
+  --eq-nav-bg:        #0E1D1C;   // Dark navy main nav background
+  --eq-nest-nav:      #788A3B;   // Olive-green return-to-parent banner
+  --eq-nav-selected:  #DFDF9E;   // Muted gold selected nav
+  --eq-nav-hover:     #84984C;   // Hover green nav
+  --eq-portlet-blue:  #205C90;   // Portlet header blue
+  --eq-edit-bar:      #84B3B3;   // Edit bar dark teal
+  --eq-footer-bg:     #2E76A0;   // LP footer blue
+  --eq-footer-link:   #7DD4D6;   // Light blue
+  --eq-footer-credit: #AAE2FD;   // Pale blue site credit
+
+  --eq-text:          #666;      // Body text grey
+  --eq-text-light:    #676767;   // Intro text dark grey
+
+  --eq-orange:        #F7931F;   // Readmore hover / button
+  --eq-orange-bg:     #DD733E;   // .bg-orange block
+  --eq-orange-solid:  #F59E20;   // .btn-solid-orange
+  --eq-orange-hover:  #E64C00;   // Button hover
+  --eq-cta-bg:        #F7BD4F;   // CTA banner gold
+  --eq-cta-hover:     #F38B1A;   // CTA button hover
+  --eq-cta-block-bg:  #28526E;   // CTA block dark teal
+  --eq-gold:          #F6D514;   // Style guide gold
+  --eq-blue-accent:   #6D97BF;   // Style guide blue
+  --eq-grey-bg:       #F5F5F5;
 }
+
+
+// =============================================================================
+// 2. BASE & TYPOGRAPHY
+// =============================================================================
 
 body {
   background: #fff;
@@ -26,26 +55,158 @@ body {
   color: var(--eq-text);
 }
 
-#content h1, #content h2, h3, h4 {
+#content h1.documentFirstHeading,
+#content h1 {
+  color: var(--eq-heading);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 2.6em;
+  margin-bottom: 0.5em;
+  margin-top: 1.5em;
+  letter-spacing: -0.0115em;
+}
+
+h2, h3, h4, h5, h6 {
   color: var(--eq-heading);
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
+  line-height: 1.5em;
+  letter-spacing: -0.0115em;
 }
 
-#mainnavigation-wrapper,
-#portal-globalnav-wrapper { background-color: var(--eq-nav-bg); }
+h2 { font-size: 30px; }
+h3 { font-size: 24px; }
 
-#portal-globalnav .nav-item a.nav-link {
-  background-color: var(--eq-nav-bg);
-  color: #fff;
+p {
+  font-family: 'Merriweather', serif;
+  color: var(--eq-text);
+  letter-spacing: 0.01em;
+  line-height: 1.6em;
+  padding-bottom: 15px;
+}
+
+li {
+  font-family: 'Merriweather', serif;
+  color: var(--eq-text);
+}
+
+#portal-globalnav li,
+#portal-footer li,
+nav[aria-label="breadcrumb"] li {
+  font-family: 'Montserrat', sans-serif;
+  color: inherit;
+}
+
+.intro {
+  font-size: 17px;
+  color: var(--eq-text-light);
+  line-height: 1.7em;
+  margin: 1em 0;
+}
+
+@media (max-width: 767px) {
+  #content h1.documentFirstHeading,
+  #content h1 { margin-top: 0; }
+}
+
+
+// =============================================================================
+// 3. NEST NAVIGATION BAR (return-to-parent strip)
+// =============================================================================
+
+#return-to-lp-banner {
+  background: var(--eq-nest-nav);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 30px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 1px;
   text-transform: uppercase;
-  padding: 14px 18px;
 
-  &:hover { background-color: var(--eq-nav-hover); color: #fff; }
+  a {
+    color: #fff;
+    text-decoration: none;
+    &:hover { color: #ffe061; }
+  }
+}
+
+
+// =============================================================================
+// 4. NAVIGATION  — dark navy bar with muted-gold selected state
+// =============================================================================
+
+#mainnavigation-wrapper,
+#portal-globalnav-wrapper {
+  background-color: var(--eq-nav-bg);
+  border: none;
+}
+
+#portal-globalnav {
+  background-color: var(--eq-nav-bg);
+  width: 100%;
+  justify-content: center;
+
+  li { background: transparent; }
+
+  .nav-item a.nav-link {
+    background-color: var(--eq-nav-bg);
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 14px 18px;
+    border: none;
+    transition: background-color 0.2s ease, color 0.2s ease;
+
+    &:hover {
+      background-color: var(--eq-nav-hover);
+      color: #fff;
+    }
+  }
+
+  .nav-item.current > a.nav-link,
+  .nav-item.inPath > a.nav-link {
+    background-color: var(--eq-nav-selected);
+    color: #222;
+
+    &:hover {
+      background-color: var(--eq-nav-hover);
+      color: #fff;
+    }
+  }
+}
+
+
+// =============================================================================
+// 5. BUTTONS & CTAs
+// =============================================================================
+
+a.readmore {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-family: 'Source Sans Pro', sans-serif;
+
+  &:hover { color: var(--eq-orange); }
+}
+
+.btn-solid-orange {
+  background: var(--eq-orange-solid);
+  color: #fff;
+  border-color: transparent;
+  &:hover {
+    background: var(--eq-orange-hover);
+    color: #fff;
+  }
 }
 
 .cta-button {
-  background: var(--eq-cta);
+  background: var(--eq-cta-bg);
   color: #fff;
   padding: 0.75rem 1.25rem;
   border-radius: 4px;
@@ -57,9 +218,83 @@ body {
   &:hover { background: var(--eq-cta-hover); color: #fff; }
 }
 
-#portal-footer-wrapper { background: var(--eq-footer-bg); }
-#portal-footer {
-  background: var(--eq-footer-bg);
+
+// =============================================================================
+// 6. CONTENT BLOCKS & UTILITY
+// =============================================================================
+
+#cta-block {
+  background: var(--eq-cta-block-bg);
   color: #fff;
-  a { color: #fff; &:hover { color: var(--eq-cta); } }
+  padding: 40px 30px;
+  margin: 2em 0;
+  h2, h3, h4 { color: #fff; }
 }
+
+.bg-orange { background: var(--eq-orange-bg); }
+.grey-bg, .light-grey { background: var(--eq-grey-bg); }
+
+
+// =============================================================================
+// 7. PORTLETS
+// =============================================================================
+
+.card.portlet {
+  font-size: 90%;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+
+  &.portlet-navigation-tree .card-header {
+    background: var(--eq-portlet-blue);
+    color: #fff;
+    text-transform: uppercase;
+    padding: 15px;
+    border-radius: 4px 4px 0 0;
+  }
+}
+
+
+// =============================================================================
+// 8. FOOTER  — LP-wide blue footer
+// =============================================================================
+
+#portal-footer-wrapper {
+  background: var(--eq-footer-bg);
+  margin-top: 5em;
+
+  #portal-footer {
+    background: var(--eq-footer-bg);
+    color: #fff;
+    padding: 2em 0;
+
+    a {
+      color: var(--eq-footer-link);
+      text-decoration: none;
+      &:hover { color: #fff; }
+    }
+
+    .sitecredit { color: var(--eq-footer-credit); }
+
+    h4 {
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: 16px;
+      margin-top: 20px;
+      padding: 30px 0 0;
+    }
+  }
+}
+
+
+// =============================================================================
+// 9. STYLE GUIDE COLOR SWATCHES
+// =============================================================================
+
+.orange     { background: var(--eq-orange); }
+.brown      { background: var(--eq-heading); }
+.dark-blue  { background: var(--eq-portlet-blue); }
+.light-grey { background: var(--eq-grey-bg); }
+.dark-grey  { background: var(--eq-text-light); }
+.gold       { background: var(--eq-gold); }
+.blue       { background: var(--eq-blue-accent); }
