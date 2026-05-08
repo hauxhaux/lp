@@ -106,6 +106,16 @@ h1, h2, h3, h4 {
 // 4. HEADER
 // =============================================================================
 
+// The shared theme sets #content-header { background-color: var(--darkgreen) }
+// for the main LP theme's teal header strip. For this sub-site the logo must
+// sit directly on the body bg image, so we strip the background and fixed
+// height so the page bg shows through behind the logo area.
+#content-header {
+  background: transparent;
+  height: auto;
+  box-shadow: none;
+}
+
 #portal-header {
   background: none;
   border: none;
@@ -196,8 +206,11 @@ h1, h2, h3, h4 {
   background: rgba(0, 0, 0, 0.55);
   border-radius: 6px;
   padding: 10px;
-  position: absolute;
-  margin-top: -73px;
+  // Removed position:absolute + margin-top:-73px from the old ecoss.css, which
+  // placed the search over the nav in the legacy fixed-height layout. In the
+  // Diazo flex template the searchbox is inside .offcanvas-body (a flex row),
+  // so margin-left:auto pushes it to the right edge inside the nav bar.
+  margin-left: auto;
   border-right: none;
 }
 
