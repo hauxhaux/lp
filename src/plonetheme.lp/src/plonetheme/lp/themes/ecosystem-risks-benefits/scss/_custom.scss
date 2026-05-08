@@ -73,7 +73,9 @@ body {
   background-color: #fff;
 }
 
-#portal-top { height: 240px; }
+// Fixed height was for the old layout's header area; in the Diazo flex template
+// portal-top receives portal-header children and must be sized by content.
+#portal-top { height: auto; }
 
 
 // =============================================================================
@@ -107,17 +109,21 @@ h1, h2, h3, h4 {
 #portal-header {
   background: none;
   border: none;
-  width: 1000px;
+  // Fixed width from old layout — replaced by container sizing in Diazo template.
+  width: auto;
 }
 
+// Old layout used large margins (50px top) to position the logo under a
+// fixed-height header background. In the flex Diazo template, these margins
+// bloat the content-header. Use modest padding instead.
 #portal-logo {
   display: block;
-  margin: 50px 0 30px;
+  margin: 20px 0 15px;
 }
 
+// Old absolute top value was tied to the legacy fixed-height header.
 #portal-personaltools-wrapper {
   right: 0;
-  top: 197px;
 }
 
 
@@ -138,8 +144,10 @@ h1, h2, h3, h4 {
 #portal-globalnav-wrapper {
   background-color: var(--eco-nav-bg);
   border: none;
-  margin: 15px 0 10px;
-  width: 1000px;
+  margin: 0;
+  // Old layout used fixed width: 1000px; let the wrapper fill the container
+  // width naturally so it doesn't overflow on smaller viewports.
+  width: 100%;
 }
 
 #portal-globalnav {
@@ -170,6 +178,12 @@ h1, h2, h3, h4 {
   .selected a {
     background: var(--eco-selected);
     color: #fff;
+  }
+
+  // Barceloneta's dropdown ▼ label::after inherits --bs-navbar-hover-background
+  // which is dark semi-transparent — strip background so it doesn't cover text.
+  label::after {
+    background: transparent !important;
   }
 }
 
