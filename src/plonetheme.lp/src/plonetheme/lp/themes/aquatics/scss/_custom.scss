@@ -98,12 +98,13 @@ body {
   }
 }
 
-// Move anonymous login tools into the banner
+// Login/register links inside the dark return-to-LP banner.
+// top: 10px places them within the banner's own padding area.
 #portal-anontools {
   position: absolute;
   right: 30px;
   z-index: 10;
-  top: -36px;
+  top: 10px;
 
   .list-inline {
     margin: 0;
