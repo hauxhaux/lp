@@ -70,6 +70,15 @@ body {
   color: var(--anchor-text);
 }
 
+// Prevent any phantom horizontal scroll from off-canvas drawers, sub-pixel
+// rounding, or wide content (matches the convention used by wildland-fire).
+// Bootstrap's offcanvas-end uses transform: translateX(100%) when hidden, which
+// leaves it sitting off the right edge of the viewport and inflates scrollWidth.
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -202,6 +211,7 @@ label,
     a { font-size: 11px; padding: 3px 8px; }
   }
 }
+
 
 
 // =============================================================================
@@ -340,7 +350,13 @@ a.readmore {
   margin-bottom: 0;
 }
 
-// Portal-top: zero height on Anchor (no topbar content above logo)
+// Portal-top: receives Plone's #portal-header children — the lineage
+// "Jump to child site" <select> and anonymous tools (Log in). On desktop
+// the original Anchor layout has zero height: the select overlays the
+// navy banner from above (visible only because overflow is visible) and
+// anontools sits at top-right via absolute positioning. We keep that
+// behaviour here, then override on mobile (see media queries below) to
+// keep both elements inside the viewport on narrow widths.
 #portal-top {
   height: 0;
   background-image: none;
@@ -399,12 +415,80 @@ a.readmore {
       }
     }
   }
+
+  // #portal-top contains [anontools, lineageForm] in DOM order. On mobile
+  // we want them side-by-side as [lineageForm | Log in] with the select
+  // taking the lion's share. Tighter horizontal padding, place anontools
+  // visually after the form via `order`, and inherit the navy banner bg
+  // so white "Log in" text stays legible (otherwise it sits on grass).
+  #portal-top {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.5rem;
+    height: auto;
+    min-height: 32px;
+    max-width: 100%;
+    padding: 4px 10px;
+    background: var(--anchor-navy);
+    position: relative; // anchor for any absolute children
+  }
+
+  #portal-top > * { min-width: 0; max-width: 100%; }
+
+  // #portal-anontools is position:absolute by default (so it can sit at the
+  // top-right of #content-header on desktop). On mobile we need it to flow
+  // with the lineage select inside #portal-top so it never overlaps the logo.
+  #portal-anontools {
+    position: static;
+    right: auto;
+    top: auto;
+    z-index: auto;
+    order: 2; // visually trail the lineage select on the right
+    flex: 0 0 auto;
+  }
+
+  // Let the lineage form share the row width with anontools.
+  #lineageSelectionForm {
+    flex: 1 1 auto;
+    min-width: 0;
+    order: 1;
+
+    select#lineageSelection {
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+    }
+  }
 }
 
 // Further shrink on small phones
 @media (max-width: 480px) {
   #portal-logo-wrapper #portal-logo img {
     width: 280px;
+  }
+
+  // Stack lineage select on its own row above anontools so neither is
+  // squashed into a couple of characters wide.
+  #portal-top {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+  }
+
+  #portal-anontools {
+    align-self: flex-end;
+  }
+}
+
+// Tiny phones (<=375): cap logo at viewport width minus padding so it never
+// pushes past the right edge or overlaps the toggler/anontools.
+@media (max-width: 375px) {
+  #portal-logo-wrapper #portal-logo img {
+    width: auto;
+    max-width: calc(100vw - 30px);
+    height: auto;
   }
 }
 
@@ -890,8 +974,18 @@ nav[aria-label="breadcrumb"] {
   display: flex;
   align-items: center;
   justify-content: space-around;
+  // Allow logos to wrap to a second line below the lg breakpoint —
+  // the 5 partner logos in this section have intrinsic widths summing to
+  // ~865px which overflow the .container at 992-1199px without wrapping.
+  flex-wrap: wrap;
   gap: 20px;
   margin: 2em auto;
+}
+
+// Constrain each partner logo so it never exceeds the wrap row.
+.partner-logo {
+  max-width: 100%;
+  height: auto;
 }
 
 @media (max-width: 768px) {
