@@ -351,12 +351,14 @@ a.gold-text {
 
 // WLFW circular badge — anchored top-left of the dark-green header band,
 // matching the live EDF layout (badge left at ~x:32, wordmark to its right at ~x:240).
+// Live size at 1530px: 190x190; we mirror that. The header is min-height:150px
+// but overflow:visible lets the larger badge extend below into the banner if needed.
 #wlfw-banner-badge {
   position: absolute;
-  top: 20px;
-  left: 30px;
-  width: 130px;
-  height: 130px;
+  top: 24px;
+  left: 32px;
+  width: 190px;
+  height: 190px;
   z-index: 10;
   text-decoration: none;
 
@@ -515,6 +517,10 @@ a.gold-text {
   display: flex;
   justify-content: flex-end;
   margin-right: 2.5%;
+  // Keep nav items on one line at all desktop widths. Without nowrap, at
+  // 992-1280px the items + searchbox combo exceeded available container
+  // width and wrapped to two rows ("nav appears too short" symptom).
+  flex-wrap: nowrap;
 
   .nav-item {
     a.nav-link {
@@ -594,11 +600,37 @@ a.gold-text {
   }
 }
 
-// Tablet nav adjustments
+// Tablet/intermediate-desktop nav adjustments. Range covers the inline
+// (navbar-expand-lg) layout from 992px up through 1280px, where items +
+// searchbox would otherwise overflow the centred .container width and the
+// nav strip looks "too short" on the right edge of the header bar.
+// Above 1280px the default flex-end + 2.5% margin-right lays out comfortably.
+@media (max-width: 1280px) and (min-width: 992px) {
+  #portal-globalnav {
+    // Drop the right margin so the nav can fully use container width.
+    margin-right: 0;
+  }
+
+  #portal-globalnav .nav-item a.nav-link {
+    font-size: 0.95rem;
+    padding: 10px 12px;
+  }
+
+  // Tighter searchbox so it doesn't crowd the nav items at 992-1280.
+  #portal-globalnav-wrapper #portal-searchbox {
+    margin-right: 0;
+
+    input[type="text"],
+    .form-control {
+      width: 130px;
+    }
+  }
+}
+
+// Sub-tablet nav adjustments (offcanvas takes over at <992; this targets
+// the brief overlap zone where labels/font may need tightening).
 @media (max-width: 1024px) {
   #portal-globalnav .nav-item a.nav-link {
-    font-size: 16px;
-    padding: 10px 15px;
     margin: 0 0.125em;
     text-align: center;
   }
