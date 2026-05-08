@@ -334,12 +334,50 @@ a.gold-text {
 // 5. PAGE HEADER
 // =============================================================================
 
+// =============================================================================
+// HEADER LAYOUT
+// Three-layer stack matching the live workinglandsforwildlife.org/grasslands:
+//   1. #content-header   — dark-blue 150px tall, holds the wordmark
+//   2. #mainnavigation   — dark-blue, holds the global nav links
+//   3. #hero/.principal  — 450px scenic photo banner
+//
+// Plus #wlfw-banner-badge — 190px circular WLFW badge at top-left,
+// hanging down past the header bottom edge into the hero photo.
+// =============================================================================
+
 #content-header {
   background: var(--grass-darkblue);
   border: none;
   position: relative;
-  width: 100%;
-  height: 150px;
+  // Full-viewport-width breakout: removes Bootstrap container constraints.
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  max-width: none;
+  min-height: 150px;
+  padding: 0 35px 0 240px; // leave room at left for the WLFW badge
+  color: #fff;
+  overflow: visible; // allow #wlfw-banner-badge to hang below
+}
+
+// The big WLFW Landscapes circular badge.
+// 190x190 PNG, absolutely positioned at top-left of #content-header,
+// extending downward past the slate's bottom edge into the hero photo.
+#wlfw-banner-badge {
+  position: absolute;
+  top: 24px;
+  left: 32px;
+  width: 190px;
+  height: 190px;
+  z-index: 10;
+  text-decoration: none;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
 }
 
 #portal-logo-wrapper {
@@ -394,10 +432,6 @@ a.gold-text {
 }
 
 @media (max-width: 768px) {
-  #content-header {
-    height: 100px;
-  }
-
   #portal-logo-wrapper {
     width: 340px;
 
@@ -618,17 +652,22 @@ a.gold-text {
 // 7. BANNER IMAGES
 // =============================================================================
 
+// Full-width hero photo banner — always shown, matching the live
+// workinglandsforwildlife.org/grasslands #portal-banner rule.
+// The default image is the restored-prairie-hero.jpg; section-specific
+// overrides can be added below if needed.
 #hero,
 .principal {
   display: block;
-  background-position: center;
-  background-size: cover;
+  height: 450px;
+  background: url('../theme_images/working-lands/restored-prairie-hero.jpg') center / cover no-repeat;
+  background-color: #ededed;
   position: relative;
-
-  &.has-banner {
-    height: 450px;
-    background-color: #ededed;
-  }
+  // Full-viewport-width breakout so the photo spans edge-to-edge.
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  max-width: none;
 
   .container,
   .gigantic {
@@ -650,13 +689,25 @@ a.gold-text {
 }
 
 @media (max-width: 768px) {
-  #hero.has-banner,
-  .principal.has-banner {
+  #hero,
+  .principal {
     height: 195px;
   }
 
   .banner-caption {
     display: none;
+  }
+
+  #content-header {
+    padding-left: 35px;
+    min-height: 100px;
+  }
+
+  #wlfw-banner-badge {
+    width: 110px;
+    height: 110px;
+    top: 12px;
+    left: 12px;
   }
 }
 
