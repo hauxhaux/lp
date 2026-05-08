@@ -324,9 +324,11 @@ a.readmore {
 // 5. PAGE HEADER
 // =============================================================================
 
-// Header container — carries the full banner background image.
-// Tall enough to span logo + nav + visible banner area below nav.
-// Nav and hero are pulled up into this space via negative margins.
+// Header container — full-viewport-width banner.
+// The index.html <header> no longer has Bootstrap's 'container' class so
+// the background image spans the full viewport. Logo content is offset
+// inward via #portal-logo-wrapper padding.
+// padding-bottom creates the visible banner area below the logo row.
 #content-header {
   background: url('../theme_images/anchor-grasslands-banner.jpg') no-repeat center / cover;
   background-color: #ededed;
@@ -334,8 +336,7 @@ a.readmore {
   position: relative;
   width: 100%;
   max-width: 100%;
-  padding-top: 0;
-  padding-bottom: 290px; // extra space below the logo for nav + banner
+  padding: 0 0 290px; // vertical: zero top, 290px bottom banner space
   margin-bottom: 0;
 }
 
@@ -348,8 +349,9 @@ a.readmore {
   min-height: 0;
 }
 
+// Inset logo area from viewport edges (header no longer uses Bootstrap .container)
 #portal-logo-wrapper {
-  padding: 10px 0;
+  padding: 10px 30px;
   width: 100%;
 
   // Collapse the navbar toggler area when it's next to the logo
@@ -378,7 +380,7 @@ a.readmore {
 // Match Bootstrap's navbar-expand-lg collapse breakpoint (991.98px)
 @media (max-width: 991.98px) {
   #content-header {
-    padding-bottom: 320px; // generous space: logo + banner + room before MENU bar
+    padding: 0 0 320px; // zero horizontal (full-width), 320px bottom banner space
     background-position: center top; // show sky at top for logo contrast
   }
 
