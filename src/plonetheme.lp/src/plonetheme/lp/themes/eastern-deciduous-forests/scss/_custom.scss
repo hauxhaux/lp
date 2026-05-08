@@ -495,9 +495,17 @@ a.gold-text {
 // The captured site positioned the nav absolutely over the dark-green header;
 // our Diazo template emits nav as a separate block. Give it the same dark-green
 // background so white nav-link text is visible (white-on-white otherwise).
+// Diazo wraps the nav inside Plone's .container element, which caps width
+// and centers it — leaving big white gutters either side of the dark-green
+// nav band. Break out to viewport width so the band runs edge-to-edge.
+// Same pattern used in grasslands-and-savannas and aquatics.
 #mainnavigation-wrapper {
   background-color: var(--edf-darkgreen);
   border-top: none;
+  width: 100vw;
+  max-width: none;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
 }
 
 #portal-globalnav-wrapper {
