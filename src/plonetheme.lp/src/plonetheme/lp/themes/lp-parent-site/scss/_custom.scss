@@ -170,6 +170,19 @@ a:visited {
   }
 }
 
+// On narrow viewports, shrink the logo margin so the hamburger toggler
+// has breathing room on the right edge.
+@media (max-width: 575.98px) {
+  #portal-logo {
+    margin: 20px 0 10px 10px;
+
+    img {
+      // Keep logo legible but allow small viewports to fit toggler beside it.
+      max-width: calc(100vw - 90px);
+    }
+  }
+}
+
 // The theme logo image is an SVG served via the ++theme++ traversal.
 // Constrain content-header so the header area never collapses when
 // portal-top is empty (no personal tools injected in this layout).
@@ -181,6 +194,13 @@ a:visited {
 // =============================================================================
 // 4. NAVIGATION  — slate blue-gray bar with olive selected state
 // =============================================================================
+//
+// The LP parent site is the network root and lists ALL 15 sub-site folders as
+// top-level nav items (plus Home/News/Events). 17 items is too wide to fit
+// on a single row even at 1920px, so the strategy is:
+//   * <1400px (below xxl): collapse to hamburger via navbar-expand-xxl
+//   * >=1400px: allow nav to wrap to a maximum of 2 rows with compact link
+//     padding/font-size so the wrap is clean and predictable.
 
 #globalnav-wrapper,
 #mainnavigation-wrapper,
@@ -195,6 +215,7 @@ a:visited {
   background-color: var(--lp-nav-bg);
   font-weight: 400;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   margin: 0;
 
@@ -254,6 +275,60 @@ a:visited {
   // text. Strip the background so only the tiny chevron glyph is visible.
   label::after {
     background: transparent !important;
+  }
+}
+
+// --- Compact horizontal nav (xxl and up — when not collapsed to hamburger)
+// At >=1400px, lower padding/font-size so 17 top-level items wrap cleanly
+// onto at most 2 rows. The submenu chevron buttons also need to scale down.
+@media (min-width: 1400px) {
+  #portal-globalnav {
+    .nav-item a.nav-link,
+    li a {
+      font-size: 15px;
+      padding: 10px 12px;
+      line-height: 1.2;
+    }
+  }
+}
+
+// --- 1400-1599 range: tighten further so 17 items fit in 2 rows.
+@media (min-width: 1400px) and (max-width: 1599px) {
+  #portal-globalnav {
+    .nav-item a.nav-link,
+    li a {
+      font-size: 14px;
+      padding: 9px 8px;
+    }
+  }
+}
+
+// --- Search box: inline at desktop, full width inside hamburger drawer
+@media (max-width: 1399.98px) {
+  #portal-searchbox {
+    width: 100%;
+    margin-top: 1em;
+  }
+}
+
+// --- Inside offcanvas drawer (hamburger): stack items vertically and
+//     restore comfortable touch targets.
+.offcanvas #portal-globalnav {
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  width: 100%;
+
+  .nav-item,
+  li {
+    width: 100%;
+  }
+
+  .nav-item a.nav-link,
+  li a {
+    font-size: 16px;
+    padding: 12px 16px;
+    text-align: left;
   }
 }
 
