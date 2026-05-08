@@ -48,6 +48,18 @@
 // 2. BASE & TYPOGRAPHY
 // =============================================================================
 
+// Prevent horizontal scrollbar/page-scroll caused by:
+//  (a) offcanvas (position:fixed, translated off-screen) extending past viewport,
+//  (b) authored content with inline width (e.g. legacy #cyclist banner at 1280px),
+//  (c) the #content-header 100vw breakout interacting with the vertical scrollbar.
+// overflow-x: clip leaves vertical scroll intact and never spawns a horizontal one.
+// Applied to both html and body — clip on body alone still lets the html element
+// be horizontally scrolled by user input/Tab focus on offscreen children.
+html,
+body {
+  overflow-x: clip;
+}
+
 body {
   background: #fff;
   font-family: 'Open Sans', sans-serif;
@@ -147,9 +159,40 @@ nav[aria-label="breadcrumb"] li {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 991px) {
+  // Below the navbar-expand-lg breakpoint the offcanvas hamburger is in
+  // the header, so the logo no longer needs the absolute-style nudge that
+  // pushes it down into breadcrumb territory.
   #portal-logo-wrapper #portal-logo img {
-    width: 330px;
+    top: 0;
+    left: 0;
+    width: 380px;
+    max-width: 70vw;
+  }
+
+  // Keep #portal-top (Log in / "Jump to child site" dropdown) on a single
+  // row that doesn't push the dropdown wider than the viewport.
+  #portal-top {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  #portal-top select,
+  #portal-top .form-select {
+    max-width: 60vw;
+  }
+}
+
+@media (max-width: 575px) {
+  #portal-logo-wrapper #portal-logo img {
+    width: 280px;
+  }
+}
+
+@media (max-width: 359px) {
+  #portal-logo-wrapper #portal-logo img {
+    width: 220px;
   }
 }
 
@@ -230,6 +273,49 @@ nav[aria-label="breadcrumb"] li {
   // box that covers the adjacent link text. Make it transparent.
   label::after {
     background: transparent !important;
+  }
+}
+
+// Between the navbar-expand-lg breakpoint (992px) and 1199px the
+// horizontal layout (5+1 nav items + search + 30px container padding) is
+// tight: at 992 the 6th item wraps to a 2nd row. Tighten padding/letter-
+// spacing and shrink the search field so all 6 items + search hold one line.
+@media (min-width: 992px) and (max-width: 1199px) {
+  #portal-globalnav .nav-item a.nav-link {
+    padding: 12px 8px;
+    font-size: 12px;
+    letter-spacing: 0.02em;
+  }
+
+  #portal-searchbox .searchField {
+    width: 140px;
+    min-width: 0;
+  }
+}
+
+// At <=991 the nav collapses into the offcanvas; ensure the search box
+// inside the offcanvas is full width and stacked beneath the nav list,
+// and the offcanvas panel itself matches the navy of the desktop nav
+// (Bootstrap defaults the panel to --bs-primary which is the LP green).
+@media (max-width: 991px) {
+  #offcanvasNavbar {
+    background-color: var(--eq-nav-bg);
+    color: #fff;
+  }
+
+  #offcanvasNavbar .offcanvas-body {
+    flex-direction: column;
+    align-items: stretch !important;
+  }
+
+  #portal-searchbox {
+    margin-top: 1rem;
+    width: 100%;
+  }
+
+  #portal-searchbox .searchField {
+    width: 100%;
+    min-width: 0;
   }
 }
 
