@@ -55,21 +55,32 @@ body {
 }
 
 // White content card floating over the bg image, with the signature shadow.
-// Diazo template uses outer-wrapper / container / main-container; the captured
-// site used #visual-portal-wrapper / #portal-columns. Apply the white-card
-// styling to whichever is present so content always reads against a solid bg.
+// On the live site the body bg image shows through behind the logo / header
+// area, and only the content area below the navbar sits on a white card.
+// The legacy site used #visual-portal-wrapper / #portal-columns; the Diazo
+// template uses .outer-wrapper / .container / #main-container. Keep the outer
+// chrome transparent so the body bg image is visible behind the logo, then
+// apply the white card to the content row only.
 #visual-portal-wrapper,
 .outer-wrapper {
-  background-color: #fff;
-  box-shadow: 0 10px 20px rgba(50, 50, 50, 0.41);
+  background-color: transparent;
   margin: 0 auto;
   max-width: 1000px;
   min-height: calc(100vh - 190px);
 }
 
-#portal-columns,
+// White content card sits below the navbar, around the page content.
+// In the Diazo template the content row is `.outer-wrapper > .container`
+// (containing #global_statusmessage and #main-container). Apply the white
+// card + drop shadow to that container so the body bg image shows above
+// the card (behind the logo) but content has a solid surface to sit on.
+.outer-wrapper > .container:last-of-type {
+  background-color: #fff;
+  box-shadow: 0 10px 20px rgba(50, 50, 50, 0.41);
+}
+
 #main-container,
-.container > .row {
+#portal-columns {
   background-color: #fff;
 }
 
