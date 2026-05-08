@@ -333,13 +333,40 @@ a.gold-text {
 // =============================================================================
 
 // Dark-green header band housing the logo.
+// Break out of any parent container so the dark-green fills 100vw even
+// on wide viewports (same breakout pattern as birdlocale / western-landscapes).
 // min-height (not fixed height) lets the band grow if the logo row wraps.
 #content-header {
   background: var(--edf-darkgreen);
   border: none;
   position: relative;
-  width: 100%;
+  width: 100vw;
+  max-width: none;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
   min-height: 150px;
+  padding: 0 35px 0 35px;
+  overflow: visible; // allow WLFW badge to extend outside bounds if needed
+}
+
+// WLFW circular badge — 190×190 PNG positioned at the top-right corner
+// of the dark-green header, matching the canonical EDF site which shows
+// the WLFW badge in the header band.
+#wlfw-banner-badge {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  width: 130px;
+  height: 130px;
+  z-index: 10;
+  text-decoration: none;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
 }
 
 #portal-logo-wrapper {
@@ -429,7 +456,15 @@ a.gold-text {
 
 @media (max-width: 768px) {
   #content-header {
-    height: 100px;
+    min-height: 100px;
+    padding: 0 15px;
+  }
+
+  #wlfw-banner-badge {
+    width: 80px;
+    height: 80px;
+    top: 10px;
+    right: 15px;
   }
 
   #portal-logo-wrapper {
