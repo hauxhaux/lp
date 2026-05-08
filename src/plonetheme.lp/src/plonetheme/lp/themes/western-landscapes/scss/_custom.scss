@@ -389,6 +389,10 @@ a.gold-text {
   padding: 0 35px 0 240px;     // leave room at left for the WLFW badge
   color: #fff;
   overflow: visible;            // allow #wlfw-banner-badge to hang below
+  // Layout: horizontal row at desktop (logo + search side-by-side).
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 
 // The big WLFW Landscapes circular badge.
@@ -457,8 +461,7 @@ a.gold-text {
   background: var(--west-purple);
   // Right-align nav items to give them maximum space (live site style).
   justify-content: flex-end;
-  // Prevent wrapping — all 6 items must stay on one row.
-  // !important beats Barceloneta's .navbar-nav { flex-wrap: wrap } rule.
+  // Prevent wrapping — all items must stay on one row at desktop widths.
   flex-wrap: nowrap !important;
 
   // Barceloneta paints each .navbar-nav li with --bs-navbar-background
@@ -475,6 +478,9 @@ a.gold-text {
       font-weight: 600;
       font-size: 1rem;
       text-transform: uppercase;
+      // Prevent multi-word nav items (e.g. "About Western Landscapes")
+      // from wrapping onto a second line inside their nav item.
+      white-space: nowrap;
       padding: 10px 20px;
       border: 3px solid transparent;
       transition: background-color 0.15s ease, color 0.15s ease;
@@ -519,20 +525,85 @@ a.gold-text {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1199.98px) {
+  // At mobile/tablet: lay header items in a single row (logo + hamburger),
+  // keep height tight so the hamburger is immediately visible.
   #content-header {
-    padding-left: 35px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    min-height: 70px;
+    padding: 10px 15px 10px 130px; // leave room for WLFW badge on left
+    overflow: visible;
   }
+
+  // Smaller badge on mobile so it doesn't push content around.
   #wlfw-banner-badge {
     width: 110px;
     height: 110px;
-    top: 12px;
-    left: 12px;
+    top: 8px;
+    left: 10px;
   }
-  // No nav padding override needed — padding-left was removed from desktop too.
+
+  // Logo wrapper: flex row with logo + hamburger side-by-side.
+  // Use flex: 1 (not width: 100%) so it fills the remaining content box
+  // without overflowing the left padding reserved for the WLFW badge.
+  #portal-logo-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex: 1;
+    min-width: 0; // prevent flex overflow
+
+    #portal-logo img {
+      max-width: 220px;
+      width: 100%;
+      height: auto;
+    }
+  }
+
   #portal-banner-image {
     height: 195px;
     &::after { display: none; }
+  }
+}
+
+// Below 480px: shrink logo further and hide the portal-top dropdown.
+@media (max-width: 480px) {
+  #content-header {
+    padding-left: 80px;
+  }
+
+  #wlfw-banner-badge {
+    width: 70px;
+    height: 70px;
+    top: 10px;
+    left: 6px;
+  }
+
+  // Hide "Jump to child site" at mobile — not needed when using hamburger.
+  #portal-top {
+    display: none;
+  }
+
+  #portal-logo-wrapper #portal-logo img {
+    max-width: 150px;
+  }
+}
+
+// Shrink portal-top at 480-768px so it doesn't overflow.
+@media (min-width: 481px) and (max-width: 768px) {
+  #portal-top {
+    max-width: 160px;
+    overflow: hidden;
+    flex-shrink: 1;
+
+    select {
+      max-width: 100%;
+      font-size: 11px;
+    }
   }
 }
 
@@ -572,20 +643,7 @@ a.gold-text {
 }
 
 @media (max-width: 768px) {
-  #content-header {
-    height: 100px;
-  }
-
-  #portal-logo-wrapper {
-    width: 340px;
-
-    #portal-logo img {
-      width: 320px;
-      top: -18px;
-      left: 5px;
-    }
-  }
-
+  // Search box rules only; header/logo layout handled in the 1199.98px block.
   #header-searchbox #portal-searchbox {
     position: absolute;
     top: 5px;
@@ -657,34 +715,41 @@ a.gold-text {
   }
 }
 
-// Tablet nav adjustments
-@media (max-width: 1024px) {
+// Compact nav at 1200-1400px — reduce padding/font so 6 items + search
+// fit on a single row. navbar-expand-xl means desktop mode starts at 1200px.
+@media (min-width: 1200px) and (max-width: 1400px) {
   #portal-globalnav .nav-item a.nav-link {
-    font-size: 16px;
-    padding: 10px 15px;
-    margin: 0 0.125em;
-    text-align: center;
+    font-size: 0.85rem;
+    padding: 10px 12px;
   }
 }
 
-// Mobile nav
-@media (max-width: 991.98px) {
+// Mobile / offcanvas nav (below the xl expand breakpoint: < 1200px)
+@media (max-width: 1199.98px) {
+  // Show the hamburger toggler with a visible border.
   .navbar-toggler {
-    border-color: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.6);
+    border-width: 2px;
+    // Ensure it's always accessible in the header.
+    position: relative;
+    z-index: 20;
   }
 
+  // Offcanvas panel: gold background matching the live site mobile nav.
   #offcanvasNavbar {
-    background-color: #d8c468; // Gold background for mobile nav
+    background-color: #d8c468;
 
     .offcanvas-header .btn-close {
       filter: invert(1);
     }
   }
 
+  // Nav links inside offcanvas: full-width, purple text on gold.
   #portal-globalnav {
     .nav-item {
       a.nav-link {
-        text-align: center;
+        white-space: normal; // allow wrapping inside the offcanvas menu
+        text-align: left;
         padding: 12px 20px;
         background: #d8c468;
         color: var(--west-purple);
