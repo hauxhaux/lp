@@ -146,54 +146,61 @@ body {
 // 3. TYPOGRAPHY
 // =============================================================================
 
-#content h1.documentFirstHeading {
-  color: var(--bob-text);
-  font-family: 'Montserrat', sans-serif;
-  font-size: 2.3em;
-  font-weight: 500;
-  margin-bottom: 0.5em;
-  margin-top: 1.5em;
-}
-
+// Page title — Montserrat medium, comfortable top spacing (not too much)
+#content h1.documentFirstHeading,
 #content h1 {
   color: var(--bob-text);
   font-family: 'Montserrat', sans-serif;
-  font-size: 2.3em;
-  font-weight: 500;
+  font-size: 2em;         // was 2.3em — a touch smaller feels cleaner
+  font-weight: 600;
+  margin-bottom: 0.5em;
+  margin-top: 1em;        // was 1.5em — trim top gap so content starts sooner
+  line-height: 1.25;
+}
+
+h2 {
+  color: var(--bob-text);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 1.5rem;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
   margin-bottom: 0.5em;
   margin-top: 1.5em;
 }
 
-h2, h3, h4, h5, h6 {
+h3, h4, h5, h6 {
   color: var(--bob-text);
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
-  line-height: 1.5em;
+  line-height: 1.4em;
   letter-spacing: -0.0115em;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
-h3 { font-size: 24px; }
-h4 { font-size: 20px; }
+h3 { font-size: 22px; }
+h4 { font-size: 18px; }
+h5 { font-size: 15px; }
 
 p {
   font-family: 'Merriweather', serif;
-  color: #666;
-  font-size: 16px;
+  color: #555;            // slightly less muted than #666 — better readability
+  font-size: 15px;
   letter-spacing: 0.01em;
-  line-height: 1.6em;
+  line-height: 1.7em;
 }
 
 li {
   font-family: 'Merriweather', serif;
-  color: #666;
-  font-size: 16px;
+  color: #555;
+  font-size: 15px;
   line-height: 1.6em;
 }
 
-// Navigation list items should NOT inherit body list styles
+// Navigation/chrome list items must not inherit body-text font/color.
+// Reset them to Montserrat and inherit the parent container's color.
 #portal-globalnav li,
-#portal-footer li,
+#portal-footer-wrapper li,
 #return-to-lp-banner li,
 nav[aria-label="breadcrumb"] li {
   font-family: 'Montserrat', sans-serif;
@@ -212,93 +219,108 @@ nav[aria-label="breadcrumb"] li {
 // 5. PAGE HEADER
 // =============================================================================
 
-// Gold header band. Nav now flows as a sibling row below (no overlap).
-// 240px accommodates the 90px SVG logo with space above and below.
+// Gold header band. Logo sits in the left column; #portal-top (search,
+// lineage selector) is hidden in this sub-site. Nav flows as a sibling
+// row below via #mainnavigation-wrapper. min-height gives the gold band
+// enough height for the logo with comfortable vertical breathing room.
 #content-header {
   background: var(--bob-gold);
   border: none;
   position: relative;
   width: 100%;
-  min-height: 240px;
-  background-size: cover;
+  min-height: 170px;   // matches captured reference: 170px desktop header
+  padding: 25px 0;
+  // Override Bootstrap d-flex / flex-row so the header stacks content
+  // naturally without unusual column gaps.
+  align-items: center;
+}
+
+// Hide the lineage sub-site jump selector — not useful in sub-site context.
+// The brown "Return to LP" banner handles cross-site navigation instead.
+// Bootstrap's d-flex class on #portal-top uses !important, so we need
+// !important here to win the specificity battle.
+#portal-top {
+  display: none !important;
+}
+
+#lineageSelectionForm {
+  display: none !important;
 }
 
 #portal-logo-wrapper {
-  padding: 15px 0 10px;
+  padding: 0 0 0 2em;
 
   #portal-logo {
     margin: 0;
     display: block;
-    width: 360px;
-    height: 90px;
+    width: 360px;   // generous width for the Bobscapes SVG text logo
+    height: 100px;
     position: relative;
-    top: 0.5em;
-    left: 2em;
-    background: url('../theme_images/bobscapes-logo.svg') no-repeat left center;
-    background-size: contain;
 
-    img {
-      // Hide the Plone-configured logo; Bobscapes logo shown via bg
-      opacity: 0;
+    a {
+      display: block;
       width: 100%;
       height: 100%;
     }
+
+    img {
+      // Show the actual SVG logo img tag directly (Diazo injects bobscapes-logo.svg)
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: left center;
+    }
   }
 }
 
-#header-searchbox {
-  #portal-searchbox {
-    position: absolute;
-    top: 15px;
-    right: 3.5em;
+// The search box is rendered inside the Bootstrap offcanvas nav body.
+// On desktop it appears inline after all the nav links — style it to look
+// tidy. On mobile it's inside the offcanvas drawer and is fine as-is.
+#portal-searchbox {
+  .searchSection { display: none; }
+
+  input[type="text"],
+  .form-control {
+    font-size: 13px;
+    padding: 4px 8px;
+    height: 32px;
+    width: 150px;
+    border: 1px solid #ccc;
+    border-radius: 3px 0 0 3px;
     background: #fff;
-    padding: 10px 13px;
-    border-radius: 6px;
-    border: 1px solid #fff;
+  }
 
-    .searchSection { display: none; }
+  .searchButton,
+  button[type="submit"] {
+    font-size: 12px;
+    padding: 4px 10px;
+    height: 32px;
+    background: #ededed;
+    border: 1px solid #ccc;
+    border-left: none;
+    border-radius: 0 3px 3px 0;
+    color: #555;
+    cursor: pointer;
 
-    input[type="text"],
-    .form-control {
-      font-size: 13px;
-      padding: 4px 8px;
-      height: 28px;
-      width: 180px;
-      border: 1px solid #ccc;
-      border-radius: 3px;
-    }
-
-    .searchButton,
-    button[type="submit"] {
-      font-size: 12px;
-      padding: 4px 10px;
-      height: 28px;
-      background: #ededed;
-      border: 1px solid #ccc;
-      color: #555;
-      cursor: pointer;
-
-      &:hover {
-        background: #ddd;
-      }
+    &:hover {
+      background: #ddd;
     }
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 991.98px) {
   #content-header {
-    height: 145px;
+    min-height: auto;
+    padding: 12px 0;
   }
 
-  #portal-logo-wrapper #portal-logo {
-    width: 330px;
-    height: 80px;
-    left: 0.5em;
-    top: -1em;
-  }
+  #portal-logo-wrapper {
+    padding: 0 0 0 0.75em;
 
-  #header-searchbox #portal-searchbox {
-    display: none;
+    #portal-logo {
+      width: 220px;
+      height: 60px;
+    }
   }
 }
 
@@ -307,12 +329,11 @@ nav[aria-label="breadcrumb"] li {
 // 6. NAVIGATION
 // =============================================================================
 
-// Bobscapes captured design absolutely positions the nav inside the gold
-// header at top:121px, but our Diazo template emits the nav as a sibling
-// row below #content-header. Absolute positioning caused nav to overlap
-// the banner area. Normal flow below the header keeps content readable.
-// #portal-globalnav is right-aligned (justify-content: flex-end) to match
-// the reference right-side nav layout.
+// Nav sits below the gold header as a sibling row. Background is gold to
+// match the captured design (the original placed nav inside the header at
+// top:121px via absolute positioning — we keep it in normal flow instead).
+// flex-nowrap prevents items wrapping onto a second row at desktop widths;
+// font-size reduced to 15px (was 130% ~20px) so 7 items fit on one row.
 #mainnavigation-wrapper {
   background-color: var(--bob-gold);
   border: none;
@@ -327,23 +348,30 @@ nav[aria-label="breadcrumb"] li {
 
   .container {
     max-width: 100%;
-    padding: 0;
+    padding: 0 1em;
   }
 }
 
 #portal-globalnav {
   background-color: transparent;
+  // Right-align nav links, matching reference captured design.
+  // flex-nowrap: never allow items to wrap to a second row on desktop.
   justify-content: flex-end;
+  flex-wrap: nowrap;
+  align-items: stretch;
 
   .nav-item {
+    flex-shrink: 0;  // items must not shrink; drop to mobile toggle instead
+
     a.nav-link {
       background-color: transparent;
       color: var(--bob-text);
-      font-size: 130%;
+      font-size: 15px;          // was 130% (~20px); 7+ items need 15px to fit
       font-family: 'Montserrat', sans-serif;
       font-weight: 600;
       text-transform: none;
-      padding: 0.75em 1.5em;
+      padding: 0.65em 1em;      // tighter padding to fit all items one row
+      white-space: nowrap;
       border: none;
       transition: background-color 0.2s ease, color 0.2s ease;
 
@@ -368,17 +396,19 @@ nav[aria-label="breadcrumb"] li {
   // Dropdown / submenu
   ul.dropdown {
     background: #fff;
-    border: 1px solid #fff;
+    border: 1px solid #ddd;
+    border-top: none;
 
     .nav-item a.nav-link {
       background: #fff;
       color: #333;
       text-transform: none;
-      font-size: 15px;
-      padding: 8px 20px;
+      font-size: 14px;
+      padding: 8px 18px;
+      white-space: nowrap;
 
       &:hover {
-        background-color: #fff;
+        background-color: #f8f8f8;
         color: var(--bob-rust);
       }
     }
@@ -395,30 +425,26 @@ nav[aria-label="breadcrumb"] li {
     height: 100%;
     display: flex;
     align-items: center;
-    padding: 0 8px;
+    padding: 0 6px;
     cursor: pointer;
 
     &::after {
-      content: "▼";
-      font-size: 9px;
+      content: "▾";
+      font-size: 11px;
       color: var(--bob-text);
       line-height: 1;
     }
   }
 
   &.has_subtree > a.nav-link {
-    padding-right: 28px;
+    padding-right: 24px;
   }
 }
 
-// Mobile nav
+// Mobile / tablet nav (offcanvas drawer)
 @media (max-width: 991.98px) {
-  #mainnavigation-wrapper {
-    // already static/full-width at all breakpoints; no reset needed
-  }
-
   .navbar-toggler {
-    border-color: rgba(0, 0, 0, 0.3);
+    border-color: rgba(0, 0, 0, 0.4);
   }
 
   #offcanvasNavbar {
@@ -430,16 +456,32 @@ nav[aria-label="breadcrumb"] li {
   }
 
   #portal-globalnav {
+    // In offcanvas mode, allow flex-wrap / column layout
+    flex-wrap: wrap;
+
     .nav-item {
       width: 100%;
       background: var(--bob-mobile-nav-bg);
 
       a.nav-link {
-        text-align: center;
+        text-align: left;
         padding: 12px 20px;
-        font-size: 16px;
+        font-size: 15px;
         color: var(--bob-text);
       }
+    }
+  }
+
+  // On mobile, search box moves into the offcanvas drawer — style it
+  // so it sits flush as a block rather than inline
+  #portal-searchbox {
+    display: block;
+    padding: 12px 20px;
+    width: 100%;
+
+    input[type="text"],
+    .form-control {
+      width: 100%;
     }
   }
 }
@@ -479,16 +521,12 @@ nav[aria-label="breadcrumb"] li {
 // 8. BREADCRUMBS
 // =============================================================================
 
-#portal-breadcrumbs,
-nav[aria-label="breadcrumb"] {
-  font-size: 85%;
-  margin: 0;
-  padding: 20px;
-
-  .breadcrumb {
-    margin-bottom: 0;
-  }
-}
+// The shared _base.scss already sets:
+//   background: transparent; border: 0; padding: 0.25rem 20px;
+//   a { color: #205c90; } .breadcrumb-item.active { color: #6c757d; }
+// No bobscapes-specific breadcrumb overrides are needed — just let the
+// shared rules apply. Any previous per-theme breadcrumb rules (green
+// background, filled bar) are intentionally removed here.
 
 
 // =============================================================================
