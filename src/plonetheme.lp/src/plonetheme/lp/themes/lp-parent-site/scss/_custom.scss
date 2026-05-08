@@ -162,10 +162,19 @@ a:visited {
   margin: 30px 0 20px 30px;
 
   img {
-    max-width: 382px;
+    // SVG viewBox is 490×150 — cap at 382px wide so it fits the header
+    width: 382px;
+    max-width: 100%;
     height: auto;
     display: block;
   }
+}
+
+// The theme logo image is an SVG served via the ++theme++ traversal.
+// Constrain content-header so the header area never collapses when
+// portal-top is empty (no personal tools injected in this layout).
+#content-header {
+  min-height: 100px;
 }
 
 
@@ -237,6 +246,14 @@ a:visited {
     }
 
     li { font-size: 11px; }
+  }
+
+  // Barceloneta renders an absolutely-positioned <label> (the ▼ dropdown
+  // toggle) whose ::after pseudo-element inherits --bs-navbar-hover-background
+  // which resolves to rgba(0,0,0,0.3) here — a dark box that covers the link
+  // text. Strip the background so only the tiny chevron glyph is visible.
+  label::after {
+    background: transparent !important;
   }
 }
 
