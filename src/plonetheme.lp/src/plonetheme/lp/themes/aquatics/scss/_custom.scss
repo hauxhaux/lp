@@ -319,7 +319,14 @@ a.gold-text {
   background-color: var(--aq-teal);
   border: none;
   position: relative;
-  width: 100%;
+  // Full-viewport-width breakout: overrides the Bootstrap .container cap.
+  // Inner content (logo, search) stays aligned via padding on child elements.
+  width: 100vw;
+  max-width: none;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  padding-left: calc(50vw - 50%);
+  padding-right: calc(50vw - 50%);
   // The captured site fits its 300x112 hero logo + WLFW LANDSCAPE
   // tagline in 150px because its nav lives inside this band; our Diazo
   // template renders the nav as a sibling row below, so the band needs
@@ -578,11 +585,10 @@ a.gold-text {
   background-position: center;
   background-size: cover;
   position: relative;
-
-  &.has-banner {
-    height: 450px;
-    background-color: #ededed;
-  }
+  // Apply unconditionally — Plone does not render .has-banner in this setup.
+  height: 450px;
+  background-color: #ededed;
+  background-image: url('../theme_images/aquatics-hero.jpg');
 
   .container,
   .gigantic {
@@ -591,8 +597,8 @@ a.gold-text {
 }
 
 @media (max-width: 768px) {
-  #hero.has-banner,
-  .principal.has-banner {
+  #hero,
+  .principal {
     height: 195px;
   }
 }
