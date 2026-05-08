@@ -214,18 +214,57 @@ a.readmore {
 // 5. PAGE HEADER
 // =============================================================================
 
+// Break out of Bootstrap .container to allow full-viewport-width background image.
+// The <header> element has class="container" in index.html; we override the
+// container constraints here so the banner photograph spans the full browser width.
 #content-header {
   background: url('../theme_images/birdlocale-header.jpg') no-repeat right bottom / cover;
   border: none;
   position: relative;
-  width: 100%;
+  width: 100vw;
+  max-width: none;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
   height: 635px;
+  overflow: visible; // allow #wlfw-banner-badge to hang below into nav if needed
 }
 
 @media (max-width: 768px) {
   #content-header {
     background: url('../theme_images/birdlocale-block.jpg') no-repeat center bottom / cover;
     height: 240px;
+    width: 100vw;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+// WLFW partner badge — circular logo anchored top-right of the header image.
+// BirdLocale is a WLFW partner sub-site; the badge links to workinglandsforwildlife.org.
+#wlfw-banner-badge {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  width: 120px;
+  height: 120px;
+  z-index: 10;
+  text-decoration: none;
+  display: block;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+
+@media (max-width: 768px) {
+  #wlfw-banner-badge {
+    width: 80px;
+    height: 80px;
+    top: 10px;
+    right: 10px;
   }
 }
 
