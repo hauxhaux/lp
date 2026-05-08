@@ -238,7 +238,12 @@ nav[aria-label="breadcrumb"] li {
   background-size: 52%;   // scale down the 2542×181 banner to ~half viewport
   border: none;
   position: relative;
-  width: 100%;
+  // .container in index.html constrains the header to Bootstrap's max-width;
+  // break out to viewport edges so the bird-banner runs edge-to-edge.
+  width: 100vw;
+  max-width: none;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
   min-height: 220px;
   overflow: hidden;
 }
