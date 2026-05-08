@@ -419,15 +419,24 @@ a.gold-text {
 // 6. NAVIGATION
 // =============================================================================
 
+// Give the nav wrapper the same dark-blue as the header so white nav-link
+// text is readable. Without this the wrapper is transparent over the white
+// page body and nav links are invisible (white-on-white).
 #mainnavigation-wrapper {
-  background-color: transparent;
+  background-color: var(--grass-darkblue);
   border-top: none;
 }
 
 #portal-globalnav-wrapper {
+  // Override Barceloneta's .navbar-barceloneta background-color rule
+  // (which defaults to $primary green) via ID specificity.
   background-color: transparent;
   border: none;
   padding: 0;
+
+  // Override --bs-navbar-background so Barceloneta's var() chain resolves
+  // to transparent rather than the LP primary green.
+  --bs-navbar-background: transparent;
 
   .container {
     max-width: 100%;
@@ -526,6 +535,41 @@ a.gold-text {
   }
 }
 
+// Search box in the nav bar — sits in #offcanvasNavbar .offcanvas-body
+// alongside #portal-globalnav on desktop. Needs contrast against the
+// dark-blue nav wrapper background.
+#mainnavigation-wrapper #portal-searchbox {
+  .searchSection { display: none; }
+
+  input[type="text"],
+  .form-control {
+    font-size: 13px;
+    padding: 4px 8px;
+    height: 28px;
+    width: 160px;
+    background: #fff;
+    border: 1px solid #aaa;
+    border-radius: 3px;
+    color: #333;
+  }
+
+  .searchButton,
+  button[type="submit"] {
+    font-size: 12px;
+    padding: 4px 10px;
+    height: 28px;
+    background: #e8e8e8;
+    border: 1px solid #aaa;
+    color: #444;
+    border-radius: 0 3px 3px 0;
+    cursor: pointer;
+
+    &:hover {
+      background: #ddd;
+    }
+  }
+}
+
 // Tablet nav adjustments
 @media (max-width: 1024px) {
   #portal-globalnav .nav-item a.nav-link {
@@ -538,6 +582,12 @@ a.gold-text {
 
 // Mobile nav
 @media (max-width: 991.98px) {
+  // On mobile the nav bar collapses; restore header height and ensure the
+  // toggle button is visible against the dark-blue header background.
+  #mainnavigation-wrapper {
+    background-color: transparent; // Mobile nav handled by offcanvas panel
+  }
+
   .navbar-toggler {
     border-color: rgba(255, 255, 255, 0.3);
   }
