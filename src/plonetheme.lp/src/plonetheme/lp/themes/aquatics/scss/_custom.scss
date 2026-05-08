@@ -98,8 +98,10 @@ body {
   }
 }
 
-// Login/register links inside the dark return-to-LP banner.
-// top: 10px places them within the banner's own padding area.
+// Login/register links rendered inside #portal-top (which lives at the
+// top of #content-header). Positioned absolutely so they sit at the
+// top-right corner of the teal header band, just below the dark
+// return-to-LP banner.
 #portal-anontools {
   position: absolute;
   right: 30px;
@@ -337,10 +339,25 @@ a.gold-text {
   overflow: hidden;
 }
 
-@media (max-width: 768px) {
+// At tablet and below the desktop nav collapses to a hamburger toggler
+// (Bootstrap's navbar-expand-lg breakpoint = 991.98px). The badge +
+// wordmark are absolutely positioned so the structural #portal-logo
+// is hidden; without an explicit height the header would still report
+// 240px from the desktop rule. The min-height of 240px below works
+// for the stacked badge+wordmark layout, but we keep the box-shadow
+// disabled for a flatter mobile look.
+@media (max-width: 991.98px) {
   #content-header {
-    height: 100px;
     box-shadow: none;
+  }
+}
+
+// At very small mobile widths the badge shrinks to 80x80 and the
+// wordmark to 110x48, so the teal band only needs ~190px to clear
+// the wordmark. Tighten the header to avoid a tall empty band.
+@media (max-width: 575.98px) {
+  #content-header {
+    min-height: 175px;
   }
 }
 
@@ -598,10 +615,39 @@ a.gold-text {
 
 // Mobile nav
 @media (max-width: 991.98px) {
+  // Pull the hamburger out of the flexbox flow at the bottom-left of
+  // #portal-logo-wrapper and pin it at the bottom-right of the teal
+  // header band. The top-right is occupied by #portal-top (lineage
+  // child-site selector + login link); placing the toggler at the
+  // bottom-right keeps it visible against the teal background and
+  // out of the way of those controls.
+  #portal-logo-wrapper .navbar {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    top: auto;
+    z-index: 11;
+    padding: 0;
+  }
+
   .navbar-toggler {
-    border-color: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.7);
+    color: #fff;
     font-weight: 600;
     font-size: 13px;
+    padding: 6px 10px;
+
+    // Bootstrap's default toggler icon is a dark SVG; substitute a
+    // white-stroke SVG so the bars read clearly against the teal
+    // header background. Use stroke-width 3 (vs Bootstrap's 2) at
+    // viewBox 0-30 so the bars stay legible at the 1.5em icon size.
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23ffffff' stroke-linecap='round' stroke-miterlimit='10' stroke-width='3' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+
+    &:focus {
+      box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5);
+    }
   }
 
   #offcanvasNavbar {
@@ -619,6 +665,15 @@ a.gold-text {
         padding: 12px 20px;
       }
     }
+  }
+}
+
+@media (max-width: 575.98px) {
+  // At small phone widths nudge the toggler so it doesn't crowd the
+  // shrunken badge.
+  #portal-logo-wrapper .navbar {
+    bottom: 12px;
+    right: 12px;
   }
 }
 
