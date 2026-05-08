@@ -218,7 +218,12 @@ nav[aria-label="breadcrumb"] li {
   background: #fff;
   border: none;
   position: relative;
-  width: 100%;
+  // .container in index.html constrains the header to Bootstrap's max-width;
+  // break out to viewport edges so the white band runs edge-to-edge.
+  width: 100vw;
+  max-width: none;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
 }
 
 #portal-logo-wrapper {
