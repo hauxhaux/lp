@@ -303,23 +303,37 @@ a.readmore {
   background: transparent;
   border: none;
   position: relative;
-  width: 100%;
+  // Break out of Bootstrap's .container max-width so the logo can anchor
+  // at viewport-relative coords (live places it at left:46 — that 46px is
+  // measured from the viewport, not from the centered container's edge).
+  width: 100vw;
+  max-width: none;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
   // Don't pin a height — let the logo dictate it
   min-height: 110px;
 }
 
+// Live WLFW logo position at 1530px is (46, 58) at 200x200. The Diazo
+// `<header class="container">` wrapping the logo means Bootstrap's
+// container max-width centers and adds horizontal padding — pushing the
+// logo to ~163px from the viewport edge instead of the canonical 46px.
+// Anchor the logo absolutely to the viewport so its position is
+// independent of the container math.
 #portal-logo-wrapper {
   padding: 0;
 
   #portal-logo {
-    margin: 12px 20px 20px;
+    position: absolute;
+    top: 58px;
+    left: 46px;
+    margin: 0;
     display: inline-block;
-    position: relative;
     width: auto;
 
     img {
-      width: 220px !important;
-      max-width: 220px;
+      width: 200px !important;
+      max-width: 200px;
       height: auto;
       display: block;
     }
