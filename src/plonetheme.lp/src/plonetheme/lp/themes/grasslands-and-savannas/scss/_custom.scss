@@ -473,6 +473,12 @@ a.gold-text {
     }
   }
 
+  // Barceloneta's dropdown ▼ label::after inherits --bs-navbar-hover-background
+  // which renders as a dark semi-transparent pill; strip so it doesn't obscure text.
+  label::after {
+    background: transparent !important;
+  }
+
   // Dropdown / submenu
   ul.dropdown {
     background: #fff;
