@@ -380,6 +380,27 @@ a.gold-text {
   }
 }
 
+// Grasslands & Savannas wordmark — wide SVG, to the right of the circular badge.
+// Live site coordinates: left: 240px, top: 81px, size: 415x63px.
+#wlfw-grassland-wordmark {
+  position: absolute;
+  left: 240px;
+  top: 44px;
+  width: 415px;
+  height: 63px;
+  z-index: 10;
+  text-decoration: none;
+  display: block;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: left center;
+  }
+}
+
 #portal-logo-wrapper {
   padding: 0;
 
@@ -456,9 +477,15 @@ a.gold-text {
 // Give the nav wrapper the same dark-blue as the header so white nav-link
 // text is readable. Without this the wrapper is transparent over the white
 // page body and nav links are invisible (white-on-white).
+// Full-viewport-width breakout mirrors #content-header so the dark-blue bar
+// spans edge-to-edge at any viewport width.
 #mainnavigation-wrapper {
   background-color: var(--grass-darkblue);
   border-top: none;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  max-width: none;
 }
 
 #portal-globalnav-wrapper {
@@ -700,7 +727,7 @@ a.gold-text {
 
   #content-header {
     padding-left: 35px;
-    min-height: 100px;
+    min-height: 165px; // tall enough to show badge + stacked wordmark
   }
 
   #wlfw-banner-badge {
@@ -708,6 +735,14 @@ a.gold-text {
     height: 110px;
     top: 12px;
     left: 12px;
+  }
+
+  // Wordmark: stacks under the badge on mobile, scaled proportionally
+  #wlfw-grassland-wordmark {
+    left: 12px;
+    top: 122px;
+    width: 240px;
+    height: 36px;
   }
 }
 
