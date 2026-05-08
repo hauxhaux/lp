@@ -132,3 +132,23 @@ $enable-roboto-webfont: false !default;
 // rule for when Home really is the current page. No shared override is
 // needed — the per-site default `.nav-link` rule wins for non-current
 // states naturally.)
+
+// Barceloneta paints #portal-breadcrumbs with $breadcrumb-bg and adds
+// margin-bottom — that produces a visible filled bar across most sub-site
+// themes that's out of place against full-bleed banner imagery. None of the
+// captured LP sites render breadcrumbs as a filled bar; they're plain
+// inline text above the content. Strip the background and trim spacing
+// so breadcrumbs sit unobtrusively. Per-theme files can still override.
+#portal-breadcrumbs {
+  background: transparent;
+  border: 0;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  margin-bottom: 0.5rem;
+
+  .breadcrumb {
+    background: transparent;
+    padding: 0;
+    margin-bottom: 0;
+  }
+}
