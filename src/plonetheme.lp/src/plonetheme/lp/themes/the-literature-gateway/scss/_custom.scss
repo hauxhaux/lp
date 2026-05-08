@@ -228,13 +228,14 @@ nav[aria-label="breadcrumb"] li {
 // 5. PAGE HEADER
 // =============================================================================
 
-// The Literature Gateway uses a bird-banner image above the header.
-// Captured site puts logo at top:75px inside a 130px-tall #content-header
-// because its nav is integrated; our Diazo template emits the nav as a
-// separate row below, so we need a taller band that contains the logo
-// fully and leaves the nav row clear.
+// The Literature Gateway uses a bird-banner image across the header area.
+// Captured site applied it to #portal-top via background-image: repeat-x.
+// In our Plone 6 layout there is no #portal-top equivalent — apply it
+// directly to #content-header so the birds are always visible.
+// The logo (position:relative, top:25px) floats above the bird strip.
 #content-header {
-  background: transparent;
+  background: #fff url('../theme_images/literature-images/bird-banner.jpg') left top repeat-x;
+  background-size: 52%;   // scale down the 2542×181 banner to ~half viewport
   border: none;
   position: relative;
   width: 100%;
@@ -242,23 +243,17 @@ nav[aria-label="breadcrumb"] li {
   overflow: hidden;
 }
 
-// Portal-top area with bird banner background
-// NOTE: In Plone 6 Classic, the equivalent of #portal-top is handled
-// via the hero/principal area or custom Diazo injection
-.portal-top-banner {
-  height: 215px;
-  background-image: url('../theme_images/literature-images/bird-banner.jpg');
-  background-position: left top;
-  background-repeat: repeat-x;
-  background-size: 52%;
+@media (max-width: 768px) {
+  #content-header {
+    background-size: 100%;
+    min-height: 130px;
+  }
 }
 
-@media (max-width: 768px) {
-  .portal-top-banner {
-    height: 130px;
-    background-repeat: no-repeat;
-    background-size: 100%;
-  }
+// .portal-top-banner is no longer used — bird banner is on #content-header.
+// Retained as a hidden no-op so old template references don't break.
+.portal-top-banner {
+  display: none;
 }
 
 #portal-logo-wrapper {
