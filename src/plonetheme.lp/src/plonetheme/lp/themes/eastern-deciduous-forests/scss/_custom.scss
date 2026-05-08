@@ -107,12 +107,13 @@ body {
   display: block;
 }
 
-// Move anonymous login tools into the return banner area
+// Login/register links inside the dark return-to-LP banner.
+// top: 10px places them within the banner's own padding area.
 #portal-anontools {
   position: absolute;
   right: 30px;
   z-index: 10;
-  top: -36px;
+  top: 10px;
 
   .list-inline {
     margin: 0;
@@ -331,12 +332,14 @@ a.gold-text {
 // 5. PAGE HEADER
 // =============================================================================
 
+// Dark-green header band housing the logo.
+// min-height (not fixed height) lets the band grow if the logo row wraps.
 #content-header {
   background: var(--edf-darkgreen);
   border: none;
   position: relative;
   width: 100%;
-  height: 150px;
+  min-height: 150px;
 }
 
 #portal-logo-wrapper {
@@ -416,10 +419,12 @@ a.gold-text {
 // 6. NAVIGATION
 // =============================================================================
 
+// Nav flows as a sibling row below #content-header (not overlapping).
+// The captured site used position:absolute inside the header, but our
+// Diazo template emits the nav as a separate block, so we let it flow.
 #mainnavigation-wrapper {
   background-color: transparent;
   border-top: none;
-  // Nav overlaps onto the header — positioned at top: 100px from header top
 }
 
 #portal-globalnav-wrapper {
