@@ -359,17 +359,49 @@ a.readmore {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 991.98px) {
+  // Mobile: header lays out as logo (left) + hamburger (right) — no fixed height.
   #content-header {
-    height: 185px;
+    min-height: 0;
+    padding: 0.5rem 0.75rem;
   }
 
-  #portal-logo-wrapper #portal-logo {
-    position: absolute;
-    top: 30px;
-    left: 10px;
-    width: 295px;
-    margin: 0;
+  #portal-logo-wrapper {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding-bottom: 0;
+
+    #portal-logo {
+      margin: 0;
+
+      img {
+        width: 110px !important;
+        max-width: 110px;
+        height: auto;
+      }
+    }
+
+    .navbar-toggler {
+      flex-shrink: 0;
+    }
+  }
+
+  // Header search box is rendered inside the offcanvas at this breakpoint;
+  // make sure the desktop absolute positioning doesn't apply.
+  #header-searchbox #portal-searchbox,
+  .offcanvas-body #portal-searchbox {
+    position: static;
+    top: auto;
+    right: auto;
+  }
+}
+
+@media (max-width: 575.98px) {
+  #portal-logo-wrapper #portal-logo img {
+    width: 90px !important;
+    max-width: 90px;
   }
 }
 
@@ -477,8 +509,26 @@ a.readmore {
 
 // Mobile nav
 @media (max-width: 991.98px) {
+  // Hide the nav bar strip when the offcanvas is collapsed — otherwise the
+  // 1px white border-top + blue background show as a thin strip below the
+  // header. Toggler lives in the header instead.
+  #mainnavigation-wrapper {
+    background-color: transparent;
+    border-top: none;
+  }
+
+  #portal-globalnav-wrapper {
+    background-color: transparent;
+    padding: 0;
+
+    > .container {
+      padding: 0;
+    }
+  }
+
   .navbar-toggler {
-    border-color: rgba(255, 255, 255, 0.3);
+    border-color: var(--wlfw-nav-bg);
+    color: var(--wlfw-nav-bg);
   }
 
   #offcanvasNavbar {
@@ -1174,6 +1224,11 @@ a.overlay-btn-2 {
   color: #f8cf95;
   float: left;
   margin-right: 10px;
+  // Prevent the unstyled icon name (e.g. "play_circle_filled") from
+  // expanding past the viewport before the icon font loads.
+  max-width: 100%;
+  overflow: hidden;
+  word-break: break-word;
 }
 
 .material-icons-gold-circle {

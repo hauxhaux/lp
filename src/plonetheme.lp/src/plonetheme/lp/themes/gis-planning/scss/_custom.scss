@@ -279,3 +279,88 @@ input.searchPage {
 .nest-navigation-bar { display: block; }
 #portal-banner       { display: none; }
 .nest-nav-inner      { width: 1140px; }
+
+
+// =============================================================================
+// 10. RESPONSIVE — mobile offcanvas + small-viewport adjustments
+// =============================================================================
+
+// Bootstrap's offcanvas inherits --bs-primary (LP lime green #4AC728) for its
+// background, which clashes with this theme's dark near-black nav palette.
+// Override on small viewports so the slide-out panel matches the desktop nav.
+@media (max-width: 991.98px) {
+  #offcanvasNavbar {
+    background-color: var(--gis-nav-bg);
+    color: #fff;
+
+    .offcanvas-header .btn-close {
+      // White X on dark background
+      filter: invert(1);
+    }
+
+    .offcanvas-body {
+      // Stack nav + search vertically on mobile
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+
+  // Make nav links full-width inside the slide-out panel and remove the
+  // vertical white separator (which was meant for horizontal layout).
+  #portal-globalnav {
+    flex-direction: column;
+    width: 100%;
+
+    .nav-item a.nav-link {
+      border-right: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      text-align: left;
+      width: 100%;
+    }
+  }
+
+  // Inside the offcanvas, give the searchbox proper top spacing and full width
+  #portal-searchbox {
+    margin-top: 1rem;
+    margin-left: 0;
+    padding: 0 0.5rem;
+    width: 100%;
+
+    label {
+      color: #fff;
+    }
+
+    #searchGadget,
+    input[type="text"],
+    input[type="search"] {
+      width: 100%;
+      box-sizing: border-box;
+    }
+  }
+
+  // Header padding on small screens — keep logo from hugging the edge
+  #portal-logo {
+    margin: 14px 12px 4px;
+  }
+
+  // Content side-margins were 2em (~32px) — too generous on phones
+  #content {
+    margin: 1em 1em !important;
+  }
+}
+
+// Extra-small phone (<=414px): tighten further to prevent text crowding
+@media (max-width: 414px) {
+  #content {
+    margin: 1em 0.75em !important;
+  }
+
+  #portal-logo {
+    margin: 12px 10px 4px;
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+}
