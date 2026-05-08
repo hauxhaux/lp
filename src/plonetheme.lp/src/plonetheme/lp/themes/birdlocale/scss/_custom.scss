@@ -239,12 +239,12 @@ a.readmore {
   }
 }
 
-// WLFW partner badge — circular logo anchored top-right of the header image.
-// BirdLocale is a WLFW partner sub-site; the badge links to workinglandsforwildlife.org.
+// WLFW partner badge — circular logo anchored top-left of the header image,
+// matching the live BirdLocale site layout (badge left, wordmark to its right).
 #wlfw-banner-badge {
   position: absolute;
   top: 20px;
-  right: 40px;
+  left: 30px;
   width: 120px;
   height: 120px;
   z-index: 10;
@@ -264,7 +264,7 @@ a.readmore {
     width: 80px;
     height: 80px;
     top: 10px;
-    right: 10px;
+    left: 10px;
   }
 }
 
@@ -276,7 +276,8 @@ a.readmore {
     display: block;
     width: 320px;
     position: relative;
-    left: 10%;
+    // Start the wordmark to the right of the 120px WLFW badge + 30px gap
+    left: 230px;
     top: 20px;
     z-index: 2;
     background: url('../theme_images/birdlocale-logo.png') no-repeat left center;
