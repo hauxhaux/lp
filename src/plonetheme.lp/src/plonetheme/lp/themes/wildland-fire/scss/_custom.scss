@@ -875,7 +875,8 @@ a.btn-orange {
     color: var(--wf-footer-link);
     display: block;
     margin-top: 0;
-    height: 350px;
+    // Removed fixed height: 350px — it clips footer content on pages with
+    // more footer text; let the content dictate height instead.
     padding: 2em 0;
 
     a {
