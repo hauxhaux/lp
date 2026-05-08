@@ -1,0 +1,438 @@
+// =============================================================================
+// PLONETHEME.LP — EQUITY & INCLUSION CUSTOM STYLES
+// =============================================================================
+// Custom overrides for the equity-inclusion sub-site.
+//
+// Reference design:  lp-lineage-theme-capture/captured-themes/equity-inclusion/STYLE-GUIDE.md
+// Source CSS:        lp-lineage-theme-capture/captured-themes/equity-inclusion/css/equity.css
+// Note: production site is access-restricted (HTTP 401); palette below is from
+//       Wayback Machine 2023 captures.
+// Compiled via:      themes/scripts/build-themes.mjs (auto-discovered by per-site theme glob)
+// =============================================================================
+
+
+// =============================================================================
+// 1. CUSTOM PROPERTIES
+// =============================================================================
+
+:root {
+  // --- Equity & Inclusion brand colours ---
+  --eq-heading:       #A26623;   // Brown/rust H1–H6
+  --eq-nav-bg:        #0E1D1C;   // Dark navy main nav background
+  --eq-nest-nav:      #788A3B;   // Olive-green return-to-parent banner
+  --eq-nav-selected:  #DFDF9E;   // Muted gold selected nav
+  --eq-nav-hover:     #84984C;   // Hover green nav
+  --eq-portlet-blue:  #205C90;   // Portlet header blue
+  --eq-edit-bar:      #84B3B3;   // Edit bar dark teal
+  --eq-footer-bg:     #2E76A0;   // LP footer blue
+  --eq-footer-link:   #7DD4D6;   // Light blue
+  --eq-footer-credit: #AAE2FD;   // Pale blue site credit
+
+  --eq-text:          #666;      // Body text grey
+  --eq-text-light:    #676767;   // Intro text dark grey
+
+  --eq-orange:        #F7931F;   // Readmore hover / button
+  --eq-orange-bg:     #DD733E;   // .bg-orange block
+  --eq-orange-solid:  #F59E20;   // .btn-solid-orange
+  --eq-orange-hover:  #E64C00;   // Button hover
+  --eq-cta-bg:        #F7BD4F;   // CTA banner gold
+  --eq-cta-hover:     #F38B1A;   // CTA button hover
+  --eq-cta-block-bg:  #28526E;   // CTA block dark teal
+  --eq-gold:          #F6D514;   // Style guide gold
+  --eq-blue-accent:   #6D97BF;   // Style guide blue
+  --eq-grey-bg:       #F5F5F5;
+}
+
+
+// =============================================================================
+// 2. BASE & TYPOGRAPHY
+// =============================================================================
+
+// Prevent horizontal scrollbar/page-scroll caused by:
+//  (a) offcanvas (position:fixed, translated off-screen) extending past viewport,
+//  (b) authored content with inline width (e.g. legacy #cyclist banner at 1280px),
+//  (c) the #content-header 100vw breakout interacting with the vertical scrollbar.
+// overflow-x: clip leaves vertical scroll intact and never spawns a horizontal one.
+// Applied to both html and body — clip on body alone still lets the html element
+// be horizontally scrolled by user input/Tab focus on offscreen children.
+html,
+body {
+  overflow-x: clip;
+}
+
+body {
+  background: #fff;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  color: var(--eq-text);
+}
+
+#content h1.documentFirstHeading,
+#content h1 {
+  color: var(--eq-heading);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 2.6em;
+  margin-bottom: 0.5em;
+  margin-top: 1.5em;
+  letter-spacing: -0.0115em;
+}
+
+h2, h3, h4, h5, h6 {
+  color: var(--eq-heading);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  line-height: 1.5em;
+  letter-spacing: -0.0115em;
+}
+
+h2 { font-size: 30px; }
+h3 { font-size: 24px; }
+
+p {
+  font-family: 'Merriweather', serif;
+  color: var(--eq-text);
+  letter-spacing: 0.01em;
+  line-height: 1.6em;
+  padding-bottom: 15px;
+}
+
+li {
+  font-family: 'Merriweather', serif;
+  color: var(--eq-text);
+}
+
+#portal-globalnav li,
+#portal-footer li,
+nav[aria-label="breadcrumb"] li {
+  font-family: 'Montserrat', sans-serif;
+  color: inherit;
+}
+
+.intro {
+  font-size: 17px;
+  color: var(--eq-text-light);
+  line-height: 1.7em;
+  margin: 1em 0;
+}
+
+@media (max-width: 767px) {
+  #content h1.documentFirstHeading,
+  #content h1 { margin-top: 0; }
+}
+
+
+// =============================================================================
+// 3. PAGE HEADER & LOGO
+// =============================================================================
+
+#content-header {
+  background: #fff;
+  border: none;
+  position: relative;
+  // .container in index.html constrains the header to Bootstrap's max-width;
+  // break out to viewport edges so the white band runs edge-to-edge.
+  width: 100vw;
+  max-width: none;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  min-height: 150px;
+}
+
+#portal-logo-wrapper {
+  padding: 0;
+
+  #portal-logo {
+    margin: 0;
+    display: block;
+
+    img {
+      // Captured equity site uses width:480px top:20px left:15%
+      width: 480px;
+      max-width: 90%;
+      height: auto;
+      position: relative;
+      top: 20px;
+      left: 5%;
+      transition: all 0.3s ease-in-out;
+    }
+  }
+}
+
+@media (max-width: 991px) {
+  // Below the navbar-expand-lg breakpoint the offcanvas hamburger is in
+  // the header, so the logo no longer needs the absolute-style nudge that
+  // pushes it down into breadcrumb territory.
+  #portal-logo-wrapper #portal-logo img {
+    top: 0;
+    left: 0;
+    width: 380px;
+    max-width: 70vw;
+  }
+
+  // Keep #portal-top (Log in / "Jump to child site" dropdown) on a single
+  // row that doesn't push the dropdown wider than the viewport.
+  #portal-top {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  #portal-top select,
+  #portal-top .form-select {
+    max-width: 60vw;
+  }
+}
+
+@media (max-width: 575px) {
+  #portal-logo-wrapper #portal-logo img {
+    width: 280px;
+  }
+}
+
+@media (max-width: 359px) {
+  #portal-logo-wrapper #portal-logo img {
+    width: 220px;
+  }
+}
+
+
+// =============================================================================
+// 4. NEST NAVIGATION BAR (return-to-parent strip)
+// =============================================================================
+
+#return-to-lp-banner {
+  background: var(--eq-nest-nav);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 30px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+
+  a {
+    color: #fff;
+    text-decoration: none;
+    &:hover { color: #ffe061; }
+  }
+}
+
+
+// =============================================================================
+// 4. NAVIGATION  — dark navy bar with muted-gold selected state
+// =============================================================================
+
+#mainnavigation-wrapper,
+#portal-globalnav-wrapper {
+  background-color: var(--eq-nav-bg);
+  border: none;
+}
+
+#portal-globalnav {
+  background-color: var(--eq-nav-bg);
+  width: 100%;
+  justify-content: center;
+
+  li { background: transparent; }
+
+  .nav-item a.nav-link {
+    background-color: var(--eq-nav-bg);
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    // Slightly tighter padding prevents the 6-item nav from wrapping to 2 rows
+    padding: 12px 14px;
+    border: none;
+    transition: background-color 0.2s ease, color 0.2s ease;
+
+    &:hover {
+      background-color: var(--eq-nav-hover);
+      color: #fff;
+    }
+  }
+
+  .nav-item.current > a.nav-link,
+  .nav-item.inPath:not(.index_html) > a.nav-link {
+    background-color: var(--eq-nav-selected);
+    color: #222;
+
+    &:hover {
+      background-color: var(--eq-nav-hover);
+      color: #fff;
+    }
+  }
+
+  // Barceloneta's dropdown ▼ toggle label::after gets background from
+  // --bs-navbar-hover-background which resolves to a dark semi-transparent
+  // box that covers the adjacent link text. Make it transparent.
+  label::after {
+    background: transparent !important;
+  }
+}
+
+// Between the navbar-expand-lg breakpoint (992px) and 1199px the
+// horizontal layout (5+1 nav items + search + 30px container padding) is
+// tight: at 992 the 6th item wraps to a 2nd row. Tighten padding/letter-
+// spacing and shrink the search field so all 6 items + search hold one line.
+@media (min-width: 992px) and (max-width: 1199px) {
+  #portal-globalnav .nav-item a.nav-link {
+    padding: 12px 8px;
+    font-size: 12px;
+    letter-spacing: 0.02em;
+  }
+
+  #portal-searchbox .searchField {
+    width: 140px;
+    min-width: 0;
+  }
+}
+
+// At <=991 the nav collapses into the offcanvas; ensure the search box
+// inside the offcanvas is full width and stacked beneath the nav list,
+// and the offcanvas panel itself matches the navy of the desktop nav
+// (Bootstrap defaults the panel to --bs-primary which is the LP green).
+@media (max-width: 991px) {
+  #offcanvasNavbar {
+    background-color: var(--eq-nav-bg);
+    color: #fff;
+  }
+
+  #offcanvasNavbar .offcanvas-body {
+    flex-direction: column;
+    align-items: stretch !important;
+  }
+
+  #portal-searchbox {
+    margin-top: 1rem;
+    width: 100%;
+  }
+
+  #portal-searchbox .searchField {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+
+// =============================================================================
+// 5. BUTTONS & CTAs
+// =============================================================================
+
+a.readmore {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-family: 'Source Sans Pro', sans-serif;
+
+  &:hover { color: var(--eq-orange); }
+}
+
+.btn-solid-orange {
+  background: var(--eq-orange-solid);
+  color: #fff;
+  border-color: transparent;
+  &:hover {
+    background: var(--eq-orange-hover);
+    color: #fff;
+  }
+}
+
+.cta-button {
+  background: var(--eq-cta-bg);
+  color: #fff;
+  padding: 0.75rem 1.25rem;
+  border-radius: 4px;
+  font-weight: 700;
+  text-transform: uppercase;
+  display: inline-block;
+  text-decoration: none;
+  transition: background 0.2s ease;
+  &:hover { background: var(--eq-cta-hover); color: #fff; }
+}
+
+
+// =============================================================================
+// 6. CONTENT BLOCKS & UTILITY
+// =============================================================================
+
+#cta-block {
+  background: var(--eq-cta-block-bg);
+  color: #fff;
+  padding: 40px 30px;
+  margin: 2em 0;
+  h2, h3, h4 { color: #fff; }
+}
+
+.bg-orange { background: var(--eq-orange-bg); }
+.grey-bg, .light-grey { background: var(--eq-grey-bg); }
+
+
+// =============================================================================
+// 7. PORTLETS
+// =============================================================================
+
+.card.portlet {
+  font-size: 90%;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+
+  &.portlet-navigation-tree .card-header {
+    background: var(--eq-portlet-blue);
+    color: #fff;
+    text-transform: uppercase;
+    padding: 15px;
+    border-radius: 4px 4px 0 0;
+  }
+}
+
+
+// =============================================================================
+// 8. FOOTER  — LP-wide blue footer
+// =============================================================================
+
+#portal-footer-wrapper {
+  background: var(--eq-footer-bg);
+  margin-top: 5em;
+
+  #portal-footer {
+    background: var(--eq-footer-bg);
+    color: #fff;
+    padding: 2em 0;
+
+    a {
+      color: var(--eq-footer-link);
+      text-decoration: none;
+      &:hover { color: #fff; }
+    }
+
+    .sitecredit { color: var(--eq-footer-credit); }
+
+    h4 {
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: 16px;
+      margin-top: 20px;
+      padding: 30px 0 0;
+    }
+  }
+}
+
+
+// =============================================================================
+// 9. STYLE GUIDE COLOR SWATCHES
+// =============================================================================
+
+.orange     { background: var(--eq-orange); }
+.brown      { background: var(--eq-heading); }
+.dark-blue  { background: var(--eq-portlet-blue); }
+.light-grey { background: var(--eq-grey-bg); }
+.dark-grey  { background: var(--eq-text-light); }
+.gold       { background: var(--eq-gold); }
+.blue       { background: var(--eq-blue-accent); }

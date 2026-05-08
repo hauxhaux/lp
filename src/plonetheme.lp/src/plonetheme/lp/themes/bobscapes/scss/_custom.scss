@@ -1,0 +1,1138 @@
+// =============================================================================
+// PLONETHEME.LP — BOBSCAPES CUSTOM STYLES
+// =============================================================================
+// Custom overrides for the Bobscapes sub-site, scoped under
+// body classes like .section-bobscapes or .site-bobscapes.
+//
+// Reference design:  lp-lineage-theme-capture/captured-themes/bobscapes/STYLE-GUIDE.md
+// Source CSS:        lp-lineage-theme-capture/captured-themes/bobscapes/css/bobscapes.css
+// Compiled via:      themes/scripts/build-themes.mjs (auto-discovered by per-site theme glob)
+//
+// CONTENTS
+//   1.  Custom properties  — colour palette
+//   2.  Base & reset
+//   3.  Typography         — headings, paragraphs
+//   4.  Links
+//   5.  Page header        — logo, search, portal-top
+//   6.  Navigation         — global nav, hover/selected, submenus, mobile
+//   7.  Banner images
+//   8.  Breadcrumbs
+//   9.  Layout utilities   — containers, grids, full-width sections
+//  10.  Content blocks     — framework, green-box, blue-section, quail, cellphone
+//  11.  Buttons & CTAs
+//  12.  Footer
+//  13.  Portlets
+//  14.  Animated underline
+//  15.  Utility classes
+// =============================================================================
+
+
+// =============================================================================
+// 1. CUSTOM PROPERTIES
+// =============================================================================
+
+:root {
+  // --- Bobscapes brand colours ---
+  --bob-gold:           #ffda3e;   // Header background (bright gold/yellow)
+  --bob-nav-bg:         #5d442a;   // Nav bar background (dark brown)
+  --bob-footer-bg:      #7d6042;   // Footer background (medium brown)
+  --bob-footer-border:  #54402d;   // Footer divider borders, h3 underline
+  --bob-text:           #2c2c2c;   // Body text, headings, nav link text
+  --bob-rust:           #a84e47;   // Nav hover text, home tab hover
+  --bob-selected:       #dd7031;   // Selected nav tab background (orange)
+  --bob-footer-heading: #d4a447;   // Footer h3 colour (gold)
+  --bob-footer-link:    #ede6d7;   // Footer link colour (cream)
+  --bob-footer-hover:   #f4a221;   // Footer link hover (amber)
+  --bob-ft-menu-hover:  #f1c058;   // .ft-menu a:hover (gold)
+  --bob-nav-hover:      #ffe061;   // .bobscapes-nav-bar a:hover (gold)
+  --bob-underline:      #ED9700;   // Animated underline ::after
+  --bob-page-bg:        #E9E6D4;   // Body background (warm cream/tan)
+  --bob-dark-bar:       #34281c;   // Site actions bar background
+  --bob-framework:      #fbecbf;   // .framework-block background (light yellow)
+  --bob-green-box:      #8fa85d;   // .green-box background
+  --bob-blue-section:   #2fb9d2;   // .blue-section background
+  --bob-quail-border:   #4b4744;   // .quail-block top border (dark)
+  --bob-btn-orange:     #f8903e;   // Orange button background
+  --bob-btn-orange-hov: #F7700D;   // Orange button hover
+  --bob-mobile-nav-bg:  #efefef;   // Mobile nav item background
+}
+
+
+// =============================================================================
+// 2. BASE & RESET
+// =============================================================================
+
+body {
+  background: var(--bob-page-bg);
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  color: #000;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+// "Return to Landscape Partnership Site" brown bar
+#return-to-lp-banner {
+  background: var(--bob-nav-bg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 40px 10px 70px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  position: relative;
+
+  a {
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-decoration: none;
+
+    &:hover {
+      color: var(--bob-nav-hover);
+    }
+  }
+}
+
+// Login/register links inside the dark return-to-LP banner.
+// top: 10px places them within the banner's own padding area.
+#portal-anontools {
+  position: absolute;
+  right: 30px;
+  z-index: 10;
+  top: 10px;
+
+  .list-inline {
+    margin: 0;
+    padding: 0;
+
+    .list-inline-item {
+      margin: 0;
+    }
+  }
+
+  a {
+    color: #fff;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    text-decoration: none;
+
+    &:hover {
+      color: var(--bob-nav-hover);
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  #return-to-lp-banner {
+    padding: 10px 10px 10px 15px;
+    font-size: 11px;
+
+    a { letter-spacing: 1px; }
+  }
+
+  #portal-anontools {
+    right: 10px;
+
+    a { font-size: 11px; padding: 3px 8px; }
+  }
+}
+
+
+// =============================================================================
+// 3. TYPOGRAPHY
+// =============================================================================
+
+// Page title — Montserrat medium, comfortable top spacing (not too much)
+#content h1.documentFirstHeading,
+#content h1 {
+  color: var(--bob-text);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2em;         // was 2.3em — a touch smaller feels cleaner
+  font-weight: 600;
+  margin-bottom: 0.5em;
+  margin-top: 1em;        // was 1.5em — trim top gap so content starts sooner
+  line-height: 1.25;
+}
+
+h2 {
+  color: var(--bob-text);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 1.5rem;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.5em;
+  margin-top: 1.5em;
+}
+
+h3, h4, h5, h6 {
+  color: var(--bob-text);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  line-height: 1.4em;
+  letter-spacing: -0.0115em;
+  margin-bottom: 8px;
+}
+
+h3 { font-size: 22px; }
+h4 { font-size: 18px; }
+h5 { font-size: 15px; }
+
+p {
+  font-family: 'Merriweather', serif;
+  color: #555;            // slightly less muted than #666 — better readability
+  font-size: 15px;
+  letter-spacing: 0.01em;
+  line-height: 1.7em;
+}
+
+li {
+  font-family: 'Merriweather', serif;
+  color: #555;
+  font-size: 15px;
+  line-height: 1.6em;
+}
+
+// Navigation/chrome list items must not inherit body-text font/color.
+// Reset them to Montserrat and inherit the parent container's color.
+#portal-globalnav li,
+#portal-footer-wrapper li,
+#return-to-lp-banner li,
+nav[aria-label="breadcrumb"] li {
+  font-family: 'Montserrat', sans-serif;
+  color: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+
+// =============================================================================
+// 4. LINKS
+// =============================================================================
+
+
+// =============================================================================
+// 5. PAGE HEADER
+// =============================================================================
+
+// Gold header band. Logo sits in the left column; #portal-top (search,
+// lineage selector) is hidden in this sub-site. Nav flows as a sibling
+// row below via #mainnavigation-wrapper. min-height gives the gold band
+// enough height for the logo with comfortable vertical breathing room.
+#content-header {
+  background: var(--bob-gold);
+  border: none;
+  position: relative;
+  width: 100%;
+  min-height: 170px;   // matches captured reference: 170px desktop header
+  padding: 25px 0;
+  // Override Bootstrap d-flex / flex-row so the header stacks content
+  // naturally without unusual column gaps.
+  align-items: center;
+}
+
+// Hide the lineage sub-site jump selector — not useful in sub-site context.
+// The brown "Return to LP" banner handles cross-site navigation instead.
+// Bootstrap's d-flex class on #portal-top uses !important, so we need
+// !important here to win the specificity battle.
+#portal-top {
+  display: none !important;
+}
+
+#lineageSelectionForm {
+  display: none !important;
+}
+
+#portal-logo-wrapper {
+  padding: 0 0 0 2em;
+
+  #portal-logo {
+    margin: 0;
+    display: block;
+    width: 360px;   // generous width for the Bobscapes SVG text logo
+    height: 100px;
+    position: relative;
+
+    a {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    img {
+      // Show the actual SVG logo img tag directly (Diazo injects bobscapes-logo.svg)
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: left center;
+    }
+  }
+}
+
+// The search box is rendered inside the Bootstrap offcanvas nav body.
+// On desktop it appears inline after all the nav links — style it to look
+// tidy. On mobile it's inside the offcanvas drawer and is fine as-is.
+#portal-searchbox {
+  .searchSection { display: none; }
+
+  input[type="text"],
+  .form-control {
+    font-size: 13px;
+    padding: 4px 8px;
+    height: 32px;
+    width: 150px;
+    border: 1px solid #ccc;
+    border-radius: 3px 0 0 3px;
+    background: #fff;
+  }
+
+  .searchButton,
+  button[type="submit"] {
+    font-size: 12px;
+    padding: 4px 10px;
+    height: 32px;
+    background: #ededed;
+    border: 1px solid #ccc;
+    border-left: none;
+    border-radius: 0 3px 3px 0;
+    color: #555;
+    cursor: pointer;
+
+    &:hover {
+      background: #ddd;
+    }
+  }
+}
+
+@media (max-width: 991.98px) {
+  #content-header {
+    min-height: auto;
+    padding: 12px 0;
+  }
+
+  #portal-logo-wrapper {
+    padding: 0 0 0 0.75em;
+
+    #portal-logo {
+      width: 220px;
+      height: 60px;
+    }
+  }
+}
+
+
+// =============================================================================
+// 6. NAVIGATION
+// =============================================================================
+
+// Nav sits below the gold header as a sibling row. Background is gold to
+// match the captured design (the original placed nav inside the header at
+// top:121px via absolute positioning — we keep it in normal flow instead).
+// flex-nowrap prevents items wrapping onto a second row at desktop widths;
+// font-size reduced to 15px (was 130% ~20px) so 7 items fit on one row.
+#mainnavigation-wrapper {
+  background-color: var(--bob-gold);
+  border: none;
+  position: static;
+  width: 100%;
+}
+
+#portal-globalnav-wrapper {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+
+  .container {
+    max-width: 100%;
+    padding: 0 1em;
+  }
+}
+
+#portal-globalnav {
+  background-color: transparent;
+  // Right-align nav links, matching reference captured design.
+  // flex-nowrap: never allow items to wrap to a second row on desktop.
+  justify-content: flex-end;
+  flex-wrap: nowrap;
+  align-items: stretch;
+
+  .nav-item {
+    flex-shrink: 0;  // items must not shrink; drop to mobile toggle instead
+
+    a.nav-link {
+      background-color: transparent;
+      color: var(--bob-text);
+      font-size: 15px;          // was 130% (~20px); 7+ items need 15px to fit
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      text-transform: none;
+      padding: 0.65em 1em;      // tighter padding to fit all items one row
+      white-space: nowrap;
+      border: none;
+      transition: background-color 0.2s ease, color 0.2s ease;
+
+      &:hover {
+        background-color: transparent;
+        color: var(--bob-rust);
+      }
+    }
+
+    // Selected / current nav item
+    &.current > a.nav-link,
+    &.inPath:not(.index_html) > a.nav-link {
+      background-color: var(--bob-selected);
+      color: #fff;
+
+      &:hover {
+        color: var(--bob-rust);
+      }
+    }
+  }
+
+  // Dropdown / submenu
+  ul.dropdown {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-top: none;
+
+    .nav-item a.nav-link {
+      background: #fff;
+      color: #333;
+      text-transform: none;
+      font-size: 14px;
+      padding: 8px 18px;
+      white-space: nowrap;
+
+      &:hover {
+        background-color: #f8f8f8;
+        color: var(--bob-rust);
+      }
+    }
+  }
+}
+
+// Dropdown toggle arrow
+#portal-globalnav .nav-item {
+  > label {
+    color: var(--bob-text);
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 6px;
+    cursor: pointer;
+
+    &::after {
+      content: "▾";
+      font-size: 11px;
+      color: var(--bob-text);
+      line-height: 1;
+    }
+  }
+
+  &.has_subtree > a.nav-link {
+    padding-right: 24px;
+  }
+}
+
+// Mobile / tablet nav (offcanvas drawer)
+@media (max-width: 991.98px) {
+  .navbar-toggler {
+    border-color: rgba(0, 0, 0, 0.4);
+  }
+
+  #offcanvasNavbar {
+    background-color: var(--bob-mobile-nav-bg);
+
+    .offcanvas-header .btn-close {
+      filter: none;
+    }
+  }
+
+  #portal-globalnav {
+    // In offcanvas mode, allow flex-wrap / column layout
+    flex-wrap: wrap;
+
+    .nav-item {
+      width: 100%;
+      background: var(--bob-mobile-nav-bg);
+
+      a.nav-link {
+        text-align: left;
+        padding: 12px 20px;
+        font-size: 15px;
+        color: var(--bob-text);
+      }
+    }
+  }
+
+  // On mobile, search box moves into the offcanvas drawer — style it
+  // so it sits flush as a block rather than inline
+  #portal-searchbox {
+    display: block;
+    padding: 12px 20px;
+    width: 100%;
+
+    input[type="text"],
+    .form-control {
+      width: 100%;
+    }
+  }
+}
+
+
+// =============================================================================
+// 7. BANNER IMAGES
+// =============================================================================
+
+#hero,
+.principal {
+  display: block;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+
+  &.has-banner {
+    height: 300px;
+    background-color: #ededed;
+  }
+
+  .container,
+  .gigantic {
+    &:empty { display: none; }
+  }
+}
+
+@media (max-width: 768px) {
+  #hero.has-banner,
+  .principal.has-banner {
+    height: 150px;
+  }
+}
+
+
+// =============================================================================
+// 8. BREADCRUMBS
+// =============================================================================
+
+// The shared _base.scss already sets:
+//   background: transparent; border: 0; padding: 0.25rem 20px;
+//   a { color: #205c90; } .breadcrumb-item.active { color: #6c757d; }
+// No bobscapes-specific breadcrumb overrides are needed — just let the
+// shared rules apply. Any previous per-theme breadcrumb rules (green
+// background, filled bar) are intentionally removed here.
+
+
+// =============================================================================
+// 9. LAYOUT UTILITIES
+// =============================================================================
+
+#visual-portal-wrapper,
+.outer-wrapper {
+  background-color: #fff;
+  max-width: 100%;
+  min-height: calc(100vh - 190px);
+  border-radius: 0;
+}
+
+.fullwidth-section {
+  padding: 0;
+  margin-bottom: 3em;
+}
+
+// Full-bleed breakout from the centered .container at narrower widths.
+// Uses calc(50% - 50vw) so the section spans exactly viewport width
+// regardless of the parent container's left offset — avoids the
+// horizontal overflow that 'width: 100vw' caused at 992/768/576.
+@media (max-width: 1169px) {
+  .fullwidth-section {
+    width: auto;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+  }
+}
+
+// Grid layouts
+.grid-container-three-quarter {
+  display: grid;
+  grid-template-columns: 68% 1fr;
+  grid-column-gap: 30px;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .grid-container-three-quarter { grid-template-columns: 100%; }
+}
+
+.flex-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .flex-container {
+    align-items: center;
+    flex-direction: column;
+  }
+}
+
+.flex-container-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+@media (max-width: 768px) {
+  .flex-container-center {
+    gap: 20px;
+    flex-direction: column;
+  }
+}
+
+.flex1 { flex: 1; }
+
+.center-block {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+}
+
+.twocol-container {
+  display: flex;
+  gap: 30px;
+}
+
+@media (max-width: 1200px) {
+  .twocol-container { flex-direction: column; }
+}
+
+
+// =============================================================================
+// 10. CONTENT BLOCKS
+// =============================================================================
+
+.framework-block {
+  background: var(--bob-framework);
+  padding: 20px 30px;
+}
+
+.green-box {
+  background: var(--bob-green-box);
+  text-align: center;
+  padding: 30px;
+  color: #fff;
+  margin: 1em 0;
+  border-radius: 10px;
+}
+
+.blue-section {
+  background: var(--bob-blue-section);
+  text-align: center;
+  padding: 20px;
+  color: #fff;
+  border-radius: 8px;
+
+  h3 {
+    margin: 0;
+    font-size: 1.8rem;
+  }
+}
+
+.quail-block {
+  background: url('../theme_images/bobscapes-images/quail-forever-landscape-w-quail.jpg') no-repeat center top;
+  background-size: cover;
+  min-height: 540px;
+  border-top: 6px solid var(--bob-quail-border);
+}
+
+.cellphone-block {
+  background: url('../theme_images/bobscapes-images/hand-w-phone.jpg') no-repeat center center;
+  background-size: cover;
+  min-height: 540px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  h2 {
+    margin-right: 30%;
+    color: #fff;
+  }
+}
+
+@media (max-width: 768px) {
+  .quail-block {
+    background: none;
+    min-height: 10px;
+  }
+
+  .cellphone-block {
+    min-height: 480px;
+    padding: 20px 20px 30px;
+
+    h2 {
+      font-size: 2em;
+      line-height: 1.5em;
+      margin-right: 0;
+    }
+  }
+}
+
+.dark-block {
+  background: rgba(0, 0, 0, 0.80);
+  padding: 40px 30px;
+  min-height: 460px;
+}
+
+.blue-block {
+  background: rgba(20, 83, 120, 0.80);
+  padding: 40px 30px;
+  min-height: 400px;
+
+  h4 { color: #f1d215; font-size: 22px; }
+  p { color: #fff; font-size: 16px; line-height: 1.7em; margin-top: 10px; }
+  li { color: #fff; }
+
+  a:link, a:visited { color: #f9d90f; }
+  a:hover { color: #fd7916; }
+}
+
+.feature-block {
+  border: 6px solid #efefef;
+  padding: 20px;
+  background: #fff;
+  margin-bottom: 0;
+
+  h3 { margin-top: 10px; font-size: 28px; color: var(--bob-rust); }
+}
+
+.bg-grey { background: #efefef; }
+.bg-white { background: #fff; }
+
+.subhead {
+  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: 2px;
+  display: block;
+  color: #7f7f87;
+  line-height: 1em;
+}
+
+.heading-white {
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.7em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+  .heading-white { font-size: 2.4em; }
+}
+
+.slide-overlay {
+  position: absolute;
+  z-index: 5;
+  top: 55%;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 30px 30px 40px;
+  width: 70%;
+  left: 15%;
+  color: #fff;
+  border-radius: 6px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .slide-overlay {
+    top: 35%;
+    background: rgba(0, 0, 0, 0.45);
+    width: 100%;
+    left: 0;
+    border-radius: 0;
+  }
+}
+
+.image-inline, a .image-inline, a:visited .image-inline {
+  border: none;
+  padding: 4px;
+  max-width: 100%;
+  background: #fff;
+}
+
+
+// =============================================================================
+// 11. BUTTONS & CTAs
+// =============================================================================
+
+.button {
+  color: #54585b;
+  font-size: 1.125rem;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.1875rem;
+  display: inline-block;
+  text-decoration: none;
+  border: 1px solid #888;
+  border-radius: 0.25rem;
+  text-align: center;
+  font-weight: 700;
+  transition: background 0.2s linear, color 0.2s linear, border-color 0.2s linear;
+  font-family: "Open Sans", Arial, sans-serif;
+  box-shadow: 2px 3px 5px -1px rgba(0, 0, 0, 0.35);
+
+  &:hover {
+    border-color: transparent;
+    background: var(--bob-btn-orange-hov);
+    color: #fff;
+  }
+}
+
+a.btn-orange {
+  color: #fff;
+  letter-spacing: 0.025em;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 13px;
+  background: var(--bob-btn-orange);
+  padding: 10px 15px;
+  border: 1px solid #fff;
+  border-radius: 5px;
+
+  &:hover {
+    background: var(--bob-btn-orange-hov);
+    color: #fff;
+  }
+}
+
+a.readmore {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-family: 'Source Sans Pro', sans-serif;
+
+  &:hover { color: #f7931e; }
+}
+
+
+// =============================================================================
+// 12. FOOTER
+// =============================================================================
+
+#portal-footer-wrapper {
+  background: var(--bob-footer-bg);
+  margin-top: 3em;
+
+  #portal-footer {
+    background: var(--bob-footer-bg);
+    color: #fff;
+    padding: 1.5em 0;
+
+    a {
+      color: var(--bob-footer-link);
+
+      &:hover {
+        color: var(--bob-footer-hover);
+      }
+    }
+
+    h3 {
+      color: var(--bob-footer-heading);
+      letter-spacing: 2px;
+      margin: 15px 0;
+    }
+
+    h3.underline {
+      border-bottom: 1px solid var(--bob-footer-border);
+    }
+
+    h4 {
+      color: var(--bob-footer-heading);
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: 16px;
+    }
+  }
+}
+
+.ft-menu {
+  li {
+    padding: 3px 0;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 14px;
+  }
+
+  a {
+    color: var(--bob-footer-link);
+
+    &:hover {
+      color: var(--bob-ft-menu-hover);
+    }
+  }
+}
+
+.border-left {
+  border-left: 1px solid var(--bob-footer-border);
+  padding-left: 20px;
+}
+
+@media (max-width: 768px) {
+  .border-left {
+    border-left: none;
+    padding-left: 0;
+  }
+}
+
+.eeo-statement {
+  font-size: 13px;
+  line-height: 1.3em;
+  margin-top: 10px;
+  margin-right: 3em;
+  color: var(--bob-footer-link);
+}
+
+@media (max-width: 768px) {
+  .eeo-statement { margin-right: 0; }
+}
+
+// Site actions bar (very dark brown bar at bottom)
+#portal-siteactions {
+  background: var(--bob-dark-bar);
+}
+
+// Bottom navigation (footer nav links)
+.bottom-nav {
+  text-align: left;
+  margin: 20px 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding-top: 20px;
+}
+
+@media (max-width: 1023px) {
+  .bottom-nav {
+    text-align: center;
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding-top: 20px;
+    flex-direction: column;
+  }
+}
+
+// Site credit
+.sitecredit {
+  background: url('../theme_images/fergusonlynch-icon.png') no-repeat scroll 0 2px transparent;
+  background-size: 36px;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  line-height: 1.2rem;
+  padding-left: 50px;
+  text-transform: uppercase;
+  width: 185px;
+}
+
+@media (max-width: 768px) {
+  .sitecredit { margin: 15px 0; }
+}
+
+
+// =============================================================================
+// 13. PORTLETS
+// =============================================================================
+
+.card.portlet {
+  font-size: 90%;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  margin-bottom: 1.5em;
+
+  .card-header {
+    padding: 1em 1em 0.25em;
+    background: transparent;
+    color: #666;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 17px;
+  }
+
+  &.portlet-navigation-tree .card-header {
+    background: #205C90;
+    border-radius: 4px 4px 0 0;
+    text-transform: uppercase;
+    padding: 15px;
+    color: #fff;
+  }
+}
+
+
+// =============================================================================
+// 14. ANIMATED UNDERLINE
+// =============================================================================
+
+.underline-animation {
+  display: inline-block;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 3px;
+    bottom: -5px;
+    left: 0;
+    background-color: var(--bob-underline);
+    transform-origin: bottom center;
+    transition: transform 0.35s ease-out;
+  }
+
+  &:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom center;
+  }
+}
+
+
+// =============================================================================
+// 15. UTILITY CLASSES
+// =============================================================================
+
+.white, .white a:link, .white a:visited {
+  color: #fff;
+}
+
+.intro {
+  font-family: 'Merriweather', serif;
+  font-size: 18px;
+  line-height: 1.7em;
+  color: #676767;
+  margin: 1em 0;
+}
+
+.image-right {
+  float: right;
+  margin-left: 2em;
+  margin-bottom: 1em;
+}
+
+.float-right { float: right; }
+
+.caption {
+  padding: 10px 0;
+  color: #777;
+  font-size: 13px;
+}
+
+.space40 {
+  height: 40px;
+  display: block;
+}
+
+.space-around {
+  margin: 4rem auto;
+}
+
+.small-heading {
+  display: block;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  line-height: 1.3em;
+}
+
+.button-left {
+  margin: 2.5em 0 1em;
+}
+
+// News tiles
+.tileItem {
+  clear: both;
+}
+
+.tileHeadline {
+  font-size: 1.5em;
+  font-weight: 600;
+}
+
+.tileImage img {
+  width: 220px;
+  height: auto;
+}
+
+// Hide items not used in this theme
+#jumpmenu, .rss, .rss-feeds {
+  display: none;
+}
+
+// Table styling
+#content table.listing {
+  width: 100%;
+}
+
+// Flex row (footer partner logos)
+.flex-row {
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media (max-width: 1160px) {
+  .flex-row {
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+    img { margin: 1em; }
+  }
+}
+
+// Company logos (partner section)
+.company-logo img {
+  filter: grayscale(100%);
+  transform: scale(0.95);
+  opacity: 0.35;
+  transition: all 0.4s ease;
+  margin: 12px;
+  width: 150px;
+
+  &:hover {
+    filter: grayscale(0);
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+// Gap utilities
+.gap10 { gap: 10px; }
+.gap15 { gap: 15px; }
+.gap20 { gap: 20px; }
+.gap30 { gap: 30px; }
+
+// Desktop / mobile visibility
+.desktop-only { display: none; }
+.mobile-only { padding: 10px; }
+
+@media (min-width: 700px) {
+  .mobile-only { display: none; }
+}
+
+@media (min-width: 701px) {
+  .desktop-only { display: block; }
+}
+
+// Listing bar
+.listingBar {
+  padding-bottom: 50px;
+}

@@ -1,0 +1,6 @@
+// Entry point for the equity-inclusion theme.
+// Imports the shared LP base (Bootstrap + Barceloneta + LP variables/maps/print),
+// then the equity-inclusion sub-site's customizations.
+
+@import "../../_shared/scss/base";
+@import "custom";

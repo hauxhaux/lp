@@ -1,0 +1,357 @@
+// =============================================================================
+// PLONETHEME.LP — ECOSYSTEM BENEFITS & RISKS CUSTOM STYLES
+// =============================================================================
+// Custom overrides for the ecosystem-risks-benefits sub-site.
+//
+// Reference design:  lp-lineage-theme-capture/captured-themes/ecosystem-risks-benefits/STYLE-GUIDE.md
+// Source CSS:        lp-lineage-theme-capture/captured-themes/ecosystem-risks-benefits/css/ecoss.css
+// Compiled via:      themes/scripts/build-themes.mjs (auto-discovered by per-site theme glob)
+// =============================================================================
+
+
+// =============================================================================
+// 1. CUSTOM PROPERTIES
+// =============================================================================
+
+:root {
+  --eco-nav-bg:        #173145;   // Deep navy main nav background
+  --eco-bg-fallback:   #173245;   // Body bg fallback under bg image
+  --eco-heading:       #205c90;   // Heading blue (h1-h4)
+  --eco-selected:      #5b9a9a;   // Selected nav teal
+  --eco-hover:         #69ABBB;   // Nav-link hover teal
+  --eco-orange:        #EB801C;   // Search button accent
+  --eco-text:          #444;
+  --eco-text-light:    #676767;   // .intro
+  --eco-image-border:  #cccccc;
+  --eco-caption:       #777;
+
+  // Shared LP footer chrome
+  --eco-footer-bg:     #2e76a0;
+  --eco-footer-link:   #7dd4d6;
+  --eco-footer-credit: #aae2fd;
+  --eco-footer-help:   #9adff1;
+  --eco-footer-hover:  #FFA64D;
+  --eco-heading-dark:  #17455e;
+}
+
+
+// =============================================================================
+// 2. BASE
+// =============================================================================
+
+body {
+  background: url('../theme_images/ecoss-images/ecoss-bg.jpg') no-repeat center center fixed var(--eco-bg-fallback);
+  background-size: cover;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 100%;
+  color: var(--eco-text);
+  margin: 0;
+  padding: 0;
+}
+
+#content {
+  font-size: 100%;
+  margin: 2em;
+}
+
+// White content card floating over the bg image, with the signature shadow.
+// On the live site the body bg image shows through behind the logo / header
+// area, and only the content area below the navbar sits on a white card.
+// The legacy site used #visual-portal-wrapper / #portal-columns; the Diazo
+// template uses .outer-wrapper / .container / #main-container. Keep the outer
+// chrome transparent so the body bg image is visible behind the logo, then
+// apply the white card to the content row only.
+#visual-portal-wrapper,
+.outer-wrapper {
+  background-color: transparent;
+  margin: 0 auto;
+  max-width: 1000px;
+  min-height: calc(100vh - 190px);
+}
+
+// White content card sits below the navbar, around the page content.
+// In the Diazo template the content row is `.outer-wrapper > .container`
+// (containing #global_statusmessage and #main-container). Apply the white
+// card + drop shadow to that container so the body bg image shows above
+// the card (behind the logo) but content has a solid surface to sit on.
+.outer-wrapper > .container:last-of-type {
+  background-color: #fff;
+  box-shadow: 0 10px 20px rgba(50, 50, 50, 0.41);
+}
+
+#main-container,
+#portal-columns {
+  background-color: #fff;
+}
+
+// Fixed height was for the old layout's header area; in the Diazo flex template
+// portal-top receives portal-header children and must be sized by content.
+#portal-top { height: auto; }
+
+
+// =============================================================================
+// 3. TYPOGRAPHY
+// =============================================================================
+
+h1, h2, h3, h4 {
+  color: var(--eco-heading);
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.0115em;
+  line-height: 1.2em;
+  margin-bottom: 10px;
+}
+
+.intro {
+  color: var(--eco-text-light);
+  font-size: 1.3em;
+  font-weight: 300;
+  line-height: 1.4em;
+  margin: 1em 0;
+  -webkit-font-smoothing: antialiased;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
+}
+
+
+// =============================================================================
+// 4. HEADER
+// =============================================================================
+
+// The shared theme sets #content-header { background-color: var(--darkgreen) }
+// for the main LP theme's teal header strip. For this sub-site the logo must
+// sit directly on the body bg image, so we strip the background and fixed
+// height so the page bg shows through behind the logo area.
+#content-header {
+  background: transparent;
+  height: auto;
+  box-shadow: none;
+}
+
+#portal-header {
+  background: none;
+  border: none;
+  // Fixed width from old layout — replaced by container sizing in Diazo template.
+  width: auto;
+}
+
+// Old layout used large margins (50px top) to position the logo under a
+// fixed-height header background. In the flex Diazo template, these margins
+// bloat the content-header. Use modest padding instead.
+#portal-logo {
+  display: block;
+  margin: 20px 0 15px;
+}
+
+// Old absolute top value was tied to the legacy fixed-height header.
+#portal-personaltools-wrapper {
+  right: 0;
+}
+
+// Lineage / anontools row: keep contents inside the viewport on small screens.
+// The Jump-to-child <select> has long option text, which gives it a large
+// intrinsic min-width that pushes the .container wider than the viewport
+// (~366px at 320px). Allow children to wrap and constrain max-widths.
+#portal-top {
+  flex-wrap: wrap;
+  max-width: 100%;
+  gap: 0.5rem;
+
+  > * { min-width: 0; max-width: 100%; }
+
+  #lineageSelectionForm,
+  select#lineageSelection {
+    max-width: 100%;
+  }
+
+  select#lineageSelection {
+    width: 100%;
+  }
+}
+
+// Make sure the logo image never overflows its parent on narrow widths.
+#portal-logo img { max-width: 100%; height: auto; }
+
+
+// =============================================================================
+// 5. NAVIGATION  — deep-navy bar with teal hover/selected
+// =============================================================================
+
+.nest-navigation-bar {
+  background: transparent;
+  display: block;
+  height: 40px;
+  margin: 0 auto;
+  width: 1050px;
+}
+
+#globalnav-wrapper,
+#mainnavigation-wrapper,
+#portal-globalnav-wrapper {
+  background-color: var(--eco-nav-bg);
+  border: none;
+  margin: 0;
+  // Old layout used fixed width: 1000px; let the wrapper fill the container
+  // width naturally so it doesn't overflow on smaller viewports.
+  width: 100%;
+}
+
+#portal-globalnav {
+  background-color: var(--eco-nav-bg);
+  font-size: 100%;
+  justify-content: flex-start;
+
+  li { background: transparent; }
+
+  .nav-item a.nav-link {
+    background: var(--eco-nav-bg);
+    color: #fff;
+    border: none;
+    font-size: 1.1em;
+    font-weight: normal;
+    min-width: 2.5em;
+    padding: 0.85em 1.1em;
+    transition: background-color 0.2s ease, color 0.2s ease;
+
+    &:hover {
+      background: var(--eco-hover);
+      color: var(--eco-nav-bg) !important;
+    }
+  }
+
+  .nav-item.current > a.nav-link,
+  .nav-item.inPath:not(.index_html) > a.nav-link,
+  .selected a {
+    background: var(--eco-selected);
+    color: #fff;
+  }
+
+  // Barceloneta's dropdown ▼ label::after inherits --bs-navbar-hover-background
+  // which is dark semi-transparent — strip background so it doesn't cover text.
+  label::after {
+    background: transparent !important;
+  }
+}
+
+
+// =============================================================================
+// 6. SEARCH
+// =============================================================================
+
+#portal-searchbox {
+  background: rgba(0, 0, 0, 0.55);
+  border-radius: 6px;
+  padding: 10px;
+  // Removed position:absolute + margin-top:-73px from the old ecoss.css, which
+  // placed the search over the nav in the legacy fixed-height layout. In the
+  // Diazo flex template the searchbox is inside .offcanvas-body (a flex row),
+  // so margin-left:auto pushes it to the right edge inside the nav bar.
+  margin-left: auto;
+  border-right: none;
+}
+
+#searchGadget { width: 15em; max-width: 100%; }
+
+// Below the lg breakpoint the offcanvas navbar slides in and the search box
+// renders inside it (full-width column). The 15em #searchGadget + button
+// won't fit at 320px, so collapse the search input to fill the row.
+@media (max-width: 991.98px) {
+  #portal-searchbox {
+    width: 100%;
+    margin-left: 0;
+    box-sizing: border-box;
+  }
+  #searchGadget { width: 100%; }
+}
+
+input.searchField {
+  -moz-appearance: none;
+  border: 1px solid #999;
+  border-radius: 4px;
+  padding: 8px 10px;
+}
+
+.searchSection { color: #fff; display: none; }
+
+.searchButton,
+#header-searchbox button[type="submit"] {
+  background: var(--eco-orange) !important;
+  border: none;
+  border-radius: 3px;
+  color: #fff;
+  margin-left: 5px;
+  padding: 7px 3px;
+
+  &:hover { background: tomato; color: #fff; }
+}
+
+
+// =============================================================================
+// 7. CONTENT
+// =============================================================================
+
+.image-inline,
+a .image-inline,
+a:visited .image-inline {
+  border: 1px solid var(--eco-image-border);
+  float: right;
+  margin-left: 1.5em;
+  margin-top: 0.75em;
+  padding: 0;
+}
+
+.captioned img { border: none; }
+
+dd.image-caption {
+  color: var(--eco-caption);
+  font-size: 11pt;
+  line-height: 1.3em;
+  margin: 6px 15px 10px;
+  max-width: 92%;
+}
+
+.span6last {
+  float: right;
+  margin-right: 0;
+  width: 47.75%;
+}
+
+@media (max-width: 680px) {
+  .span6last { float: none; width: 100%; }
+}
+
+
+// =============================================================================
+// 8. BREADCRUMBS / FOOTER
+// =============================================================================
+
+#portal-breadcrumbs a { color: var(--eco-heading); }
+
+#portal-footer-wrapper { background: var(--eco-footer-bg); }
+
+#portal-footer {
+  background: var(--eco-footer-bg);
+  color: var(--eco-footer-credit);
+
+  a { color: var(--eco-footer-link); }
+  a:hover { color: var(--eco-footer-hover); }
+
+  .help a { color: var(--eco-footer-help); }
+  .help a:hover { color: var(--eco-footer-hover); }
+
+  h4 { color: var(--eco-heading-dark); }
+}
+
+#portal-footer-inner { max-width: 1000px !important; }
+
+
+// =============================================================================
+// 9. UTILITY HIDES (legacy)
+// =============================================================================
+
+#portaltab-the-cooperative,
+#portaltab-research,
+#portaltab-projects,
+li#portaltab-home ul.submenu,
+li#portaltab-child-home ul.submenu,
+#portal-banner,
+.lp-footer { display: none !important; }

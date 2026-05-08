@@ -1,0 +1,548 @@
+// =============================================================================
+// PLONETHEME.LP — LP PARENT SITE CUSTOM STYLES
+// =============================================================================
+// Custom overrides for the LP parent (root) site (landscapepartnership.org).
+//
+// Reference design:  lp-lineage-theme-capture/captured-themes/lp-parent-site/STYLE-GUIDE.md
+// Source CSS:        lp-lineage-theme-capture/captured-themes/lp-parent-site/css/ploneCustom.css
+// Compiled via:      themes/scripts/build-themes.mjs (auto-discovered by per-site theme glob)
+// =============================================================================
+
+
+// =============================================================================
+// 1. CUSTOM PROPERTIES
+// =============================================================================
+
+:root {
+  // --- LP brand colours (parent site palette) ---
+  --lp-nav-bg:         #657F9E;   // Slate blue-gray nav
+  --lp-nav-hover:      #4C6C8C;   // Nav hover bg
+  --lp-nav-selected:   #95A664;   // Selected (olive)
+  --lp-nav-submenu-bg: #efefef;   // Submenu bg
+  --lp-nav-submenu-hv: #7d9cc0;   // Submenu hover
+  --lp-cta-block-bg:   #28526E;   // Dark navy CTA block
+  --lp-footer-bg:      #2e76a0;   // Medium blue footer
+  --lp-breadcrumb-link:#205C90;
+  --lp-link-visited:   #205C90;
+
+  --lp-heading:        #8E6747;   // Warm brown headings
+  --lp-gold:           #C1B259;
+  --lp-text-big-blue:  #408E9B;
+
+  --lp-cta-bg:         #f7bd4f;
+  --lp-cta-hover:      #f38b1a;
+  --lp-orange:         #f8903e;   // .btn-orange
+  --lp-orange-hover:   #F7700D;
+  --lp-orange-block:   #ef9b26;
+  --lp-orange-bg:      #dd733e;   // .bg-orange
+  --lp-red:            #FF6633;
+  --lp-amber:          #f7c60e;
+  --lp-circle-icon:    #f19023;
+  --lp-mat-icon-grey:  #9d9d9d;
+  --lp-mat-icon-gold:  #f8cf95;
+
+  --lp-text:           #444;
+  --lp-text-light:     #676767;
+  --lp-meta:           #7e7e7e;
+  --lp-grey-bg:        #f5f5f5;
+  --lp-banner-bg:      #f6f3ed;
+  --lp-beige:          #e5e5dc;
+
+  --lp-footer-rss:     #17455e;
+  --lp-footer-link:    #7dd4d6;
+  --lp-footer-credit:  #aae2fd;
+  --lp-footer-help:    #9adff1;
+  --lp-footer-hover:   #FFA64D;
+}
+
+
+// =============================================================================
+// 2. BASE & TYPOGRAPHY
+// =============================================================================
+
+body {
+  background: #fff url('../theme_images/blue-top-bar.png') repeat-x top;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  color: var(--lp-text);
+  line-height: 1.5em;
+}
+
+* { box-sizing: border-box; }
+
+html {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--lp-heading);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  line-height: 1.5em;
+  letter-spacing: -0.0125em;
+}
+
+#content h1.documentFirstHeading,
+#content h1 {
+  color: var(--lp-heading);
+  font-size: 36px;
+  margin-bottom: 0.5em;
+  margin-top: 1.5em;
+}
+
+@media (max-width: 600px) {
+  #content h1.documentFirstHeading,
+  #content h1 {
+    font-size: 30px;
+    line-height: 1.2em;
+    margin-top: 0;
+  }
+}
+
+h2 { font-size: 30px; }
+h3 {
+  font-size: 24px;
+  margin-bottom: 0.5em;
+  margin-top: 1em;
+}
+h3.heading {
+  font-size: 1.4em;
+  margin-bottom: 15px;
+}
+
+p {
+  color: var(--lp-text);
+  font-size: 16px;
+  line-height: 1.6em;
+}
+
+a:visited {
+  color: var(--lp-link-visited) !important;
+}
+
+.intro {
+  font-size: 20px;
+  line-height: 1.5em;
+  color: var(--lp-text-light);
+  margin: 1em 0;
+}
+
+.introtext {
+  font-size: 16px;
+  line-height: 1.5em;
+  color: var(--lp-text);
+  margin: 1em 0;
+  font-weight: 600;
+}
+
+.text-big-blue {
+  font-size: 18px;
+  line-height: 1.2em;
+  font-weight: 600;
+  margin: 1em;
+  color: var(--lp-text-big-blue);
+}
+
+.dark    { color: var(--lp-text) !important; }
+.smaller { font-size: 14px; }
+
+
+// =============================================================================
+// 3. PAGE HEADER & LOGO
+// =============================================================================
+
+#portal-top {
+  position: relative;
+  background: transparent;
+}
+
+#portal-logo {
+  display: block;
+  margin: 30px 0 20px 30px;
+
+  img {
+    // SVG viewBox is 490×150 — cap at 382px wide so it fits the header
+    width: 382px;
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+}
+
+// On narrow viewports, shrink the logo margin so the hamburger toggler
+// has breathing room on the right edge.
+@media (max-width: 575.98px) {
+  #portal-logo {
+    margin: 20px 0 10px 10px;
+
+    img {
+      // Keep logo legible but allow small viewports to fit toggler beside it.
+      max-width: calc(100vw - 90px);
+    }
+  }
+}
+
+// The theme logo image is an SVG served via the ++theme++ traversal.
+// Constrain content-header so the header area never collapses when
+// portal-top is empty (no personal tools injected in this layout).
+#content-header {
+  min-height: 100px;
+}
+
+
+// =============================================================================
+// 4. NAVIGATION  — slate blue-gray bar with olive selected state
+// =============================================================================
+//
+// The LP parent site is the network root and lists ALL 15 sub-site folders as
+// top-level nav items (plus Home/News/Events). 17 items is too wide to fit
+// on a single row even at 1920px, so the strategy is:
+//   * <1400px (below xxl): collapse to hamburger via navbar-expand-xxl
+//   * >=1400px: allow nav to wrap to a maximum of 2 rows with compact link
+//     padding/font-size so the wrap is clean and predictable.
+
+#globalnav-wrapper,
+#mainnavigation-wrapper,
+#portal-globalnav-wrapper {
+  background-color: var(--lp-nav-bg);
+  border-bottom: none;
+  border-top: 1px solid #fff;
+  margin-bottom: 0;
+}
+
+#portal-globalnav {
+  background-color: var(--lp-nav-bg);
+  font-weight: 400;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0;
+
+  li { background: transparent; }
+
+  .nav-item a.nav-link,
+  li a {
+    background-color: var(--lp-nav-bg);
+    border-right: none;
+    color: #fff;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 18px;
+    min-width: 2.5em;
+    padding: 14px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  a:link, a:visited { color: #fff !important; }
+
+  a:hover,
+  .selected a:hover,
+  .nav-item.current > a.nav-link:hover {
+    background: var(--lp-nav-hover);
+    color: #fff;
+  }
+
+  .selected a,
+  .nav-item.current > a.nav-link,
+  .nav-item.inPath:not(.index_html) > a.nav-link {
+    background: var(--lp-nav-selected);
+    color: #fff;
+  }
+
+  // Dropdown / submenu
+  ul.submenu,
+  ul.dropdown {
+    background: var(--lp-nav-submenu-bg);
+    border: 1px solid #ddd;
+    box-shadow: 0 0 5px #666;
+
+    a, a:visited {
+      background: var(--lp-nav-submenu-bg) !important;
+      color: #333 !important;
+    }
+
+    a:hover {
+      background-color: var(--lp-nav-submenu-hv) !important;
+      color: #fff !important;
+    }
+
+    li { font-size: 11px; }
+  }
+
+  // Barceloneta renders an absolutely-positioned <label> (the ▼ dropdown
+  // toggle) whose ::after pseudo-element inherits --bs-navbar-hover-background
+  // which resolves to rgba(0,0,0,0.3) here — a dark box that covers the link
+  // text. Strip the background so only the tiny chevron glyph is visible.
+  label::after {
+    background: transparent !important;
+  }
+}
+
+// --- Compact horizontal nav (xxl and up — when not collapsed to hamburger)
+// At >=1400px, lower padding/font-size so 17 top-level items wrap cleanly
+// onto at most 2 rows. The submenu chevron buttons also need to scale down.
+@media (min-width: 1400px) {
+  #portal-globalnav {
+    .nav-item a.nav-link,
+    li a {
+      font-size: 15px;
+      padding: 10px 12px;
+      line-height: 1.2;
+    }
+  }
+}
+
+// --- 1400-1599 range: tighten further so 17 items fit in 2 rows.
+@media (min-width: 1400px) and (max-width: 1599px) {
+  #portal-globalnav {
+    .nav-item a.nav-link,
+    li a {
+      font-size: 14px;
+      padding: 9px 8px;
+    }
+  }
+}
+
+// --- Search box: inline at desktop, full width inside hamburger drawer
+@media (max-width: 1399.98px) {
+  #portal-searchbox {
+    width: 100%;
+    margin-top: 1em;
+  }
+}
+
+// --- Inside offcanvas drawer (hamburger): stack items vertically and
+//     restore comfortable touch targets.
+.offcanvas #portal-globalnav {
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  width: 100%;
+
+  .nav-item,
+  li {
+    width: 100%;
+  }
+
+  .nav-item a.nav-link,
+  li a {
+    font-size: 16px;
+    padding: 12px 16px;
+    text-align: left;
+  }
+}
+
+
+// =============================================================================
+// 5. BREADCRUMBS
+// =============================================================================
+
+#portal-breadcrumbs {
+  margin-top: 0;
+  padding: 10px 20px;
+  font-size: 12px;
+
+  a { color: var(--lp-breadcrumb-link); }
+}
+
+
+// =============================================================================
+// 6. BUTTONS & CTAs
+// =============================================================================
+
+.cta-button {
+  padding: 15px 25px;
+  background: var(--lp-cta-bg);
+  font-size: 20px;
+  border-radius: 5px;
+  text-align: center;
+  margin: 0 1.5em;
+  border: 1px solid #fff;
+
+  &:hover { background: var(--lp-cta-hover); }
+
+  a {
+    border-bottom: none;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+
+    &:hover { color: #fff !important; border-bottom: none; }
+  }
+}
+
+.btn-orange {
+  background: var(--lp-orange);
+  padding: 10px 15px;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  border-bottom: 1px solid #fff !important;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.btn-orange-large {
+  background: var(--lp-orange);
+  padding: 10px 15px;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  border-bottom: 1px solid #fff !important;
+  font-size: 18px;
+  display: inline-block;
+}
+
+a.btn-orange,
+a.btn-orange-large,
+a.btn-red {
+  color: #fff !important;
+  letter-spacing: 0.025em;
+}
+
+#content a.btn-orange:hover,
+#content a.btn-orange-large:hover {
+  color: #fff !important;
+  background: var(--lp-orange-hover);
+}
+
+.btn-red {
+  background: var(--lp-red);
+  padding: 10px 15px;
+  border-radius: 5px;
+  border-bottom: 1px solid #fff !important;
+  font-size: 18px;
+}
+
+a.overlay-btn {
+  background: rgba(0, 0, 0, 0.5);
+  display: block;
+  padding: 10px;
+  color: #fafafa !important;
+  font-size: 20px;
+  font-weight: 600;
+  border-bottom: none !important;
+  border-radius: 0 0 5px 5px;
+  text-align: center;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.6);
+    color: #616161;
+    text-decoration: none;
+  }
+}
+
+
+// =============================================================================
+// 7. CONTENT BLOCKS & UTILITIES
+// =============================================================================
+
+#cta-block {
+  background: var(--lp-cta-block-bg);
+  color: #fff;
+  padding: 40px 30px;
+  margin: 2em 0;
+
+  h2, h3 { color: #fff; }
+}
+
+.bg-orange    { background: var(--lp-orange-bg); }
+.orange-block { background: var(--lp-orange-block); }
+.bg-blue,
+.gold-block,
+.grey-bg      { background: var(--lp-grey-bg); }
+
+
+// Home-template overrides — landscape_home is the LP parent home view
+.template-landscape_home {
+  #visual-portal-wrapper { max-width: 100%; }
+  #content { width: 100%; padding-bottom: 0 !important; }
+  #portal-columns { margin-bottom: -24px !important; }
+  #edit-bar,
+  .addthis_toolbox,
+  a.managePortletsFallback,
+  #portal-breadcrumbs { display: none; }
+}
+
+
+// =============================================================================
+// 8. FOOTER  — medium blue
+// =============================================================================
+
+// Sub-site-specific footers should not appear when the parent site renders
+#fire-footer,
+#sefiremap-footer,
+#bobscapes-footer,
+#birdlocale-footer,
+#portal-footer-lit-gateway { display: none; }
+
+#portal-footer-wrapper { background: var(--lp-footer-bg); }
+
+#portal-footer {
+  background: var(--lp-footer-bg);
+  color: #fff;
+  width: 100%;
+  padding: 1.5em;
+  position: relative;
+
+  p { padding-left: 15px; color: #fff; font-size: 12px; }
+
+  h3 {
+    color: var(--lp-footer-credit);
+    font-size: 20px;
+    margin: 17px 0 10px;
+    text-transform: uppercase;
+  }
+
+  .sitecredit {
+    color: var(--lp-footer-credit);
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    line-height: 1.1rem;
+    text-transform: uppercase;
+    width: 185px;
+
+    a, a:visited { color: var(--lp-footer-link) !important; }
+    a:hover { color: #fff !important; }
+  }
+
+  .rss {
+    color: var(--lp-footer-rss);
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.0125em;
+    padding-left: 18px;
+    text-indent: 10px;
+    text-transform: uppercase;
+  }
+
+  .help {
+    color: var(--lp-footer-rss);
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.0125em;
+    padding-bottom: 10px;
+    padding-left: 32px;
+    text-transform: uppercase;
+    line-height: 24px;
+
+    > a:link  { color: var(--lp-footer-help); }
+    > a:hover { color: var(--lp-footer-hover) !important; }
+  }
+
+  ul.ft-menu {
+    color: #fff;
+    margin-top: 0;
+
+    li { display: block; }
+    li a {
+      color: #fff !important;
+      font-size: 15px;
+      line-height: 1.8em;
+
+      &:hover { border-bottom: 1px solid #fff; }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  #portal-footer .sitecredit { margin: 15px auto; }
+}

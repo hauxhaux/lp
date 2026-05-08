@@ -1,0 +1,6 @@
+// Entry point for the lp-parent-site theme.
+// Imports the shared LP base (Bootstrap + Barceloneta + LP variables/maps/print),
+// then the lp-parent-site sub-site's customizations.
+
+@import "../../_shared/scss/base";
+@import "custom";

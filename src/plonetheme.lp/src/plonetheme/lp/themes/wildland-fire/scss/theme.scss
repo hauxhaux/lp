@@ -1,0 +1,6 @@
+// Entry point for the wildland-fire theme.
+// Imports the shared LP base (Bootstrap + Barceloneta + LP variables/maps/print),
+// then the wildland-fire sub-site's customizations.
+
+@import "../../_shared/scss/base";
+@import "custom";

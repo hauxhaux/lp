@@ -1,0 +1,19 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:browser="http://namespaces.zope.org/browser"
+           i18n_domain="plonetheme.lp">
+
+  <!--
+    Return-to-parent banner for lineage child sites.
+    Rendered inside Plone's portalheader manager; each theme's rules.xml
+    can reposition or copy it as needed via Diazo.
+  -->
+  <browser:viewlet
+      name="plonetheme.lp.return-to-parent"
+      manager="plone.app.layout.viewlets.interfaces.IPortalHeader"
+      class=".return_to_parent.ReturnToParentViewlet"
+      template="templates/return_to_parent.pt"
+      layer="..interfaces.IBrowserLayer"
+      permission="zope2.View"
+      />
+
+</configure>
