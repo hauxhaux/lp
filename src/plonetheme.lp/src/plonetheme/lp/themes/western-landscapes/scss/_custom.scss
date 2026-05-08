@@ -448,12 +448,18 @@ a.gold-text {
   #portal-globalnav-wrapper,
   .navbar-barceloneta {
     background: var(--west-purple);
-    padding-left: 240px;       // align nav items past the WLFW badge
+    // No left indent — the WLFW badge overlaps from the header above.
+    // Nav items are right-aligned via #portal-globalnav justify-content.
   }
 }
 
 #portal-globalnav {
   background: var(--west-purple);
+  // Right-align nav items to give them maximum space (live site style).
+  justify-content: flex-end;
+  // Prevent wrapping — all 6 items must stay on one row.
+  // !important beats Barceloneta's .navbar-nav { flex-wrap: wrap } rule.
+  flex-wrap: nowrap !important;
 
   // Barceloneta paints each .navbar-nav li with --bs-navbar-background
   // (the LP-wide green). Override so the slate header bg shows through.
@@ -469,7 +475,7 @@ a.gold-text {
       font-weight: 600;
       font-size: 1rem;
       text-transform: uppercase;
-      padding: 12px 22px;
+      padding: 10px 20px;
       border: 3px solid transparent;
       transition: background-color 0.15s ease, color 0.15s ease;
 
@@ -523,12 +529,7 @@ a.gold-text {
     top: 12px;
     left: 12px;
   }
-  #mainnavigation-wrapper {
-    #portal-globalnav-wrapper,
-    .navbar-barceloneta {
-      padding-left: 35px;
-    }
-  }
+  // No nav padding override needed — padding-left was removed from desktop too.
   #portal-banner-image {
     height: 195px;
     &::after { display: none; }
