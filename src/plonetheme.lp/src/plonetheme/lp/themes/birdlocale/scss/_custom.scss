@@ -217,6 +217,12 @@ a.readmore {
 // Break out of Bootstrap .container to allow full-viewport-width background image.
 // The <header> element has class="container" in index.html; we override the
 // container constraints here so the banner photograph spans the full browser width.
+//
+// Height is sized to fit the 180px WLFW badge (top:32 + 180 = 212) plus a
+// ~30px breathing strip of the bird photograph. Previously this was 635px,
+// which produced a large empty gap between the logos and the nav row that
+// follows. The bird photo still anchors to "right bottom" for visual interest
+// without leaving acres of empty banner above the nav.
 #content-header {
   background: url('../theme_images/birdlocale-header.jpg') no-repeat right bottom / cover;
   border: none;
@@ -225,7 +231,7 @@ a.readmore {
   max-width: none;
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
-  height: 635px;
+  height: 240px;
   overflow: visible; // allow #wlfw-banner-badge to hang below into nav if needed
 }
 
@@ -241,12 +247,13 @@ a.readmore {
 
 // WLFW partner badge — circular logo anchored top-left of the header image,
 // matching the live BirdLocale site layout (badge left, wordmark to its right).
+// Live coordinates at 1530px viewport: x=32, y=76, 180x180.
 #wlfw-banner-badge {
   position: absolute;
-  top: 20px;
-  left: 30px;
-  width: 120px;
-  height: 120px;
+  top: 32px;
+  left: 32px;
+  width: 180px;
+  height: 180px;
   z-index: 10;
   text-decoration: none;
   display: block;
@@ -274,11 +281,16 @@ a.readmore {
   #portal-logo {
     margin: 0;
     display: block;
-    width: 320px;
+    width: 300px;
     position: relative;
-    // Start the wordmark to the right of the 120px WLFW badge + 30px gap
-    left: 230px;
-    top: 20px;
+    // Start the wordmark to the right of the 180px WLFW badge + ~38px gap
+    // (badge is left:32 width:180 -> right edge at 212; wordmark starts at 250
+    // to mirror live layout where birdlocale wordmark sits at x=250 at 1530).
+    // The wrapper has flex padding offsets, so left:238 lands x at ~250 here.
+    // top:42 lands y near live's y=98 so the wordmark sits visually below the
+    // top of the WLFW badge, matching live composition.
+    left: 238px;
+    top: 42px;
     z-index: 2;
     background: url('../theme_images/birdlocale-logo.png') no-repeat left center;
     background-size: contain;
@@ -299,9 +311,11 @@ a.readmore {
 
 @media (max-width: 768px) {
   #portal-logo-wrapper #portal-logo {
-    width: 290px;
-    top: 15px;
-    left: 5px;
+    // Mobile: place wordmark to the right of the small WLFW badge
+    // (badge is 80px wide at left:10, ending at x=90). 100px gives a small gap.
+    width: 240px;
+    top: 25px;
+    left: 100px;
     position: absolute;
   }
 }
