@@ -136,6 +136,30 @@ h1, h2, h3, h4 {
   right: 0;
 }
 
+// Lineage / anontools row: keep contents inside the viewport on small screens.
+// The Jump-to-child <select> has long option text, which gives it a large
+// intrinsic min-width that pushes the .container wider than the viewport
+// (~366px at 320px). Allow children to wrap and constrain max-widths.
+#portal-top {
+  flex-wrap: wrap;
+  max-width: 100%;
+  gap: 0.5rem;
+
+  > * { min-width: 0; max-width: 100%; }
+
+  #lineageSelectionForm,
+  select#lineageSelection {
+    max-width: 100%;
+  }
+
+  select#lineageSelection {
+    width: 100%;
+  }
+}
+
+// Make sure the logo image never overflows its parent on narrow widths.
+#portal-logo img { max-width: 100%; height: auto; }
+
 
 // =============================================================================
 // 5. NAVIGATION  — deep-navy bar with teal hover/selected
@@ -214,7 +238,19 @@ h1, h2, h3, h4 {
   border-right: none;
 }
 
-#searchGadget { width: 15em; }
+#searchGadget { width: 15em; max-width: 100%; }
+
+// Below the lg breakpoint the offcanvas navbar slides in and the search box
+// renders inside it (full-width column). The 15em #searchGadget + button
+// won't fit at 320px, so collapse the search input to fill the row.
+@media (max-width: 991.98px) {
+  #portal-searchbox {
+    width: 100%;
+    margin-left: 0;
+    box-sizing: border-box;
+  }
+  #searchGadget { width: 100%; }
+}
 
 input.searchField {
   -moz-appearance: none;
