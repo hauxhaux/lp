@@ -139,16 +139,35 @@ $enable-roboto-webfont: false !default;
 // captured LP sites render breadcrumbs as a filled bar; they're plain
 // inline text above the content. Strip the background and trim spacing
 // so breadcrumbs sit unobtrusively. Per-theme files can still override.
+//
+// Link color: canonical LP CSS sets `#portal-breadcrumbs a { color: #205C90 }`
+// (see captured ploneCustom.css). Without this override, links inherit
+// `--bs-link-color` which is set to the LP lime-green primary — distracting
+// against muted body content and not matching any captured sub-site.
 #portal-breadcrumbs {
   background: transparent;
   border: 0;
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
+  padding: 0.25rem 20px;
   margin-bottom: 0.5rem;
+  font-size: 12px;
 
   .breadcrumb {
     background: transparent;
     padding: 0;
     margin-bottom: 0;
+  }
+
+  a {
+    color: #205c90;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .breadcrumb-item.active,
+  .breadcrumb-item + .breadcrumb-item::before {
+    color: #6c757d;
   }
 }
