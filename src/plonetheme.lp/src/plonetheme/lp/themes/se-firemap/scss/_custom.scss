@@ -283,6 +283,51 @@ nav[aria-label="breadcrumb"] li {
   }
 }
 
+// In-nav search box (lives inside the dark global nav). Override Bootstrap's
+// .btn-outline-light defaults so the button is visible against the dark band
+// and matches the live SE FireMap site (light grey button with dark text).
+// IDs raise specificity above Bootstrap's .btn.btn-outline-light cascade.
+#portal-globalnav-wrapper {
+  #portal-searchbox {
+    flex-shrink: 0;
+
+    .searchField,
+    input[type="text"].form-control {
+      font-size: 13px;
+      height: 32px;
+      width: 180px;
+      max-width: 100%;
+    }
+
+    button.searchButton,
+    button[type="submit"] {
+      font-size: 13px;
+      height: 32px;
+      padding: 4px 12px;
+      background: #ededed;
+      border: 1px solid #ccc;
+      color: #444;
+      white-space: nowrap;
+
+      &:hover,
+      &:focus {
+        background: #ddd;
+        border-color: #bbb;
+        color: #222;
+      }
+    }
+  }
+}
+
+// Narrow desktop sizes: shrink the search input so the nav fits without
+// flush-to-viewport-edge crowding (visible at 1200, 1366 widths).
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  #portal-globalnav-wrapper #portal-searchbox .searchField,
+  #portal-globalnav-wrapper #portal-searchbox input[type="text"].form-control {
+    width: 130px;
+  }
+}
+
 @media (max-width: 768px) {
   #portal-logo-wrapper #portal-logo {
     width: 280px;
@@ -307,9 +352,13 @@ nav[aria-label="breadcrumb"] li {
   border: none;
   padding: 0;
 
-  .container {
+  // Use full width but keep a small horizontal gutter so the nav items
+  // and search box don't sit flush against the viewport edge at desktop
+  // breakpoints (1200, 1366) where Bootstrap's offcanvas-body has 0 padding.
+  > .container {
     max-width: 100%;
-    padding: 0;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 }
 
@@ -613,7 +662,10 @@ nav[aria-label="breadcrumb"] {
   }
 }
 
-// Full-width section helpers
+// Full-width section helpers — break out of parent container without
+// causing horizontal overflow. Use the calc(50% - 50vw) trick (same
+// pattern used for #content-header) so the element spans the viewport
+// regardless of its parent's max-width.
 .fullwidth-section {
   margin-bottom: 3em;
 }
@@ -621,8 +673,10 @@ nav[aria-label="breadcrumb"] {
 @media (max-width: 1169px) {
   .fullwidth-section {
     width: 100vw;
-    margin-left: -1.5em;
-    left: 0;
+    max-width: none;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    left: auto;
   }
 }
 
@@ -1103,7 +1157,17 @@ a.readmore {
     flex-wrap: wrap;
     justify-content: space-around;
 
-    img { margin: 1em; }
+    img { margin: 1em; max-width: 100%; }
+  }
+}
+
+// On narrow viewports the 1em side margin can push images past their
+// container edges (e.g. partner logo grid). Drop horizontal margin so
+// images stay within the viewport.
+@media (max-width: 767.98px) {
+  .flex-row img {
+    margin-left: 0;
+    margin-right: 0;
   }
 }
 
@@ -1192,6 +1256,30 @@ a.readmore {
 // Hide items not used in this theme
 #jumpmenu, .rss, .rss-feeds {
   display: none;
+}
+
+// Defensive responsive images: content-area images shouldn't overflow
+// the viewport regardless of authored width attributes (e.g. partner
+// logos with width="380" inside narrow grid cells on mobile).
+#content img,
+#portal-column-content img,
+#portal-footer img {
+  max-width: 100%;
+  height: auto;
+}
+
+// Defensive: anchors that wrap content-area images should also clamp,
+// otherwise inline anchor bounding boxes can extend past the viewport
+// and produce phantom horizontal scroll on small screens.
+#content a > img,
+#portal-column-content a > img {
+  max-width: 100%;
+}
+
+#content a:has(> img),
+#portal-column-content a:has(> img) {
+  display: inline-block;
+  max-width: 100%;
 }
 
 // Table styling
