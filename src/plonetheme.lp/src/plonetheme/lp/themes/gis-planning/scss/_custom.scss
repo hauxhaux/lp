@@ -51,8 +51,13 @@ body {
   box-shadow: 0px 9px 18px rgba(50, 50, 50, 0.7);
 }
 
+// #portal-top lives inside #content-header flex row. Old layout used a fixed
+// 260px height here to push the header area down; in the Diazo template the
+// header is sized by its content (logo + padding). Remove the fixed height so
+// the header collapses to the logo height and doesn't create whitespace.
 #portal-top {
-  height: 260px;
+  height: auto;
+  min-height: 0;
   background-image: none;
 }
 
@@ -100,21 +105,28 @@ dl.portlet li {
   margin: 20px 20px 5px;
 }
 
+// Old absolute positioning used pixel-exact top value tied to the legacy
+// fixed-height header; no longer needed in the flex-based Diazo layout.
 #portal-personaltools-wrapper {
   right: 0;
-  top: 210px;
 }
 
 #portal-searchbox {
   background: transparent;
-  padding: 10px 0;
-  position: absolute;
-  right: 20px;
-  top: 40px;
+  padding: 6px 8px;
+  // Old layout used position:absolute to place the searchbox in the header;
+  // in the current Diazo template the searchbox lives inside the nav's
+  // .offcanvas-body and must flow with it rather than escaping the stacking
+  // context. Relative keeps it in flow.
+  position: relative;
+  right: auto;
+  top: auto;
+  margin-left: auto; // Push searchbox to the right side of the nav bar
 
   label {
-    color: var(--gis-meta);
+    color: #fff;
     font-weight: normal;
+    font-size: 12px;
   }
 }
 
@@ -129,8 +141,10 @@ dl.portlet li {
   background-color: var(--gis-wrapper-bg);
   border-bottom: none;
   border-top: 1px solid #fff;
-  height: 40px;
-  margin: 10px 0;
+  // Removed fixed height:40px — clips nav items and search box in flex layout.
+  // Let the nav wrapper size to its content naturally.
+  height: auto;
+  margin: 0;
 }
 
 #portal-globalnav {
@@ -163,6 +177,12 @@ dl.portlet li {
     color: #fff;
 
     &:hover { background: var(--gis-primary); }
+  }
+
+  // Barceloneta's dropdown ▼ label::after inherits --bs-navbar-hover-background
+  // (resolves to dark semi-transparent) — strip so it doesn't cover link text.
+  label::after {
+    background: transparent !important;
   }
 }
 
