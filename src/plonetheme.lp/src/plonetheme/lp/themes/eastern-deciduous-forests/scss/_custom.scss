@@ -358,7 +358,9 @@ a.gold-text {
   }
 }
 
-#header-searchbox {
+// Search box: #portal-searchbox lives inside the offcanvas nav bar (not #header-searchbox).
+// Scope to #portal-globalnav-wrapper so we don't affect search on content pages.
+#portal-globalnav-wrapper {
   #portal-searchbox {
     margin-right: 20px;
     margin-top: 0;
@@ -381,13 +383,45 @@ a.gold-text {
       font-size: 12px;
       padding: 4px 10px;
       height: 28px;
-      background: #ededed;
+      // Dark-green bg provides clear contrast on the dark-green nav bar
+      background: #fff;
       border: 1px solid #ccc;
-      color: #555;
+      color: var(--edf-darkgreen);
+      font-weight: 600;
       cursor: pointer;
 
       &:hover {
-        background: #ddd;
+        background: var(--edf-gold);
+        border-color: var(--edf-gold);
+        color: var(--edf-darkgreen);
+      }
+    }
+  }
+}
+
+// Legacy selector kept for any context where #header-searchbox wraps search
+#header-searchbox {
+  #portal-searchbox {
+    margin-right: 20px;
+    margin-top: 0;
+    padding: 7px;
+
+    .searchSection { display: none; }
+
+    .searchButton,
+    button[type="submit"] {
+      font-size: 12px;
+      padding: 4px 10px;
+      height: 28px;
+      background: #fff;
+      border: 1px solid #ccc;
+      color: var(--edf-darkgreen);
+      font-weight: 600;
+      cursor: pointer;
+
+      &:hover {
+        background: var(--edf-gold);
+        border-color: var(--edf-gold);
       }
     }
   }
@@ -420,15 +454,16 @@ a.gold-text {
 // =============================================================================
 
 // Nav flows as a sibling row below #content-header (not overlapping).
-// The captured site used position:absolute inside the header, but our
-// Diazo template emits the nav as a separate block, so we let it flow.
+// The captured site positioned the nav absolutely over the dark-green header;
+// our Diazo template emits nav as a separate block. Give it the same dark-green
+// background so white nav-link text is visible (white-on-white otherwise).
 #mainnavigation-wrapper {
-  background-color: transparent;
+  background-color: var(--edf-darkgreen);
   border-top: none;
 }
 
 #portal-globalnav-wrapper {
-  background-color: transparent;
+  background-color: var(--edf-darkgreen);
   border: none;
   padding: 0;
 
@@ -565,16 +600,34 @@ a.gold-text {
 // 7. BANNER IMAGES
 // =============================================================================
 
+// #hero / .principal — the banner strip below the nav.
+// The element always renders in the DOM (from index.html) without a has-banner
+// class, so we apply the default banner image unconditionally, then override
+// per-section using body class selectors (Plone adds section-* to <body>).
+// Images live at theme_images/working-lands/; paths are relative to this CSS.
 #hero,
 .principal {
   display: block;
   background-position: center;
   background-size: cover;
   position: relative;
+  height: 450px;
+  // Default banner: home & workspace
+  background-image: url('../theme_images/working-lands/forest-crispin-jones-unsplash.jpg');
 
-  &.has-banner {
-    height: 450px;
-    background-color: #ededed;
+  // Caption pseudo-element — mirrors captured wlfw-forest.css :after rule
+  &::after {
+    content: "Crispin Jones, UnSplash";
+    display: block;
+    position: absolute;
+    font-size: 12px;
+    color: #fff;
+    bottom: 15px;
+    left: 15px;
+    padding: 0.5rem 1.2rem;
+    background: rgba(0, 0, 0, 0.35);
+    max-width: 430px;
+    line-height: 1.5em;
   }
 
   .container,
@@ -583,7 +636,34 @@ a.gold-text {
   }
 }
 
-// Banner caption overlay
+// Per-section banner overrides keyed off body classes added by Plone
+.section-about #hero,
+.section-about .principal {
+  background-image: url('../theme_images/working-lands/oak-trees-banner.jpg');
+
+  &::after { content: "Oak trees"; }
+}
+
+.section-resources #hero,
+.section-resources .principal {
+  background-image: url('../theme_images/working-lands/timber-harvest.jpg');
+
+  &::after { content: "Harvesting timber"; }
+}
+
+.section-news #hero,
+.section-news .principal {
+  &::after { content: "toad"; }
+}
+
+.subsection-golden-winged-warbler #hero,
+.subsection-golden-winged-warbler .principal {
+  background-image: url('../theme_images/working-lands/warbler-banner.webp');
+
+  &::after { display: none; }
+}
+
+// Banner caption overlay (also used for legacy .banner-caption markup)
 .banner-caption {
   font-size: 12px;
   color: #fff;
@@ -597,9 +677,11 @@ a.gold-text {
 }
 
 @media (max-width: 768px) {
-  #hero.has-banner,
-  .principal.has-banner {
+  #hero,
+  .principal {
     height: 195px;
+
+    &::after { display: none; }
   }
 
   .banner-caption {
@@ -612,15 +694,28 @@ a.gold-text {
 // 8. BREADCRUMBS
 // =============================================================================
 
+// Shared _base.scss strips the Barceloneta/Bootstrap background from breadcrumbs
+// and sets link color to #205c90. Reinforce here so any EDF-specific overrides
+// (e.g. green heading color) do NOT bleed in. No background, no green.
 #portal-breadcrumbs,
 nav[aria-label="breadcrumb"] {
+  background: transparent;
   margin-left: 0;
   margin-top: 0;
   padding: 15px 35px;
   font-size: 0.9rem;
 
   .breadcrumb {
+    background: transparent;
     margin-bottom: 0;
+  }
+
+  // Override any inherited green from EDF heading colour variable
+  a {
+    color: #205c90;
+    text-decoration: none;
+
+    &:hover { text-decoration: underline; }
   }
 }
 
