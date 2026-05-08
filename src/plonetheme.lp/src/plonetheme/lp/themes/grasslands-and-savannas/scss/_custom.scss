@@ -401,19 +401,16 @@ a.gold-text {
   }
 }
 
+// Live site renders only TWO logos at the top: the round WLFW badge and the
+// grasslands wordmark — both delivered via #wlfw-banner-badge and
+// #wlfw-grassland-wordmark above. The structural #portal-logo (carrying
+// grasslands-logo.svg) was rendering a third nearly-identical wordmark on
+// top of the canonical two — hide it so it doesn't double-up.
 #portal-logo-wrapper {
   padding: 0;
 
   #portal-logo {
-    margin: 0;
-    display: block;
-
-    img {
-      width: 560px;
-      position: relative;
-      top: 15px;
-      left: 35px;
-    }
+    display: none;
   }
 }
 
@@ -453,16 +450,6 @@ a.gold-text {
 }
 
 @media (max-width: 768px) {
-  #portal-logo-wrapper {
-    width: 340px;
-
-    #portal-logo img {
-      width: 335px;
-      top: -15px;
-      left: 5px;
-    }
-  }
-
   #header-searchbox #portal-searchbox {
     position: absolute;
     top: 5px;
