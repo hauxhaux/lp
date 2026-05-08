@@ -546,11 +546,15 @@ nav[aria-label="breadcrumb"] li {
   margin-bottom: 3em;
 }
 
+// Full-bleed breakout from the centered .container at narrower widths.
+// Uses calc(50% - 50vw) so the section spans exactly viewport width
+// regardless of the parent container's left offset — avoids the
+// horizontal overflow that 'width: 100vw' caused at 992/768/576.
 @media (max-width: 1169px) {
   .fullwidth-section {
-    width: 100vw;
-    margin-left: -1.5em;
-    left: 0;
+    width: auto;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
   }
 }
 
