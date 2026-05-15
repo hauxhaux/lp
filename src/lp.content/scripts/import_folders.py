@@ -50,19 +50,6 @@ folder_fti.global_allow = True
 print("Connected to Plone site:")
 print(portal.absolute_url())
 
-# # ===== debug
-# print("Portal type:", portal.portal_type)
-
-# fti = portal.portal_types.getTypeInfo(portal)
-# print("FTI id:", fti.getId())
-# print("filter_content_types:", fti.filter_content_types)
-# print("allowed_content_types:", fti.allowed_content_types)
-
-# print("Allowed in portal:")
-# for type_info in portal.allowedContentTypes():
-#     print(" -", type_info.getId(), type_info.Title())
-# # ===== end debug
-
 data = json.loads(FOLDER_TREE_PATH.read_text())
 data.sort(key=lambda row: row["path"].count("/"))
 
