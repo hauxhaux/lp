@@ -26,6 +26,7 @@ services:
       # - ./src/zen-organization:/app/src/zen-organization
       - ./src/plonetheme.lp:/app/src/plonetheme.lp
       - ./src/lp.content:/app/src/lp.content
+      - ./migration:/app/migration
       - ./requirements.txt:/app/requirements.txt:ro
 
 volumes:
