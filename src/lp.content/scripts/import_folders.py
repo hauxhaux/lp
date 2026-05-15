@@ -73,6 +73,9 @@ with api.env.adopt_roles(["Manager"]):
             description=row.get("description") or "",
         )
 
+        folder.exclude_from_nav = bool(row.get("exclude_from_nav", False))
+        folder.reindexObject(idxs=["exclude_from_nav"])
+
         print(f"Ensured folder: {'/'.join(folder.getPhysicalPath())}")
 
     transaction.commit()

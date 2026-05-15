@@ -52,6 +52,16 @@ for brain in brains:
     except:
         pass
 
+    exclude_from_nav = 0
+
+    try:
+        exclude_from_nav = obj.getExcludeFromNav()
+    except:
+        try:
+            exclude_from_nav = obj.exclude_from_nav
+        except:
+            exclude_from_nav = 0
+
     if not first:
         lines.append(",")
     first = 0
@@ -65,6 +75,7 @@ for brain in brains:
     lines.append('"portal_type": "%s",' % esc(obj.portal_type))
     lines.append('"review_state": "%s",' % esc(getattr(brain, "review_state", "")))
     lines.append('"owner": "%s",' % esc(owner))
+    lines.append('"exclude_from_nav": %s,' % str(bool(exclude_from_nav)).lower())
     lines.append('"local_roles": [%s]' % ",".join(local_roles))
     lines.append("}")
 
